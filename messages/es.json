@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "destinations": "Destinos",
+    "services": "Servicios",
+    "stories": "Historias",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "label": "Edición Mediterránea",
+    "title": "Tu Nuevo Capítulo en España",
+    "description": "Una conexión cuidada entre residentes internacionales y profesionales españoles de confianza. Seguros, servicios legales y vivienda—todo en un solo lugar.",
+    "stats": {
+      "cities": "Ciudades",
+      "partners": "Partners Verificados",
+      "languages": "Idiomas"
+    },
+    "cta": {
+      "primary": "Comienza Tu Viaje",
+      "secondary": "Explorar Servicios"
+    }
+  },
+  "features": {
+    "expats": "Extranjeros Viviendo en España",
+    "sunshine": "Días de Sol al Año",
+    "commission": "Comisión para Usuarios",
+    "verified": "Profesionales Verificados"
+  },
+  "profiles": {
+    "tag": "A Quién Servimos",
+    "title": "Cuatro Historias, Un Destino",
+    "description": "Cada viaje a España es único. Ya sea que estés comenzando una carrera, formando una familia, semi-jubilándote o disfrutando de la jubilación completa, te conectamos con los profesionales adecuados.",
+    "starters": {
+      "title": "Los Móviles",
+      "age": "22-34 años • Trabajo y Estudios",
+      "description": "Jóvenes profesionales que buscan oportunidades laborales, experiencia internacional y nuevos comienzos en ciudades españolas."
+    },
+    "families": {
+      "title": "Las Familias",
+      "age": "35-49 años • Reubicación",
+      "description": "Reubicaciones familiares completas que buscan estabilidad, educación de calidad y mejor calidad de vida en España."
+    },
+    "professionals": {
+      "title": "Los Profesionales",
+      "age": "50-59 años • Semi-Retiro",
+      "description": "Profesionales consolidados que buscan un semi-retiro activo con estilo de vida mediterráneo y vida de calidad."
+    },
+    "retirees": {
+      "title": "Los Jubilados",
+      "age": "60-70 años • Jubilación Completa",
+      "description": "Disfrutando de una merecida jubilación bajo el sol español con apoyo integral y tranquilidad."
+    }
+  },
+  "services": {
+    "tag": "Servicios Esenciales",
+    "title": "Todo Lo Que Necesitas",
+    "description": "Profesionales verificados que hablan tu idioma y comprenden tus necesidades únicas como residente internacional.",
+    "insurance": {
+      "category": "Salud y Bienestar",
+      "title": "Seguros de Salud",
+      "description": "Compara opciones de seguros médicos privados adaptados para expatriados. Válidos para visados no lucrativos y cobertura completa.",
+      "cta": "Explorar Opciones"
+    },
+    "lawyers": {
+      "category": "Servicios Legales",
+      "title": "Abogados de Extranjería",
+      "description": "Especialistas en visados, NIE, arraigo, reagrupación familiar y todos los procedimientos migratorios.",
+      "cta": "Encontrar Abogado"
+    },
+    "realestate": {
+      "category": "Bienes Raíces",
+      "title": "Agentes Inmobiliarios",
+      "description": "Agencias con amplia experiencia trabajando con clientes internacionales que entienden tus necesidades específicas.",
+      "cta": "Ver Propiedades"
+    },
+    "admin": {
+      "category": "Administración",
+      "title": "Servicios de Gestoría",
+      "description": "Profesionales administrativos para gestionar papeleo, impuestos y procedimientos burocráticos en tu nombre.",
+      "cta": "Obtener Ayuda"
+    }
+  },
+  "cta": {
+    "quote": "No solo te conectamos con profesionales. Te guiamos en cada paso para hacer de España tu hogar.",
+    "author": "Promesa de Health4Spain",
+    "button": "Comienza Tu Historia"
+  },
+  "footer": {
+    "tagline": "Conectando residentes internacionales con profesionales españoles de confianza desde 2026.",
+    "services": "Servicios",
+    "destinations": "Destinos",
+    "company": "Empresa",
+    "about": "Sobre Nosotros",
+    "forProfessionals": "Para Profesionales",
+    "blog": "Historias",
+    "contact": "Contacto",
+    "allCities": "Todas las Ciudades",
+    "copyright": "© 2026 Health4Spain. Todos los derechos reservados.",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "cookies": "Cookies"
+  }
+}

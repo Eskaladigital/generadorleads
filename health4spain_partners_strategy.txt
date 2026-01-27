@@ -1,0 +1,93 @@
+
+DOCUMENTO ESTRATÉGICO
+GESTIÓN DE PARTNERS Y PREVENCIÓN DE FUGA DE LEADS
+PROYECTO HEALTH4SPAIN
+
+DIAGNÓSTICO GENERAL
+
+Sí, es correcto tener partners pequeños y locales.
+Sí, es inevitable que algunos usuarios intenten buscarlos directamente.
+No, eso no invalida el modelo si está bien diseñado.
+
+Health4Spain debe asumir que existe una “fuga natural” de tráfico y leads, especialmente en servicios de bajo ticket y negocios locales con fuerte presencia en Google Maps.
+
+El objetivo no es impedir la fuga al 100%, sino hacer que no merezca la pena para el usuario.
+
+VERDAD CLAVE (ACEPTACIÓN NECESARIA)
+
+No hay nada que impida técnicamente que un usuario busque en Google Maps:
+“Peluquería Paquito Torrevieja”
+
+Eso no se puede ni se debe bloquear.
+
+El error no es que exista esa posibilidad.
+El error es diseñar el marketplace como si no existiera.
+
+Los marketplaces maduros:
+- aceptan la fuga
+- la limitan
+- y la compensan con volumen, valor y control del funnel
+
+POR QUÉ UN USUARIO SE IRÍA A GOOGLE MAPS
+
+Un usuario solo se va si cree que así:
+1. Ahorrará tiempo
+2. Ahorrará dinero
+3. Tendrá una solución más sencilla o directa
+
+Si Health4Spain neutraliza esos tres incentivos, la mayoría no se irá.
+
+PRINCIPIO CENTRAL DEL MODELO
+
+En Health4Spain el usuario NO elige proveedor.
+El usuario explica su caso.
+
+Health4Spain no es un listado.
+Es un gestor del proceso.
+
+No se vende “Peluquería Paquito”.
+Se vende “una solución adecuada para tu perfil, idioma y contexto”.
+
+ESTRATEGIA GENERAL CON PARTNERS
+
+Sí a trabajar con partners grandes y pequeños.
+Sí a mostrarlos como parte de la solución.
+No a convertirlos en el producto principal.
+
+El partner es un atributo.
+La solución es el producto.
+
+MEDIDAS CONCRETAS PARA REDUCIR FUGA (PARTNERS PEQUEÑOS)
+
+1. LIMITAR LA INFORMACIÓN IDENTIFICABLE
+Evitar mostrar dirección exacta, teléfono, enlace a Google Maps o nombre legal completo en fases tempranas.
+Mostrar zona aproximada, tipo de negocio, idiomas, especialización en extranjeros y nivel de calidad.
+
+2. CAMBIAR EL ENFOQUE MENTAL DEL USUARIO
+No comunicar “aquí tienes esta peluquería”.
+Comunicar “te asignamos un profesional adecuado a tu perfil”.
+
+3. APORTAR VENTAJAS EXCLUSIVAS
+Prioridad en citas, precio cerrado, idioma garantizado y soporte post-servicio.
+
+4. HACER EL CONTACTO DIRECTO MÁS INCÓMODO
+Evitar que el usuario tenga que repetir su caso o enfrentarse a barreras idiomáticas.
+
+5. REVELAR EL NOMBRE COMPLETO SOLO AL FINAL
+Mostrar el nombre real del partner solo tras el envío del lead.
+
+GESTIÓN DIFERENCIADA POR SERVICIO
+
+Servicios de bajo ticket: se asume mayor fuga.
+Servicios de alto ticket: funnel más cerrado y mayor control.
+
+REGLAS CON PARTNERS
+
+Prohibido incentivar contacto directo fuera de la plataforma.
+Leads exclusivos durante un periodo definido.
+Incumplimientos implican penalización o salida.
+
+CONCLUSIÓN
+
+Health4Spain no gana ocultando nombres.
+Gana haciendo el proceso más fácil, seguro y cómodo que hacerlo solo.
