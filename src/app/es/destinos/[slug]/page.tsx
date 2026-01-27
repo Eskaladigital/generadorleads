@@ -273,7 +273,7 @@ export default async function DestinoPage({
               <div className="text-3xl mb-2">
                 {key === 'sunshine' ? '☀️' : key === 'temperature' ? '🌡️' : key === 'beaches' ? '🏖️' : '✈️'}
               </div>
-              <div className="font-bold text-accent text-xl mb-1">{value}</div>
+              <div className="font-bold text-accent text-xl mb-1">{value as string}</div>
               <div className="text-sm text-gray-600 capitalize">
                 {key === 'sunshine' ? 'Días de sol' : 
                  key === 'temperature' ? 'Temperatura' : 
