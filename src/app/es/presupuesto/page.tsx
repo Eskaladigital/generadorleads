@@ -344,9 +344,9 @@ export default function PresupuestoPage() {
               <p className="text-accent font-semibold">5-20€/mes</p>
             </div>
             <div className="bg-white p-6 rounded-lg border-l-4 border-gray-300">
-              <div className="text-3xl mb-3">📝</div>
-              <h3 className="font-bold mb-2 text-gray-900">Redacción</h3>
-              <p className="text-gray-600 text-sm mb-2">Textos personalizados</p>
+              <div className="text-3xl mb-3">✍️</div>
+              <h3 className="font-bold mb-2 text-gray-900">Artículos Blog</h3>
+              <p className="text-gray-600 text-sm mb-2">Redacción de contenidos para blog</p>
               <p className="text-accent font-semibold">A presupuestar</p>
             </div>
             <div className="bg-white p-6 rounded-lg border-l-4 border-gray-300">
