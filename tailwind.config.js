@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        lora: ['Lora', 'serif'],
+        lora: ['Roboto Slab', 'serif'],
         work: ['Work Sans', 'sans-serif'],
       },
       colors: {

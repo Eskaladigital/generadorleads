@@ -283,25 +283,9 @@ export default function PresupuestoPage() {
       {/* TOTAL VISUAL */}
       <section className="py-16 px-[5%] bg-gradient-to-br from-gray-900 to-[#1a1a1a] text-white">
         <div className="max-w-[1200px] mx-auto text-center">
-          <div className="mb-8">
-            <p className="text-accent uppercase tracking-[3px] text-sm font-bold mb-4">INVERSIÓN TOTAL</p>
-            <div className="text-[6rem] font-bold font-lora leading-none mb-2">2.350€</div>
-            <p className="text-gray-400 text-lg">+ IVA | Plataforma completa + 3 meses soporte</p>
-          </div>
-          <div className="flex gap-6 justify-center flex-wrap">
-            <Link
-              href="/es/contacto"
-              className="bg-accent text-white py-6 px-12 rounded-lg no-underline font-bold uppercase tracking-wider text-sm transition-all hover:bg-accent/90 hover:scale-105 shadow-2xl"
-            >
-              Aceptar Presupuesto →
-            </Link>
-            <a
-              href="mailto:info@health4spain.com?subject=Consulta Presupuesto"
-              className="bg-transparent text-white py-6 px-12 rounded-lg no-underline font-bold uppercase tracking-wider text-sm border-2 border-white transition-all hover:bg-white hover:text-[#1a1a1a]"
-            >
-              Hacer Consulta
-            </a>
-          </div>
+          <p className="text-accent uppercase tracking-[3px] text-sm font-bold mb-4">INVERSIÓN TOTAL</p>
+          <div className="text-[6rem] font-bold font-lora leading-none mb-2">2.350€</div>
+          <p className="text-gray-400 text-lg">+ IVA | Plataforma completa + 3 meses soporte</p>
         </div>
       </section>
 
@@ -387,40 +371,6 @@ export default function PresupuestoPage() {
         </div>
       </section>
 
-      {/* PRÓXIMOS PASOS - TIMELINE */}
-      <section className="py-24 px-[5%] bg-white">
-        <div className="max-w-[900px] mx-auto">
-          <h2 className="font-lora text-[3rem] font-bold text-center mb-16 text-[#1a1a1a]">
-            Cómo Empezamos
-          </h2>
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-1 bg-accent/20"></div>
-            <div className="space-y-12">
-              <div className="relative pl-24">
-                <div className="absolute left-0 w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-lg">1</div>
-                <h3 className="font-bold text-xl mb-2 text-gray-900">Confirmas el presupuesto</h3>
-                <p className="text-gray-600">Revisas todo y nos das el OK. Cualquier duda, estamos aquí.</p>
-              </div>
-              <div className="relative pl-24">
-                <div className="absolute left-0 w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-lg">2</div>
-                <h3 className="font-bold text-xl mb-2 text-gray-900">Reunión de briefing</h3>
-                <p className="text-gray-600">Entendemos tu visión, objetivos y público. Definimos todo juntos.</p>
-              </div>
-              <div className="relative pl-24">
-                <div className="absolute left-0 w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-lg">3</div>
-                <h3 className="font-bold text-xl mb-2 text-gray-900">Diseño y desarrollo</h3>
-                <p className="text-gray-600">Trabajamos en la web. Te mostramos avances y ajustamos.</p>
-              </div>
-              <div className="relative pl-24">
-                <div className="absolute left-0 w-16 h-16 bg-[#1a1a1a] text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-lg">4</div>
-                <h3 className="font-bold text-xl mb-2 text-gray-900">Lanzamiento</h3>
-                <p className="text-gray-600">Todo listo. Publicamos y te formamos para gestionar tu web.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA FINAL */}
       <section className="py-32 px-[5%] bg-gradient-to-br from-[#1a1a1a] to-gray-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
@@ -431,15 +381,9 @@ export default function PresupuestoPage() {
           <h2 className="font-lora text-[3.5rem] font-bold mb-6 leading-tight">
             Lista Para Generar Leads
           </h2>
-          <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+          <p className="text-xl text-gray-300 leading-relaxed">
             Una inversión que se paga sola. Cada cliente que captes gracias al posicionamiento hace que valga la pena.
           </p>
-          <Link
-            href="/es/contacto"
-            className="inline-block bg-accent text-white py-7 px-16 rounded-lg no-underline font-bold uppercase tracking-wider text-base transition-all hover:bg-accent/90 hover:scale-105 shadow-2xl"
-          >
-            Empezar Ahora →
-          </Link>
         </div>
       </section>
     </>
