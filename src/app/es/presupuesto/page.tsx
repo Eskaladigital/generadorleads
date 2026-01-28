@@ -103,10 +103,10 @@ export default function PresupuestoPage() {
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
                   <h3 className="font-lora text-[1.5rem] font-semibold mb-3 text-[#1a1a1a]">
-                    Páginas Dinámicas Editables (x2)
+                    Páginas Adicionales (x2)
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    Dos páginas que tú mismo podrás editar cuando quieras desde un panel privado (sin necesidad de llamarnos). Perfectas para tus páginas de Destinos y Servicios. Piensa en ello como tener un Word online donde cambias textos y fotos sin tocar código.
+                    Dos páginas adicionales programadas para tu web (por ejemplo: Destinos y Servicios). Estas páginas están desarrolladas directamente en código, como el resto de la web, garantizando máximo rendimiento y consistencia visual. Para modificarlas en el futuro, se requiere edición de código (nosotros nos encargamos durante el periodo de soporte).
                   </p>
                 </div>
                 <div className="text-right ml-6">
@@ -121,10 +121,10 @@ export default function PresupuestoPage() {
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
                   <h3 className="font-lora text-[1.5rem] font-semibold mb-3 text-[#1a1a1a]">
-                    Sistema de Blog Profesional
+                    Sistema de Blog con CMS
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    Tu espacio para publicar artículos, noticias y contenidos. Los artículos se ordenan automáticamente por fecha, con botón "leer más" y posibilidad de adjuntar documentos descargables. Gestionable desde tu área privada. Fundamental para aparecer en Google.
+                    Tu espacio para publicar artículos, noticias y contenidos con total autonomía. Incluye un <strong>CMS (Sistema de Gestión de Contenidos)</strong> desde donde puedes crear, editar y publicar artículos tú mismo sin necesidad de tocar código. Los artículos se ordenan automáticamente por fecha, con botón "leer más" y posibilidad de adjuntar documentos descargables. Fundamental para aparecer en Google.
                   </p>
                 </div>
                 <div className="text-right ml-6">
@@ -198,6 +198,27 @@ export default function PresupuestoPage() {
                 </div>
               </div>
             </div>
+
+            {/* Soporte Incluido */}
+            <div className="bg-white border border-gray-200 p-8 border-l-4 border-green-600">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex-1">
+                  <h3 className="font-lora text-[1.5rem] font-semibold mb-3 text-[#1a1a1a]">
+                    3 Meses de Soporte y Revisiones
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-3">
+                    Incluido sin coste adicional: tres meses completos de soporte técnico después del lanzamiento. Cubrimos ajustes, correcciones de errores, cambios menores de contenido y resolución de dudas. Tu tranquilidad está garantizada durante los primeros meses más críticos.
+                  </p>
+                  <div className="bg-green-50 p-4 text-sm text-gray-700">
+                    ✓ Incluye: corrección de errores, ajustes de diseño menores, cambios de textos e imágenes, actualización de contenidos, resolución de dudas técnicas.
+                  </div>
+                </div>
+                <div className="text-right ml-6">
+                  <div className="text-gray-400 line-through text-[1.2rem]">600,00 €</div>
+                  <div className="text-green-600 font-bold text-[1.5rem]">INCLUIDO</div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* TOTAL */}
@@ -208,7 +229,7 @@ export default function PresupuestoPage() {
                   INVERSIÓN TOTAL
                 </h3>
                 <p className="text-gray-300 text-lg">
-                  Plataforma completa lista para funcionar
+                  Plataforma completa + 3 meses de soporte
                 </p>
               </div>
               <div className="text-right">
@@ -308,9 +329,9 @@ export default function PresupuestoPage() {
             </div>
 
             <div className="bg-white border border-gray-200 p-6">
-              <h3 className="font-semibold mb-2">🔧 Mantenimiento Mensual</h3>
+              <h3 className="font-semibold mb-2">🔧 Mantenimiento Posterior</h3>
               <p className="text-gray-600 text-sm">
-                Actualizaciones, cambios y soporte técnico continuo se presupuestan por separado.
+                Después de los 3 meses de soporte incluido, el mantenimiento continuo, actualizaciones mayores y nuevas funcionalidades se presupuestan por separado.
               </p>
             </div>
 
