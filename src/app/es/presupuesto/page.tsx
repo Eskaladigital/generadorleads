@@ -29,8 +29,138 @@ export default function PresupuestoPage() {
               Tu nueva web será una plataforma completa y profesional, programada a medida para captar clientes que buscan servicios en España. No usamos plantillas genéricas—cada elemento está optimizado para convertir visitantes en contactos cualificados.
             </p>
             <p className="text-[1.1rem] text-gray-600 leading-relaxed">
-              El objetivo es simple: que tu negocio sea encontrado por las personas adecuadas, en el momento adecuado, sin que tengas que preocuparte de la tecnología.
+              <strong>Pero lo más importante:</strong> el objetivo es simple: que tu negocio sea encontrado por las personas adecuadas, en el momento adecuado, sin que tengas que preocuparte de la tecnología.
             </p>
+          </div>
+
+          {/* ESTRATEGIA SEO */}
+          <div className="bg-gradient-to-br from-accent/5 to-accent/10 border-l-4 border-accent p-10 mb-12">
+            <div className="flex items-start gap-4 mb-6">
+              <div className="text-5xl">🎯</div>
+              <div>
+                <h2 className="font-lora text-[2.2rem] font-bold mb-2 text-[#1a1a1a]">
+                  El Pilar Central: Estrategia SEO
+                </h2>
+                <p className="text-accent font-semibold text-lg">
+                  La clave para que tu negocio sea encontrado en Google
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold text-[1.3rem] mb-3 text-[#1a1a1a]">
+                  ¿Por Qué es Tan Importante el SEO?
+                </h3>
+                <p className="text-[1.05rem] text-gray-700 leading-relaxed mb-3">
+                  Imagina tener una oficina en el mejor centro comercial de la ciudad, pero sin ningún letrero que indique qué vendes. Eso es tener una web sin SEO. <strong>El SEO (posicionamiento en buscadores) es lo que hace que Google te muestre cuando alguien busca exactamente lo que ofreces.</strong>
+                </p>
+                <p className="text-[1.05rem] text-gray-700 leading-relaxed">
+                  Más del 90% de las personas que necesitan seguros de salud, abogados o inmobiliarias en España empiezan buscando en Google. Si no apareces en la primera página, simplemente no existes para ellos.
+                </p>
+              </div>
+
+              <div className="bg-white/80 p-6 rounded">
+                <h3 className="font-semibold text-[1.3rem] mb-3 text-[#1a1a1a]">
+                  Nuestro Enfoque: SEO Local Multiidioma a Gran Escala
+                </h3>
+                <p className="text-[1.05rem] text-gray-700 leading-relaxed mb-4">
+                  No hacemos SEO genérico. Hemos diseñado una <strong>estrategia quirúrgica</strong> que ataca todas las búsquedas posibles que puede hacer tu cliente ideal:
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <span className="text-accent font-bold text-xl mt-1">→</span>
+                    <div>
+                      <strong className="text-gray-900">Por servicio:</strong> "Seguros de salud", "Abogados extranjería", "Inmobiliarias"...
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-accent font-bold text-xl mt-1">→</span>
+                    <div>
+                      <strong className="text-gray-900">Por localidad:</strong> "en Alicante", "en Torrevieja", "en Murcia"... (20 ciudades)
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-accent font-bold text-xl mt-1">→</span>
+                    <div>
+                      <strong className="text-gray-900">Por idioma:</strong> En español, inglés, alemán y francés
+                    </div>
+                  </li>
+                </ul>
+                <p className="text-[1.05rem] text-gray-700 leading-relaxed mt-4">
+                  <strong>Resultado:</strong> 320 páginas específicas (4 servicios × 20 ciudades × 4 idiomas) cada una optimizada para una búsqueda concreta. Es como tener 320 puertas de entrada diferentes a tu negocio.
+                </p>
+              </div>
+
+              <div className="bg-white/80 p-6 rounded">
+                <h3 className="font-semibold text-[1.3rem] mb-3 text-[#1a1a1a]">
+                  ¿Qué Objetivos Vamos a Conseguir?
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-600 font-bold text-2xl">✓</span>
+                    <div>
+                      <strong className="text-gray-900">Visibilidad inmediata</strong>
+                      <p className="text-gray-600 text-sm mt-1">Aparecer desde el primer día en búsquedas hiperlocales y específicas</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-600 font-bold text-2xl">✓</span>
+                    <div>
+                      <strong className="text-gray-900">Tráfico cualificado</strong>
+                      <p className="text-gray-600 text-sm mt-1">Visitantes que buscan exactamente lo que ofreces, listos para contratar</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-600 font-bold text-2xl">✓</span>
+                    <div>
+                      <strong className="text-gray-900">Autoridad territorial</strong>
+                      <p className="text-gray-600 text-sm mt-1">Dominar tu zona geográfica en todas las búsquedas relacionadas</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-green-600 font-bold text-2xl">✓</span>
+                    <div>
+                      <strong className="text-gray-900">Ventaja competitiva</strong>
+                      <p className="text-gray-600 text-sm mt-1">Mientras tu competencia tiene 5-10 páginas, tú tendrás 320</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white/80 p-6 rounded">
+                <h3 className="font-semibold text-[1.3rem] mb-3 text-[#1a1a1a]">
+                  ¿Por Qué Esta Estructura?
+                </h3>
+                <p className="text-[1.05rem] text-gray-700 leading-relaxed mb-3">
+                  Google premia dos cosas por encima de todo: <strong>relevancia y especificidad</strong>.
+                </p>
+                <p className="text-[1.05rem] text-gray-700 leading-relaxed mb-3">
+                  Una página genérica tipo "Servicios en España" compite con millones de webs. Pero una página específica "Health insurance in Torrevieja" tiene muchísima menos competencia y es exactamente lo que busca tu cliente ideal.
+                </p>
+                <p className="text-[1.05rem] text-gray-700 leading-relaxed">
+                  <strong>Cada landing page está estratégicamente diseñada para:</strong>
+                </p>
+                <ul className="space-y-2 mt-3 ml-6">
+                  <li className="text-gray-700">• Contener las palabras clave exactas que busca el usuario</li>
+                  <li className="text-gray-700">• Aparecer en búsquedas de cola larga (long-tail) con poca competencia</li>
+                  <li className="text-gray-700">• Convertir inmediatamente al visitante en lead cualificado</li>
+                  <li className="text-gray-700">• Generar enlaces internos que fortalecen toda la estructura</li>
+                </ul>
+              </div>
+
+              <div className="bg-accent text-white p-6 rounded">
+                <h3 className="font-semibold text-[1.3rem] mb-3">
+                  💰 El Ahorro Real en SEO
+                </h3>
+                <p className="text-white/95 leading-relaxed mb-3">
+                  Una campaña de SEO profesional para posicionar 320 términos de búsqueda diferentes te costaría entre <strong>2.000€ - 4.000€ mensuales durante 6-12 meses</strong> (total: 12.000€ - 48.000€). Y aún así, sin garantía de resultados.
+                </p>
+                <p className="text-white/95 leading-relaxed">
+                  <strong>Con esta estructura ya incluida en la web, te estás ahorrando todo ese trabajo de SEO inicial.</strong> La arquitectura, las URLs optimizadas, el contenido estructurado y los enlaces internos ya están listos desde el día uno. Solo necesitarás trabajo de SEO de mantenimiento y creación de contenido.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
