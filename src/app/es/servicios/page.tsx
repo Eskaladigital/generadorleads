@@ -4,33 +4,33 @@ const services = [
   {
     slug: 'seguros',
     category: "Salud y Bienestar",
-    title: "Seguros de Salud",
+    title: "Seguros de Salud y Vida",
     icon: "🏥",
-    description: "Compara opciones de seguros médicos privados adaptados para expatriados. Válidos para visados no lucrativos y cobertura completa.",
+    description: "Seguros médicos y de vida adaptados a tu edad y situación laboral. Válidos para visados no lucrativos, cobertura completa para expatriados.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800"
   },
   {
     slug: 'abogados',
     category: "Servicios Legales",
-    title: "Abogados de Extranjería",
+    title: "Abogados Especializados",
     icon: "⚖️",
-    description: "Especialistas en visados, NIE, arraigo, reagrupación familiar y todos los procedimientos migratorios.",
+    description: "Expertos en extranjería (visados, NIE, residencia) y derecho laboral. Experiencia específica con clientes internacionales.",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800"
   },
   {
     slug: 'inmobiliarias',
     category: "Bienes Raíces",
-    title: "Agentes Inmobiliarios",
+    title: "Inmobiliarias Locales",
     icon: "🏠",
-    description: "Agencias con amplia experiencia trabajando con clientes internacionales que entienden tus necesidades específicas.",
+    description: "Agencias con amplia experiencia en la zona que trabajan habitualmente con clientes internacionales y conocen el mercado local.",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800"
   },
   {
-    slug: 'gestorias',
-    category: "Administración",
-    title: "Servicios de Gestoría",
+    slug: 'otros-servicios',
+    category: "Servicios Adicionales",
+    title: "Gestorías y Más",
     icon: "📋",
-    description: "Profesionales administrativos para gestionar papeleo, impuestos y procedimientos burocráticos en tu nombre.",
+    description: "Gestorías administrativas, clínicas privadas, academias de idiomas y otros servicios esenciales para tu nueva vida en España.",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800"
   }
 ];

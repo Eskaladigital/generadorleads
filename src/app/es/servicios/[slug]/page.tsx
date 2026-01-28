@@ -4,9 +4,9 @@ import Link from 'next/link';
 const servicesData: Record<string, any> = {
   seguros: {
     category: "Salud y Bienestar",
-    title: "Seguros de Salud",
+    title: "Seguros de Salud y Vida",
     icon: "🏥",
-    description: "Encuentra el seguro médico privado perfecto para tu situación en España",
+    description: "Seguros médicos y de vida adaptados a tu edad y situación laboral en España",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200",
     content: {
       intro: "El seguro de salud es uno de los requisitos más importantes para vivir en España, especialmente si necesitas tramitar una visa no lucrativa o de residencia. Te ayudamos a comparar y elegir la mejor opción según tu perfil.",
@@ -80,9 +80,9 @@ const servicesData: Record<string, any> = {
   },
   abogados: {
     category: "Servicios Legales",
-    title: "Abogados de Extranjería",
+    title: "Abogados Especializados",
     icon: "⚖️",
-    description: "Especialistas en inmigración y residencia en España",
+    description: "Expertos en extranjería (visados, NIE, residencia) y derecho laboral",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
     content: {
       intro: "Navegar el sistema legal español puede ser complejo. Nuestros abogados especializados en extranjería te guían en cada paso del proceso migratorio.",
@@ -148,9 +148,9 @@ const servicesData: Record<string, any> = {
   },
   inmobiliarias: {
     category: "Bienes Raíces",
-    title: "Agentes Inmobiliarios",
+    title: "Inmobiliarias Locales",
     icon: "🏠",
-    description: "Encuentra tu hogar ideal en España",
+    description: "Agencias con experiencia en la zona y clientes internacionales",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200",
     content: {
       intro: "Encontrar la vivienda perfecta es crucial para tu nueva vida en España. Trabajamos con agencias inmobiliarias especializadas en clientes internacionales.",
@@ -209,17 +209,17 @@ const servicesData: Record<string, any> = {
       ]
     }
   },
-  gestorias: {
-    category: "Administración",
-    title: "Servicios de Gestoría",
+  'otros-servicios': {
+    category: "Servicios Adicionales",
+    title: "Gestorías y Más",
     icon: "📋",
-    description: "Gestión administrativa completa",
+    description: "Gestorías, clínicas privadas, academias de idiomas y otros servicios esenciales",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200",
     content: {
-      intro: "La burocracia española puede ser abrumadora. Las gestorías se encargan de todos tus trámites administrativos, fiscales y laborales.",
+      intro: "Más allá de los servicios principales, necesitarás apoyo en gestión administrativa, salud privada y aprendizaje del idioma. Te conectamos con profesionales de confianza en todas estas áreas.",
       sections: [
         {
-          title: "Servicios Administrativos",
+          title: "Gestorías Administrativas",
           items: [
             {
               name: "Trámites de Extranjería",
@@ -239,19 +239,63 @@ const servicesData: Record<string, any> = {
           ]
         },
         {
-          title: "Servicios Incluidos",
+          title: "Clínicas y Servicios Médicos Privados",
           items: [
             {
-              name: "Atención en Tu Idioma",
-              description: "Gestorías con personal que habla inglés, alemán, francés."
+              name: "Clínicas Privadas Multiespecialidad",
+              description: "Atención médica completa sin esperas.",
+              features: ["Medicina general", "Especialistas", "Pruebas diagnósticas", "Atención en tu idioma"]
             },
             {
-              name: "Gestión Digital",
-              description: "Certificado digital, firma electrónica, sede electrónica."
+              name: "Dentistas",
+              description: "Odontología general y especializada.",
+              features: ["Revisiones", "Ortodoncia", "Implantes", "Estética dental"]
             },
             {
-              name: "Representación Legal",
-              description: "Podemos actuar en tu nombre ante administraciones públicas."
+              name: "Fisioterapia y Rehabilitación",
+              description: "Tratamientos personalizados.",
+              features: ["Fisioterapia deportiva", "Rehabilitación", "Osteopatía", "Masajes terapéuticos"]
+            }
+          ]
+        },
+        {
+          title: "Academias de Idiomas",
+          items: [
+            {
+              name: "Español para Extranjeros (ELE)",
+              description: "Aprende español desde nivel básico hasta avanzado.",
+              features: ["Clases grupales", "Clases individuales", "Cursos intensivos", "Preparación DELE"]
+            },
+            {
+              name: "Programas de Integración",
+              description: "Español práctico para la vida diaria.",
+              features: ["Español para trámites", "Conversación cotidiana", "Cultura española", "Horarios flexibles"]
+            },
+            {
+              name: "Cursos Online y Presenciales",
+              description: "Modalidades adaptadas a tu disponibilidad.",
+              features: ["Clases online en directo", "Presencial en tu ciudad", "Materiales incluidos", "Certificación oficial"]
+            }
+          ]
+        },
+        {
+          title: "Otros Servicios Útiles",
+          items: [
+            {
+              name: "Servicios Bancarios",
+              description: "Apertura de cuentas bancarias para extranjeros, asesoría en productos financieros."
+            },
+            {
+              name: "Seguros Diversos",
+              description: "Seguros de hogar, vehículos, responsabilidad civil, mascotas."
+            },
+            {
+              name: "Traductores Jurados",
+              description: "Traducción oficial de documentos para trámites legales."
+            },
+            {
+              name: "Mudanzas Internacionales",
+              description: "Empresas especializadas en mudanzas desde el extranjero a España."
             }
           ]
         }
@@ -262,12 +306,16 @@ const servicesData: Record<string, any> = {
           answer: "Declaración informativa obligatoria para residentes fiscales en España con bienes en el extranjero superiores a 50.000€."
         },
         {
-          question: "¿Cuándo soy residente fiscal en España?",
-          answer: "Si pasas más de 183 días al año en España o si tu centro de intereses económicos está aquí."
+          question: "¿Necesito aprender español para vivir en España?",
+          answer: "No es obligatorio, pero sí muy recomendable para integrarte mejor, hacer trámites y disfrutar de la vida local. En zonas con muchos expatriados puedes desenvolverte en inglés."
         },
         {
-          question: "¿Necesito gestoría si no trabajo?",
-          answer: "Sí, aún debes presentar declaración de renta y posiblemente modelo 720 si tienes bienes en el extranjero."
+          question: "¿Las clínicas privadas aceptan mi seguro?",
+          answer: "Depende del seguro. Te ayudamos a encontrar clínicas que trabajen con tu aseguradora o que ofrezcan precios competitivos sin seguro."
+        },
+        {
+          question: "¿Cuándo soy residente fiscal en España?",
+          answer: "Si pasas más de 183 días al año en España o si tu centro de intereses económicos está aquí."
         }
       ]
     }
@@ -279,7 +327,7 @@ export async function generateStaticParams() {
     { slug: 'seguros' },
     { slug: 'abogados' },
     { slug: 'inmobiliarias' },
-    { slug: 'gestorias' },
+    { slug: 'otros-servicios' },
   ];
 }
 

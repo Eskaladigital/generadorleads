@@ -21,22 +21,22 @@ export default function Footer() {
             <ul className="list-none space-y-4">
               <li>
                 <Link href="/es/servicios/seguros" className="text-gray-600 no-underline hover:text-accent transition-colors">
-                  Seguros de salud
+                  Seguros de salud y vida
                 </Link>
               </li>
               <li>
                 <Link href="/es/servicios/abogados" className="text-gray-600 no-underline hover:text-accent transition-colors">
-                  Abogados extranjería
+                  Abogados especializados
                 </Link>
               </li>
               <li>
                 <Link href="/es/servicios/inmobiliarias" className="text-gray-600 no-underline hover:text-accent transition-colors">
-                  Inmobiliarias
+                  Inmobiliarias locales
                 </Link>
               </li>
               <li>
-                <Link href="/es/servicios/gestorias" className="text-gray-600 no-underline hover:text-accent transition-colors">
-                  Gestorías
+                <Link href="/es/servicios/otros-servicios" className="text-gray-600 no-underline hover:text-accent transition-colors">
+                  Gestorías y más
                 </Link>
               </li>
             </ul>

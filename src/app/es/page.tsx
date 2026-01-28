@@ -187,31 +187,31 @@ export default function HomePage() {
             {[
               {
                 category: "Salud y Bienestar",
-                title: "Seguros de Salud",
-                description: "Compara opciones de seguros médicos privados adaptados para expatriados. Válidos para visados no lucrativos y cobertura completa.",
+                title: "Seguros de Salud y Vida",
+                description: "Seguros médicos y de vida adaptados a tu edad y situación laboral. Válidos para visados no lucrativos, cobertura completa para expatriados.",
                 cta: "Explorar Opciones",
                 slug: "seguros"
               },
               {
                 category: "Servicios Legales",
-                title: "Abogados de Extranjería",
-                description: "Especialistas en visados, NIE, arraigo, reagrupación familiar y todos los procedimientos migratorios.",
+                title: "Abogados Especializados",
+                description: "Expertos en extranjería (visados, NIE, residencia) y derecho laboral. Experiencia específica con clientes internacionales.",
                 cta: "Encontrar Abogado",
                 slug: "abogados"
               },
               {
                 category: "Bienes Raíces",
-                title: "Agentes Inmobiliarios",
-                description: "Agencias con amplia experiencia trabajando con clientes internacionales que entienden tus necesidades específicas.",
+                title: "Inmobiliarias Locales",
+                description: "Agencias con amplia experiencia en la zona que trabajan habitualmente con clientes internacionales y conocen el mercado local.",
                 cta: "Ver Propiedades",
                 slug: "inmobiliarias"
               },
               {
-                category: "Administración",
-                title: "Servicios de Gestoría",
-                description: "Profesionales administrativos para gestionar papeleo, impuestos y procedimientos burocráticos en tu nombre.",
-                cta: "Obtener Ayuda",
-                slug: "gestorias"
+                category: "Servicios Adicionales",
+                title: "Gestorías y Más",
+                description: "Gestorías administrativas, clínicas privadas, academias de idiomas y otros servicios esenciales para tu nueva vida en España.",
+                cta: "Descubrir Más",
+                slug: "otros-servicios"
               }
             ].map((service, index) => (
               <div 
