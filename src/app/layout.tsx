@@ -27,6 +27,10 @@ export const metadata: Metadata = {
   keywords: ["expatriados españa", "residentes internacionales", "seguros extranjeros", "abogados extranjería", "inmobiliarias expatriados"],
   authors: [{ name: "Health4Spain" }],
   creator: "Health4Spain",
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
   openGraph: {
     type: "website",
     locale: "es_ES",
@@ -36,7 +40,7 @@ export const metadata: Metadata = {
     description: "Conectamos residentes internacionales con profesionales españoles de confianza.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/logo-horizontal.png",
         width: 1200,
         height: 630,
         alt: "Health4Spain",
@@ -47,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Health4Spain - Tu Nueva Vida en España",
     description: "Conectamos residentes internacionales con profesionales españoles de confianza.",
-    images: ["/og-image.jpg"],
+    images: ["/images/logo-horizontal.png"],
   },
   robots: {
     index: true,
@@ -70,8 +74,6 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${robotoSlab.variable} ${ubuntu.variable}`}>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#43beda" />
       </head>
       <body className="font-body antialiased">

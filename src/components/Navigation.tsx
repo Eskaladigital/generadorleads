@@ -35,15 +35,24 @@ export default function Navigation() {
       <div className="container-base">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/es" className="flex items-center gap-2">
-            {/* Logo H4S siglas a color */}
-            <div className="flex items-center">
-              <span className="text-2xl font-heading font-bold">
-                <span className="text-primary">H</span>
-                <span className="text-secondary">4</span>
-                <span className="text-primary">S</span>
-              </span>
-            </div>
+          <Link href="/es" className="flex items-center">
+            {/* Logo completo en desktop, siglas en mobile */}
+            <Image 
+              src="/images/logo-horizontal.png" 
+              alt="Health4Spain" 
+              width={180}
+              height={45}
+              priority
+              className="h-8 md:h-10 w-auto hidden sm:block"
+            />
+            <Image 
+              src="/images/logo-siglas-gradient.png" 
+              alt="H4S" 
+              width={60}
+              height={40}
+              priority
+              className="h-9 w-auto sm:hidden"
+            />
           </Link>
 
           {/* Desktop Navigation */}

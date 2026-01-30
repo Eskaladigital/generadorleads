@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const footerLinks = {
   servicios: [
@@ -36,13 +37,15 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
-            {/* Logo H4S */}
+            {/* Logo H4S blanco */}
             <Link href="/es" className="inline-block mb-4">
-              <span className="text-2xl font-heading font-bold">
-                <span className="text-primary">H</span>
-                <span className="text-white">4</span>
-                <span className="text-primary">S</span>
-              </span>
+              <Image 
+                src="/images/logo-horizontal-white.png" 
+                alt="Health4Spain" 
+                width={150}
+                height={40}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed">
               Tu puente hacia una nueva vida en España.
