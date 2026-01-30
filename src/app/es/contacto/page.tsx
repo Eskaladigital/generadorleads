@@ -6,18 +6,18 @@ import Link from 'next/link';
 
 // Tipos
 interface FormData {
-  // Paso 1: Datos personales
+  // Paso 1: Servicio
+  servicio: string;
+  
+  // Paso 2: Destino/Ubicación
+  ciudad_interes: string;
+  
+  // Paso 3: Datos personales
   nombre: string;
   email: string;
   telefono: string;
   pais_origen: string;
   ciudad_origen: string;
-  
-  // Paso 2: Servicio
-  servicio: string;
-  
-  // Paso 3: Destino
-  ciudad_interes: string;
   
   // Paso 4: Detalles
   presupuesto: string;
@@ -87,8 +87,85 @@ const URGENCIAS = [
   { id: 'solo-informacion', label: 'Solo busco información', score: 5 },
 ];
 
-// Componente de paso 1: Datos personales
+// Componente de paso 1: Selección de servicio
 function Step1({ formData, updateFormData, errors }: StepProps) {
+  return (
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+          ¿Qué servicio necesitas?
+        </h2>
+        <p className="text-gray-600">
+          Selecciona el tipo de profesional que buscas
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {SERVICIOS.map((servicio) => (
+          <button
+            key={servicio.id}
+            type="button"
+            onClick={() => updateFormData('servicio', servicio.id)}
+            className={`p-4 rounded-xl border-2 transition-all text-center ${
+              formData.servicio === servicio.id
+                ? 'border-primary bg-primary/5 shadow-md'
+                : 'border-gray-200 hover:border-primary/50'
+            }`}
+          >
+            <span className="text-3xl mb-2 block">{servicio.icon}</span>
+            <span className={`font-medium ${
+              formData.servicio === servicio.id ? 'text-primary' : 'text-gray-700'
+            }`}>
+              {servicio.label}
+            </span>
+          </button>
+        ))}
+      </div>
+      {errors.servicio && <p className="form-error text-center">{errors.servicio}</p>}
+    </div>
+  );
+}
+
+// Componente de paso 2: Selección de ciudad/destino
+function Step2({ formData, updateFormData, errors }: StepProps) {
+  return (
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+          ¿Dónde en España?
+        </h2>
+        <p className="text-gray-600">
+          Selecciona la ciudad donde necesitas el servicio
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        {CIUDADES.map((ciudad) => (
+          <button
+            key={ciudad.id}
+            type="button"
+            onClick={() => updateFormData('ciudad_interes', ciudad.id)}
+            className={`p-3 rounded-xl border-2 transition-all text-center ${
+              formData.ciudad_interes === ciudad.id
+                ? 'border-primary bg-primary/5 shadow-md'
+                : 'border-gray-200 hover:border-primary/50'
+            }`}
+          >
+            <span className={`font-medium text-sm ${
+              formData.ciudad_interes === ciudad.id ? 'text-primary' : 'text-gray-700'
+            }`}>
+              {ciudad.label}
+            </span>
+          </button>
+        ))}
+      </div>
+      {errors.ciudad_interes && <p className="form-error text-center">{errors.ciudad_interes}</p>}
+    </div>
+  );
+}
+
+// Componente de paso 3: Datos personales
+function Step3({ formData, updateFormData, errors }: StepProps) {
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
@@ -167,82 +244,6 @@ function Step1({ formData, updateFormData, errors }: StepProps) {
   );
 }
 
-// Componente de paso 2: Selección de servicio
-function Step2({ formData, updateFormData, errors }: StepProps) {
-  return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
-          ¿Qué servicio necesitas?
-        </h2>
-        <p className="text-gray-600">
-          Selecciona el tipo de profesional que buscas
-        </p>
-      </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {SERVICIOS.map((servicio) => (
-          <button
-            key={servicio.id}
-            type="button"
-            onClick={() => updateFormData('servicio', servicio.id)}
-            className={`p-4 rounded-xl border-2 transition-all text-center ${
-              formData.servicio === servicio.id
-                ? 'border-primary bg-primary/5 shadow-md'
-                : 'border-gray-200 hover:border-primary/50'
-            }`}
-          >
-            <span className="text-3xl mb-2 block">{servicio.icon}</span>
-            <span className={`font-medium ${
-              formData.servicio === servicio.id ? 'text-primary' : 'text-gray-700'
-            }`}>
-              {servicio.label}
-            </span>
-          </button>
-        ))}
-      </div>
-      {errors.servicio && <p className="form-error text-center">{errors.servicio}</p>}
-    </div>
-  );
-}
-
-// Componente de paso 3: Selección de ciudad
-function Step3({ formData, updateFormData, errors }: StepProps) {
-  return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
-          ¿Dónde en España?
-        </h2>
-        <p className="text-gray-600">
-          Selecciona la ciudad donde necesitas el servicio
-        </p>
-      </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {CIUDADES.map((ciudad) => (
-          <button
-            key={ciudad.id}
-            type="button"
-            onClick={() => updateFormData('ciudad_interes', ciudad.id)}
-            className={`p-3 rounded-xl border-2 transition-all text-center ${
-              formData.ciudad_interes === ciudad.id
-                ? 'border-primary bg-primary/5 shadow-md'
-                : 'border-gray-200 hover:border-primary/50'
-            }`}
-          >
-            <span className={`font-medium text-sm ${
-              formData.ciudad_interes === ciudad.id ? 'text-primary' : 'text-gray-700'
-            }`}>
-              {ciudad.label}
-            </span>
-          </button>
-        ))}
-      </div>
-      {errors.ciudad_interes && <p className="form-error text-center">{errors.ciudad_interes}</p>}
-    </div>
-  );
-}
 
 // Componente de paso 4: Detalles finales
 function Step4({ formData, updateFormData, errors }: StepProps) {
@@ -370,13 +371,14 @@ function ContactPageContent() {
       landing_page: typeof window !== 'undefined' ? window.location.href : '',
     }));
 
-    // Si viene con servicio preseleccionado, saltar al paso 2 o 3
+    // Si viene con servicio preseleccionado, saltar al paso 2 (ubicación)
+    // Luego seguirá al paso 3 (datos personales) y finalmente paso 4 (detalles)
     if (servicio && ciudad) {
-      setCurrentStep(4);
+      setCurrentStep(2); // Si tiene servicio y ciudad, va al paso 2 (ubicación ya seleccionada, pero puede cambiarla)
     } else if (servicio) {
-      setCurrentStep(3);
+      setCurrentStep(2); // Si solo tiene servicio, va al paso 2 (ubicación)
     } else if (ciudad) {
-      setCurrentStep(2);
+      setCurrentStep(2); // Si solo tiene ciudad, va al paso 2 (ubicación ya seleccionada)
     }
   }, [searchParams]);
 
@@ -392,6 +394,17 @@ function ContactPageContent() {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
 
     if (step === 1) {
+      // Paso 1: Servicio
+      if (!formData.servicio) newErrors.servicio = 'Selecciona un servicio';
+    }
+
+    if (step === 2) {
+      // Paso 2: Ubicación/Destino
+      if (!formData.ciudad_interes) newErrors.ciudad_interes = 'Selecciona una ciudad';
+    }
+
+    if (step === 3) {
+      // Paso 3: Datos personales
       if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
       if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -401,15 +414,8 @@ function ContactPageContent() {
       if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
     }
 
-    if (step === 2) {
-      if (!formData.servicio) newErrors.servicio = 'Selecciona un servicio';
-    }
-
-    if (step === 3) {
-      if (!formData.ciudad_interes) newErrors.ciudad_interes = 'Selecciona una ciudad';
-    }
-
     if (step === 4) {
+      // Paso 4: Detalles
       if (!formData.presupuesto) newErrors.presupuesto = 'Selecciona tu presupuesto';
       if (!formData.urgencia) newErrors.urgencia = 'Selecciona cuándo lo necesitas';
     }
