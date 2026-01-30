@@ -1,0 +1,451 @@
+'use client';
+
+import { useState } from 'react';
+
+interface LeadFormProps {
+  servicio?: string;
+  servicioSlug?: string;
+  ciudad?: string;
+  ciudadSlug?: string;
+  idioma?: string;
+  variant?: 'card' | 'inline' | 'modal';
+  title?: string;
+  subtitle?: string;
+  showServiceField?: boolean;
+  showCityField?: boolean;
+  source?: string;
+  campaign?: string;
+}
+
+const SERVICIOS = [
+  { value: 'seguros', label: 'Seguro de Salud' },
+  { value: 'abogados', label: 'Abogado de Extranjería' },
+  { value: 'inmobiliarias', label: 'Agente Inmobiliario' },
+  { value: 'dentistas', label: 'Dentista' },
+  { value: 'gestorias', label: 'Gestoría' },
+  { value: 'clinicas', label: 'Clínica Privada' },
+  { value: 'otro', label: 'Otro servicio' },
+];
+
+const CIUDADES = [
+  { value: 'torrevieja', label: 'Torrevieja' },
+  { value: 'alicante', label: 'Alicante' },
+  { value: 'murcia', label: 'Murcia' },
+  { value: 'benidorm', label: 'Benidorm' },
+  { value: 'cartagena', label: 'Cartagena' },
+  { value: 'elche', label: 'Elche' },
+  { value: 'orihuela', label: 'Orihuela' },
+  { value: 'lorca', label: 'Lorca' },
+  { value: 'rojales', label: 'Rojales' },
+  { value: 'san-javier', label: 'San Javier' },
+  { value: 'otra', label: 'Otra ciudad' },
+];
+
+const URGENCIAS = [
+  { value: 'esta_semana', label: 'Esta semana', hot: true },
+  { value: 'este_mes', label: 'Este mes', hot: false },
+  { value: 'sin_prisa', label: 'Sin prisa', hot: false },
+];
+
+const IDIOMAS = [
+  { value: 'es', label: 'Español' },
+  { value: 'en', label: 'English' },
+  { value: 'de', label: 'Deutsch' },
+  { value: 'fr', label: 'Français' },
+];
+
+export default function LeadForm({
+  servicio,
+  servicioSlug,
+  ciudad,
+  ciudadSlug,
+  idioma = 'es',
+  variant = 'card',
+  title,
+  subtitle,
+  showServiceField = true,
+  showCityField = true,
+  source,
+  campaign,
+}: LeadFormProps) {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    telefono: '',
+    email: '',
+    servicio: servicioSlug || '',
+    ciudad: ciudadSlug || '',
+    urgencia: '',
+    idioma_preferido: idioma,
+    mensaje: '',
+    acepta_privacidad: false,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const leadData = {
+      ...formData,
+      landing_page: source || window.location.pathname,
+      utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
+      utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
+      utm_campaign: campaign || new URLSearchParams(window.location.search).get('utm_campaign') || '',
+      dispositivo: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+      created_at: new Date().toISOString(),
+    };
+
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadData),
+      });
+      
+      if (!response.ok) throw new Error('Error al enviar');
+      
+      setSubmitStatus('success');
+      setFormData({
+        nombre: '',
+        telefono: '',
+        email: '',
+        servicio: servicioSlug || '',
+        ciudad: ciudadSlug || '',
+        urgencia: '',
+        idioma_preferido: idioma,
+        mensaje: '',
+        acepta_privacidad: false,
+      });
+      setCurrentStep(1);
+      
+    } catch (error) {
+      console.error('Error enviando lead:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const defaultTitle = servicio ? `Solicita tu ${servicio}` : '¿Qué necesitas?';
+  const defaultSubtitle = 'Te contactamos en menos de 24h';
+  const displayTitle = title || defaultTitle;
+  const displaySubtitle = subtitle || defaultSubtitle;
+
+  const containerClasses = {
+    card: 'bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl border-2 border-blue-500 p-4 sm:p-6 lg:p-8',
+    inline: 'bg-gray-50 p-4 sm:p-6 rounded-lg',
+    modal: 'bg-white p-4 sm:p-6 lg:p-8',
+  };
+
+  // Estado de éxito
+  if (submitStatus === 'success') {
+    return (
+      <div className={containerClasses[variant]}>
+        <div className="text-center py-6 sm:py-8">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+            <svg className="w-8 h-8 sm:w-10 sm:h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">¡Recibido!</h3>
+          <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+            Te contactaremos en las próximas horas.
+          </p>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 text-xs sm:text-sm text-blue-800 text-left">
+            <strong>¿Qué pasa ahora?</strong><br />
+            Un experto revisará tu caso y te llamará para confirmar tus necesidades.
+          </div>
+          <button
+            onClick={() => setSubmitStatus('idle')}
+            className="mt-4 sm:mt-6 text-blue-600 hover:text-blue-800 font-medium text-sm sm:text-base"
+          >
+            Enviar otra consulta
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={containerClasses[variant]} id="formulario">
+      {/* Header */}
+      <div className="text-center mb-4 sm:mb-6">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">{displayTitle}</h3>
+        <p className="text-gray-600 text-sm sm:text-base">{displaySubtitle}</p>
+      </div>
+
+      {/* Progress */}
+      <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
+        {[1, 2].map((step) => (
+          <div key={step} className="flex items-center">
+            <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-colors ${
+              currentStep >= step ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-500'
+            }`}>
+              {step}
+            </div>
+            {step < 2 && (
+              <div className={`w-8 sm:w-12 h-1 mx-1 transition-colors ${
+                currentStep > step ? 'bg-blue-600' : 'bg-gray-200'
+              }`} />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit}>
+        {/* STEP 1 */}
+        {currentStep === 1 && (
+          <div className="space-y-4 sm:space-y-5">
+            {/* Servicio */}
+            {(showServiceField && !servicioSlug) && (
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                  ¿Qué servicio necesitas? *
+                </label>
+                <select
+                  name="servicio"
+                  value={formData.servicio}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                >
+                  <option value="">Selecciona un servicio</option>
+                  {SERVICIOS.map(s => (
+                    <option key={s.value} value={s.value}>{s.label}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {servicioSlug && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 text-sm">
+                <span className="text-blue-600">✓</span>
+                <span className="text-blue-800 font-medium">Servicio: {servicio}</span>
+              </div>
+            )}
+
+            {/* Ciudad */}
+            {(showCityField && !ciudadSlug) && (
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                  ¿En qué ciudad? *
+                </label>
+                <select
+                  name="ciudad"
+                  value={formData.ciudad}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                >
+                  <option value="">Selecciona una ciudad</option>
+                  {CIUDADES.map(c => (
+                    <option key={c.value} value={c.value}>{c.label}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {ciudadSlug && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 text-sm">
+                <span className="text-green-600">📍</span>
+                <span className="text-green-800 font-medium">Ciudad: {ciudad}</span>
+              </div>
+            )}
+
+            {/* Urgencia */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                ¿Cuándo lo necesitas? *
+              </label>
+              <div className="grid grid-cols-1 gap-2">
+                {URGENCIAS.map(u => (
+                  <label 
+                    key={u.value}
+                    className={`flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 border-2 rounded-lg cursor-pointer transition-all text-sm sm:text-base ${
+                      formData.urgencia === u.value 
+                        ? 'border-blue-500 bg-blue-50' 
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="urgencia"
+                      value={u.value}
+                      checked={formData.urgencia === u.value}
+                      onChange={handleChange}
+                      className="w-4 h-4 text-blue-600"
+                      required
+                    />
+                    <span className="text-gray-700">{u.label}</span>
+                    {u.hot && (
+                      <span className="ml-auto text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">
+                        Prioritario
+                      </span>
+                    )}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setCurrentStep(2)}
+              disabled={!formData.urgencia || (!servicioSlug && !formData.servicio) || (!ciudadSlug && !formData.ciudad)}
+              className="w-full bg-blue-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold text-base sm:text-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
+            >
+              Continuar →
+            </button>
+          </div>
+        )}
+
+        {/* STEP 2 */}
+        {currentStep === 2 && (
+          <div className="space-y-4 sm:space-y-5">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                Tu nombre *
+              </label>
+              <input
+                type="text"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+                required
+                placeholder="¿Cómo te llamas?"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                Teléfono (WhatsApp) *
+              </label>
+              <input
+                type="tel"
+                name="telefono"
+                value={formData.telefono}
+                onChange={handleChange}
+                required
+                placeholder="+34 600 000 000"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                Email *
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="tu@email.com"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                Idioma preferido
+              </label>
+              <select
+                name="idioma_preferido"
+                value={formData.idioma_preferido}
+                onChange={handleChange}
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+              >
+                {IDIOMAS.map(i => (
+                  <option key={i.value} value={i.value}>{i.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                ¿Algo más? <span className="font-normal text-gray-400">(opcional)</span>
+              </label>
+              <textarea
+                name="mensaje"
+                value={formData.mensaje}
+                onChange={handleChange}
+                rows={2}
+                placeholder="Cuéntanos más..."
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none resize-none"
+              />
+            </div>
+
+            <label className="flex items-start gap-2 sm:gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                name="acepta_privacidad"
+                checked={formData.acepta_privacidad}
+                onChange={handleChange}
+                required
+                className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 text-blue-600 rounded"
+              />
+              <span className="text-xs sm:text-sm text-gray-600">
+                Acepto la{' '}
+                <a href="/es/privacidad" className="text-blue-600 hover:underline" target="_blank">
+                  política de privacidad
+                </a>
+              </span>
+            </label>
+
+            <div className="flex gap-2 sm:gap-3">
+              <button
+                type="button"
+                onClick={() => setCurrentStep(1)}
+                className="px-4 sm:px-6 py-3 sm:py-4 border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition-all text-sm sm:text-base"
+              >
+                ←
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting || !formData.acepta_privacidad}
+                className="flex-1 bg-green-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold text-base sm:text-lg hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span className="hidden sm:inline">Enviando...</span>
+                  </>
+                ) : (
+                  'Enviar solicitud'
+                )}
+              </button>
+            </div>
+
+            {/* Trust badges - responsive */}
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pt-3 sm:pt-4 border-t border-gray-100 text-xs sm:text-sm text-gray-500">
+              <span>🔒 Seguro</span>
+              <span>⚡ 24h</span>
+              <span>💰 Gratis</span>
+            </div>
+          </div>
+        )}
+
+        {submitStatus === 'error' && (
+          <div className="mt-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 text-xs sm:text-sm">
+            <strong>Error al enviar.</strong> Inténtalo de nuevo.
+          </div>
+        )}
+      </form>
+    </div>
+  );
+}

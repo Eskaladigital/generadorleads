@@ -1,0 +1,6 @@
+-- =============================================
+-- ARCHIVO OBSOLETO - Ver storage-policies.sql
+-- =============================================
+-- Este archivo ha sido consolidado en storage-policies.sql
+-- Puedes eliminarlo de forma segura.
+-- =============================================
