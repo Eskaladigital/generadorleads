@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabase';
 import MediaManager from '@/components/admin/MediaManager';
 
 // Importar TinyMCE dinámicamente para evitar SSR
-const Editor = dynamic(() => import('@tinymce/tinymce-react').then(mod => mod.Editor), {
+const Editor = dynamic(() => import('@tinymce/tinymce-react').then(mod => mod.Editor as any), {
   ssr: false,
   loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse"></div>,
 });
