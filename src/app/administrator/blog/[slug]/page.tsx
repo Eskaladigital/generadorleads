@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState, use, useRef } from 'react';
+import React, { useEffect, useState, use, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { supabase } from '@/lib/supabase';
 import MediaManager from '@/components/admin/MediaManager';
 
 // Importar TinyMCE dinámicamente para evitar SSR
-const Editor = dynamic(() => import('@tinymce/tinymce-react').then(mod => mod.Editor as any), {
+const Editor = dynamic(() => import('@tinymce/tinymce-react').then(mod => mod.Editor as unknown as React.ComponentType<any>), {
   ssr: false,
   loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse"></div>,
 });
@@ -25,6 +25,9 @@ interface BlogPost {
   meta_description: string;
   status: string;
   lang: string;
+  created_at?: string;
+  updated_at?: string;
+  published_at?: string;
 }
 
 const emptyPost: BlogPost = {
@@ -269,8 +272,8 @@ export default function BlogEditorPage({ params }: { params: Promise<{ slug: str
             <Editor
               apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
               value={post.content}
-              onInit={(evt, editor) => editorRef.current = editor}
-              onEditorChange={(content) => setPost(prev => ({ ...prev, content }))}
+              onInit={(evt: any, editor: any) => editorRef.current = editor}
+              onEditorChange={(content: any) => setPost(prev => ({ ...prev, content }))}
               init={{
                 height: 500,
                 menubar: true,
@@ -297,7 +300,7 @@ export default function BlogEditorPage({ params }: { params: Promise<{ slug: str
                 automatic_uploads: false,
                 file_picker_types: 'image',
                 // Abrir nuestro MediaManager al hacer clic en insertar imagen de TinyMCE
-                file_picker_callback: (callback, value, meta) => {
+                file_picker_callback: (callback: any, value: any, meta: any) => {
                   if (meta.filetype === 'image') {
                     // Abrimos nuestro gestor de medios
                     setMediaTarget('content');

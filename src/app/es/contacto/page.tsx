@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -328,7 +328,7 @@ function Step4({ formData, updateFormData, errors }: StepProps) {
 }
 
 // Componente principal del formulario
-export default function ContactPage() {
+function ContactPageContent() {
   const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -645,5 +645,14 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Componente wrapper con Suspense
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Cargando...</div>}>
+      <ContactPageContent />
+    </Suspense>
   );
 }

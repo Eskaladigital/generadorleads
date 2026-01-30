@@ -10,8 +10,9 @@ interface MediaFile {
   updated_at: string;
   created_at: string;
   metadata: {
-    size: number;
-    mimetype: string;
+    size?: number;
+    mimetype?: string;
+    [key: string]: any;
   } | null;
   url: string;
   isFolder?: boolean;
