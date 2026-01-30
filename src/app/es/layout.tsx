@@ -1,14 +1,20 @@
-import type { Metadata } from "next";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import StickyCTA from "@/components/StickyCTA";
 
-export const metadata: Metadata = {
-  title: "Health4Spain - Tu Nueva Vida en España",
-  description: "Conectamos residentes internacionales con profesionales españoles de confianza. Seguros, abogados, inmobiliarias y más.",
-};
-
-export default function ESLayout({
+export default function SpanishLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <Navigation />
+      <main className="min-h-screen pt-16">
+        {children}
+      </main>
+      <Footer />
+      <StickyCTA />
+    </>
+  );
 }

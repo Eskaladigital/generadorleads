@@ -1,192 +1,154 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
 
-const destinations = [
+export const metadata: Metadata = {
+  title: 'Destinos en España para Expatriados',
+  description: 'Descubre los mejores destinos en España para vivir como expatriado. Costa Blanca, Costa del Sol, Madrid, Barcelona, Islas Baleares y Canarias.',
+};
+
+// Destinos organizados por región
+const REGIONES = [
   {
-    slug: 'torrevieja',
-    name: 'Torrevieja',
-    region: 'Costa Blanca',
-    expats: '28%',
-    image: 'https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=800',
-    highlight: 'Ciudad más popular',
-    description: 'La ciudad con mayor porcentaje de residentes extranjeros en España'
+    id: 'costa-blanca',
+    nombre: 'Costa Blanca',
+    descripcion: 'Sol, playas y la mejor calidad de vida del Mediterráneo.',
+    ciudades: [
+      { slug: 'alicante', nombre: 'Alicante' },
+      { slug: 'torrevieja', nombre: 'Torrevieja' },
+      { slug: 'benidorm', nombre: 'Benidorm' },
+      { slug: 'denia', nombre: 'Dénia' },
+      { slug: 'javea', nombre: 'Jávea' },
+    ],
   },
   {
-    slug: 'alicante',
-    name: 'Alicante',
-    region: 'Costa Blanca',
-    expats: '15%',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-    highlight: 'Capital de provincia',
-    description: 'Ciudad cosmopolita con excelentes conexiones y servicios'
+    id: 'costa-del-sol',
+    nombre: 'Costa del Sol',
+    descripcion: 'El destino favorito de los europeos en el sur de España.',
+    ciudades: [
+      { slug: 'malaga', nombre: 'Málaga' },
+      { slug: 'marbella', nombre: 'Marbella' },
+      { slug: 'fuengirola', nombre: 'Fuengirola' },
+      { slug: 'estepona', nombre: 'Estepona' },
+      { slug: 'nerja', nombre: 'Nerja' },
+    ],
   },
   {
-    slug: 'murcia',
-    name: 'Murcia',
-    region: 'Costa Cálida',
-    expats: '12%',
-    image: 'https://images.unsplash.com/photo-1509840841025-9088ba78a826?w=800',
-    highlight: 'Menos turística',
-    description: 'Auténtica vida española con clima excelente'
+    id: 'grandes-ciudades',
+    nombre: 'Grandes Ciudades',
+    descripcion: 'Oportunidades profesionales y vida cosmopolita.',
+    ciudades: [
+      { slug: 'madrid', nombre: 'Madrid' },
+      { slug: 'barcelona', nombre: 'Barcelona' },
+      { slug: 'valencia', nombre: 'Valencia' },
+      { slug: 'sevilla', nombre: 'Sevilla' },
+      { slug: 'bilbao', nombre: 'Bilbao' },
+    ],
   },
   {
-    slug: 'benidorm',
-    name: 'Benidorm',
-    region: 'Costa Blanca',
-    expats: '24%',
-    image: 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?w=800',
-    highlight: 'Infraestructura completa',
-    description: 'Resort mediterráneo con todos los servicios'
+    id: 'islas',
+    nombre: 'Islas',
+    descripcion: 'Paraísos insulares con clima privilegiado todo el año.',
+    ciudades: [
+      { slug: 'palma', nombre: 'Palma de Mallorca' },
+      { slug: 'ibiza', nombre: 'Ibiza' },
+      { slug: 'tenerife', nombre: 'Tenerife' },
+      { slug: 'las-palmas', nombre: 'Las Palmas' },
+      { slug: 'lanzarote', nombre: 'Lanzarote' },
+    ],
   },
   {
-    slug: 'cartagena',
-    name: 'Cartagena',
-    region: 'Costa Cálida',
-    expats: '10%',
-    image: 'https://images.unsplash.com/photo-1555881603-1f2169d36904?w=800',
-    highlight: 'Historia y playas',
-    description: 'Puerto milenario con playas vírgenes cercanas'
+    id: 'levante',
+    nombre: 'Levante y Murcia',
+    descripcion: 'Costa cálida, precios accesibles y comunidad internacional.',
+    ciudades: [
+      { slug: 'murcia', nombre: 'Murcia' },
+      { slug: 'cartagena', nombre: 'Cartagena' },
+      { slug: 'orihuela', nombre: 'Orihuela Costa' },
+      { slug: 'almeria', nombre: 'Almería' },
+    ],
   },
-  {
-    slug: 'elche',
-    name: 'Elche',
-    region: 'Costa Blanca',
-    expats: '14%',
-    image: 'https://images.unsplash.com/photo-1601654742265-6f7e72a06d5b?w=800',
-    highlight: 'Ciudad patrimonio',
-    description: 'Palmeral histórico y calidad de vida excepcional'
-  }
 ];
 
 export default function DestinosPage() {
   return (
     <>
-      {/* HEADER */}
-      <section className="py-24 px-[5%] bg-gray-50 border-b border-gray-200">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="uppercase tracking-[2px] text-[0.75rem] text-accent font-semibold mb-4">
-            Costa Mediterránea
+      {/* Header - altura reducida */}
+      <section className="bg-gradient-secondary text-white py-12 md:py-16">
+        <div className="container-base">
+          <div className="max-w-3xl">
+            <h1 className="font-heading text-3xl md:text-4xl font-bold mb-3">
+              Destinos en España
+            </h1>
+            <p className="text-lg text-white/90">
+              Encuentra tu lugar ideal para vivir. Cada destino tiene su encanto único 
+              y una comunidad internacional que te espera.
+            </p>
           </div>
-          <h1 className="font-lora text-[4rem] font-bold mb-6 text-[#1a1a1a]">
-            Explora Tu Futuro Hogar
-          </h1>
-          <p className="text-[1.2rem] text-gray-600 leading-relaxed max-w-[700px]">
-            Descubre las ciudades más populares entre extranjeros en la Costa Blanca y Costa Cálida. Clima excepcional, playas, y comunidades internacionales establecidas.
-          </p>
         </div>
       </section>
 
-      {/* DESTINATIONS GRID */}
-      <section className="py-16 px-[5%]">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {destinations.map((destination) => (
-              <Link
-                key={destination.slug}
-                href={`/es/destinos/${destination.slug}`}
-                className="group relative overflow-hidden no-underline"
-              >
-                <div 
-                  className="h-[400px] bg-cover bg-center relative transition-transform duration-500 group-hover:scale-110"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('${destination.image}')`
-                  }}
-                >
-                  {destination.highlight && (
-                    <div className="absolute top-4 right-4 bg-accent text-white px-3 py-1 text-xs font-semibold uppercase tracking-wider">
-                      {destination.highlight}
-                    </div>
-                  )}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                    <div className="text-sm mb-2 opacity-90">
-                      {destination.region} • {destination.expats} extranjeros
-                    </div>
-                    <h2 className="font-lora text-[2.5rem] font-bold mb-2">
-                      {destination.name}
-                    </h2>
-                    <p className="text-sm opacity-90">
-                      {destination.description}
-                    </p>
-                  </div>
+      {/* CTA flotante - visible desde el inicio */}
+      <div className="bg-primary/10 border-b border-primary/20">
+        <div className="container-base py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-gray-700 text-center sm:text-left">
+            <strong>¿Ya sabes dónde quieres vivir?</strong> Te conectamos con profesionales locales.
+          </p>
+          <Link href="/es/contacto" className="btn-primary btn-sm whitespace-nowrap">
+            Solicitar información
+          </Link>
+        </div>
+      </div>
+
+      {/* Regiones */}
+      <section className="py-10 md:py-14">
+        <div className="container-base">
+          <div className="space-y-12">
+            {REGIONES.map((region) => (
+              <div key={region.id}>
+                <div className="mb-6">
+                  <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+                    {region.nombre}
+                  </h2>
+                  <p className="text-gray-600">{region.descripcion}</p>
                 </div>
-              </Link>
+                
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                  {region.ciudades.map((ciudad) => (
+                    <Link
+                      key={ciudad.slug}
+                      href={`/es/destinos/${ciudad.slug}`}
+                      className="group card card-hover p-4 text-center"
+                    >
+                      {/* Icono monocromático */}
+                      <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                        <svg className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <h3 className="font-medium text-gray-900 group-hover:text-primary transition-colors">
+                        {ciudad.nombre}
+                      </h3>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* COMPARE */}
-      <section className="py-24 px-[5%] bg-gray-50">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="font-lora text-[3rem] font-bold mb-12 text-center text-[#1a1a1a]">
-            Comparativa Rápida
+      {/* CTA Final */}
+      <section className="py-10 md:py-14 bg-gray-50">
+        <div className="container-base text-center">
+          <h2 className="font-heading text-2xl font-bold text-gray-900 mb-3">
+            ¿No encuentras tu destino?
           </h2>
-          <div className="bg-white border border-gray-200 overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
-                <tr>
-                  <th className="text-left p-6 font-semibold uppercase text-xs tracking-wider">Ciudad</th>
-                  <th className="text-left p-6 font-semibold uppercase text-xs tracking-wider">% Extranjeros</th>
-                  <th className="text-left p-6 font-semibold uppercase text-xs tracking-wider">Alquiler 2BR</th>
-                  <th className="text-left p-6 font-semibold uppercase text-xs tracking-wider">Compra €/m²</th>
-                  <th className="text-left p-6 font-semibold uppercase text-xs tracking-wider">Aeropuerto</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-gray-200">
-                  <td className="p-6 font-semibold">Torrevieja</td>
-                  <td className="p-6">28%</td>
-                  <td className="p-6">700-900€</td>
-                  <td className="p-6">1.500-2.000€</td>
-                  <td className="p-6">40 min</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="p-6 font-semibold">Alicante</td>
-                  <td className="p-6">15%</td>
-                  <td className="p-6">800-1.200€</td>
-                  <td className="p-6">2.000-3.000€</td>
-                  <td className="p-6">15 min</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="p-6 font-semibold">Murcia</td>
-                  <td className="p-6">12%</td>
-                  <td className="p-6">600-900€</td>
-                  <td className="p-6">1.300-1.800€</td>
-                  <td className="p-6">30 min</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="p-6 font-semibold">Benidorm</td>
-                  <td className="p-6">24%</td>
-                  <td className="p-6">900-1.300€</td>
-                  <td className="p-6">2.200-3.500€</td>
-                  <td className="p-6">50 min</td>
-                </tr>
-                <tr>
-                  <td className="p-6 font-semibold">Cartagena</td>
-                  <td className="p-6">10%</td>
-                  <td className="p-6">550-800€</td>
-                  <td className="p-6">1.200-1.700€</td>
-                  <td className="p-6">25 min</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 px-[5%]">
-        <div className="max-w-[1000px] mx-auto text-center bg-gray-50 p-16 border-l-4 border-accent">
-          <h2 className="font-lora text-[2.5rem] font-bold mb-6">
-            ¿No Sabes Qué Ciudad Elegir?
-          </h2>
-          <p className="text-[1.2rem] text-gray-600 mb-8">
-            Te ayudamos a encontrar el destino perfecto según tu perfil, presupuesto y prioridades.
+          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+            Cuéntanos dónde quieres vivir y te ayudamos a encontrar los mejores profesionales en esa zona.
           </p>
-          <Link
-            href="/es/contacto"
-            className="inline-block bg-[#1a1a1a] text-white py-5 px-10 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-accent"
-          >
-            Asesoría Personalizada
+          <Link href="/es/contacto" className="btn-primary">
+            Contactar ahora
           </Link>
         </div>
       </section>

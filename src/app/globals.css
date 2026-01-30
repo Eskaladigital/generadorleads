@@ -2,20 +2,416 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap');
+/* =============================================
+   HEALTH4SPAIN - Global Styles
+   Colores: #43beda (primario) | #2b3e92 (secundario)
+   Tipografías: Roboto Slab (títulos) | Ubuntu (body)
+   ============================================= */
 
+/* =============================================
+   GOOGLE FONTS
+   ============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+/* =============================================
+   CSS CUSTOM PROPERTIES
+   ============================================= */
 :root {
-  --accent: #c7956d;
-  --accent-light: #e0c5a8;
+  /* Colores principales */
+  --color-primary: #43beda;
+  --color-primary-dark: #1ea7c7;
+  --color-secondary: #2b3e92;
+  --color-secondary-dark: #1e2b66;
+  
+  /* Grises */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Semánticos */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  /* Espaciado de secciones (coherente) */
+  --section-padding: 4rem;
+  --section-padding-mobile: 2.5rem;
+  
+  /* Bordes */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* =============================================
+   BASE STYLES
+   ============================================= */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: 'Work Sans', sans-serif;
-  color: #1a1a1a;
-  line-height: 1.8;
+  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--color-gray-800);
+  line-height: 1.6;
+  background-color: #ffffff;
 }
 
+/* Títulos con Roboto Slab */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto Slab', serif;
-  font-weight: 500;
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-gray-900);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+@media (min-width: 768px) {
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.25rem; }
+  h3 { font-size: 1.75rem; }
+}
+
+/* =============================================
+   SECTION SPACING (Coherencia)
+   ============================================= */
+@layer components {
+  /* Sección estándar */
+  .section {
+    @apply py-section-sm md:py-section;
+  }
+  
+  /* Sección con fondo */
+  .section-alt {
+    @apply py-section-sm md:py-section bg-gray-50;
+  }
+  
+  /* Container estándar */
+  .container-base {
+    @apply max-w-container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Container más estrecho para texto */
+  .container-narrow {
+    @apply max-w-narrow mx-auto px-4 sm:px-6;
+  }
+  
+  /* Container para contenido principal */
+  .container-content {
+    @apply max-w-content mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-xl transition-all duration-200 text-center;
+  }
+  
+  /* Botón primario (turquesa) */
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary-600 shadow-lg hover:shadow-cta active:scale-[0.98];
+  }
+  
+  /* Botón secundario (azul oscuro) */
+  .btn-secondary {
+    @apply btn bg-secondary text-white hover:bg-secondary-800 shadow-lg hover:shadow-xl active:scale-[0.98];
+  }
+  
+  /* Botón outline */
+  .btn-outline {
+    @apply btn bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white;
+  }
+  
+  /* Botón outline secundario */
+  .btn-outline-secondary {
+    @apply btn bg-transparent border-2 border-secondary text-secondary hover:bg-secondary hover:text-white;
+  }
+  
+  /* Botón blanco (para fondos de color) */
+  .btn-white {
+    @apply btn bg-white text-secondary hover:bg-gray-100 shadow-lg;
+  }
+  
+  /* Botón ghost */
+  .btn-ghost {
+    @apply btn bg-transparent text-gray-600 hover:bg-gray-100;
+  }
+  
+  /* Tamaños */
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+  
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+}
+
+/* =============================================
+   CARDS
+   ============================================= */
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-card transition-all duration-300;
+  }
+  
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-card-hover;
+  }
+  
+  .card-interactive {
+    @apply card card-hover cursor-pointer;
+  }
+}
+
+/* =============================================
+   HEADERS DE PÁGINA (Coherencia visual)
+   ============================================= */
+@layer components {
+  /* Header de página estándar (altura reducida) */
+  .page-header {
+    @apply relative bg-gradient-to-r from-secondary to-secondary-800 text-white py-12 md:py-16;
+  }
+  
+  .page-header-title {
+    @apply font-heading text-3xl md:text-4xl font-bold mb-3;
+  }
+  
+  .page-header-subtitle {
+    @apply text-lg md:text-xl text-white/90 max-w-2xl;
+  }
+}
+
+/* =============================================
+   CTA FIJO (Presente desde el inicio)
+   ============================================= */
+@layer components {
+  .sticky-cta {
+    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40 py-3 px-4;
+  }
+  
+  @media (min-width: 768px) {
+    .sticky-cta {
+      @apply hidden;
+    }
+  }
+}
+
+/* =============================================
+   ICONOS MONOCROMÁTICOS
+   ============================================= */
+@layer components {
+  .icon-mono {
+    @apply text-gray-500 transition-colors;
+  }
+  
+  .icon-mono-primary {
+    @apply text-primary;
+  }
+  
+  .icon-mono-secondary {
+    @apply text-secondary;
+  }
+}
+
+/* =============================================
+   FORMS
+   ============================================= */
+input, textarea, select {
+  @apply transition-all duration-200;
+}
+
+input:focus, textarea:focus, select:focus {
+  @apply outline-none ring-2 ring-primary ring-offset-1;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  @apply border-gray-300 text-primary focus:ring-primary;
+}
+
+/* =============================================
+   FORM STYLES (para fase de conversión)
+   ============================================= */
+@layer components {
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-2;
+  }
+  
+  .form-error {
+    @apply text-sm text-error mt-1;
+  }
+  
+  .form-help {
+    @apply text-sm text-gray-500 mt-1;
+  }
+}
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s ease-in-out infinite;
+  }
+}
+
+/* =============================================
+   PROSE (Blog content)
+   ============================================= */
+.prose {
+  @apply text-gray-700 leading-relaxed;
+}
+
+.prose h1 {
+  @apply font-heading text-4xl font-bold text-gray-900 mt-12 mb-6;
+}
+
+.prose h2 {
+  @apply font-heading text-3xl font-bold text-gray-900 mt-10 mb-4;
+}
+
+.prose h3 {
+  @apply font-heading text-2xl font-semibold text-gray-900 mt-8 mb-3;
+}
+
+.prose p {
+  @apply mb-6;
+}
+
+.prose a {
+  @apply text-primary hover:text-primary-600 underline;
+}
+
+.prose ul, .prose ol {
+  @apply mb-6 pl-6;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary pl-6 italic text-gray-600 my-6;
+}
+
+.prose img {
+  @apply rounded-xl shadow-soft my-8;
+}
+
+/* =============================================
+   UTILITIES
+   ============================================= */
+@layer utilities {
+  /* Text balance para títulos */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary-600;
+  }
+  
+  .bg-gradient-secondary {
+    @apply bg-gradient-to-r from-secondary to-secondary-800;
+  }
+  
+  .bg-gradient-hero {
+    @apply bg-gradient-to-br from-secondary via-secondary-800 to-primary-600;
+  }
+}
+
+/* =============================================
+   REDUCED MOTION
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================
+   PRINT STYLES
+   ============================================= */
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }

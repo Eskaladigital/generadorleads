@@ -1,433 +1,603 @@
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+import { createServerSupabaseClient } from '@/lib/supabase';
+import { LandingPage } from '@/lib/types';
 
-const destinationsData: Record<string, any> = {
-  torrevieja: {
-    name: 'Torrevieja',
-    region: 'Costa Blanca, Alicante',
-    expats: '28%',
-    population: '82.000 habitantes',
-    image: 'https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=1200',
-    hero: 'La ciudad más internacional de España',
-    stats: {
-      sunshine: '320 días/año',
-      temperature: '18°C promedio',
-      beaches: '20km de playas',
-      airport: '40 min a Alicante'
-    },
-    overview: 'Torrevieja se ha consolidado como el destino favorito para extranjeros en España, con más del 28% de su población compuesta por residentes internacionales. Esta ciudad costera ofrece un equilibrio perfecto entre clima mediterráneo, infraestructura adaptada y coste de vida asequible.',
-    livingCosts: {
-      rentStudio: '500-700€',
-      rent2bed: '700-900€',
-      rent3bed: '900-1.200€',
-      buyPrice: '1.500-2.000€/m²',
-      utilities: '100-150€',
-      groceries: '300-400€',
-      healthcare: '150-250€'
-    },
-    pros: [
-      'Mayor comunidad de expatriados en España',
-      'Servicios en múltiples idiomas ampliamente disponibles',
-      'Coste de vida 30% más bajo que Madrid o Barcelona',
-      'Clima excepcional: 320 días de sol al año',
-      'Playas de bandera azul y lagunas saladas terapéuticas',
-      'Excelente conectividad: 2 aeropuertos cercanos',
-      'Supermercados internacionales y productos de todo el mundo',
-      'Asociaciones y clubes sociales para todas las nacionalidades'
-    ],
-    cons: [
-      'Muy turística en temporada alta (julio-agosto)',
-      'Menos auténtica culturalmente que otras ciudades',
-      'Tráfico intenso en verano',
-      'Puede sentirse algo aislado del "verdadero" estilo de vida español'
-    ],
-    neighborhoods: [
-      {
-        name: 'Centro/Playa del Cura',
-        description: 'Zona más céntrica y animada. Cerca de todo pero puede ser ruidosa. Ideal para quienes buscan vida social activa.',
-        price: 'Medio-Alto'
-      },
-      {
-        name: 'La Mata',
-        description: 'Zona residencial tranquila al norte. Popular entre familias. Playa menos concurrida.',
-        price: 'Medio'
-      },
-      {
-        name: 'Los Altos',
-        description: 'Urbanizaciones en altura con vistas al mar. Más exclusivo y tranquilo.',
-        price: 'Alto'
-      },
-      {
-        name: 'Los Balcones/Punta Prima',
-        description: 'Urbanizaciones residenciales. Muy popular entre británicos y escandinavos.',
-        price: 'Medio'
-      }
-    ],
-    services: [
-      'Hospital Universitario de Torrevieja (atención multiidioma)',
-      'Múltiples centros médicos privados especializados en expatriados',
-      'Supermercados internacionales: Iceland, Lidl, Aldi, Mercadona',
-      'Oficinas de extranjería con atención en inglés',
-      'Numerosas gestorías y abogados especializados en no residentes',
-      'Clubes sociales: British Legion, Scandinavian Club, German Club',
-      'Transporte público: autobuses urbanos e interurbanos'
-    ]
+// Función para obtener landing de la BD
+async function getLanding(slug: string): Promise<LandingPage | null> {
+  const supabase = createServerSupabaseClient();
+  
+  const { data, error } = await supabase
+    .from('landing_pages')
+    .select('*')
+    .eq('slug', slug)
+    .eq('activo', true)
+    .single();
+  
+  if (error || !data) return null;
+  return data as LandingPage;
+}
+
+// Datos de ciudades estáticas (fallback)
+const CIUDADES_DATA: Record<string, {
+  nombre: string;
+  region: string;
+  descripcion: string;
+  poblacion: string;
+  clima: string;
+  costeVida: string;
+  puntos: string[];
+  serviciosDestacados: string[];
+}> = {
+  'alicante': {
+    nombre: 'Alicante',
+    region: 'Costa Blanca',
+    descripcion: 'Capital de la Costa Blanca, Alicante combina playas urbanas, un casco histórico encantador y una vibrante comunidad internacional.',
+    poblacion: '337.000 habitantes',
+    clima: '18°C media anual',
+    costeVida: 'Medio',
+    puntos: ['Aeropuerto internacional', 'Puerto deportivo', 'Sanidad de calidad', 'Colegios internacionales'],
+    serviciosDestacados: ['seguros', 'abogados', 'inmobiliarias'],
   },
-  alicante: {
-    name: 'Alicante',
-    region: 'Capital de Provincia, Costa Blanca',
-    expats: '15%',
-    population: '340.000 habitantes',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200',
-    hero: 'Capital cosmopolita con autenticidad española',
-    stats: {
-      sunshine: '300 días/año',
-      temperature: '18°C promedio',
-      beaches: '15km de playas',
-      airport: '15 min al centro'
-    },
-    overview: 'Alicante combina lo mejor de ambos mundos: una capital de provincia moderna y cosmopolita que mantiene su autenticidad española. Con menos turistas que Torrevieja pero con servicios excelentes y conexiones internacionales.',
-    livingCosts: {
-      rentStudio: '600-800€',
-      rent2bed: '800-1.200€',
-      rent3bed: '1.000-1.500€',
-      buyPrice: '2.000-3.000€/m²',
-      utilities: '120-170€',
-      groceries: '350-450€',
-      healthcare: '150-250€'
-    },
-    pros: [
-      'Ciudad capital con todos los servicios',
-      'Mejor equilibrio entre vida internacional y auténtica española',
-      'Excelentes conexiones: AVE a Madrid (2h 30min)',
-      'Universidad y ambiente estudiantil',
-      'Vida cultural activa: museos, teatros, festivales',
-      'Aeropuerto internacional muy cercano',
-      'Paseo marítimo y puerto deportivo',
-      'Barrios históricos con encanto'
-    ],
-    cons: [
-      'Más caro que Torrevieja o Murcia',
-      'Tráfico urbano en horas punta',
-      'Menos centrado en extranjeros (puede ser pro o contra)',
-      'Veranos muy calurosos en el centro'
-    ],
-    neighborhoods: [
-      {
-        name: 'Playa San Juan',
-        description: 'Zona de playa residencial. Popular entre familias. Buenas conexiones con el centro.',
-        price: 'Medio-Alto'
-      },
-      {
-        name: 'Centro Histórico',
-        description: 'Casco antiguo con encanto. Vida nocturna y cultural. Pisos más antiguos pero con carácter.',
-        price: 'Medio'
-      },
-      {
-        name: 'Cabo de las Huertas',
-        description: 'Zona residencial exclusiva junto al mar. Calas naturales. Muy tranquilo.',
-        price: 'Alto'
-      },
-      {
-        name: 'Vistahermosa',
-        description: 'Barrio moderno y residencial. Cerca de universidad. Buenas comunicaciones.',
-        price: 'Medio-Alto'
-      }
-    ],
-    services: [
-      'Hospital General Universitario de Alicante',
-      'Múltiples hospitales y clínicas privadas (Vithas, Vistahermosa)',
-      'Estación de AVE con conexión directa a Madrid',
-      'Aeropuerto internacional (12 millones de pasajeros/año)',
-      'Universidad de Alicante (35.000 estudiantes)',
-      'Red de tranvía (TRAM) eficiente',
-      'Oficinas consulares de múltiples países'
-    ]
+  'torrevieja': {
+    nombre: 'Torrevieja',
+    region: 'Costa Blanca',
+    descripcion: 'Torrevieja es conocida por sus lagunas saladas y su enorme comunidad de expatriados.',
+    poblacion: '84.000 habitantes',
+    clima: '19°C media anual',
+    costeVida: 'Bajo-Medio',
+    puntos: ['Gran comunidad internacional', 'Precios competitivos', 'Microclima saludable', 'Comercios adaptados'],
+    serviciosDestacados: ['seguros', 'inmobiliarias', 'gestorias'],
   },
-  murcia: {
-    name: 'Murcia',
-    region: 'Capital de Región, Costa Cálida',
-    expats: '12%',
-    population: '460.000 habitantes',
-    image: 'https://images.unsplash.com/photo-1509840841025-9088ba78a826?w=1200',
-    hero: 'Auténtica vida española con clima excepcional',
-    stats: {
-      sunshine: '315 días/año',
-      temperature: '19°C promedio',
-      beaches: '30 min a costa',
-      airport: '30 min Corvera'
-    },
-    overview: 'Murcia ofrece una experiencia más auténticamente española que las zonas costeras. Es la tercera ciudad más soleada de Europa, con costes de vida muy asequibles y una calidad de vida excelente. Perfecta para quienes quieren inmersión cultural real.',
-    livingCosts: {
-      rentStudio: '400-600€',
-      rent2bed: '600-900€',
-      rent3bed: '800-1.100€',
-      buyPrice: '1.300-1.800€/m²',
-      utilities: '90-130€',
-      groceries: '280-380€',
-      healthcare: '120-200€'
-    },
-    pros: [
-      'Auténtica vida española (inmersión cultural)',
-      'Coste de vida muy bajo',
-      'Ciudad universitaria joven y dinámica',
-      'Gastronomía excepcional (huerta de Europa)',
-      'Menos turística, más tranquila',
-      'Centro histórico hermoso y bien conservado',
-      'A 30 minutos de playas vírgenes',
-      'Clima excepcional: el más seco de Europa'
-    ],
-    cons: [
-      'Menos servicios específicos para extranjeros',
-      'Necesario hablar español para el día a día',
-      'Interior (30 min a la playa más cercana)',
-      'Veranos muy calurosos (puede superar 40°C)',
-      'Menos vuelos internacionales directos'
-    ],
-    neighborhoods: [
-      {
-        name: 'Centro Histórico',
-        description: 'Casco antiguo peatonal. Catedral, plazas, vida comercial. Pisos con encanto.',
-        price: 'Medio'
-      },
-      {
-        name: 'El Carmen',
-        description: 'Barrio residencial tranquilo. Popular entre familias. Parques y colegios.',
-        price: 'Medio'
-      },
-      {
-        name: 'Nueva Condomina',
-        description: 'Zona moderna con centro comercial. Bien comunicada. Edificios nuevos.',
-        price: 'Medio'
-      },
-      {
-        name: 'Espinardo',
-        description: 'Zona universitaria. Más económico. Ambiente joven.',
-        price: 'Bajo-Medio'
-      }
-    ],
-    services: [
-      'Hospital Clínico Universitario Virgen de la Arrixaca',
-      'Hospital Morales Meseguer',
-      'Universidad de Murcia (38.000 estudiantes)',
-      'Aeropuerto Internacional Región de Murcia (Corvera)',
-      'Red de tranvía moderna',
-      'Mercados de abastos tradicionales',
-      'Teatro Romea, Auditorio El Batel'
-    ]
-  }
+  'malaga': {
+    nombre: 'Málaga',
+    region: 'Costa del Sol',
+    descripcion: 'Málaga ha experimentado una transformación espectacular como destino cultural de primer nivel.',
+    poblacion: '578.000 habitantes',
+    clima: '19°C media anual',
+    costeVida: 'Medio-Alto',
+    puntos: ['Hub tecnológico', 'Oferta cultural', 'Conexiones aéreas', 'Gastronomía mediterránea'],
+    serviciosDestacados: ['abogados', 'inmobiliarias', 'gestorias'],
+  },
+  'marbella': {
+    nombre: 'Marbella',
+    region: 'Costa del Sol',
+    descripcion: 'Sinónimo de lujo y exclusividad, Marbella atrae a una clientela internacional de alto poder adquisitivo.',
+    poblacion: '147.000 habitantes',
+    clima: '18°C media anual',
+    costeVida: 'Alto',
+    puntos: ['Destino de lujo', 'Campos de golf', 'Colegios internacionales', 'Seguridad premium'],
+    serviciosDestacados: ['inmobiliarias', 'abogados', 'dentistas'],
+  },
+  'madrid': {
+    nombre: 'Madrid',
+    region: 'Centro',
+    descripcion: 'La capital de España ofrece infinitas oportunidades profesionales y vida cultural inigualable.',
+    poblacion: '3.300.000 habitantes',
+    clima: '15°C media anual',
+    costeVida: 'Alto',
+    puntos: ['Centro empresarial', 'Oferta cultural', 'Transporte público', 'Comunidad internacional'],
+    serviciosDestacados: ['abogados', 'gestorias', 'clinicas'],
+  },
+  'barcelona': {
+    nombre: 'Barcelona',
+    region: 'Cataluña',
+    descripcion: 'Barcelona combina playa y montaña, arquitectura modernista y vida cosmopolita.',
+    poblacion: '1.600.000 habitantes',
+    clima: '16°C media anual',
+    costeVida: 'Alto',
+    puntos: ['Arquitectura Gaudí', 'Ecosistema emprendedor', 'Playa urbana', 'Gastronomía vanguardia'],
+    serviciosDestacados: ['abogados', 'inmobiliarias', 'dentistas'],
+  },
+  'valencia': {
+    nombre: 'Valencia',
+    region: 'Comunidad Valenciana',
+    descripcion: 'Valencia ofrece el equilibrio perfecto entre ciudad grande y calidad de vida.',
+    poblacion: '800.000 habitantes',
+    clima: '18°C media anual',
+    costeVida: 'Medio',
+    puntos: ['Ciudad de las Artes', 'Cuna de la paella', 'Playas urbanas', 'Ambiente joven'],
+    serviciosDestacados: ['seguros', 'inmobiliarias', 'gestorias'],
+  },
+  'palma': {
+    nombre: 'Palma de Mallorca',
+    region: 'Islas Baleares',
+    descripcion: 'La capital balear combina el encanto del Mediterráneo con sofisticación europea.',
+    poblacion: '416.000 habitantes',
+    clima: '17°C media anual',
+    costeVida: 'Alto',
+    puntos: ['Infraestructuras premium', 'Comunidad internacional', 'Deportes náuticos', 'Gastronomía local'],
+    serviciosDestacados: ['inmobiliarias', 'abogados', 'seguros'],
+  },
+  'tenerife': {
+    nombre: 'Tenerife',
+    region: 'Islas Canarias',
+    descripcion: 'La isla de la eterna primavera con clima privilegiado todo el año.',
+    poblacion: '928.000 habitantes',
+    clima: '22°C media anual',
+    costeVida: 'Medio',
+    puntos: ['Clima primaveral', 'Parque Nacional Teide', 'Ventajas fiscales', 'Vuelos directos'],
+    serviciosDestacados: ['seguros', 'gestorias', 'clinicas'],
+  },
 };
 
-export async function generateStaticParams() {
-  return [
-    { slug: 'torrevieja' },
-    { slug: 'alicante' },
-    { slug: 'murcia' },
-    { slug: 'benidorm' },
-    { slug: 'cartagena' },
-    { slug: 'elche' },
-  ];
+const SERVICIOS_INFO: Record<string, { nombre: string }> = {
+  seguros: { nombre: 'Seguros de Salud' },
+  abogados: { nombre: 'Abogados' },
+  inmobiliarias: { nombre: 'Inmobiliarias' },
+  dentistas: { nombre: 'Dentistas' },
+  gestorias: { nombre: 'Gestorías' },
+  clinicas: { nombre: 'Clínicas' },
+};
+
+// Detectar si es landing de servicio-ciudad o solo ciudad
+function parseSlug(slug: string): { servicio?: string; ciudad: string } | null {
+  // Primero verificar si es ciudad directa
+  if (CIUDADES_DATA[slug]) {
+    return { ciudad: slug };
+  }
+  
+  // Intentar parsear como servicio-ciudad
+  const servicios = Object.keys(SERVICIOS_INFO);
+  for (const servicio of servicios) {
+    if (slug.startsWith(`${servicio}-`)) {
+      const ciudad = slug.replace(`${servicio}-`, '');
+      return { servicio, ciudad };
+    }
+  }
+  
+  return null;
+}
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}): Promise<Metadata> {
+  const { slug } = await params;
+  
+  // Intentar obtener de BD primero (landing generada por IA)
+  const landing = await getLanding(slug);
+  if (landing) {
+    return {
+      title: landing.meta_title,
+      description: landing.meta_description,
+      keywords: landing.meta_keywords?.join(', '),
+    };
+  }
+  
+  // Fallback a datos estáticos
+  const parsed = parseSlug(slug);
+  if (!parsed) {
+    return { title: 'Destino no encontrado' };
+  }
+  
+  const ciudadData = CIUDADES_DATA[parsed.ciudad];
+  if (!ciudadData) {
+    return { title: 'Destino no encontrado' };
+  }
+  
+  if (parsed.servicio) {
+    const servicioInfo = SERVICIOS_INFO[parsed.servicio];
+    return {
+      title: `${servicioInfo.nombre} en ${ciudadData.nombre} - Expatriados España`,
+      description: `Encuentra los mejores ${servicioInfo.nombre.toLowerCase()} en ${ciudadData.nombre}. Profesionales verificados que hablan tu idioma.`,
+    };
+  }
+  
+  return {
+    title: `Vivir en ${ciudadData.nombre} - Guía para Expatriados`,
+    description: ciudadData.descripcion,
+  };
 }
 
 export default async function DestinoPage({ 
   params 
 }: { 
-  params: { slug: string } 
+  params: Promise<{ slug: string }> 
 }) {
-  const destination = destinationsData[params.slug];
-
-  if (!destination) {
+  const { slug } = await params;
+  
+  // Intentar obtener de BD (landing generada por IA)
+  const landing = await getLanding(slug);
+  
+  if (landing) {
+    return <LandingPageView landing={landing} />;
+  }
+  
+  // Fallback a vista estática
+  const parsed = parseSlug(slug);
+  if (!parsed) {
     notFound();
   }
+  
+  const ciudadData = CIUDADES_DATA[parsed.ciudad];
+  if (!ciudadData) {
+    notFound();
+  }
+  
+  // Si es servicio-ciudad, mostrar vista de landing
+  if (parsed.servicio) {
+    return (
+      <ServiceCityView 
+        servicio={parsed.servicio} 
+        ciudad={parsed.ciudad} 
+        ciudadData={ciudadData} 
+      />
+    );
+  }
+  
+  // Si es solo ciudad, mostrar vista de ciudad
+  return <CityView slug={slug} ciudad={ciudadData} />;
+}
 
+// Componente para landing pages de BD
+function LandingPageView({ landing }: { landing: LandingPage }) {
   return (
     <>
-      {/* HERO */}
-      <section className="relative h-[70vh] min-h-[500px]">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('${destination.image}')`
-          }}
-        />
-        <div className="relative z-10 h-full flex items-end px-[5%] pb-16">
-          <div className="max-w-[1200px] mx-auto w-full text-white">
-            <div className="text-sm mb-4 opacity-90">
-              {destination.region} • {destination.expats} población extranjera
-            </div>
-            <h1 className="font-lora text-[5rem] font-bold mb-4">
-              {destination.name}
-            </h1>
-            <p className="text-[1.5rem] opacity-95">
-              {destination.hero}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* QUICK STATS */}
-      <section className="py-12 px-[5%] bg-white border-b border-gray-200">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          {Object.entries(destination.stats).map(([key, value]) => (
-            <div key={key} className="text-center">
-              <div className="text-3xl mb-2">
-                {key === 'sunshine' ? '☀️' : key === 'temperature' ? '🌡️' : key === 'beaches' ? '🏖️' : '✈️'}
-              </div>
-              <div className="font-bold text-accent text-xl mb-1">{value as string}</div>
-              <div className="text-sm text-gray-600 capitalize">
-                {key === 'sunshine' ? 'Días de sol' : 
-                 key === 'temperature' ? 'Temperatura' : 
-                 key === 'beaches' ? 'Playas' : 'Aeropuerto'}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* OVERVIEW */}
-      <section className="py-16 px-[5%]">
-        <div className="max-w-[900px] mx-auto">
-          <p className="text-[1.3rem] text-gray-700 leading-relaxed border-l-4 border-accent pl-8">
-            {destination.overview}
+      {/* Header */}
+      <section className="bg-gradient-secondary text-white py-10 md:py-12">
+        <div className="container-base">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold mb-3">
+            {landing.hero_title}
+          </h1>
+          <p className="text-lg text-white/90 max-w-2xl mb-6">
+            {landing.hero_subtitle}
           </p>
-        </div>
-      </section>
-
-      {/* LIVING COSTS */}
-      <section className="py-16 px-[5%] bg-gray-50">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="font-lora text-[3rem] font-bold mb-12 text-[#1a1a1a]">
-            Coste de Vida Mensual
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white p-8 border-l-4 border-accent">
-              <h3 className="font-semibold text-xl mb-6">💰 Vivienda</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Estudio</span>
-                  <span className="font-semibold">{destination.livingCosts.rentStudio}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">2 dormitorios</span>
-                  <span className="font-semibold">{destination.livingCosts.rent2bed}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">3 dormitorios</span>
-                  <span className="font-semibold">{destination.livingCosts.rent3bed}</span>
-                </div>
-                <div className="flex justify-between pt-3 border-t">
-                  <span className="text-gray-600">Precio compra</span>
-                  <span className="font-semibold">{destination.livingCosts.buyPrice}</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white p-8 border-l-4 border-accent">
-              <h3 className="font-semibold text-xl mb-6">📋 Gastos Mensuales</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Servicios (luz, agua, internet)</span>
-                  <span className="font-semibold">{destination.livingCosts.utilities}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Supermercado (pareja)</span>
-                  <span className="font-semibold">{destination.livingCosts.groceries}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Seguro salud privado</span>
-                  <span className="font-semibold">{destination.livingCosts.healthcare}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROS & CONS */}
-      <section className="py-16 px-[5%]">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="font-lora text-[3rem] font-bold mb-12 text-[#1a1a1a]">
-            Ventajas y Consideraciones
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-green-50 p-8 border-l-4 border-green-600">
-              <h3 className="font-semibold text-xl mb-6 text-green-900">✓ Ventajas</h3>
-              <ul className="space-y-3">
-                {destination.pros.map((pro: string, index: number) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="text-green-600 mt-1">✓</span>
-                    <span className="text-gray-700">{pro}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-orange-50 p-8 border-l-4 border-orange-600">
-              <h3 className="font-semibold text-xl mb-6 text-orange-900">⚠️ Consideraciones</h3>
-              <ul className="space-y-3">
-                {destination.cons.map((con: string, index: number) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="text-orange-600 mt-1">•</span>
-                    <span className="text-gray-700">{con}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NEIGHBORHOODS */}
-      {destination.neighborhoods && (
-        <section className="py-16 px-[5%] bg-gray-50">
-          <div className="max-w-[1200px] mx-auto">
-            <h2 className="font-lora text-[3rem] font-bold mb-12 text-[#1a1a1a]">
-              Mejores Zonas Para Vivir
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {destination.neighborhoods.map((neighborhood: any, index: number) => (
-                <div key={index} className="bg-white p-8 border-l-4 border-accent">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="font-semibold text-xl">{neighborhood.name}</h3>
-                    <span className="text-sm font-semibold text-accent">{neighborhood.price}</span>
-                  </div>
-                  <p className="text-gray-600 leading-relaxed">{neighborhood.description}</p>
-                </div>
+          {landing.hero_bullets && landing.hero_bullets.length > 0 && (
+            <ul className="flex flex-wrap gap-4">
+              {landing.hero_bullets.slice(0, 3).map((bullet, idx) => (
+                <li key={idx} className="flex items-center gap-2 text-white/80 text-sm">
+                  <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  {bullet}
+                </li>
               ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* SERVICES */}
-      <section className="py-16 px-[5%]">
-        <div className="max-w-[900px] mx-auto">
-          <h2 className="font-lora text-[3rem] font-bold mb-12 text-[#1a1a1a]">
-            Servicios y Equipamientos
-          </h2>
-          <ul className="space-y-4">
-            {destination.services.map((service: string, index: number) => (
-              <li key={index} className="flex items-start gap-3 text-gray-700 text-lg">
-                <span className="text-accent mt-1">✓</span>
-                <span>{service}</span>
-              </li>
-            ))}
-          </ul>
+            </ul>
+          )}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 px-[5%] bg-[#1a1a1a] text-white">
-        <div className="max-w-[1000px] mx-auto text-center">
-          <h2 className="font-lora text-[2.5rem] font-bold mb-6">
-            ¿Quieres Establecerte en {destination.name}?
-          </h2>
-          <p className="text-[1.2rem] mb-8 opacity-90">
-            Te conectamos con profesionales locales que te ayudarán con vivienda, trámites legales y todo lo necesario.
+      {/* CTA fijo */}
+      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+        <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-gray-700 text-sm text-center sm:text-left">
+            <strong>{landing.cta_title || 'Te conectamos con profesionales verificados'}</strong>
           </p>
-          <Link
-            href="/es/contacto"
-            className="inline-block bg-white text-[#1a1a1a] py-5 px-10 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-accent hover:text-white"
+          <Link 
+            href={`/es/contacto?servicio=${landing.servicio_slug}&ciudad=${landing.ciudad_slug}`} 
+            className="btn-primary btn-sm whitespace-nowrap"
           >
-            Solicitar Información
+            Solicitar información
+          </Link>
+        </div>
+      </div>
+
+      {/* Contenido */}
+      <section className="py-10 md:py-12">
+        <div className="container-base">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-10">
+              {/* Problema */}
+              {landing.problems && landing.problems.length > 0 && (
+                <div>
+                  <h2 className="font-heading text-xl font-bold text-gray-900 mb-4">
+                    {landing.problem_title || '¿Te identificas con esto?'}
+                  </h2>
+                  <div className="space-y-3">
+                    {landing.problems.map((problem, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center shrink-0 mt-0.5">
+                          <span className="text-gray-500 text-sm">{idx + 1}</span>
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-900">{problem.title}</p>
+                          <p className="text-gray-600 text-sm">{problem.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Solución */}
+              {landing.solution_text && (
+                <div>
+                  <h2 className="font-heading text-xl font-bold text-gray-900 mb-4">
+                    {landing.solution_title || 'Nuestra solución'}
+                  </h2>
+                  <p className="text-gray-700 leading-relaxed">
+                    {landing.solution_text}
+                  </p>
+                </div>
+              )}
+
+              {/* Servicios */}
+              {landing.services && landing.services.length > 0 && (
+                <div>
+                  <h2 className="font-heading text-xl font-bold text-gray-900 mb-4">
+                    {landing.services_title || 'Qué ofrecemos'}
+                  </h2>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {landing.services.map((service, idx) => (
+                      <div key={idx} className="card p-4">
+                        <h3 className="font-semibold text-gray-900 mb-1">{service.title}</h3>
+                        <p className="text-gray-600 text-sm">{service.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* FAQs */}
+              {landing.faqs && landing.faqs.length > 0 && (
+                <div>
+                  <h2 className="font-heading text-xl font-bold text-gray-900 mb-4">
+                    Preguntas frecuentes
+                  </h2>
+                  <div className="space-y-4">
+                    {landing.faqs.map((faq, idx) => (
+                      <div key={idx} className="card p-4">
+                        <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+                        <p className="text-gray-600 text-sm">{faq.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              {/* Stats */}
+              {landing.why_city_stats && landing.why_city_stats.length > 0 && (
+                <div className="card p-5">
+                  <h3 className="font-heading font-bold text-gray-900 mb-4">
+                    {landing.why_city_title || 'Datos de interés'}
+                  </h3>
+                  <div className="space-y-3">
+                    {landing.why_city_stats.map((stat, idx) => (
+                      <div key={idx} className="flex justify-between">
+                        <span className="text-gray-500 text-sm">{stat.label}</span>
+                        <span className="font-semibold text-gray-900 text-sm">{stat.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* CTA Card */}
+              <div className="card p-5 bg-primary/5 border-primary/20">
+                <h3 className="font-heading font-bold text-gray-900 mb-2">
+                  {landing.cta_title || 'Solicita información'}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  {landing.cta_subtitle || 'Te conectamos con profesionales verificados.'}
+                </p>
+                <Link 
+                  href={`/es/contacto?servicio=${landing.servicio_slug}&ciudad=${landing.ciudad_slug}`}
+                  className="btn-primary w-full text-center"
+                >
+                  Comenzar ahora
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className="py-10 md:py-12 bg-gray-50">
+        <div className="container-base text-center">
+          <h2 className="font-heading text-2xl font-bold text-gray-900 mb-3">
+            {landing.cta_title || 'Da el primer paso'}
+          </h2>
+          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+            {landing.cta_subtitle || 'Sin compromiso. Te conectamos con los mejores profesionales.'}
+          </p>
+          <Link 
+            href={`/es/contacto?servicio=${landing.servicio_slug}&ciudad=${landing.ciudad_slug}`} 
+            className="btn-primary btn-lg"
+          >
+            Solicitar información gratuita
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// Componente para vista servicio-ciudad (fallback)
+function ServiceCityView({ 
+  servicio, 
+  ciudad, 
+  ciudadData 
+}: { 
+  servicio: string; 
+  ciudad: string; 
+  ciudadData: typeof CIUDADES_DATA[string];
+}) {
+  const servicioInfo = SERVICIOS_INFO[servicio];
+  
+  return (
+    <>
+      <section className="bg-gradient-secondary text-white py-10 md:py-12">
+        <div className="container-base">
+          <div className="flex items-center gap-2 text-white/70 text-sm mb-3">
+            <Link href="/es/servicios" className="hover:text-white">Servicios</Link>
+            <span>/</span>
+            <Link href={`/es/servicios/${servicio}`} className="hover:text-white">{servicioInfo.nombre}</Link>
+            <span>/</span>
+            <span>{ciudadData.nombre}</span>
+          </div>
+          <h1 className="font-heading text-3xl md:text-4xl font-bold mb-2">
+            {servicioInfo.nombre} en {ciudadData.nombre}
+          </h1>
+          <p className="text-lg text-white/90 max-w-2xl">
+            Profesionales verificados que hablan tu idioma en {ciudadData.nombre}.
+          </p>
+        </div>
+      </section>
+
+      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+        <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-gray-700 text-sm">
+            <strong>¿Necesitas {servicioInfo.nombre.toLowerCase()} en {ciudadData.nombre}?</strong>
+          </p>
+          <Link 
+            href={`/es/contacto?servicio=${servicio}&ciudad=${ciudad}`} 
+            className="btn-primary btn-sm"
+          >
+            Solicitar información
+          </Link>
+        </div>
+      </div>
+
+      <section className="py-10 md:py-12">
+        <div className="container-base">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-gray-700 text-lg mb-8">
+              Te conectamos con los mejores profesionales de {servicioInfo.nombre.toLowerCase()} en {ciudadData.nombre}. 
+              {ciudadData.descripcion}
+            </p>
+            <Link 
+              href={`/es/contacto?servicio=${servicio}&ciudad=${ciudad}`} 
+              className="btn-primary btn-lg"
+            >
+              Solicitar información gratuita
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// Componente para vista de ciudad
+function CityView({ 
+  slug, 
+  ciudad 
+}: { 
+  slug: string; 
+  ciudad: typeof CIUDADES_DATA[string];
+}) {
+  return (
+    <>
+      <section className="bg-gradient-secondary text-white py-10 md:py-12">
+        <div className="container-base">
+          <div className="flex items-center gap-2 text-white/70 text-sm mb-3">
+            <Link href="/es/destinos" className="hover:text-white">Destinos</Link>
+            <span>/</span>
+            <span>{ciudad.region}</span>
+          </div>
+          <h1 className="font-heading text-3xl md:text-4xl font-bold mb-2">
+            Vivir en {ciudad.nombre}
+          </h1>
+          <p className="text-lg text-white/90 max-w-2xl">
+            Tu guía completa para establecerte en {ciudad.nombre}
+          </p>
+        </div>
+      </section>
+
+      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+        <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-gray-700 text-sm">
+            <strong>¿Quieres vivir en {ciudad.nombre}?</strong> Te conectamos con profesionales.
+          </p>
+          <Link href={`/es/contacto?ciudad=${slug}`} className="btn-primary btn-sm">
+            Solicitar información
+          </Link>
+        </div>
+      </div>
+
+      <section className="py-10 md:py-12">
+        <div className="container-base">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-8">
+              <div>
+                <h2 className="font-heading text-xl font-bold text-gray-900 mb-4">
+                  Sobre {ciudad.nombre}
+                </h2>
+                <p className="text-gray-700 leading-relaxed">{ciudad.descripcion}</p>
+              </div>
+
+              <div>
+                <h2 className="font-heading text-xl font-bold text-gray-900 mb-4">
+                  ¿Por qué {ciudad.nombre}?
+                </h2>
+                <ul className="space-y-3">
+                  {ciudad.puntos.map((punto, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-primary mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-gray-700">{punto}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-heading text-xl font-bold text-gray-900 mb-4">
+                  Servicios más solicitados
+                </h2>
+                <div className="grid sm:grid-cols-3 gap-4">
+                  {ciudad.serviciosDestacados.map((servicioId) => (
+                    <Link
+                      key={servicioId}
+                      href={`/es/contacto?servicio=${servicioId}&ciudad=${slug}`}
+                      className="card card-hover p-4 text-center"
+                    >
+                      <span className="font-medium text-gray-900 text-sm">
+                        {SERVICIOS_INFO[servicioId]?.nombre}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="card p-5">
+                <h3 className="font-heading font-bold text-gray-900 mb-4">Datos</h3>
+                <dl className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <dt className="text-gray-500">Población</dt>
+                    <dd className="font-medium text-gray-900">{ciudad.poblacion}</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-gray-500">Clima</dt>
+                    <dd className="font-medium text-gray-900">{ciudad.clima}</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-gray-500">Coste de vida</dt>
+                    <dd className="font-medium text-gray-900">{ciudad.costeVida}</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="card p-5 bg-primary/5 border-primary/20">
+                <h3 className="font-heading font-bold text-gray-900 mb-2">¿Listo?</h3>
+                <p className="text-gray-600 text-sm mb-4">Te conectamos con profesionales verificados.</p>
+                <Link href={`/es/contacto?ciudad=${slug}`} className="btn-primary w-full text-center">
+                  Solicitar información
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-10 bg-gray-50">
+        <div className="container-base text-center">
+          <h2 className="font-heading text-2xl font-bold text-gray-900 mb-3">
+            Empieza tu nueva vida en {ciudad.nombre}
+          </h2>
+          <p className="text-gray-600 mb-6">Sin compromiso. Profesionales que hablan tu idioma.</p>
+          <Link href={`/es/contacto?ciudad=${slug}`} className="btn-primary btn-lg">
+            Solicitar información gratuita
           </Link>
         </div>
       </section>

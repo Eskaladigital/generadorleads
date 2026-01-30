@@ -1,329 +1,649 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
-export default function ContactoPage() {
-  const [formData, setFormData] = useState({
+// Tipos
+interface FormData {
+  // Paso 1: Datos personales
+  nombre: string;
+  email: string;
+  telefono: string;
+  pais_origen: string;
+  ciudad_origen: string;
+  
+  // Paso 2: Servicio
+  servicio: string;
+  
+  // Paso 3: Destino
+  ciudad_interes: string;
+  
+  // Paso 4: Detalles
+  presupuesto: string;
+  urgencia: string;
+  mensaje: string;
+  
+  // Hidden fields
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+  landing_page: string;
+}
+
+interface StepProps {
+  formData: FormData;
+  updateFormData: (field: keyof FormData, value: string) => void;
+  errors: Partial<Record<keyof FormData, string>>;
+}
+
+// Datos de opciones
+const PAISES = [
+  'Reino Unido', 'Alemania', 'Francia', 'Países Bajos', 'Bélgica', 
+  'Suecia', 'Noruega', 'Dinamarca', 'Finlandia', 'Irlanda',
+  'Estados Unidos', 'Canadá', 'Rusia', 'Ucrania', 'Polonia',
+  'Italia', 'Portugal', 'Suiza', 'Austria', 'Otro'
+];
+
+const SERVICIOS = [
+  { id: 'seguros', label: 'Seguros de Salud', icon: '🏥' },
+  { id: 'abogados', label: 'Abogados de Extranjería', icon: '⚖️' },
+  { id: 'inmobiliarias', label: 'Inmobiliarias', icon: '🏠' },
+  { id: 'dentistas', label: 'Clínicas Dentales', icon: '🦷' },
+  { id: 'gestorias', label: 'Gestorías', icon: '📋' },
+  { id: 'clinicas', label: 'Clínicas Médicas', icon: '🩺' },
+];
+
+const CIUDADES = [
+  { id: 'madrid', label: 'Madrid' },
+  { id: 'barcelona', label: 'Barcelona' },
+  { id: 'valencia', label: 'Valencia' },
+  { id: 'alicante', label: 'Alicante' },
+  { id: 'malaga', label: 'Málaga' },
+  { id: 'marbella', label: 'Marbella' },
+  { id: 'torrevieja', label: 'Torrevieja' },
+  { id: 'benidorm', label: 'Benidorm' },
+  { id: 'murcia', label: 'Murcia' },
+  { id: 'sevilla', label: 'Sevilla' },
+  { id: 'palma', label: 'Palma de Mallorca' },
+  { id: 'tenerife', label: 'Tenerife' },
+  { id: 'las-palmas', label: 'Las Palmas' },
+  { id: 'ibiza', label: 'Ibiza' },
+  { id: 'otra', label: 'Otra ciudad' },
+];
+
+const PRESUPUESTOS = [
+  { id: 'menos-5000', label: 'Menos de 5.000€', score: 10 },
+  { id: '5000-15000', label: '5.000€ - 15.000€', score: 20 },
+  { id: '15000-30000', label: '15.000€ - 30.000€', score: 35 },
+  { id: 'mas-30000', label: 'Más de 30.000€', score: 50 },
+  { id: 'no-seguro', label: 'No estoy seguro', score: 15 },
+];
+
+const URGENCIAS = [
+  { id: 'esta-semana', label: 'Esta semana', score: 30 },
+  { id: 'este-mes', label: 'Este mes', score: 20 },
+  { id: 'proximo-trimestre', label: 'Próximo trimestre', score: 10 },
+  { id: 'solo-informacion', label: 'Solo busco información', score: 5 },
+];
+
+// Componente de paso 1: Datos personales
+function Step1({ formData, updateFormData, errors }: StepProps) {
+  return (
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+          Cuéntanos sobre ti
+        </h2>
+        <p className="text-gray-600">
+          Necesitamos algunos datos para poder ayudarte mejor
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="md:col-span-2">
+          <label className="form-label">Nombre completo *</label>
+          <input
+            type="text"
+            value={formData.nombre}
+            onChange={(e) => updateFormData('nombre', e.target.value)}
+            className={`form-input ${errors.nombre ? 'border-error ring-error/20' : ''}`}
+            placeholder="Tu nombre"
+          />
+          {errors.nombre && <p className="form-error">{errors.nombre}</p>}
+        </div>
+
+        <div>
+          <label className="form-label">Email *</label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => updateFormData('email', e.target.value)}
+            className={`form-input ${errors.email ? 'border-error ring-error/20' : ''}`}
+            placeholder="tu@email.com"
+          />
+          {errors.email && <p className="form-error">{errors.email}</p>}
+        </div>
+
+        <div>
+          <label className="form-label">Teléfono *</label>
+          <input
+            type="tel"
+            value={formData.telefono}
+            onChange={(e) => updateFormData('telefono', e.target.value)}
+            className={`form-input ${errors.telefono ? 'border-error ring-error/20' : ''}`}
+            placeholder="+34 600 000 000"
+          />
+          {errors.telefono && <p className="form-error">{errors.telefono}</p>}
+        </div>
+
+        <div>
+          <label className="form-label">País de origen *</label>
+          <select
+            value={formData.pais_origen}
+            onChange={(e) => updateFormData('pais_origen', e.target.value)}
+            className={`form-input ${errors.pais_origen ? 'border-error ring-error/20' : ''}`}
+          >
+            <option value="">Selecciona tu país</option>
+            {PAISES.map((pais) => (
+              <option key={pais} value={pais}>{pais}</option>
+            ))}
+          </select>
+          {errors.pais_origen && <p className="form-error">{errors.pais_origen}</p>}
+        </div>
+
+        <div>
+          <label className="form-label">Ciudad de origen</label>
+          <input
+            type="text"
+            value={formData.ciudad_origen}
+            onChange={(e) => updateFormData('ciudad_origen', e.target.value)}
+            className="form-input"
+            placeholder="Tu ciudad actual"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Componente de paso 2: Selección de servicio
+function Step2({ formData, updateFormData, errors }: StepProps) {
+  return (
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+          ¿Qué servicio necesitas?
+        </h2>
+        <p className="text-gray-600">
+          Selecciona el tipo de profesional que buscas
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {SERVICIOS.map((servicio) => (
+          <button
+            key={servicio.id}
+            type="button"
+            onClick={() => updateFormData('servicio', servicio.id)}
+            className={`p-4 rounded-xl border-2 transition-all text-center ${
+              formData.servicio === servicio.id
+                ? 'border-primary bg-primary/5 shadow-md'
+                : 'border-gray-200 hover:border-primary/50'
+            }`}
+          >
+            <span className="text-3xl mb-2 block">{servicio.icon}</span>
+            <span className={`font-medium ${
+              formData.servicio === servicio.id ? 'text-primary' : 'text-gray-700'
+            }`}>
+              {servicio.label}
+            </span>
+          </button>
+        ))}
+      </div>
+      {errors.servicio && <p className="form-error text-center">{errors.servicio}</p>}
+    </div>
+  );
+}
+
+// Componente de paso 3: Selección de ciudad
+function Step3({ formData, updateFormData, errors }: StepProps) {
+  return (
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+          ¿Dónde en España?
+        </h2>
+        <p className="text-gray-600">
+          Selecciona la ciudad donde necesitas el servicio
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        {CIUDADES.map((ciudad) => (
+          <button
+            key={ciudad.id}
+            type="button"
+            onClick={() => updateFormData('ciudad_interes', ciudad.id)}
+            className={`p-3 rounded-xl border-2 transition-all text-center ${
+              formData.ciudad_interes === ciudad.id
+                ? 'border-primary bg-primary/5 shadow-md'
+                : 'border-gray-200 hover:border-primary/50'
+            }`}
+          >
+            <span className={`font-medium text-sm ${
+              formData.ciudad_interes === ciudad.id ? 'text-primary' : 'text-gray-700'
+            }`}>
+              {ciudad.label}
+            </span>
+          </button>
+        ))}
+      </div>
+      {errors.ciudad_interes && <p className="form-error text-center">{errors.ciudad_interes}</p>}
+    </div>
+  );
+}
+
+// Componente de paso 4: Detalles finales
+function Step4({ formData, updateFormData, errors }: StepProps) {
+  return (
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+          Últimos detalles
+        </h2>
+        <p className="text-gray-600">
+          Esto nos ayudará a encontrar el profesional ideal para ti
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Presupuesto */}
+        <div>
+          <label className="form-label">¿Cuál es tu presupuesto aproximado? *</label>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
+            {PRESUPUESTOS.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                onClick={() => updateFormData('presupuesto', option.id)}
+                className={`p-3 rounded-xl border-2 transition-all text-center ${
+                  formData.presupuesto === option.id
+                    ? 'border-primary bg-primary/5'
+                    : 'border-gray-200 hover:border-primary/50'
+                }`}
+              >
+                <span className={`font-medium text-sm ${
+                  formData.presupuesto === option.id ? 'text-primary' : 'text-gray-700'
+                }`}>
+                  {option.label}
+                </span>
+              </button>
+            ))}
+          </div>
+          {errors.presupuesto && <p className="form-error">{errors.presupuesto}</p>}
+        </div>
+
+        {/* Urgencia */}
+        <div>
+          <label className="form-label">¿Cuándo lo necesitas? *</label>
+          <div className="grid grid-cols-2 gap-3 mt-2">
+            {URGENCIAS.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                onClick={() => updateFormData('urgencia', option.id)}
+                className={`p-3 rounded-xl border-2 transition-all text-center ${
+                  formData.urgencia === option.id
+                    ? 'border-primary bg-primary/5'
+                    : 'border-gray-200 hover:border-primary/50'
+                }`}
+              >
+                <span className={`font-medium text-sm ${
+                  formData.urgencia === option.id ? 'text-primary' : 'text-gray-700'
+                }`}>
+                  {option.label}
+                </span>
+              </button>
+            ))}
+          </div>
+          {errors.urgencia && <p className="form-error">{errors.urgencia}</p>}
+        </div>
+
+        {/* Mensaje opcional */}
+        <div>
+          <label className="form-label">
+            ¿Algo más que debamos saber? <span className="text-gray-400">(opcional)</span>
+          </label>
+          <textarea
+            value={formData.mensaje}
+            onChange={(e) => updateFormData('mensaje', e.target.value)}
+            className="form-input min-h-[100px]"
+            placeholder="Cuéntanos más sobre tu situación..."
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Componente principal del formulario
+export default function ContactPage() {
+  const searchParams = useSearchParams();
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  
+  const [formData, setFormData] = useState<FormData>({
     nombre: '',
     email: '',
     telefono: '',
-    pais: '',
-    perfil: '',
-    ciudad: '',
+    pais_origen: '',
+    ciudad_origen: '',
     servicio: '',
-    mensaje: ''
+    ciudad_interes: '',
+    presupuesto: '',
+    urgencia: '',
+    mensaje: '',
+    utm_source: '',
+    utm_medium: '',
+    utm_campaign: '',
+    landing_page: '',
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  // Capturar parámetros de URL (hidden fields)
+  useEffect(() => {
+    const servicio = searchParams.get('servicio') || '';
+    const ciudad = searchParams.get('ciudad') || '';
+    const utm_source = searchParams.get('utm_source') || '';
+    const utm_medium = searchParams.get('utm_medium') || '';
+    const utm_campaign = searchParams.get('utm_campaign') || '';
     
-    // Aquí conectarías con tu API/backend
+    setFormData(prev => ({
+      ...prev,
+      servicio: servicio || prev.servicio,
+      ciudad_interes: ciudad || prev.ciudad_interes,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      landing_page: typeof window !== 'undefined' ? window.location.href : '',
+    }));
+
+    // Si viene con servicio preseleccionado, saltar al paso 2 o 3
+    if (servicio && ciudad) {
+      setCurrentStep(4);
+    } else if (servicio) {
+      setCurrentStep(3);
+    } else if (ciudad) {
+      setCurrentStep(2);
+    }
+  }, [searchParams]);
+
+  const updateFormData = (field: keyof FormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    // Limpiar error del campo
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: undefined }));
+    }
+  };
+
+  const validateStep = (step: number): boolean => {
+    const newErrors: Partial<Record<keyof FormData, string>> = {};
+
+    if (step === 1) {
+      if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
+      if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        newErrors.email = 'Email no válido';
+      }
+      if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
+      if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
+    }
+
+    if (step === 2) {
+      if (!formData.servicio) newErrors.servicio = 'Selecciona un servicio';
+    }
+
+    if (step === 3) {
+      if (!formData.ciudad_interes) newErrors.ciudad_interes = 'Selecciona una ciudad';
+    }
+
+    if (step === 4) {
+      if (!formData.presupuesto) newErrors.presupuesto = 'Selecciona tu presupuesto';
+      if (!formData.urgencia) newErrors.urgencia = 'Selecciona cuándo lo necesitas';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const nextStep = () => {
+    if (validateStep(currentStep)) {
+      setCurrentStep(prev => Math.min(prev + 1, 4));
+    }
+  };
+
+  const prevStep = () => {
+    setCurrentStep(prev => Math.max(prev - 1, 1));
+  };
+
+  // Calcular score del lead
+  const calculateScore = (): number => {
+    let score = 50; // Base
+
+    // Presupuesto
+    const presupuestoOption = PRESUPUESTOS.find(p => p.id === formData.presupuesto);
+    if (presupuestoOption) score += presupuestoOption.score;
+
+    // Urgencia
+    const urgenciaOption = URGENCIAS.find(u => u.id === formData.urgencia);
+    if (urgenciaOption) score += urgenciaOption.score;
+
+    // Servicio de alto valor
+    if (['seguros', 'abogados', 'inmobiliarias'].includes(formData.servicio)) {
+      score += 10;
+    }
+
+    // Ciudad específica
+    if (formData.ciudad_interes && formData.ciudad_interes !== 'otra') {
+      score += 5;
+    }
+
+    // Mensaje detallado
+    if (formData.mensaje && formData.mensaje.length > 50) {
+      score += 5;
+    }
+
+    return Math.min(100, score);
+  };
+
+  const handleSubmit = async () => {
+    if (!validateStep(4)) return;
+
+    setIsSubmitting(true);
+
     try {
-      // Simulación de envío
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      setFormData({
-        nombre: '',
-        email: '',
-        telefono: '',
-        pais: '',
-        perfil: '',
-        ciudad: '',
-        servicio: '',
-        mensaje: ''
+      const score = calculateScore();
+      
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          email: formData.email,
+          telefono: formData.telefono,
+          pais_origen: formData.pais_origen,
+          ciudad_origen: formData.ciudad_origen,
+          servicio: formData.servicio,
+          ciudad: formData.ciudad_interes,
+          presupuesto: formData.presupuesto,
+          urgencia: formData.urgencia,
+          mensaje: formData.mensaje,
+          landing_page: formData.landing_page,
+          utm_source: formData.utm_source,
+          utm_medium: formData.utm_medium,
+          utm_campaign: formData.utm_campaign,
+          score,
+          idioma_preferido: 'es',
+        }),
       });
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        const data = await response.json();
+        alert(data.error || 'Error al enviar. Por favor, inténtalo de nuevo.');
+      }
     } catch (error) {
-      setSubmitStatus('error');
+      console.error('Error:', error);
+      alert('Error de conexión. Por favor, inténtalo de nuevo.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  // Pantalla de éxito
+  if (isSuccess) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center px-4">
+        <div className="max-w-md text-center">
+          <div className="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-10 h-10 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="font-heading text-3xl font-bold text-gray-900 mb-4">
+            ¡Solicitud recibida!
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Gracias por confiar en Health4Spain. Un profesional de nuestro equipo 
+            se pondrá en contacto contigo en menos de 24 horas.
+          </p>
+          <Link href="/es" className="btn-primary">
+            Volver al inicio
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const totalSteps = 4;
+  const progress = (currentStep / totalSteps) * 100;
 
   return (
-    <>
-      {/* HEADER */}
-      <section className="py-24 px-[5%] bg-gray-50 border-b border-gray-200">
-        <div className="max-w-[900px] mx-auto text-center">
-          <div className="uppercase tracking-[2px] text-[0.75rem] text-accent font-semibold mb-4">
-            Contacta Con Nosotros
+    <div className="min-h-[80vh] py-8 md:py-12">
+      <div className="container-base max-w-2xl">
+        {/* Progress bar */}
+        <div className="mb-8">
+          <div className="flex justify-between text-sm text-gray-500 mb-2">
+            <span>Paso {currentStep} de {totalSteps}</span>
+            <span>{Math.round(progress)}% completado</span>
           </div>
-          <h1 className="font-lora text-[4rem] font-bold mb-6 text-[#1a1a1a]">
-            Comienza Tu Historia
-          </h1>
-          <p className="text-[1.2rem] text-gray-600 leading-relaxed">
-            Cuéntanos tu situación y te conectamos con los profesionales más adecuados en 24-48 horas. Sin comisiones, sin compromiso.
+          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-primary transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Step indicators */}
+        <div className="flex justify-center gap-2 mb-8">
+          {[1, 2, 3, 4].map((step) => (
+            <div
+              key={step}
+              className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all ${
+                step === currentStep
+                  ? 'bg-primary text-white'
+                  : step < currentStep
+                  ? 'bg-primary/20 text-primary'
+                  : 'bg-gray-200 text-gray-400'
+              }`}
+            >
+              {step < currentStep ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                step
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Form card */}
+        <div className="bg-white rounded-2xl shadow-soft border border-gray-100 p-6 md:p-8">
+          {/* Steps content */}
+          {currentStep === 1 && (
+            <Step1 formData={formData} updateFormData={updateFormData} errors={errors} />
+          )}
+          {currentStep === 2 && (
+            <Step2 formData={formData} updateFormData={updateFormData} errors={errors} />
+          )}
+          {currentStep === 3 && (
+            <Step3 formData={formData} updateFormData={updateFormData} errors={errors} />
+          )}
+          {currentStep === 4 && (
+            <Step4 formData={formData} updateFormData={updateFormData} errors={errors} />
+          )}
+
+          {/* Navigation buttons */}
+          <div className="flex justify-between mt-8 pt-6 border-t border-gray-100">
+            <button
+              type="button"
+              onClick={prevStep}
+              disabled={currentStep === 1}
+              className={`btn ${
+                currentStep === 1
+                  ? 'invisible'
+                  : 'btn-ghost'
+              }`}
+            >
+              ← Anterior
+            </button>
+
+            {currentStep < 4 ? (
+              <button
+                type="button"
+                onClick={nextStep}
+                className="btn-primary"
+              >
+                Siguiente →
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className="btn-primary btn-lg"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                    Enviando...
+                  </>
+                ) : (
+                  'Enviar solicitud'
+                )}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Trust indicators */}
+        <div className="mt-8 text-center">
+          <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
+            <svg className="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+            </svg>
+            Tus datos están seguros y protegidos
           </p>
         </div>
-      </section>
-
-      <section className="py-16 px-[5%]">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-5 gap-16">
-          {/* SIDEBAR INFO */}
-          <div className="lg:col-span-2">
-            <h2 className="font-lora text-[2rem] font-bold mb-8 text-[#1a1a1a]">
-              ¿Por Qué Health4Spain?
-            </h2>
-            
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <div className="text-3xl">✓</div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">100% Gratis Para Ti</h3>
-                  <p className="text-gray-600">No cobramos comisiones. Los profesionales nos pagan por las conexiones, tú recibes el servicio sin coste.</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="text-3xl">🔒</div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Profesionales Verificados</h3>
-                  <p className="text-gray-600">Todos nuestros partners están verificados, con licencias activas y experiencia con clientes internacionales.</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="text-3xl">🌐</div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">En Tu Idioma</h3>
-                  <p className="text-gray-600">Te conectamos con profesionales que hablan español, inglés, alemán o francés.</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="text-3xl">⚡</div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Respuesta Rápida</h3>
-                  <p className="text-gray-600">En 24-48 horas recibirás contacto de 2-3 profesionales que mejor se ajustan a tu caso.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-12 p-6 bg-gray-50 border-l-4 border-accent">
-              <p className="text-sm text-gray-600">
-                <strong className="text-gray-900">Garantía de privacidad:</strong> Tu información solo se comparte con los profesionales que seleccionamos para ti. Nunca vendemos datos a terceros.
-              </p>
-            </div>
-          </div>
-
-          {/* FORM */}
-          <div className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="bg-white border border-gray-200 p-10">
-              <h3 className="font-lora text-[1.8rem] font-semibold mb-8">
-                Formulario de Contacto
-              </h3>
-
-              {submitStatus === 'success' && (
-                <div className="mb-8 p-6 bg-green-50 border-l-4 border-green-600 text-green-900">
-                  <strong>✓ ¡Recibido!</strong><br />
-                  Te contactaremos en las próximas 24-48 horas. Revisa tu email (incluyendo spam).
-                </div>
-              )}
-
-              {submitStatus === 'error' && (
-                <div className="mb-8 p-6 bg-red-50 border-l-4 border-red-600 text-red-900">
-                  <strong>✗ Error</strong><br />
-                  Hubo un problema al enviar. Por favor intenta de nuevo o escríbenos a info@health4spain.com
-                </div>
-              )}
-
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Nombre Completo *
-                  </label>
-                  <input
-                    type="text"
-                    name="nombre"
-                    value={formData.nombre}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 focus:border-accent focus:outline-none"
-                    placeholder="Tu nombre"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 focus:border-accent focus:outline-none"
-                      placeholder="tu@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold mb-2">
-                      Teléfono
-                    </label>
-                    <input
-                      type="tel"
-                      name="telefono"
-                      value={formData.telefono}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 focus:border-accent focus:outline-none"
-                      placeholder="+34 600 000 000"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    País de Origen *
-                  </label>
-                  <input
-                    type="text"
-                    name="pais"
-                    value={formData.pais}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 focus:border-accent focus:outline-none"
-                    placeholder="Ej: Reino Unido, Alemania..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Tu Perfil *
-                  </label>
-                  <select
-                    name="perfil"
-                    value={formData.perfil}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 focus:border-accent focus:outline-none"
-                  >
-                    <option value="">Selecciona tu perfil</option>
-                    <option value="movil">Móviles (22-34 años) - Trabajo/Estudios</option>
-                    <option value="familia">Familias (35-49 años) - Reubicación</option>
-                    <option value="profesional">Profesionales (50-59 años) - Semi-retiro</option>
-                    <option value="jubilado">Jubilados (60-70 años) - Retiro completo</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Ciudad de Interés
-                  </label>
-                  <select
-                    name="ciudad"
-                    value={formData.ciudad}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 focus:border-accent focus:outline-none"
-                  >
-                    <option value="">No estoy seguro aún</option>
-                    <option value="torrevieja">Torrevieja</option>
-                    <option value="alicante">Alicante</option>
-                    <option value="murcia">Murcia</option>
-                    <option value="benidorm">Benidorm</option>
-                    <option value="cartagena">Cartagena</option>
-                    <option value="elche">Elche</option>
-                    <option value="otra">Otra ciudad</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Servicio Que Necesitas *
-                  </label>
-                  <select
-                    name="servicio"
-                    value={formData.servicio}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 focus:border-accent focus:outline-none"
-                  >
-                    <option value="">Selecciona un servicio</option>
-                    <option value="seguro">Seguro de Salud</option>
-                    <option value="abogado">Abogado de Extranjería</option>
-                    <option value="inmobiliaria">Agente Inmobiliario</option>
-                    <option value="gestoria">Gestoría</option>
-                    <option value="multiple">Varios servicios</option>
-                    <option value="asesoria">Asesoría general</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Cuéntanos Tu Situación *
-                  </label>
-                  <textarea
-                    name="mensaje"
-                    value={formData.mensaje}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 focus:border-accent focus:outline-none resize-none"
-                    placeholder="Describe brevemente tu situación, plazos, dudas o necesidades específicas..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-[#1a1a1a] text-white py-5 px-10 font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-accent disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? 'Enviando...' : 'Enviar Solicitud'}
-                </button>
-
-                <p className="text-xs text-gray-500 text-center">
-                  Al enviar este formulario aceptas nuestra política de privacidad. 
-                  Responderemos en 24-48 horas laborables.
-                </p>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* ALTERNATIVE CONTACT */}
-      <section className="py-16 px-[5%] bg-gray-50">
-        <div className="max-w-[900px] mx-auto text-center">
-          <h2 className="font-lora text-[2rem] font-bold mb-8 text-[#1a1a1a]">
-            Otras Formas de Contacto
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 border-l-4 border-accent">
-              <div className="text-4xl mb-4">📧</div>
-              <h3 className="font-semibold mb-2">Email</h3>
-              <a href="mailto:info@health4spain.com" className="text-accent hover:underline">
-                info@health4spain.com
-              </a>
-            </div>
-            <div className="bg-white p-8 border-l-4 border-accent">
-              <div className="text-4xl mb-4">💬</div>
-              <h3 className="font-semibold mb-2">WhatsApp</h3>
-              <a href="https://wa.me/34600000000" className="text-accent hover:underline">
-                +34 600 000 000
-              </a>
-            </div>
-            <div className="bg-white p-8 border-l-4 border-accent">
-              <div className="text-4xl mb-4">📞</div>
-              <h3 className="font-semibold mb-2">Teléfono</h3>
-              <a href="tel:+34600000000" className="text-accent hover:underline">
-                +34 600 000 000
-              </a>
-              <p className="text-sm text-gray-600 mt-2">Lun-Vie 9:00-18:00</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 }

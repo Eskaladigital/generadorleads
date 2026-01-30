@@ -1,137 +1,127 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useState } from 'react';
-import LanguageSwitcher from './LanguageSwitcher';
+import Image from 'next/image';
+
+const navLinks = [
+  { href: '/es', label: 'Inicio' },
+  { href: '/es/destinos', label: 'Destinos' },
+  { href: '/es/servicios', label: 'Servicios' },
+  { href: '/es/historias', label: 'Historias' },
+  { href: '/es/blog', label: 'Blog' },
+];
 
 export default function Navigation() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="py-8 px-[5%] border-b border-gray-200 bg-white sticky top-0 z-50">
-      <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-        <Link href="/es" className="font-lora text-[2rem] font-bold text-[#1a1a1a] italic">
-          Health4Spain
-        </Link>
-        
-        <div className="flex items-center gap-8">
-          {/* Desktop Menu */}
-          <ul className="hidden lg:flex gap-12 list-none items-center">
-            <li>
-              <Link 
-                href="/es" 
-                className="no-underline text-[#1a1a1a] text-[0.95rem] uppercase tracking-wider font-medium hover:text-accent transition-colors"
-              >
-                Inicio
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/es/destinos" 
-                className="no-underline text-[#1a1a1a] text-[0.95rem] uppercase tracking-wider font-medium hover:text-accent transition-colors"
-              >
-                Destinos
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/es/servicios" 
-                className="no-underline text-[#1a1a1a] text-[0.95rem] uppercase tracking-wider font-medium hover:text-accent transition-colors"
-              >
-                Servicios
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/es/blog" 
-                className="no-underline text-[#1a1a1a] text-[0.95rem] uppercase tracking-wider font-medium hover:text-accent transition-colors"
-              >
-                Historias
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/es/contacto" 
-                className="inline-block bg-[#1a1a1a] text-white py-3 px-8 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-accent"
-              >
-                Contacto
-              </Link>
-            </li>
-          </ul>
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-white shadow-soft py-2' 
+          : 'bg-white/95 backdrop-blur-sm py-3'
+      }`}
+    >
+      <div className="container-base">
+        <nav className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/es" className="flex items-center gap-2">
+            {/* Logo H4S siglas a color */}
+            <div className="flex items-center">
+              <span className="text-2xl font-heading font-bold">
+                <span className="text-primary">H</span>
+                <span className="text-secondary">4</span>
+                <span className="text-primary">S</span>
+              </span>
+            </div>
+          </Link>
 
-          {/* Language Switcher */}
-          <div className="hidden lg:block">
-            <LanguageSwitcher />
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-gray-600 hover:text-primary font-medium transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* CTA Desktop */}
+          <div className="hidden md:flex items-center gap-4">
+            <Link href="/es/contacto" className="btn-primary btn-sm">
+              Empezar ahora
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            className="lg:hidden text-2xl"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-gray-600 hover:text-primary"
+            aria-label="Abrir menú"
           >
-            {mobileMenuOpen ? '✕' : '☰'}
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
           </button>
-        </div>
-      </div>
+        </nav>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden mt-8 pb-8">
-          <ul className="flex flex-col gap-6 list-none mb-6">
-            <li>
-              <Link 
-                href="/es" 
-                className="block no-underline text-[#1a1a1a] text-[1rem] uppercase tracking-wider font-medium hover:text-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Inicio
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/es/destinos" 
-                className="block no-underline text-[#1a1a1a] text-[1rem] uppercase tracking-wider font-medium hover:text-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Destinos
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/es/servicios" 
-                className="block no-underline text-[#1a1a1a] text-[1rem] uppercase tracking-wider font-medium hover:text-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Servicios
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/es/blog" 
-                className="block no-underline text-[#1a1a1a] text-[1rem] uppercase tracking-wider font-medium hover:text-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Historias
-              </Link>
-            </li>
-            <li>
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="md:hidden py-4 border-t border-gray-100 mt-2">
+            <div className="flex flex-col gap-3">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-gray-600 hover:text-primary font-medium py-2 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
               <Link 
                 href="/es/contacto" 
-                className="inline-block bg-[#1a1a1a] text-white py-3 px-8 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-accent"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => setIsOpen(false)}
+                className="btn-primary mt-2"
               >
-                Contacto
+                Empezar ahora
               </Link>
-            </li>
-          </ul>
-          
-          {/* Language Switcher Mobile */}
-          <div className="border-t border-gray-200 pt-6">
-            <LanguageSwitcher />
+            </div>
           </div>
-        </div>
-      )}
-    </nav>
+        )}
+      </div>
+    </header>
   );
 }

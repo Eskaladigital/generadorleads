@@ -1,259 +1,192 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
+// Datos
+const AUDIENCIAS = [
+  { id: 'jubilados', label: 'Jubilados', icon: '🌴' },
+  { id: 'familias', label: 'Familias', icon: '👨‍👩‍👧‍👦' },
+  { id: 'nomadas', label: 'Nómadas', icon: '💻' },
+  { id: 'inversores', label: 'Inversores', icon: '📈' },
+  { id: 'estudiantes', label: 'Estudiantes', icon: '🎓' },
+  { id: 'emprendedores', label: 'Emprendedores', icon: '🚀' },
+];
+
+const SERVICIOS = [
+  {
+    id: 'seguros',
+    title: 'Seguros de Salud',
+    description: 'Cobertura médica completa adaptada a residentes internacionales.',
+    icon: '🏥',
+  },
+  {
+    id: 'abogados',
+    title: 'Abogados',
+    description: 'Expertos en extranjería, visados y trámites legales.',
+    icon: '⚖️',
+  },
+  {
+    id: 'inmobiliarias',
+    title: 'Inmobiliarias',
+    description: 'Encuentra tu hogar ideal con profesionales que hablan tu idioma.',
+    icon: '🏠',
+  },
+  {
+    id: 'dentistas',
+    title: 'Dentistas',
+    description: 'Clínicas dentales de calidad a precios competitivos.',
+    icon: '🦷',
+  },
+  {
+    id: 'gestorias',
+    title: 'Gestorías',
+    description: 'Trámites administrativos sin complicaciones.',
+    icon: '📋',
+  },
+  {
+    id: 'clinicas',
+    title: 'Clínicas Médicas',
+    description: 'Atención sanitaria privada de primer nivel.',
+    icon: '🩺',
+  },
+];
 
 export default function HomePage() {
   return (
     <>
-      {/* HERO */}
-      <section className="py-24 px-[5%] max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-16 items-center">
-          <div>
-            <div className="uppercase tracking-[2px] text-[0.8rem] text-accent font-semibold mb-8">
-              Edición Mediterránea
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center bg-gradient-hero overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary rounded-full blur-3xl" />
+        </div>
+        
+        <div className="container-base relative z-10 py-16 md:py-20">
+          <div className="max-w-3xl mx-auto text-center text-white">
+            {/* Logo */}
+            <div className="mb-8">
+              <span className="text-5xl md:text-6xl font-heading font-bold">
+                <span className="text-primary">Health</span>
+                <span className="text-white">4</span>
+                <span className="text-primary">Spain</span>
+              </span>
             </div>
-            <h1 className="font-lora text-[5rem] font-bold leading-[1.1] mb-8 text-[#1a1a1a]">
-              Tu Nuevo Capítulo en España
-            </h1>
-            <p className="text-[1.4rem] text-gray-600 mb-10 leading-relaxed max-w-[550px]">
-              Una conexión cuidada entre residentes internacionales y profesionales españoles de confianza. Seguros, servicios legales y vivienda—todo en un solo lugar.
+            
+            {/* Subtitle */}
+            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+              Conectamos a residentes internacionales con los mejores profesionales españoles. 
+              Tu nueva vida en España comienza aquí.
             </p>
-            <div className="flex items-center gap-6 mb-12 pb-8 border-b border-gray-200">
-              <div className="flex items-center gap-3 text-[0.9rem] text-gray-500">
-                <span>📍</span>
-                <span>20 Ciudades</span>
-              </div>
-              <div className="flex items-center gap-3 text-[0.9rem] text-gray-500">
-                <span>✓</span>
-                <span>150+ Partners Verificados</span>
-              </div>
-              <div className="flex items-center gap-3 text-[0.9rem] text-gray-500">
-                <span>🌐</span>
-                <span>4 Idiomas</span>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <Link
-                href="/es/contacto"
-                className="bg-[#1a1a1a] text-white py-5 px-10 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-transparent hover:text-[#1a1a1a] border-2 border-[#1a1a1a]"
-              >
-                Comienza Tu Viaje
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/es/contacto" className="btn-primary btn-lg">
+                Encuentra tu profesional
               </Link>
-              <Link
-                href="/es/servicios"
-                className="bg-transparent text-[#1a1a1a] py-5 px-10 no-underline font-medium uppercase tracking-wider text-[0.85rem] border-2 border-[#1a1a1a] transition-all hover:bg-[#1a1a1a] hover:text-white"
-              >
-                Explorar Servicios
+              <Link href="#servicios" className="btn-white btn-lg">
+                Ver servicios
               </Link>
             </div>
-          </div>
-          <div 
-            className="w-full h-[600px] bg-cover bg-center border-[15px] border-gray-100 shadow-2xl"
-            style={{
-              backgroundImage: "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800')"
-            }}
-          />
-        </div>
-      </section>
-
-      {/* FEATURES BAR */}
-      <div className="py-16 px-[5%] bg-gray-50 border-t border-b border-gray-200">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="text-center">
-            <div className="font-lora text-[3rem] font-bold text-accent mb-2">
-              5.5M
+            
+            {/* Trust badges */}
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/70 text-sm">
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>+500 profesionales verificados</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>Atención en tu idioma</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>100% gratuito</span>
+              </div>
             </div>
-            <div className="text-[0.95rem] text-gray-600 uppercase tracking-wider">
-              Extranjeros Viviendo en España
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="font-lora text-[3rem] font-bold text-accent mb-2">
-              320
-            </div>
-            <div className="text-[0.95rem] text-gray-600 uppercase tracking-wider">
-              Días de Sol al Año
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="font-lora text-[3rem] font-bold text-accent mb-2">
-              0%
-            </div>
-            <div className="text-[0.95rem] text-gray-600 uppercase tracking-wider">
-              Comisión para Usuarios
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="font-lora text-[3rem] font-bold text-accent mb-2">
-              100%
-            </div>
-            <div className="text-[0.95rem] text-gray-600 uppercase tracking-wider">
-              Profesionales Verificados
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* PROFILES */}
-      <section className="py-32 px-[5%]">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="max-w-[700px] mb-20">
-            <div className="uppercase tracking-[2px] text-[0.75rem] text-accent font-semibold mb-4">
-              A Quién Servimos
-            </div>
-            <h2 className="font-lora text-[3.5rem] font-bold mb-6 text-[#1a1a1a]">
-              Cuatro Historias, Un Destino
-            </h2>
-            <p className="text-[1.2rem] text-gray-600 leading-relaxed">
-              Cada viaje a España es único. Ya sea que estés comenzando una carrera, formando una familia, semi-jubilándote o disfrutando de la jubilación completa, te conectamos con los profesionales adecuados.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {[
-              {
-                title: "Los Móviles",
-                age: "22-34 años • Trabajo y Estudios",
-                description: "Jóvenes profesionales que buscan oportunidades laborales, experiencia internacional y nuevos comienzos en ciudades españolas.",
-                image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600"
-              },
-              {
-                title: "Las Familias",
-                age: "35-49 años • Reubicación",
-                description: "Reubicaciones familiares completas que buscan estabilidad, educación de calidad y mejor calidad de vida en España.",
-                image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600"
-              },
-              {
-                title: "Los Profesionales",
-                age: "50-59 años • Semi-Retiro",
-                description: "Profesionales consolidados que buscan un semi-retiro activo con estilo de vida mediterráneo y vida de calidad.",
-                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600"
-              },
-              {
-                title: "Los Jubilados",
-                age: "60-70 años • Jubilación Completa",
-                description: "Disfrutando de una merecida jubilación bajo el sol español con apoyo integral y tranquilidad.",
-                image: "https://images.unsplash.com/photo-1609902726285-00668009f004?w=600"
-              }
-            ].map((profile, index) => (
-              <article 
-                key={index}
-                className="bg-white border border-gray-200 transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer"
-              >
-                <div 
-                  className="h-[300px] bg-cover bg-center flex items-end p-8"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('${profile.image}')`
-                  }}
-                >
-                  <h3 className="font-lora text-[2.5rem] text-white font-bold">
-                    {profile.title}
-                  </h3>
-                </div>
-                <div className="p-10">
-                  <div className="uppercase text-[0.8rem] text-accent tracking-wider mb-4 font-semibold">
-                    {profile.age}
-                  </div>
-                  <p className="text-[1.05rem] text-gray-600 leading-relaxed mb-6">
-                    {profile.description}
-                  </p>
-                  <Link 
-                    href={`/es/perfiles/${profile.title.toLowerCase().replace(' ', '-')}`}
-                    className="uppercase text-[0.8rem] tracking-wider text-[#1a1a1a] no-underline font-semibold inline-flex items-center gap-2 hover:text-accent transition-colors"
-                  >
-                    Leer Más →
-                  </Link>
-                </div>
-              </article>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="py-32 px-[5%] bg-gray-50">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="max-w-[700px] mb-20">
-            <div className="uppercase tracking-[2px] text-[0.75rem] text-accent font-semibold mb-4">
-              Servicios Esenciales
-            </div>
-            <h2 className="font-lora text-[3.5rem] font-bold mb-6 text-[#1a1a1a]">
-              Todo Lo Que Necesitas
+      {/* A quién servimos */}
+      <section className="py-12 md:py-16 bg-gray-50">
+        <div className="container-base">
+          <div className="text-center mb-10">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              ¿A quién ayudamos?
             </h2>
-            <p className="text-[1.2rem] text-gray-600 leading-relaxed">
-              Profesionales verificados que hablan tu idioma y comprenden tus necesidades únicas como residente internacional.
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Sea cual sea tu situación, estamos aquí para facilitarte la vida en España
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {[
-              {
-                category: "Salud y Bienestar",
-                title: "Seguros de Salud y Vida",
-                description: "Seguros médicos y de vida adaptados a tu edad y situación laboral. Válidos para visados no lucrativos, cobertura completa para expatriados.",
-                cta: "Explorar Opciones",
-                slug: "seguros"
-              },
-              {
-                category: "Servicios Legales",
-                title: "Abogados Especializados",
-                description: "Expertos en extranjería (visados, NIE, residencia) y derecho laboral. Experiencia específica con clientes internacionales.",
-                cta: "Encontrar Abogado",
-                slug: "abogados"
-              },
-              {
-                category: "Bienes Raíces",
-                title: "Inmobiliarias Locales",
-                description: "Agencias con amplia experiencia en la zona que trabajan habitualmente con clientes internacionales y conocen el mercado local.",
-                cta: "Ver Propiedades",
-                slug: "inmobiliarias"
-              },
-              {
-                category: "Servicios Adicionales",
-                title: "Gestorías y Más",
-                description: "Gestorías administrativas, clínicas privadas, academias de idiomas y otros servicios esenciales para tu nueva vida en España.",
-                cta: "Descubrir Más",
-                slug: "otros-servicios"
-              }
-            ].map((service, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {AUDIENCIAS.map((audiencia) => (
               <div 
-                key={index}
-                className="bg-white p-12 border-l-4 border-accent"
+                key={audiencia.id}
+                className="bg-white rounded-xl p-4 text-center shadow-card hover:shadow-card-hover transition-all"
               >
-                <div className="uppercase text-[0.75rem] text-accent tracking-[2px] font-semibold mb-4">
-                  {service.category}
-                </div>
-                <h3 className="font-lora text-[2.5rem] mb-6 text-[#1a1a1a]">
-                  {service.title}
-                </h3>
-                <p className="text-[1.1rem] text-gray-600 leading-relaxed mb-8">
-                  {service.description}
-                </p>
-                <Link
-                  href={`/es/servicios/${service.slug}`}
-                  className="uppercase text-[0.8rem] tracking-wider text-[#1a1a1a] no-underline font-semibold border-b-2 border-[#1a1a1a] pb-1 hover:text-accent hover:border-accent transition-all"
-                >
-                  {service.cta}
-                </Link>
+                <span className="text-3xl mb-2 block">{audiencia.icon}</span>
+                <span className="font-medium text-gray-800">{audiencia.label}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-32 px-[5%] bg-[#1a1a1a] text-white">
-        <div className="max-w-[900px] mx-auto text-center">
-          <div className="text-[6rem] text-accent leading-none mb-4">"</div>
-          <p className="font-lora text-[2.5rem] font-normal leading-[1.4] mb-8 italic">
-            No solo te conectamos con profesionales. Te guiamos en cada paso para hacer de España tu hogar.
-          </p>
-          <div className="uppercase text-[0.85rem] tracking-[2px] text-gray-500 mb-12">
-            Promesa de Health4Spain
+      {/* Servicios Esenciales */}
+      <section id="servicios" className="py-12 md:py-16">
+        <div className="container-base">
+          <div className="text-center mb-10">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Servicios Esenciales
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Todo lo que necesitas para establecerte en España con tranquilidad
+            </p>
           </div>
-          <Link
-            href="/es/contacto"
-            className="bg-[#1a1a1a] text-white py-5 px-10 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all border-2 border-white hover:bg-white hover:text-[#1a1a1a]"
-          >
-            Comienza Tu Historia
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SERVICIOS.map((servicio) => (
+              <Link
+                key={servicio.id}
+                href={`/es/contacto?servicio=${servicio.id}`}
+                className="group card card-hover p-6"
+              >
+                <div className="text-4xl mb-4">{servicio.icon}</div>
+                <h3 className="font-heading text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                  {servicio.title}
+                </h3>
+                <p className="text-gray-600 mb-4">{servicio.description}</p>
+                <span className="text-primary font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Solicitar información
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className="py-12 md:py-16 bg-gradient-primary">
+        <div className="container-base text-center">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
+            ¿Listo para empezar tu nueva vida en España?
+          </h2>
+          <p className="text-white/90 mb-8 max-w-2xl mx-auto">
+            Te conectamos con profesionales verificados que hablan tu idioma. 
+            Sin compromiso y totalmente gratis.
+          </p>
+          <Link href="/es/contacto" className="btn-white btn-lg">
+            Comenzar ahora
           </Link>
         </div>
       </section>
