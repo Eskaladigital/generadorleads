@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { supabase } from '@/lib/supabase';
 
 export const metadata: Metadata = {
   title: 'Mapa del Sitio - Health4Spain',
@@ -93,20 +94,22 @@ const RUTAS_ESTATICAS = [
   { url: '/es/cookies', titulo: 'Política de Cookies', descripcion: 'Uso de cookies' },
 ];
 
-// Función para obtener posts del blog
+// Función para obtener posts del blog directamente desde Supabase
 async function getBlogPosts() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    const response = await fetch(`${baseUrl}/api/blog`, {
-      next: { revalidate: 3600 }, // Revalidar cada hora
-    });
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('slug, title, excerpt, published_at')
+      .eq('status', 'published')
+      .order('published_at', { ascending: false })
+      .limit(100);
     
-    if (!response.ok) {
+    if (error) {
+      console.error('Error fetching blog posts:', error);
       return [];
     }
     
-    const data = await response.json();
-    return data.posts || [];
+    return data || [];
   } catch (error) {
     console.error('Error fetching blog posts:', error);
     return [];
