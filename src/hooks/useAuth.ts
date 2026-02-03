@@ -40,29 +40,77 @@ export function useAuth() {
   });
 
   useEffect(() => {
-    // Obtener sesión actual
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setState({
-        user: session?.user ?? null,
-        session,
-        isAdmin: isAdminEmail(session?.user?.email),
-        isLoading: false,
-      });
-    });
+    let mounted = true;
+    
+    // Timeout para evitar loading infinito
+    const timeout = setTimeout(() => {
+      if (mounted) {
+        console.error('Auth timeout - no se pudo conectar a Supabase');
+        setState({
+          user: null,
+          session: null,
+          isAdmin: false,
+          isLoading: false,
+        });
+      }
+    }, 5000); // 5 segundos timeout
 
-    // Escuchar cambios de auth
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+    // Obtener sesión actual
+    supabase.auth.getSession()
+      .then(({ data: { session }, error }) => {
+        clearTimeout(timeout);
+        if (!mounted) return;
+        
+        if (error) {
+          console.error('Error getting session:', error);
+          setState({
+            user: null,
+            session: null,
+            isAdmin: false,
+            isLoading: false,
+          });
+          return;
+        }
+        
         setState({
           user: session?.user ?? null,
           session,
           isAdmin: isAdminEmail(session?.user?.email),
           isLoading: false,
         });
+      })
+      .catch((error) => {
+        clearTimeout(timeout);
+        if (!mounted) return;
+        
+        console.error('Error in getSession:', error);
+        setState({
+          user: null,
+          session: null,
+          isAdmin: false,
+          isLoading: false,
+        });
+      });
+
+    // Escuchar cambios de auth
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        if (mounted) {
+          setState({
+            user: session?.user ?? null,
+            session,
+            isAdmin: isAdminEmail(session?.user?.email),
+            isLoading: false,
+          });
+        }
       }
     );
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      clearTimeout(timeout);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signIn = async (email: string, password: string) => {
