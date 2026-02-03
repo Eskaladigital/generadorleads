@@ -6,7 +6,6 @@ const footerLinks = {
     { href: '/es/servicios/seguros', label: 'Seguros de Salud' },
     { href: '/es/servicios/abogados', label: 'Abogados' },
     { href: '/es/servicios/inmobiliarias', label: 'Inmobiliarias' },
-    { href: '/es/servicios/dentistas', label: 'Dentistas' },
     { href: '/es/servicios/gestorias', label: 'Gestorías' },
   ],
   destinos: [
@@ -37,25 +36,25 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
-            {/* Logo H4S blanco */}
+            {/* Logo H4S blanco - 160px de alto */}
             <Link href="/es" className="inline-block mb-4">
               <Image 
                 src="/images/logo-horizontal-white.png" 
                 alt="Health4Spain" 
-                width={150}
-                height={40}
-                className="h-8 w-auto"
+                width={240}
+                height={160}
+                className="h-40 w-auto"
               />
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Tu puente hacia una nueva vida en España.
+            <p className="text-sm text-gray-400 leading-normal">
+              Conectamos residentes internacionales con profesionales españoles verificados.
             </p>
           </div>
 
           {/* Servicios */}
           <div>
             <h4 className="font-heading font-semibold text-white mb-3">Servicios</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1.5">
               {footerLinks.servicios.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm hover:text-primary transition-colors">

@@ -16,67 +16,67 @@ const SERVICIOS = [
     id: 'seguros',
     title: 'Seguros de Salud',
     description: 'Cobertura médica completa adaptada a residentes internacionales.',
-    icon: '🏥',
   },
   {
     id: 'abogados',
     title: 'Abogados',
     description: 'Expertos en extranjería, visados y trámites legales.',
-    icon: '⚖️',
   },
   {
     id: 'inmobiliarias',
     title: 'Inmobiliarias',
     description: 'Encuentra tu hogar ideal con profesionales que hablan tu idioma.',
-    icon: '🏠',
-  },
-  {
-    id: 'dentistas',
-    title: 'Dentistas',
-    description: 'Clínicas dentales de calidad a precios competitivos.',
-    icon: '🦷',
   },
   {
     id: 'gestorias',
     title: 'Gestorías',
     description: 'Trámites administrativos sin complicaciones.',
-    icon: '📋',
-  },
-  {
-    id: 'clinicas',
-    title: 'Clínicas Médicas',
-    description: 'Atención sanitaria privada de primer nivel.',
-    icon: '🩺',
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-hero overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary rounded-full blur-3xl" />
+      {/* Hero Section - Slider */}
+      <section className="relative h-[600px] md:h-[700px] flex items-center bg-gradient-hero overflow-hidden">
+        {/* Background image - profesional y que inspire confianza */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=80"
+            alt="España"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
         </div>
         
-        <div className="container-base relative z-10 py-16 md:py-20">
+        <div className="container-base relative z-10 py-12 md:py-16">
           <div className="max-w-3xl mx-auto text-center text-white">
-            {/* Logo */}
-            <div className="mb-8">
-              <span className="text-5xl md:text-6xl font-heading font-bold">
-                <span className="text-primary">Health</span>
-                <span className="text-white">4</span>
-                <span className="text-primary">Spain</span>
-              </span>
+            {/* Logo H4S siglas color centrado */}
+            <div className="mb-8 flex justify-center">
+              <Image 
+                src="/images/logo-siglas-color.png" 
+                alt="Health4Spain" 
+                width={200}
+                height={200}
+                className="h-32 md:h-40 w-auto"
+                priority
+              />
             </div>
             
-            {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Conectamos a residentes internacionales con los mejores profesionales españoles. 
-              Tu nueva vida en España comienza aquí.
-            </p>
+            {/* Logo horizontal con subtítulo */}
+            <div className="mb-8">
+              <Image 
+                src="/images/logo-horizontal.png" 
+                alt="Health4Spain" 
+                width={400}
+                height={100}
+                className="h-16 md:h-20 w-auto mx-auto mb-4"
+              />
+              <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
+                Seguro de salud para tu vida en España
+              </p>
+            </div>
             
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -114,7 +114,7 @@ export default function HomePage() {
       </section>
 
       {/* A quién servimos */}
-      <section className="py-12 md:py-16 bg-gray-50">
+      <section className="py-6 md:py-10 bg-gray-50">
         <div className="container-base">
           <div className="text-center mb-10">
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-3">
@@ -140,7 +140,7 @@ export default function HomePage() {
       </section>
 
       {/* Servicios Esenciales */}
-      <section id="servicios" className="py-12 md:py-16">
+      <section id="servicios" className="py-6 md:py-10">
         <div className="container-base">
           <div className="text-center mb-10">
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-3">
@@ -151,14 +151,13 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {SERVICIOS.map((servicio) => (
               <Link
                 key={servicio.id}
                 href={`/es/contacto?servicio=${servicio.id}`}
                 className="group card card-hover p-6"
               >
-                <div className="text-4xl mb-4">{servicio.icon}</div>
                 <h3 className="font-heading text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors">
                   {servicio.title}
                 </h3>
@@ -176,7 +175,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-12 md:py-16 bg-gradient-primary">
+      <section className="py-6 md:py-10 bg-gradient-primary">
         <div className="container-base text-center">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
             ¿Listo para empezar tu nueva vida en España?
