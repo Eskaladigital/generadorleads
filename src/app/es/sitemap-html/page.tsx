@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
 import { getServicios } from '@/lib/services';
+import { getCiudades } from '@/lib/ciudades';
 
 export const metadata: Metadata = {
   title: 'Mapa del Sitio - Health4Spain',
@@ -11,30 +12,6 @@ export const metadata: Metadata = {
     follow: true,
   },
 };
-
-// Datos de destinos - 20 destinos reales
-const DESTINOS = [
-  { slug: 'madrid', nombre: 'Madrid' },
-  { slug: 'barcelona', nombre: 'Barcelona' },
-  { slug: 'valencia', nombre: 'Valencia' },
-  { slug: 'alicante', nombre: 'Alicante' },
-  { slug: 'malaga', nombre: 'Málaga' },
-  { slug: 'marbella', nombre: 'Marbella' },
-  { slug: 'torrevieja', nombre: 'Torrevieja' },
-  { slug: 'benidorm', nombre: 'Benidorm' },
-  { slug: 'murcia', nombre: 'Murcia' },
-  { slug: 'sevilla', nombre: 'Sevilla' },
-  { slug: 'palma', nombre: 'Palma de Mallorca' },
-  { slug: 'tenerife', nombre: 'Tenerife' },
-  { slug: 'las-palmas', nombre: 'Las Palmas' },
-  { slug: 'ibiza', nombre: 'Ibiza' },
-  { slug: 'granada', nombre: 'Granada' },
-  { slug: 'bilbao', nombre: 'Bilbao' },
-  { slug: 'zaragoza', nombre: 'Zaragoza' },
-  { slug: 'fuengirola', nombre: 'Fuengirola' },
-  { slug: 'estepona', nombre: 'Estepona' },
-  { slug: 'nerja', nombre: 'Nerja' },
-];
 
 // Rutas estáticas principales
 const RUTAS_ESTATICAS = [
@@ -97,18 +74,20 @@ async function getLandingPages() {
 }
 
 export default async function SitemapHtmlPage() {
-  const [blogPosts, servicios, landingPages] = await Promise.all([
+  const [blogPosts, servicios, ciudades, landingPages] = await Promise.all([
     getBlogPosts(),
     getServicios(),
+    getCiudades(),
     getLandingPages(),
   ]);
   
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://health4spain.com';
 
-  // Obtener todos los destinos
-  const allDestinos = DESTINOS.map(destino => ({
-    url: `/es/destinos/${destino.slug}`,
-    titulo: destino.nombre,
+  // Obtener todos los destinos desde BD
+  const allDestinos = ciudades.map(ciudad => ({
+    url: `/es/destinos/${ciudad.slug}`,
+    titulo: ciudad.nombre,
+    provincia: ciudad.provincia,
   }));
 
   // Obtener todos los servicios desde BD
