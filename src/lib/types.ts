@@ -188,7 +188,7 @@ export interface LandingPage {
   // SEO
   meta_title: string;
   meta_description: string;
-  meta_keywords: string[];
+  meta_keywords: string[] | string | null; // Puede ser array, string o null
   
   // Hero
   hero_title: string;
