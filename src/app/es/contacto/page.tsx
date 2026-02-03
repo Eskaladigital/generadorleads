@@ -41,8 +41,11 @@ interface StepProps {
 const PAISES = [
   'Reino Unido', 'Alemania', 'Francia', 'Países Bajos', 'Bélgica', 
   'Suecia', 'Noruega', 'Dinamarca', 'Finlandia', 'Irlanda',
-  'Estados Unidos', 'Canadá', 'Rusia', 'Ucrania', 'Polonia',
-  'Italia', 'Portugal', 'Suiza', 'Austria', 'Otro'
+  'Estados Unidos', 'Canadá', 'Rusia', 'Ucrania',
+  'Italia', 'Portugal', 'Suiza',
+  'Argelia', 'Marruecos',
+  'Colombia', 'Ecuador', 'Bolivia', 'Argentina', 'Venezuela', 'Uruguay', 'Chile',
+  'Otro'
 ];
 
 const SERVICIOS = [
