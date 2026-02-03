@@ -36,17 +36,17 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
-            {/* Logo H4S blanco - 160px de alto */}
-            <Link href="/es" className="inline-block mb-4">
+            {/* Logo H4S siglas blanco - 160px de alto */}
+            <Link href="/es" className="inline-block mb-6">
               <Image 
-                src="/images/logo-horizontal-white.png" 
+                src="/images/logo-siglas-white.png" 
                 alt="Health4Spain" 
-                width={240}
+                width={160}
                 height={160}
                 className="h-40 w-auto"
               />
             </Link>
-            <p className="text-sm text-gray-400 leading-normal">
+            <p className="text-sm text-gray-400 leading-relaxed">
               Conectamos residentes internacionales con profesionales españoles verificados.
             </p>
           </div>
