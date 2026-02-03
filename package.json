@@ -8,7 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-landings": "npx ts-node scripts/generate-landings.ts"
+    "generate-landings": "npx tsx scripts/generate-landings.ts",
+    "generate-blog": "npx tsx scripts/generate-blog-posts.ts",
+    "test-supabase": "npx tsx scripts/test-supabase.ts",
+    "update-ciudades": "npx tsx scripts/update-ciudades.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",

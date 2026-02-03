@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, use, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { supabase } from '@/lib/supabase';
@@ -52,9 +52,8 @@ const categories = [
   { value: 'testimonios', label: 'Testimonios' },
 ];
 
-export default function BlogEditorPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
-  const isNew = resolvedParams.slug === 'new';
+export default function BlogEditorPage({ params }: { params: { slug: string } }) {
+  const isNew = params.slug === 'new';
   
   const [post, setPost] = useState<BlogPost>(emptyPost);
   const [loading, setLoading] = useState(!isNew);
@@ -69,14 +68,14 @@ export default function BlogEditorPage({ params }: { params: Promise<{ slug: str
     if (!isNew) {
       fetchPost();
     }
-  }, [isNew, resolvedParams.slug]);
+  }, [isNew, params.slug]);
 
   const fetchPost = async () => {
     try {
       const { data, error } = await supabase
         .from('blog_posts')
         .select('*')
-        .eq('slug', resolvedParams.slug)
+        .eq('slug', params.slug)
         .single();
 
       if (error) throw error;
@@ -157,7 +156,7 @@ export default function BlogEditorPage({ params }: { params: Promise<{ slug: str
         const { error } = await supabase
           .from('blog_posts')
           .update(postData)
-          .eq('slug', resolvedParams.slug);
+          .eq('slug', params.slug);
         if (error) throw error;
       }
 

@@ -7,42 +7,36 @@ const AUDIENCIAS = [
   { 
     id: 'jubilados', 
     label: 'Jubilados', 
-    icon: '🌴',
     image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=800&q=80',
     description: 'Disfruta de tu retiro en España'
   },
   { 
     id: 'familias', 
     label: 'Familias', 
-    icon: '👨‍👩‍👧‍👦',
     image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80',
     description: 'Un nuevo hogar para toda la familia'
   },
   { 
     id: 'nomadas', 
     label: 'Nómadas', 
-    icon: '💻',
     image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80',
     description: 'Trabaja desde cualquier lugar'
   },
   { 
     id: 'inversores', 
     label: 'Inversores', 
-    icon: '📈',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
     description: 'Oportunidades de inversión'
   },
   { 
     id: 'estudiantes', 
     label: 'Estudiantes', 
-    icon: '🎓',
     image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
     description: 'Estudia en España'
   },
   { 
     id: 'emprendedores', 
     label: 'Emprendedores', 
-    icon: '🚀',
     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80',
     description: 'Emprende tu negocio'
   },
@@ -169,9 +163,6 @@ export default async function HomePage() {
                 
                 {/* Contenido */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-gradient-to-t from-black/60 to-transparent">
-                  <span className="text-4xl md:text-5xl mb-2 md:mb-3 transform group-hover:scale-110 transition-transform">
-                    {audiencia.icon}
-                  </span>
                   <h3 className="font-heading text-lg md:text-xl font-bold text-white mb-1">
                     {audiencia.label}
                   </h3>

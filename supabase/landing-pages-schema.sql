@@ -67,10 +67,10 @@ CREATE TABLE IF NOT EXISTS landing_pages (
 );
 
 -- Índices para búsquedas rápidas
-CREATE INDEX idx_landing_servicio ON landing_pages(servicio_slug);
-CREATE INDEX idx_landing_ciudad ON landing_pages(ciudad_slug);
-CREATE INDEX idx_landing_activo ON landing_pages(activo);
-CREATE INDEX idx_landing_idioma ON landing_pages(idioma);
+CREATE INDEX IF NOT EXISTS idx_landing_servicio ON landing_pages(servicio_slug);
+CREATE INDEX IF NOT EXISTS idx_landing_ciudad ON landing_pages(ciudad_slug);
+CREATE INDEX IF NOT EXISTS idx_landing_activo ON landing_pages(activo);
+CREATE INDEX IF NOT EXISTS idx_landing_idioma ON landing_pages(idioma);
 
 -- Trigger para updated_at
 CREATE OR REPLACE FUNCTION update_landing_timestamp()
@@ -81,6 +81,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS trigger_landing_updated ON landing_pages;
 CREATE TRIGGER trigger_landing_updated
   BEFORE UPDATE ON landing_pages
   FOR EACH ROW
@@ -90,10 +91,12 @@ CREATE TRIGGER trigger_landing_updated
 ALTER TABLE landing_pages ENABLE ROW LEVEL SECURITY;
 
 -- Política: Lectura pública (las landing pages son públicas)
+DROP POLICY IF EXISTS "Landing pages públicas" ON landing_pages;
 CREATE POLICY "Landing pages públicas" ON landing_pages
   FOR SELECT USING (activo = true);
 
 -- Política: Solo admins pueden modificar
+DROP POLICY IF EXISTS "Solo admins modifican landings" ON landing_pages;
 CREATE POLICY "Solo admins modifican landings" ON landing_pages
   FOR ALL USING (auth.role() = 'service_role');
 
@@ -157,15 +160,95 @@ CREATE TABLE IF NOT EXISTS ciudades_catalogo (
   datos_extra JSONB
 );
 
+-- ============================================
+-- TABLA: ciudades_contenido
+-- Contenido SEO extendido para páginas de ciudades
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS ciudades_contenido (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  ciudad_slug VARCHAR(50) UNIQUE NOT NULL REFERENCES ciudades_catalogo(slug) ON DELETE CASCADE,
+  
+  -- SEO
+  meta_title VARCHAR(70) NOT NULL,
+  meta_description VARCHAR(160) NOT NULL,
+  meta_keywords TEXT,
+  
+  -- Contenido principal
+  intro_text TEXT NOT NULL,
+  
+  -- Barrios/Zonas
+  barrios JSONB DEFAULT '[]'::jsonb,
+  -- Formato: [{"nombre": "Centro", "descripcion": "..."}]
+  
+  -- Coste de vida detallado
+  coste_vida_alquiler TEXT,
+  coste_vida_compra TEXT,
+  coste_vida_alimentacion TEXT,
+  coste_vida_transporte TEXT,
+  coste_vida_utilidades TEXT,
+  
+  -- Trámites específicos
+  tramites JSONB DEFAULT '[]'::jsonb,
+  -- Formato: ["Trámite 1", "Trámite 2", ...]
+  
+  -- FAQs
+  faqs JSONB DEFAULT '[]'::jsonb,
+  -- Formato: [{"pregunta": "...", "respuesta": "..."}]
+  
+  -- Puntos de interés
+  ventajas JSONB DEFAULT '[]'::jsonb,
+  -- Formato: ["Ventaja 1", "Ventaja 2", ...]
+  
+  -- Datos adicionales
+  clima_detalle TEXT,
+  temperatura_media VARCHAR(50),
+  dias_sol INTEGER,
+  
+  -- Control
+  idioma VARCHAR(5) DEFAULT 'es',
+  activo BOOLEAN DEFAULT true,
+  generado_por_ia BOOLEAN DEFAULT false,
+  revisado BOOLEAN DEFAULT false,
+  fecha_generacion TIMESTAMPTZ,
+  fecha_revision TIMESTAMPTZ,
+  
+  -- Timestamps
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Índices
+CREATE INDEX IF NOT EXISTS idx_ciudades_contenido_activo ON ciudades_contenido(activo);
+CREATE INDEX IF NOT EXISTS idx_ciudades_contenido_ciudad ON ciudades_contenido(ciudad_slug);
+
+-- Trigger para updated_at
+DROP TRIGGER IF EXISTS trigger_ciudades_contenido_updated ON ciudades_contenido;
+CREATE TRIGGER trigger_ciudades_contenido_updated
+  BEFORE UPDATE ON ciudades_contenido
+  FOR EACH ROW
+  EXECUTE FUNCTION update_landing_timestamp();
+
+-- RLS
+ALTER TABLE ciudades_contenido ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Contenido ciudades público" ON ciudades_contenido;
+CREATE POLICY "Contenido ciudades público" ON ciudades_contenido
+  FOR SELECT USING (activo = true);
+
+DROP POLICY IF EXISTS "Solo admins modifican contenido ciudades" ON ciudades_contenido;
+CREATE POLICY "Solo admins modifican contenido ciudades" ON ciudades_contenido
+  FOR ALL USING (auth.role() = 'service_role');
+
 INSERT INTO ciudades_catalogo (slug, nombre, provincia, comunidad, poblacion, porcentaje_extranjeros, destacada, datos_extra) VALUES
-  ('torrevieja', 'Torrevieja', 'Alicante', 'Comunidad Valenciana', 82000, 28.00, true, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 40}'),
-  ('alicante', 'Alicante', 'Alicante', 'Comunidad Valenciana', 340000, 15.00, true, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 15}'),
-  ('murcia', 'Murcia', 'Murcia', 'Región de Murcia', 460000, 12.00, true, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 30}'),
+  ('torrevieja', 'Torrevieja', 'Alicante', 'Comunidad Valenciana', 82000, 28.00, true, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 40, "categoria": "Sol y playa", "descripcion": "Paraíso costero"}'),
+  ('alicante', 'Alicante', 'Alicante', 'Comunidad Valenciana', 340000, 15.00, true, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 15, "categoria": "Costa Blanca", "descripcion": "Sol y playa"}'),
+  ('murcia', 'Murcia', 'Murcia', 'Región de Murcia', 460000, 12.00, true, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 30, "categoria": "Levante", "descripcion": "Huerta mediterránea"}'),
   ('mazarron', 'Mazarrón', 'Murcia', 'Región de Murcia', 35000, 25.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 45}'),
   ('san-javier', 'San Javier', 'Murcia', 'Región de Murcia', 33000, 20.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 5}'),
   ('cartagena', 'Cartagena', 'Murcia', 'Región de Murcia', 215000, 10.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 25}'),
   ('orihuela', 'Orihuela', 'Alicante', 'Comunidad Valenciana', 77000, 22.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 50}'),
-  ('benidorm', 'Benidorm', 'Alicante', 'Comunidad Valenciana', 68000, 24.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 50}'),
+  ('benidorm', 'Benidorm', 'Alicante', 'Comunidad Valenciana', 68000, 24.00, true, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 50, "categoria": "Costa Blanca", "descripcion": ""}'),
   ('elche', 'Elche', 'Alicante', 'Comunidad Valenciana', 230000, 14.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 20}'),
   ('lorca', 'Lorca', 'Murcia', 'Región de Murcia', 95000, 15.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 70}'),
   ('rojales', 'Rojales', 'Alicante', 'Comunidad Valenciana', 20000, 45.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 35}'),
@@ -177,7 +260,24 @@ INSERT INTO ciudades_catalogo (slug, nombre, provincia, comunidad, poblacion, po
   ('la-manga', 'La Manga del Mar Menor', 'Murcia', 'Región de Murcia', 3000, 40.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 25}'),
   ('santa-pola', 'Santa Pola', 'Alicante', 'Comunidad Valenciana', 35000, 18.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 25}'),
   ('altea', 'Altea', 'Alicante', 'Comunidad Valenciana', 22000, 30.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 60}'),
-  ('denia', 'Dénia', 'Alicante', 'Comunidad Valenciana', 42000, 28.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 90}')
+  ('denia', 'Dénia', 'Alicante', 'Comunidad Valenciana', 42000, 28.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 90}'),
+  -- Ciudades principales de España
+  ('madrid', 'Madrid', 'Madrid', 'Comunidad de Madrid', 3300000, 13.50, true, '{"aeropuerto_cercano": "Madrid-Barajas", "distancia_aeropuerto": 15, "categoria": "Centro", "descripcion": "Capital cosmopolita"}'),
+  ('barcelona', 'Barcelona', 'Barcelona', 'Cataluña', 1600000, 17.80, true, '{"aeropuerto_cercano": "Barcelona-El Prat", "distancia_aeropuerto": 20, "categoria": "Cataluña", "descripcion": "Arte y mediterráneo"}'),
+  ('valencia', 'Valencia', 'Valencia', 'Comunidad Valenciana', 800000, 12.50, true, '{"aeropuerto_cercano": "Valencia", "distancia_aeropuerto": 12, "categoria": "Levante", "descripcion": "Ciudad de las artes"}'),
+  ('malaga', 'Málaga', 'Málaga', 'Andalucía', 580000, 9.20, true, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 10, "categoria": "Costa del Sol", "descripcion": "Costa andaluza"}'),
+  ('marbella', 'Marbella', 'Málaga', 'Andalucía', 145000, 35.50, true, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 50, "categoria": "Costa del Sol", "descripcion": "Lujo y glamour"}'),
+  ('sevilla', 'Sevilla', 'Sevilla', 'Andalucía', 690000, 4.80, true, '{"aeropuerto_cercano": "Sevilla", "distancia_aeropuerto": 15, "categoria": "Andalucía", "descripcion": "Flamenco y tradición"}'),
+  ('palma', 'Palma de Mallorca', 'Baleares', 'Islas Baleares', 420000, 20.30, true, '{"aeropuerto_cercano": "Palma de Mallorca", "distancia_aeropuerto": 10, "categoria": "Islas Baleares", "descripcion": "Perla del mediterráneo"}'),
+  ('tenerife', 'Tenerife', 'Santa Cruz de Tenerife', 'Canarias', 930000, 15.60, true, '{"aeropuerto_cercano": "Tenerife Sur", "distancia_aeropuerto": 60, "categoria": "Islas Canarias", "descripcion": "Eterna primavera"}'),
+  ('las-palmas', 'Las Palmas', 'Las Palmas', 'Canarias', 380000, 12.40, true, '{"aeropuerto_cercano": "Gran Canaria", "distancia_aeropuerto": 20, "categoria": "Islas Canarias", "descripcion": "Clima tropical"}'),
+  ('ibiza', 'Ibiza', 'Baleares', 'Islas Baleares', 150000, 28.70, true, '{"aeropuerto_cercano": "Ibiza", "distancia_aeropuerto": 8, "categoria": "Islas Baleares", "descripcion": "Vida y naturaleza"}'),
+  ('granada', 'Granada', 'Granada', 'Andalucía', 230000, 6.50, true, '{"aeropuerto_cercano": "Granada-Jaén", "distancia_aeropuerto": 17, "categoria": "Andalucía", "descripcion": "Alhambra y sierra"}'),
+  ('bilbao', 'Bilbao', 'Vizcaya', 'País Vasco', 350000, 7.20, true, '{"aeropuerto_cercano": "Bilbao", "distancia_aeropuerto": 12, "categoria": "País Vasco", "descripcion": "Cultura y gastronomía"}'),
+  ('zaragoza', 'Zaragoza', 'Zaragoza', 'Aragón', 680000, 11.30, false, '{"aeropuerto_cercano": "Zaragoza", "distancia_aeropuerto": 15, "categoria": "Aragón", "descripcion": "Historia milenaria"}'),
+  ('fuengirola', 'Fuengirola', 'Málaga', 'Andalucía', 80000, 32.40, true, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 25, "categoria": "Costa del Sol", "descripcion": "Playas y familias"}'),
+  ('estepona', 'Estepona', 'Málaga', 'Andalucía', 70000, 28.60, true, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 80, "categoria": "Costa del Sol", "descripcion": "Pueblo andaluz"}'),
+  ('nerja', 'Nerja', 'Málaga', 'Andalucía', 22000, 35.80, false, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 55, "categoria": "Costa del Sol", "descripcion": "Balcón de Europa"}')
 ON CONFLICT (slug) DO NOTHING;
 
 -- ============================================

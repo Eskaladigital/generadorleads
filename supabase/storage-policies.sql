@@ -28,8 +28,7 @@ TO authenticated
 WITH CHECK (
   bucket_id = 'blog-images'
   AND auth.jwt() ->> 'email' IN (
-    'admin@health4spain.com',
-    'tu-email@gmail.com'
+    'asantomebb@gmail.com'
   )
 );
 
@@ -40,15 +39,13 @@ TO authenticated
 USING (
   bucket_id = 'blog-images'
   AND auth.jwt() ->> 'email' IN (
-    'admin@health4spain.com',
-    'tu-email@gmail.com'
+    'asantomebb@gmail.com'
   )
 )
 WITH CHECK (
   bucket_id = 'blog-images'
   AND auth.jwt() ->> 'email' IN (
-    'admin@health4spain.com',
-    'tu-email@gmail.com'
+    'asantomebb@gmail.com'
   )
 );
 
@@ -59,8 +56,7 @@ TO authenticated
 USING (
   bucket_id = 'blog-images'
   AND auth.jwt() ->> 'email' IN (
-    'admin@health4spain.com',
-    'tu-email@gmail.com'
+    'asantomebb@gmail.com'
   )
 );
 

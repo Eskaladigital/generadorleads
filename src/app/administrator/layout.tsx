@@ -57,12 +57,12 @@ const LogoutIcon = () => (
 
 const navItems = [
   { href: '/administrator', label: 'Dashboard', icon: DashboardIcon, exact: true },
-  { href: '/administrator/leads', label: 'Leads', icon: LeadsIcon },
   { href: '/administrator/blog', label: 'Blog', icon: BlogIcon },
   { href: '/administrator/media', label: 'Media', icon: MediaIcon },
-  { href: '/administrator/landings', label: 'Landings', icon: LandingsIcon },
   { href: '/administrator/servicios', label: 'Servicios', icon: ServicesIcon },
   { href: '/administrator/destinos', label: 'Destinos', icon: DestinationsIcon },
+  { href: '/administrator/landings', label: 'Landings', icon: LandingsIcon },
+  { href: '/administrator/leads', label: 'Leads', icon: LeadsIcon },
 ];
 
 function AdminSidebar() {

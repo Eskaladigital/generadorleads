@@ -1,55 +1,96 @@
-# Generador de Landing Pages con IA
+# Scripts de Health4Spain
 
-Script para generar automáticamente 120 landing pages optimizadas para SEO usando OpenAI GPT-4o-mini.
+Esta carpeta contiene scripts para automatizar tareas administrativas y de generación de contenido del proyecto.
 
-## Requisitos
+---
 
-1. **API Key de OpenAI** configurada en `.env.local`:
-   ```env
-   OPENAI_API_KEY=sk-...
-   ```
+## 📍 generate-city-content.ts ⭐ NUEVO
 
-2. **Tabla `landing_pages`** creada en Supabase:
-   ```bash
-   # Ejecutar en Supabase SQL Editor
-   supabase/landing-pages-schema.sql
-   ```
+Script para generar contenido SEO extenso y detallado para páginas de ciudades usando OpenAI GPT-4o.
 
-## Uso
+### Uso
 
 ```bash
-npm run generate-landings
+# Generar todas las ciudades
+npx ts-node scripts/generate-city-content.ts
+
+# Solo ciudades destacadas (Madrid, Barcelona, Marbella, etc.)
+npx ts-node scripts/generate-city-content.ts --destacadas
+
+# Una ciudad específica
+npx ts-node scripts/generate-city-content.ts --ciudad=marbella
 ```
 
-## Configuración
+### Contenido Generado
 
-### Servicios (6)
+Cada página de ciudad incluye **1500+ palabras** con:
 
-| Slug | Nombre |
-|------|--------|
-| abogados | Abogados de Extranjería |
-| seguros | Seguros de Salud |
-| inmobiliarias | Inmobiliarias |
-| dentistas | Clínicas Dentales |
-| gestorias | Gestorías |
-| clinicas | Clínicas Médicas |
+- **Introducción extensa** (200-300 palabras) sobre por qué vivir en la ciudad
+- **5+ barrios/zonas** con descripciones detalladas (60-100 palabras cada uno)
+- **Coste de vida desglosado**:
+  - Alquiler (100-150 palabras)
+  - Compra (100-150 palabras)
+  - Alimentación (80-120 palabras)
+  - Transporte (80-100 palabras)
+  - Utilidades (60-80 palabras)
+- **8+ trámites esenciales** con ubicaciones específicas
+- **8+ FAQs** con respuestas detalladas (100-150 palabras cada una)
+- **6+ ventajas** específicas de la ciudad
+- **Datos climáticos** detallados
+- **Metadatos SEO** optimizados
 
-### Ciudades (20)
+### Características
 
-Madrid, Barcelona, Valencia, Sevilla, Málaga, Alicante, Murcia, Palma de Mallorca, Bilbao, Las Palmas, Tenerife, Zaragoza, Granada, Marbella, Ibiza, Benidorm, Torrevieja, Fuengirola, Estepona, Nerja
+- **Modelo**: GPT-4o (alta calidad para contenido largo)
+- **Tokens por ciudad**: 3,000-4,000
+- **Tiempo por ciudad**: 5-10 segundos
+- **Coste por ciudad**: $0.02-0.04
+- **Contenido específico** para cada ciudad (no genérico)
+- **Optimizado para SEO** con keywords long-tail
 
-## Estructura de URLs
+### Almacenamiento
+
+Los datos se guardan en la tabla `ciudades_contenido` de Supabase. Las páginas en `/es/destinos/{ciudad}` cargan automáticamente este contenido.
+
+### Coste Estimado
+
+- **10 ciudades destacadas**: ~$0.30
+- **40 ciudades totales**: ~$1.00-1.60
+
+---
+
+## 📍 generate-landings.ts
+
+Script para generar automáticamente landing pages de **servicio × ciudad** usando OpenAI GPT-4o-mini.
+
+### Uso
+
+```bash
+# Generar todas las combinaciones
+npx ts-node scripts/generate-landings.ts
+
+# Solo un servicio específico
+npx ts-node scripts/generate-landings.ts --servicio=abogados
+
+# Solo una ciudad específica
+npx ts-node scripts/generate-landings.ts --ciudad=marbella
+
+# Una landing específica
+npx ts-node scripts/generate-landings.ts --slug=abogados-marbella
+```
+
+### Estructura de URLs
 
 ```
 /es/destinos/{servicio}-{ciudad}
 
 Ejemplos:
-/es/destinos/abogados-madrid
+/es/destinos/abogados-marbella
 /es/destinos/seguros-barcelona
 /es/destinos/inmobiliarias-malaga
 ```
 
-## Contenido Generado
+### Contenido Generado
 
 Cada landing incluye:
 
@@ -62,42 +103,171 @@ Cada landing incluye:
 - **FAQs**: 4-5 preguntas frecuentes
 - **CTA**: título y subtítulo de llamada a la acción
 
-## Coste Estimado
+### Servicios (6)
+
+| Slug | Nombre |
+|------|--------|
+| abogados | Abogados de Extranjería |
+| seguros | Seguros de Salud |
+| inmobiliarias | Inmobiliarias |
+| dentistas | Clínicas Dentales |
+| gestorias | Gestorías |
+| clinicas | Clínicas Médicas |
+
+### Coste Estimado
 
 - **Modelo**: gpt-4o-mini
 - **Tokens por landing**: ~2,000-3,000
-- **Total 120 landings**: ~300,000 tokens
-- **Coste aproximado**: $1.50 - $2.50 USD
+- **Total 6×40 ciudades = 240 landings**: ~$2.00-4.00
 
-## Ejecución
+---
 
-El script:
+## 📄 generate-blog-posts.ts
 
-1. Verifica conexión con Supabase y OpenAI
-2. Genera contenido para cada combinación servicio-ciudad
-3. Guarda en la tabla `landing_pages`
-4. Muestra progreso en tiempo real
-5. Maneja errores y reintentos
+Script para generar automáticamente artículos de blog completos con contenido optimizado para SEO usando OpenAI GPT-4o-mini.
 
-```
-Generando landing 1/120: abogados-madrid
-✓ abogados-madrid guardado
-Generando landing 2/120: abogados-barcelona
-✓ abogados-barcelona guardado
-...
+### Uso
+
+```bash
+npm run generate-blog
 ```
 
-## Post-generación
+### Características
 
-Después de generar:
+- Genera **30 artículos de blog** en español
+- Contenido entre **1500-2000 palabras** por artículo
+- **Categorías**: Guías de Ciudad, Procedimientos, Salud, Finanzas, Vida en España
+- Optimizado para **SEO** con meta descripciones
+- Se insertan directamente en **Supabase** con status `published`
 
-1. **Revisar en el admin** (`/administrator/landings`)
-2. **Marcar como revisadas** las que estén correctas
-3. **Activar/desactivar** según necesidad
-4. **Editar manualmente** si es necesario
+### Artículos Generados
 
-## Notas
+#### Guías de Ciudad (6)
+1. Vivir en Torrevieja: Guía Completa 2026
+2. Valencia para Expatriados: Todo lo que Necesitas Saber
+3. Málaga vs Alicante: ¿Dónde Establecerte en 2026?
+4. Madrid para Extranjeros: Costos, Barrios y Consejos
+5. Barcelona: Pros y Contras de Vivir en la Ciudad Condal
+6. Las Mejores Ciudades Pequeñas de la Costa Blanca
 
-- Las landings se crean con `activo: true` y `revisado: false`
-- El campo `generado_por_ia: true` indica origen automático
-- Se puede re-ejecutar; actualiza las existentes por slug
+#### Procedimientos (8)
+7. Visa No Lucrativa 2026: Guía Paso a Paso Actualizada
+8. Arraigo Social en España: Requisitos y Proceso Completo
+9. Golden Visa España: ¿Vale la Pena en 2026?
+10. Cómo Obtener el NIE: Guía Práctica y Documentación
+... y más
+
+### Coste Estimado
+
+- **Modelo**: gpt-4o-mini
+- **Total 30 artículos**: ~100,000 tokens
+- **Coste aproximado**: $0.50 - $1.00
+
+---
+
+## 🧪 test-supabase.ts
+
+Script para verificar la conexión con Supabase.
+
+```bash
+npx ts-node scripts/test-supabase.ts
+```
+
+---
+
+## 📋 Requisitos
+
+Asegúrate de tener estas variables en `.env.local`:
+
+```env
+OPENAI_API_KEY=sk-...
+NEXT_PUBLIC_SUPABASE_URL=https://...
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
+```
+
+Y las tablas creadas en Supabase:
+
+```bash
+# Ejecutar en Supabase SQL Editor
+supabase/landing-pages-schema.sql
+supabase/schema.sql
+```
+
+---
+
+## 🚀 Flujo de Trabajo Recomendado
+
+### 1. Configurar Base de Datos
+
+```bash
+# Ejecutar en Supabase SQL Editor
+supabase/landing-pages-schema.sql
+```
+
+### 2. Generar Contenido de Ciudades Importantes
+
+```bash
+# Ciudades destacadas primero (Madrid, Barcelona, Marbella, etc.)
+npx ts-node scripts/generate-city-content.ts --destacadas
+```
+
+Esto genera contenido SEO extenso para las páginas `/es/destinos/{ciudad}`.
+
+### 3. Generar Landing Pages Servicio×Ciudad
+
+```bash
+# Por ejemplo, todas las combinaciones de abogados
+npx ts-node scripts/generate-landings.ts --servicio=abogados
+
+# O todas las landings de una ciudad
+npx ts-node scripts/generate-landings.ts --ciudad=marbella
+```
+
+Esto genera landings para URLs como `/es/destinos/abogados-marbella`.
+
+### 4. Generar Blog Posts
+
+```bash
+npm run generate-blog
+```
+
+### 5. Revisar en el Admin
+
+Accede a `/administrator/landings` y `/administrator/blog` para revisar y activar el contenido.
+
+---
+
+## 💰 Resumen de Costes
+
+| Script | Modelo | Contenido | Coste Aprox |
+|--------|--------|-----------|-------------|
+| `generate-city-content.ts` | GPT-4o | 40 ciudades | $1.00-1.60 |
+| `generate-landings.ts` | GPT-4o-mini | 240 landings | $2.00-4.00 |
+| `generate-blog-posts.ts` | GPT-4o-mini | 30 posts | $0.50-1.00 |
+| **TOTAL** | | | **$3.50-6.60** |
+
+---
+
+## 📊 Logs y Debugging
+
+Los logs de generación se guardan en `landing_generation_log` e incluyen:
+- Tokens usados
+- Coste estimado
+- Tiempo de ejecución
+- Errores
+
+---
+
+## ♻️ Actualizar Contenido
+
+Para regenerar contenido específico:
+
+```bash
+# Una ciudad
+npx ts-node scripts/generate-city-content.ts --ciudad=marbella
+
+# Una landing
+npx ts-node scripts/generate-landings.ts --slug=abogados-marbella
+```
+
+El contenido existente se sobrescribirá (upsert por slug).

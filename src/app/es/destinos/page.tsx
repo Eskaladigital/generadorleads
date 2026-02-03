@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { getCiudades } from '@/lib/ciudades';
+import { getCiudadesDestacadas } from '@/lib/ciudades';
 
 export const metadata: Metadata = {
   title: 'Destinos en España para Expatriados',
@@ -38,7 +38,17 @@ const IMAGENES_CIUDADES: Record<string, string> = {
 };
 
 export default async function DestinosPage() {
-  const ciudades = await getCiudades();
+  // Obtener solo ciudades destacadas
+  const ciudades = await getCiudadesDestacadas();
+  
+  // Agrupar por categoría
+  const categorias = [
+    { id: 'capital', label: 'Capital cosmopolita', filtro: 'Centro' },
+    { id: 'arte', label: 'Arte y mediterráneo', filtro: 'Cataluña' },
+    { id: 'artes', label: 'Ciudad de las artes', filtro: 'Levante' },
+    { id: 'playa', label: 'Sol y playa', filtro: 'Costa' },
+  ];
+  
   return (
     <>
       {/* Header */}
@@ -55,12 +65,31 @@ export default async function DestinosPage() {
         </div>
       </section>
 
+      {/* Filtros por categoría */}
+      <section className="py-6 bg-gray-50 border-b">
+        <div className="container-base">
+          <div className="flex flex-wrap gap-3 justify-center">
+            {['Capital cosmopolita', 'Arte y mediterráneo', 'Ciudad de las artes', 'Sol y playa'].map((cat) => (
+              <button
+                key={cat}
+                className="px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm font-medium"
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Grid de destinos - diseño visual llamativo */}
       <section className="py-8 md:py-12">
         <div className="container-base">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {ciudades.map((ciudad) => {
               const imagen = IMAGENES_CIUDADES[ciudad.slug] || 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&q=80';
+              const datosExtra = ciudad.datos_extra as any;
+              const categoria = datosExtra?.categoria || ciudad.provincia;
+              const descripcion = datosExtra?.descripcion || '';
               
               return (
                 <Link
@@ -82,14 +111,14 @@ export default async function DestinosPage() {
                   {/* Contenido */}
                   <div className="absolute inset-0 flex flex-col justify-end p-4">
                     <span className="text-xs font-medium text-white/70 mb-1">
-                      {ciudad.provincia}
+                      {categoria}
                     </span>
                     <h3 className="font-heading text-lg md:text-xl font-bold text-white mb-1 group-hover:text-primary transition-colors">
                       {ciudad.nombre}
                     </h3>
-                    {ciudad.porcentaje_extranjeros && (
-                      <p className="text-white/80 text-xs md:text-sm hidden md:block">
-                        {ciudad.porcentaje_extranjeros}% expatriados
+                    {descripcion && (
+                      <p className="text-white/80 text-xs md:text-sm">
+                        {descripcion}
                       </p>
                     )}
                     
