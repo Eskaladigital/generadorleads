@@ -11,72 +11,36 @@ export const metadata: Metadata = {
   },
 };
 
-// Datos de destinos (mismo que en destinos/page.tsx)
-const REGIONES = [
-  {
-    id: 'costa-blanca',
-    nombre: 'Costa Blanca',
-    ciudades: [
-      { slug: 'alicante', nombre: 'Alicante' },
-      { slug: 'torrevieja', nombre: 'Torrevieja' },
-      { slug: 'benidorm', nombre: 'Benidorm' },
-      { slug: 'denia', nombre: 'Dénia' },
-      { slug: 'javea', nombre: 'Jávea' },
-    ],
-  },
-  {
-    id: 'costa-del-sol',
-    nombre: 'Costa del Sol',
-    ciudades: [
-      { slug: 'malaga', nombre: 'Málaga' },
-      { slug: 'marbella', nombre: 'Marbella' },
-      { slug: 'fuengirola', nombre: 'Fuengirola' },
-      { slug: 'estepona', nombre: 'Estepona' },
-      { slug: 'nerja', nombre: 'Nerja' },
-    ],
-  },
-  {
-    id: 'grandes-ciudades',
-    nombre: 'Grandes Ciudades',
-    ciudades: [
-      { slug: 'madrid', nombre: 'Madrid' },
-      { slug: 'barcelona', nombre: 'Barcelona' },
-      { slug: 'valencia', nombre: 'Valencia' },
-      { slug: 'sevilla', nombre: 'Sevilla' },
-      { slug: 'bilbao', nombre: 'Bilbao' },
-    ],
-  },
-  {
-    id: 'islas',
-    nombre: 'Islas',
-    ciudades: [
-      { slug: 'palma', nombre: 'Palma de Mallorca' },
-      { slug: 'ibiza', nombre: 'Ibiza' },
-      { slug: 'tenerife', nombre: 'Tenerife' },
-      { slug: 'las-palmas', nombre: 'Las Palmas' },
-      { slug: 'lanzarote', nombre: 'Lanzarote' },
-    ],
-  },
-  {
-    id: 'levante',
-    nombre: 'Levante y Murcia',
-    ciudades: [
-      { slug: 'murcia', nombre: 'Murcia' },
-      { slug: 'cartagena', nombre: 'Cartagena' },
-      { slug: 'orihuela', nombre: 'Orihuela Costa' },
-      { slug: 'almeria', nombre: 'Almería' },
-    ],
-  },
+// Datos de destinos - 20 destinos reales
+const DESTINOS = [
+  { slug: 'madrid', nombre: 'Madrid' },
+  { slug: 'barcelona', nombre: 'Barcelona' },
+  { slug: 'valencia', nombre: 'Valencia' },
+  { slug: 'alicante', nombre: 'Alicante' },
+  { slug: 'malaga', nombre: 'Málaga' },
+  { slug: 'marbella', nombre: 'Marbella' },
+  { slug: 'torrevieja', nombre: 'Torrevieja' },
+  { slug: 'benidorm', nombre: 'Benidorm' },
+  { slug: 'murcia', nombre: 'Murcia' },
+  { slug: 'sevilla', nombre: 'Sevilla' },
+  { slug: 'palma', nombre: 'Palma de Mallorca' },
+  { slug: 'tenerife', nombre: 'Tenerife' },
+  { slug: 'las-palmas', nombre: 'Las Palmas' },
+  { slug: 'ibiza', nombre: 'Ibiza' },
+  { slug: 'granada', nombre: 'Granada' },
+  { slug: 'bilbao', nombre: 'Bilbao' },
+  { slug: 'zaragoza', nombre: 'Zaragoza' },
+  { slug: 'fuengirola', nombre: 'Fuengirola' },
+  { slug: 'estepona', nombre: 'Estepona' },
+  { slug: 'nerja', nombre: 'Nerja' },
 ];
 
-// Datos de servicios (mismo que en servicios/page.tsx)
+// Datos de servicios - 4 servicios principales
 const SERVICIOS = [
   { id: 'seguros', titulo: 'Seguros de Salud' },
-  { id: 'abogados', titulo: 'Abogados de Extranjería' },
+  { id: 'abogados', titulo: 'Abogados' },
   { id: 'inmobiliarias', titulo: 'Inmobiliarias' },
-  { id: 'dentistas', titulo: 'Clínicas Dentales' },
   { id: 'gestorias', titulo: 'Gestorías' },
-  { id: 'clinicas', titulo: 'Clínicas Médicas' },
 ];
 
 // Rutas estáticas principales
@@ -121,13 +85,10 @@ export default async function SitemapHtmlPage() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://health4spain.com';
 
   // Obtener todos los destinos
-  const allDestinos = REGIONES.flatMap(region => 
-    region.ciudades.map(ciudad => ({
-      url: `/es/destinos/${ciudad.slug}`,
-      titulo: ciudad.nombre,
-      categoria: region.nombre,
-    }))
-  );
+  const allDestinos = DESTINOS.map(destino => ({
+    url: `/es/destinos/${destino.slug}`,
+    titulo: destino.nombre,
+  }));
 
   // Obtener todos los servicios
   const allServicios = SERVICIOS.map(servicio => ({
@@ -186,27 +147,18 @@ export default async function SitemapHtmlPage() {
               <h2 className="font-heading text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
                 Destinos ({allDestinos.length} ciudades)
               </h2>
-              <div className="space-y-6">
-                {REGIONES.map((region) => (
-                  <div key={region.id}>
-                    <h3 className="font-semibold text-lg text-gray-800 mb-3">
-                      {region.nombre}
-                    </h3>
-                    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                      {region.ciudades.map((ciudad) => (
-                        <li key={ciudad.slug}>
-                          <Link 
-                            href={`/es/destinos/${ciudad.slug}`}
-                            className="text-primary hover:text-primary-dark hover:underline text-sm"
-                          >
-                            {ciudad.nombre}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+              <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                {allDestinos.map((destino) => (
+                  <li key={destino.url}>
+                    <Link 
+                      href={destino.url}
+                      className="text-primary hover:text-primary-dark hover:underline text-sm"
+                    >
+                      {destino.titulo}
+                    </Link>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
             {/* Servicios */}
