@@ -3,12 +3,48 @@ import Image from 'next/image';
 
 // Datos
 const AUDIENCIAS = [
-  { id: 'jubilados', label: 'Jubilados', icon: '🌴' },
-  { id: 'familias', label: 'Familias', icon: '👨‍👩‍👧‍👦' },
-  { id: 'nomadas', label: 'Nómadas', icon: '💻' },
-  { id: 'inversores', label: 'Inversores', icon: '📈' },
-  { id: 'estudiantes', label: 'Estudiantes', icon: '🎓' },
-  { id: 'emprendedores', label: 'Emprendedores', icon: '🚀' },
+  { 
+    id: 'jubilados', 
+    label: 'Jubilados', 
+    icon: '🌴',
+    image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=800&q=80',
+    description: 'Disfruta de tu retiro en España'
+  },
+  { 
+    id: 'familias', 
+    label: 'Familias', 
+    icon: '👨‍👩‍👧‍👦',
+    image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80',
+    description: 'Un nuevo hogar para toda la familia'
+  },
+  { 
+    id: 'nomadas', 
+    label: 'Nómadas', 
+    icon: '💻',
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80',
+    description: 'Trabaja desde cualquier lugar'
+  },
+  { 
+    id: 'inversores', 
+    label: 'Inversores', 
+    icon: '📈',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+    description: 'Oportunidades de inversión'
+  },
+  { 
+    id: 'estudiantes', 
+    label: 'Estudiantes', 
+    icon: '🎓',
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
+    description: 'Estudia en España'
+  },
+  { 
+    id: 'emprendedores', 
+    label: 'Emprendedores', 
+    icon: '🚀',
+    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80',
+    description: 'Emprende tu negocio'
+  },
 ];
 
 const SERVICIOS = [
@@ -103,9 +139,9 @@ export default function HomePage() {
       </section>
 
       {/* A quién servimos */}
-      <section className="py-6 md:py-10 bg-gray-50">
+      <section className="py-8 md:py-12 bg-gray-50">
         <div className="container-base">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8 md:mb-10">
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-3">
               ¿A quién ayudamos?
             </h2>
@@ -114,24 +150,43 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {AUDIENCIAS.map((audiencia) => (
-              <div 
+              <Link
                 key={audiencia.id}
-                className="bg-white rounded-xl p-4 text-center shadow-card hover:shadow-card-hover transition-all"
+                href={`/es/contacto?audiencia=${audiencia.id}`}
+                className="group relative overflow-hidden rounded-2xl aspect-square bg-gray-900 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-1"
               >
-                <span className="text-3xl mb-2 block">{audiencia.icon}</span>
-                <span className="font-medium text-gray-800">{audiencia.label}</span>
-              </div>
+                {/* Imagen de fondo */}
+                <Image
+                  src={audiencia.image}
+                  alt={audiencia.label}
+                  fill
+                  className="object-cover opacity-60 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
+                />
+                
+                {/* Contenido */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-gradient-to-t from-black/60 to-transparent">
+                  <span className="text-4xl md:text-5xl mb-2 md:mb-3 transform group-hover:scale-110 transition-transform">
+                    {audiencia.icon}
+                  </span>
+                  <h3 className="font-heading text-lg md:text-xl font-bold text-white mb-1">
+                    {audiencia.label}
+                  </h3>
+                  <p className="text-white/90 text-xs md:text-sm hidden md:block">
+                    {audiencia.description}
+                  </p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* Servicios Esenciales */}
-      <section id="servicios" className="py-6 md:py-10">
+      <section id="servicios" className="py-8 md:py-12">
         <div className="container-base">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8 md:mb-10">
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-3">
               Servicios Esenciales
             </h2>
@@ -164,7 +219,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-6 md:py-10 bg-gradient-primary">
+      <section className="py-8 md:py-12 bg-gradient-primary">
         <div className="container-base text-center">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
             ¿Listo para empezar tu nueva vida en España?
