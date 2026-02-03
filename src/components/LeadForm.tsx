@@ -21,9 +21,7 @@ const SERVICIOS = [
   { value: 'seguros', label: 'Seguro de Salud' },
   { value: 'abogados', label: 'Abogado de Extranjería' },
   { value: 'inmobiliarias', label: 'Agente Inmobiliario' },
-  { value: 'dentistas', label: 'Dentista' },
   { value: 'gestorias', label: 'Gestoría' },
-  { value: 'clinicas', label: 'Clínica Privada' },
   { value: 'otro', label: 'Otro servicio' },
 ];
 

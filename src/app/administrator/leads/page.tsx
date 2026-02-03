@@ -159,9 +159,7 @@ export default function LeadsPage() {
             <option value="seguros">Seguros</option>
             <option value="abogados">Abogados</option>
             <option value="inmobiliarias">Inmobiliarias</option>
-            <option value="dentistas">Dentistas</option>
             <option value="gestorias">Gestorías</option>
-            <option value="clinicas">Clínicas</option>
           </select>
           <select
             value={filterCiudad}

@@ -201,44 +201,6 @@ const SERVICIOS_DATA: Record<string, {
     ],
     ciudadesPopulares: ['madrid', 'barcelona', 'valencia', 'alicante', 'malaga'],
   },
-  'clinicas': {
-    titulo: 'Clínicas Médicas',
-    subtitulo: 'Atención sanitaria privada de primer nivel',
-    descripcion: 'La sanidad privada en España ofrece rapidez, comodidad y acceso a los mejores especialistas sin listas de espera. Te conectamos con clínicas que atienden a pacientes internacionales.',
-    beneficios: [
-      {
-        titulo: 'Sin listas de espera',
-        descripcion: 'Citas con especialistas en días, no en meses.',
-      },
-      {
-        titulo: 'Todas las especialidades',
-        descripcion: 'Desde medicina general hasta oncología, cardiología, traumatología...',
-      },
-      {
-        titulo: 'Segunda opinión',
-        descripcion: 'Acceso a especialistas para contrastar diagnósticos.',
-      },
-      {
-        titulo: 'Atención personalizada',
-        descripcion: 'Más tiempo de consulta y seguimiento cercano.',
-      },
-    ],
-    faqs: [
-      {
-        pregunta: '¿Es cara la sanidad privada en España?',
-        respuesta: 'Es significativamente más barata que en otros países europeos o EEUU. Una consulta con especialista cuesta 60-120€.',
-      },
-      {
-        pregunta: '¿Puedo ir a urgencias privadas sin seguro?',
-        respuesta: 'Sí, puedes pagar directamente. Una urgencia puede costar 100-200€ dependiendo de las pruebas necesarias.',
-      },
-      {
-        pregunta: '¿Las clínicas privadas tienen buenos médicos?',
-        respuesta: 'Muchos médicos trabajan tanto en la pública como en la privada. La formación es la misma, la diferencia está en tiempos de espera y comodidades.',
-      },
-    ],
-    ciudadesPopulares: ['madrid', 'barcelona', 'valencia', 'sevilla', 'bilbao'],
-  },
 };
 
 const CIUDADES_NOMBRES: Record<string, string> = {

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     default: "Health4Spain - Tu Nueva Vida en España",
     template: "%s | Health4Spain"
   },
-  description: "Conectamos residentes internacionales con profesionales españoles de confianza. Seguros, abogados, inmobiliarias, dentistas y más.",
+  description: "Conectamos residentes internacionales con profesionales españoles de confianza. Seguros, abogados, inmobiliarias, gestorías y más.",
   keywords: ["expatriados españa", "residentes internacionales", "seguros extranjeros", "abogados extranjería", "inmobiliarias expatriados"],
   authors: [{ name: "Health4Spain" }],
   creator: "Health4Spain",

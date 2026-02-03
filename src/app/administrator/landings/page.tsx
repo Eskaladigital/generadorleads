@@ -22,9 +22,7 @@ const servicios = [
   { value: 'abogados', label: 'Abogados' },
   { value: 'seguros', label: 'Seguros' },
   { value: 'inmobiliarias', label: 'Inmobiliarias' },
-  { value: 'dentistas', label: 'Dentistas' },
   { value: 'gestorias', label: 'Gestorías' },
-  { value: 'clinicas', label: 'Clínicas' },
 ];
 
 export default function LandingsPage() {

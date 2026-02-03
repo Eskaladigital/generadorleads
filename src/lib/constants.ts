@@ -40,19 +40,9 @@ export const SERVICES = [
     name: { es: 'Inmobiliarias', en: 'Real Estate', de: 'Immobilien', fr: 'Immobilier' },
   },
   { 
-    slug: 'dentistas', 
-    icon: '🦷',
-    name: { es: 'Dentistas', en: 'Dentists', de: 'Zahnärzte', fr: 'Dentistes' },
-  },
-  { 
     slug: 'gestorias', 
     icon: '📋',
     name: { es: 'Gestorías', en: 'Admin Services', de: 'Verwaltung', fr: 'Services Administratifs' },
-  },
-  { 
-    slug: 'clinicas', 
-    icon: '🏥',
-    name: { es: 'Clínicas', en: 'Clinics', de: 'Kliniken', fr: 'Cliniques' },
   },
 ] as const;
 

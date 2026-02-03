@@ -141,11 +141,9 @@ CREATE TABLE IF NOT EXISTS servicios_catalogo (
 
 INSERT INTO servicios_catalogo (slug, nombre, nombre_plural, icon, descripcion_corta, keywords) VALUES
   ('abogados', 'Abogado Extranjería', 'Abogados de Extranjería', '⚖️', 'Especialistas en visados, NIE, arraigo y nacionalidad', ARRAY['abogado extranjeria', 'nie', 'visado', 'arraigo', 'nacionalidad']),
-  ('seguros', 'Seguro de Salud', 'Seguros de Salud', '🏥', 'Seguros médicos privados para extranjeros', ARRAY['seguro salud', 'seguro medico', 'aseguradora', 'poliza']),
-  ('inmobiliarias', 'Inmobiliaria', 'Inmobiliarias', '🏠', 'Compra, venta y alquiler de propiedades', ARRAY['inmobiliaria', 'comprar casa', 'alquilar piso', 'vivienda']),
-  ('dentistas', 'Dentista', 'Dentistas', '🦷', 'Clínicas dentales con atención multilingüe', ARRAY['dentista', 'clinica dental', 'odontologo', 'implantes']),
   ('gestorias', 'Gestoría', 'Gestorías', '📋', 'Trámites administrativos y fiscales', ARRAY['gestoria', 'gestor', 'impuestos', 'autonomo', 'declaracion']),
-  ('clinicas', 'Clínica Privada', 'Clínicas Privadas', '🏥', 'Atención médica privada especializada', ARRAY['clinica', 'medico privado', 'especialista', 'hospital'])
+  ('inmobiliarias', 'Inmobiliaria', 'Inmobiliarias', '🏠', 'Compra, venta y alquiler de propiedades', ARRAY['inmobiliaria', 'comprar casa', 'alquilar piso', 'vivienda']),
+  ('seguros', 'Seguro de Salud', 'Seguros de Salud', '🏥', 'Seguros médicos privados para extranjeros', ARRAY['seguro salud', 'seguro medico', 'aseguradora', 'poliza'])
 ON CONFLICT (slug) DO NOTHING;
 
 -- Tabla auxiliar de ciudades

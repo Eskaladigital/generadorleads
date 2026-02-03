@@ -250,9 +250,7 @@ export const SERVICIOS = [
   { id: 'seguros', label: 'Seguros de Salud', icon: '🏥' },
   { id: 'abogados', label: 'Abogados de Extranjería', icon: '⚖️' },
   { id: 'inmobiliarias', label: 'Inmobiliarias', icon: '🏠' },
-  { id: 'dentistas', label: 'Clínicas Dentales', icon: '🦷' },
   { id: 'gestorias', label: 'Gestorías', icon: '📋' },
-  { id: 'clinicas', label: 'Clínicas Médicas', icon: '🩺' },
 ] as const;
 
 // Ciudades disponibles

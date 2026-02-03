@@ -104,7 +104,7 @@ const CIUDADES_DATA: Record<string, {
     costeVida: 'Alto',
     expatriados: '40% de la población',
     puntos: ['Destino de lujo', 'Campos de golf', 'Colegios internacionales', 'Seguridad premium'],
-    serviciosDestacados: ['inmobiliarias', 'abogados', 'dentistas'],
+    serviciosDestacados: ['inmobiliarias', 'abogados', 'seguros'],
   },
   'madrid': {
     nombre: 'Madrid',
@@ -115,7 +115,7 @@ const CIUDADES_DATA: Record<string, {
     costeVida: 'Alto',
     expatriados: '13% de la población',
     puntos: ['Centro empresarial', 'Oferta cultural', 'Transporte público', 'Comunidad internacional'],
-    serviciosDestacados: ['abogados', 'gestorias', 'clinicas'],
+    serviciosDestacados: ['abogados', 'gestorias', 'inmobiliarias'],
   },
   'barcelona': {
     nombre: 'Barcelona',
@@ -126,7 +126,7 @@ const CIUDADES_DATA: Record<string, {
     costeVida: 'Alto',
     expatriados: '18% de la población',
     puntos: ['Arquitectura Gaudí', 'Ecosistema emprendedor', 'Playa urbana', 'Gastronomía vanguardia'],
-    serviciosDestacados: ['abogados', 'inmobiliarias', 'dentistas'],
+    serviciosDestacados: ['abogados', 'inmobiliarias', 'seguros'],
   },
   'valencia': {
     nombre: 'Valencia',
@@ -159,7 +159,7 @@ const CIUDADES_DATA: Record<string, {
     costeVida: 'Medio',
     expatriados: '16% de la población',
     puntos: ['Clima primaveral', 'Parque Nacional Teide', 'Ventajas fiscales', 'Vuelos directos'],
-    serviciosDestacados: ['seguros', 'gestorias', 'clinicas'],
+    serviciosDestacados: ['seguros', 'gestorias', 'inmobiliarias'],
   },
 };
 
@@ -167,9 +167,7 @@ const SERVICIOS_INFO: Record<string, { nombre: string }> = {
   seguros: { nombre: 'Seguros de Salud' },
   abogados: { nombre: 'Abogados' },
   inmobiliarias: { nombre: 'Inmobiliarias' },
-  dentistas: { nombre: 'Dentistas' },
   gestorias: { nombre: 'Gestorías' },
-  clinicas: { nombre: 'Clínicas' },
 };
 
 // Detectar si es landing de servicio-ciudad o solo ciudad

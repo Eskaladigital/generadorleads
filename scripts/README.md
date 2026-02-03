@@ -63,57 +63,71 @@ Los datos se guardan en la tabla `ciudades_contenido` de Supabase. Las páginas 
 
 Script para generar automáticamente landing pages de **servicio × ciudad** usando OpenAI GPT-4o-mini.
 
-### Uso
+### ⭐ Scripts Disponibles
+
+```bash
+# 1. GENERAR todas las landing pages (o filtradas)
+npm run generate-landings
+
+# 2. VERIFICAR cuáles están vacías/incompletas (NO genera nada, solo revisa)
+npm run check-landings
+
+# 3. REGENERAR solo las vacías/incompletas
+npm run retry-landings
+```
+
+### Uso de generate-landings
 
 ```bash
 # Generar todas las combinaciones
-npx ts-node scripts/generate-landings.ts
+npm run generate-landings
 
 # Solo un servicio específico
-npx ts-node scripts/generate-landings.ts --servicio=abogados
+npm run generate-landings servicio=abogados
 
 # Solo una ciudad específica
-npx ts-node scripts/generate-landings.ts --ciudad=marbella
+npm run generate-landings ciudad=marbella
 
 # Una landing específica
-npx ts-node scripts/generate-landings.ts --slug=abogados-marbella
-
-# NUEVO: Verificar cuáles están vacías/incompletas
-npx ts-node scripts/generate-landings.ts --check
-
-# NUEVO: Regenerar solo las vacías/incompletas
-npx ts-node scripts/generate-landings.ts --retry-failed
+npm run generate-landings slug=abogados-marbella
 ```
 
-### Detección de Páginas Incompletas
+### 🔍 Script check-landings
 
-El script ahora puede detectar landing pages que están **vacías o incompletas** y regenerarlas automáticamente. Una landing se considera incompleta si:
+**Verifica el estado de las landing pages sin generar nada nuevo.**
 
-- ❌ No tiene título SEO (`meta_title` < 10 caracteres)
-- ❌ No tiene hero completo (`hero_title` o `hero_subtitle` muy cortos)
-- ❌ Tiene menos de 3 servicios listados
-- ❌ Tiene menos de 2 FAQs
-- ❌ Falta problema o solución
-
-**Modo verificación**:
 ```bash
-npx ts-node scripts/generate-landings.ts --check
+npm run check-landings
 ```
 
-Esto te mostrará:
-- Cuántas landing pages están incompletas
-- Qué problemas específicos tiene cada una
-- Lista de slugs que necesitan regeneración
+**Salida:**
+- Total de landing pages encontradas
+- Número de páginas incompletas
+- Desglose por tipo de problema (sin título, sin servicios, sin FAQs, etc.)
+- Lista de slugs afectados
 
-**Modo regeneración**:
+Una landing se considera incompleta si:
+- ❌ `meta_title` < 10 caracteres
+- ❌ `hero_title` < 10 caracteres
+- ❌ `hero_subtitle` < 20 caracteres
+- ❌ `services` tiene menos de 3 elementos
+- ❌ `faqs` tiene menos de 2 elementos
+- ❌ `problem_title` < 5 caracteres
+- ❌ `solution_text` < 30 caracteres
+
+### 🔄 Script retry-landings
+
+**Regenera automáticamente solo las landing pages incompletas.**
+
 ```bash
-npx ts-node scripts/generate-landings.ts --retry-failed
+npm run retry-landings
 ```
 
-Esto automáticamente:
-1. Detecta todas las landing pages incompletas
-2. Las regenera una por una con OpenAI
-3. Sobrescribe el contenido existente con contenido completo
+**Funcionalidad:**
+1. Detecta automáticamente páginas vacías/incompletas
+2. Usa OpenAI para generar contenido completo
+3. Sobrescribe el contenido existente
+4. Ahorra tiempo y dinero al no regenerar todo
 
 ### Estructura de URLs
 
@@ -253,10 +267,16 @@ Esto genera contenido SEO extenso para las páginas `/es/destinos/{ciudad}`.
 
 ```bash
 # Por ejemplo, todas las combinaciones de abogados
-npx ts-node scripts/generate-landings.ts --servicio=abogados
+npm run generate-landings servicio=abogados
 
 # O todas las landings de una ciudad
-npx ts-node scripts/generate-landings.ts --ciudad=marbella
+npm run generate-landings ciudad=marbella
+
+# IMPORTANTE: Después de generar, verifica si alguna quedó incompleta
+npm run check-landings
+
+# Si hay páginas incompletas, regenera solo esas
+npm run retry-landings
 ```
 
 Esto genera landings para URLs como `/es/destinos/abogados-marbella`.
@@ -303,7 +323,13 @@ Para regenerar contenido específico:
 npx ts-node scripts/generate-city-content.ts --ciudad=marbella
 
 # Una landing
-npx ts-node scripts/generate-landings.ts --slug=abogados-marbella
+npm run generate-landings slug=abogados-marbella
+
+# Verificar si hay landings incompletas
+npm run check-landings
+
+# Regenerar solo las incompletas
+npm run retry-landings
 ```
 
 El contenido existente se sobrescribirá (upsert por slug).
