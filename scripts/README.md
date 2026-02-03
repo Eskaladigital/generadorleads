@@ -77,7 +77,43 @@ npx ts-node scripts/generate-landings.ts --ciudad=marbella
 
 # Una landing específica
 npx ts-node scripts/generate-landings.ts --slug=abogados-marbella
+
+# NUEVO: Verificar cuáles están vacías/incompletas
+npx ts-node scripts/generate-landings.ts --check
+
+# NUEVO: Regenerar solo las vacías/incompletas
+npx ts-node scripts/generate-landings.ts --retry-failed
 ```
+
+### Detección de Páginas Incompletas
+
+El script ahora puede detectar landing pages que están **vacías o incompletas** y regenerarlas automáticamente. Una landing se considera incompleta si:
+
+- ❌ No tiene título SEO (`meta_title` < 10 caracteres)
+- ❌ No tiene hero completo (`hero_title` o `hero_subtitle` muy cortos)
+- ❌ Tiene menos de 3 servicios listados
+- ❌ Tiene menos de 2 FAQs
+- ❌ Falta problema o solución
+
+**Modo verificación**:
+```bash
+npx ts-node scripts/generate-landings.ts --check
+```
+
+Esto te mostrará:
+- Cuántas landing pages están incompletas
+- Qué problemas específicos tiene cada una
+- Lista de slugs que necesitan regeneración
+
+**Modo regeneración**:
+```bash
+npx ts-node scripts/generate-landings.ts --retry-failed
+```
+
+Esto automáticamente:
+1. Detecta todas las landing pages incompletas
+2. Las regenera una por una con OpenAI
+3. Sobrescribe el contenido existente con contenido completo
 
 ### Estructura de URLs
 

@@ -6,6 +6,8 @@
  *   npx ts-node scripts/generate-landings.ts --servicio=abogados
  *   npx ts-node scripts/generate-landings.ts --ciudad=mazarron
  *   npx ts-node scripts/generate-landings.ts --slug=abogados-mazarron
+ *   npx ts-node scripts/generate-landings.ts --retry-failed (regenera solo las vacías/incompletas)
+ *   npx ts-node scripts/generate-landings.ts --check (solo verifica cuáles están vacías)
  * 
  * REQUISITOS:
  *   - OPENAI_API_KEY en .env.local
@@ -320,6 +322,104 @@ async function saveLanding(content: LandingContent): Promise<boolean> {
 }
 
 // ============================================
+// VALIDACIÓN DE CONTENIDO
+// ============================================
+
+interface ExistingLanding {
+  slug: string;
+  meta_title?: string;
+  hero_title?: string;
+  hero_subtitle?: string;
+  services?: any;
+  faqs?: any;
+  problem_title?: string;
+  solution_text?: string;
+}
+
+function isLandingIncomplete(landing: ExistingLanding): boolean {
+  // Verificar campos críticos
+  if (!landing.meta_title || landing.meta_title.trim().length < 10) return true;
+  if (!landing.hero_title || landing.hero_title.trim().length < 10) return true;
+  if (!landing.hero_subtitle || landing.hero_subtitle.trim().length < 20) return true;
+  
+  // Verificar arrays JSON
+  if (!landing.services || !Array.isArray(landing.services) || landing.services.length < 3) return true;
+  if (!landing.faqs || !Array.isArray(landing.faqs) || landing.faqs.length < 2) return true;
+  
+  // Verificar contenido textual
+  if (!landing.problem_title || landing.problem_title.trim().length < 5) return true;
+  if (!landing.solution_text || landing.solution_text.trim().length < 30) return true;
+  
+  return false;
+}
+
+async function getExistingLandings(): Promise<ExistingLanding[]> {
+  const { data, error } = await supabase
+    .from('landing_pages')
+    .select('slug, meta_title, hero_title, hero_subtitle, services, faqs, problem_title, solution_text');
+  
+  if (error) {
+    console.error('Error obteniendo landing pages existentes:', error);
+    return [];
+  }
+  
+  return data || [];
+}
+
+async function checkIncompletePages() {
+  console.log('🔍 Verificando landing pages existentes...\n');
+  
+  const existing = await getExistingLandings();
+  console.log(`📊 Total landing pages encontradas: ${existing.length}\n`);
+  
+  const incomplete = existing.filter(isLandingIncomplete);
+  
+  if (incomplete.length === 0) {
+    console.log('✅ Todas las landing pages están completas\n');
+    return;
+  }
+  
+  console.log(`⚠️  Landing pages incompletas o vacías: ${incomplete.length}\n`);
+  
+  // Agrupar por problemas
+  const problems = {
+    noTitle: [] as string[],
+    noHero: [] as string[],
+    noServices: [] as string[],
+    noFaqs: [] as string[],
+    noProblem: [] as string[],
+    noSolution: [] as string[],
+  };
+  
+  incomplete.forEach(landing => {
+    const slug = landing.slug;
+    if (!landing.meta_title || landing.meta_title.trim().length < 10) problems.noTitle.push(slug);
+    if (!landing.hero_title || landing.hero_title.trim().length < 10) problems.noHero.push(slug);
+    if (!landing.services || !Array.isArray(landing.services) || landing.services.length < 3) problems.noServices.push(slug);
+    if (!landing.faqs || !Array.isArray(landing.faqs) || landing.faqs.length < 2) problems.noFaqs.push(slug);
+    if (!landing.problem_title || landing.problem_title.trim().length < 5) problems.noProblem.push(slug);
+    if (!landing.solution_text || landing.solution_text.trim().length < 30) problems.noSolution.push(slug);
+  });
+  
+  console.log('📋 Resumen de problemas encontrados:');
+  if (problems.noTitle.length > 0) console.log(`   - Sin título SEO: ${problems.noTitle.length}`);
+  if (problems.noHero.length > 0) console.log(`   - Sin hero completo: ${problems.noHero.length}`);
+  if (problems.noServices.length > 0) console.log(`   - Sin servicios: ${problems.noServices.length}`);
+  if (problems.noFaqs.length > 0) console.log(`   - Sin FAQs: ${problems.noFaqs.length}`);
+  if (problems.noProblem.length > 0) console.log(`   - Sin problema: ${problems.noProblem.length}`);
+  if (problems.noSolution.length > 0) console.log(`   - Sin solución: ${problems.noSolution.length}`);
+  
+  console.log('\n🔧 Para regenerar estas páginas, ejecuta:');
+  console.log('   npm run generate-landings -- --retry-failed\n');
+  
+  console.log('📝 Lista de slugs incompletos:');
+  incomplete.forEach(landing => {
+    console.log(`   - ${landing.slug}`);
+  });
+  console.log('');
+}
+
+// ============================================
 // MAIN
 // ============================================
 
@@ -329,13 +429,27 @@ async function main() {
   // Parsear argumentos
   const args = process.argv.slice(2);
   const filters: { servicio?: string; ciudad?: string; slug?: string } = {};
+  let checkOnly = false;
+  let retryFailed = false;
   
   args.forEach(arg => {
-    const [key, value] = arg.replace('--', '').split('=');
-    if (key && value) {
-      filters[key as keyof typeof filters] = value;
+    if (arg === '--check') {
+      checkOnly = true;
+    } else if (arg === '--retry-failed') {
+      retryFailed = true;
+    } else {
+      const [key, value] = arg.replace('--', '').split('=');
+      if (key && value) {
+        filters[key as keyof typeof filters] = value;
+      }
     }
   });
+  
+  // Si solo queremos verificar
+  if (checkOnly) {
+    await checkIncompletePages();
+    return;
+  }
   
   // Obtener datos
   const servicios = await getServicios();
@@ -345,12 +459,26 @@ async function main() {
   console.log(`📊 Ciudades: ${ciudades.length}`);
   console.log(`📊 Total combinaciones: ${servicios.length * ciudades.length}`);
   
+  // Si queremos regenerar las fallidas
+  let slugsToRegenerate: string[] = [];
+  
+  if (retryFailed) {
+    console.log('\n🔄 Modo regeneración: detectando landing pages incompletas...');
+    const existing = await getExistingLandings();
+    const incomplete = existing.filter(isLandingIncomplete);
+    slugsToRegenerate = incomplete.map(l => l.slug);
+    console.log(`⚠️  Encontradas ${slugsToRegenerate.length} landing pages para regenerar\n`);
+  }
+  
   // Filtrar si hay argumentos
   let pairs: { servicio: Servicio; ciudad: Ciudad }[] = [];
   
   for (const servicio of servicios) {
     for (const ciudad of ciudades) {
       const slug = `${servicio.slug}-${ciudad.slug}`;
+      
+      // Si estamos en modo retry, solo regenerar las incompletas
+      if (retryFailed && !slugsToRegenerate.includes(slug)) continue;
       
       // Aplicar filtros
       if (filters.slug && slug !== filters.slug) continue;
@@ -359,6 +487,11 @@ async function main() {
       
       pairs.push({ servicio, ciudad });
     }
+  }
+  
+  if (pairs.length === 0) {
+    console.log('\n✅ No hay landing pages para generar/regenerar\n');
+    return;
   }
   
   console.log(`\n🎯 Generando ${pairs.length} landing pages...\n`);
@@ -391,6 +524,12 @@ async function main() {
   console.log(`❌ Fallidas: ${failed}`);
   console.log(`📊 Total: ${pairs.length}`);
   console.log('========================================\n');
+  
+  // Si hubo fallos, sugerir reintentar
+  if (failed > 0) {
+    console.log('💡 Para reintentar solo las fallidas, ejecuta:');
+    console.log('   npm run generate-landings -- --retry-failed\n');
+  }
 }
 
 // Ejecutar
