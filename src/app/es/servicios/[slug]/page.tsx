@@ -511,8 +511,8 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
         </div>
       </section>
 
-      {/* CTA Sticky */}
-      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+      {/* CTA Banner */}
+      <div className="bg-primary/10 border-b border-primary/20">
         <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-gray-700 text-sm text-center sm:text-left">
             <strong>{landing.cta_title || 'Te conectamos con profesionales verificados'}</strong>
