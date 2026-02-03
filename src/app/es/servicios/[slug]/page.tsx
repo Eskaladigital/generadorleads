@@ -1,6 +1,31 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { createServerSupabaseClient } from '@/lib/supabase';
+import { LandingPage } from '@/lib/types';
+
+// Función para obtener landing page desde la BD
+async function getLanding(slug: string): Promise<LandingPage | null> {
+  try {
+    const supabase = createServerSupabaseClient();
+    
+    const { data, error } = await supabase
+      .from('landing_pages')
+      .select('*')
+      .eq('slug', slug)
+      .eq('activo', true)
+      .eq('idioma', 'es')
+      .single();
+    
+    if (error || !data) {
+      return null;
+    }
+    return data as LandingPage;
+  } catch (error) {
+    console.error('Error fetching landing page:', error);
+    return null;
+  }
+}
 
 // Datos de servicios
 const SERVICIOS_DATA: Record<string, {
@@ -223,6 +248,33 @@ export async function generateMetadata({
   params: Promise<{ slug: string }> 
 }): Promise<Metadata> {
   const { slug } = await params;
+  
+  // Primero verificar si es una landing page (servicio-ciudad)
+  if (slug.includes('-')) {
+    const landing = await getLanding(slug);
+    if (landing) {
+      return {
+        title: landing.meta_title,
+        description: landing.meta_description,
+        keywords: Array.isArray(landing.meta_keywords) 
+          ? landing.meta_keywords.join(', ') 
+          : landing.meta_keywords || undefined,
+        openGraph: {
+          title: landing.meta_title,
+          description: landing.meta_description,
+          type: 'website',
+          locale: 'es_ES',
+        },
+        twitter: {
+          card: 'summary_large_image',
+          title: landing.meta_title,
+          description: landing.meta_description,
+        },
+      };
+    }
+  }
+  
+  // Si no es landing, es página de servicio estático
   const servicio = SERVICIOS_DATA[slug];
   
   if (!servicio) {
@@ -245,6 +297,16 @@ export default async function ServicioPage({
   params: Promise<{ slug: string }> 
 }) {
   const { slug } = await params;
+  
+  // Primero verificar si es una landing page (servicio-ciudad)
+  if (slug.includes('-')) {
+    const landing = await getLanding(slug);
+    if (landing) {
+      return <LandingPageView landing={landing} />;
+    }
+  }
+  
+  // Si no es landing, mostrar página de servicio estático
   const servicio = SERVICIOS_DATA[slug];
   
   if (!servicio) {
@@ -407,6 +469,251 @@ export default async function ServicioPage({
           >
             Solicitar información gratuita
           </Link>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// Componente para renderizar landing pages dinámicas
+function LandingPageView({ landing }: { landing: LandingPage }) {
+  return (
+    <>
+      {/* Hero Section */}
+      <section className="bg-gradient-secondary text-white py-10 md:py-12">
+        <div className="container-base">
+          <div className="max-w-4xl">
+            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              {landing.hero_title}
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 mb-6 leading-relaxed">
+              {landing.hero_subtitle}
+            </p>
+            {landing.hero_bullets && landing.hero_bullets.length > 0 && (
+              <ul className="flex flex-wrap gap-4 mb-6">
+                {landing.hero_bullets.slice(0, 3).map((bullet, idx) => (
+                  <li key={idx} className="flex items-center gap-2 text-white/90 text-sm md:text-base">
+                    <svg className="w-5 h-5 text-white shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <Link 
+              href={`/es/contacto?slug=${landing.slug}`}
+              className="btn-primary btn-lg inline-block"
+            >
+              Solicitar información gratuita
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Sticky */}
+      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+        <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-gray-700 text-sm text-center sm:text-left">
+            <strong>{landing.cta_title || 'Te conectamos con profesionales verificados'}</strong>
+          </p>
+          <Link 
+            href={`/es/contacto?slug=${landing.slug}`}
+            className="btn-primary btn-sm"
+          >
+            {landing.cta_subtitle || 'Solicitar información'}
+          </Link>
+        </div>
+      </div>
+
+      {/* Contenido Principal */}
+      <section className="py-10 md:py-14">
+        <div className="container-base">
+          <div className="grid lg:grid-cols-3 gap-8">
+            
+            {/* Columna Principal */}
+            <div className="lg:col-span-2 space-y-10">
+              
+              {/* Problema */}
+              {landing.problem_title && landing.problems && landing.problems.length > 0 && (
+                <div>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                    {landing.problem_title}
+                  </h2>
+                  <div className="space-y-3">
+                    {landing.problems.map((problem, idx) => (
+                      <div key={idx} className="flex items-start gap-3 text-gray-700">
+                        <svg className="w-6 h-6 text-red-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                        </svg>
+                        <span className="leading-relaxed">{problem}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Solución */}
+              {landing.solution_title && landing.solution_text && (
+                <div className="card p-6 md:p-8 bg-green-50 border-green-200">
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                    {landing.solution_title}
+                  </h2>
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-line text-base md:text-lg">
+                    {landing.solution_text}
+                  </p>
+                </div>
+              )}
+
+              {/* Servicios Específicos */}
+              {landing.services_title && landing.services && landing.services.length > 0 && (
+                <div>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                    {landing.services_title}
+                  </h2>
+                  <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
+                    {landing.services.map((service, idx) => (
+                      <div key={idx} className="card p-5 md:p-6 hover:shadow-lg transition-shadow">
+                        {service.icon && (
+                          <div className="text-4xl mb-3">{service.icon}</div>
+                        )}
+                        <h3 className="font-heading font-bold text-gray-900 mb-2 text-lg">
+                          {service.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Por qué esta ciudad */}
+              {landing.why_city_title && landing.why_city_text && (
+                <div>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                    {landing.why_city_title}
+                  </h2>
+                  <p className="text-gray-700 leading-relaxed mb-6 whitespace-pre-line text-base md:text-lg">
+                    {landing.why_city_text}
+                  </p>
+                  {landing.why_city_stats && landing.why_city_stats.length > 0 && (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
+                      {landing.why_city_stats.map((stat, idx) => (
+                        <div key={idx} className="text-center card p-4">
+                          <div className="text-3xl md:text-4xl font-bold text-primary mb-1">
+                            {stat.value}
+                          </div>
+                          <div className="text-sm text-gray-600">{stat.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* FAQs */}
+              {landing.faqs && landing.faqs.length > 0 && (
+                <div>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                    Preguntas frecuentes
+                  </h2>
+                  <div className="space-y-4">
+                    {landing.faqs.map((faq, idx) => (
+                      <div key={idx} className="card p-5 md:p-6">
+                        <h3 className="font-heading font-semibold text-gray-900 mb-3 text-lg flex items-start gap-2">
+                          <svg className="w-5 h-5 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                          </svg>
+                          {faq.question}
+                        </h3>
+                        <p className="text-gray-600 text-sm md:text-base leading-relaxed whitespace-pre-line pl-7">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              <div className="card p-6 bg-primary/5 border-primary/20 sticky top-24">
+                <h3 className="font-heading font-bold text-gray-900 mb-3 text-lg">
+                  Solicita información
+                </h3>
+                <p className="text-gray-600 text-sm mb-5 leading-relaxed">
+                  Te conectamos con profesionales verificados en menos de 24 horas.
+                </p>
+                <Link 
+                  href={`/es/contacto?slug=${landing.slug}`}
+                  className="btn-primary w-full text-center block mb-3"
+                >
+                  Comenzar ahora
+                </Link>
+                <div className="space-y-2 text-xs text-gray-500">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Sin compromiso
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    100% gratuito
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Profesionales verificados
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className="py-12 md:py-16 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="container-base text-center">
+          <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            {landing.cta_title || '¿Listo para empezar?'}
+          </h2>
+          <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+            {landing.cta_subtitle || 'Te conectamos con profesionales que hablan tu idioma'}
+          </p>
+          <Link 
+            href={`/es/contacto?slug=${landing.slug}`}
+            className="btn-primary btn-lg inline-block"
+          >
+            Solicitar información gratuita
+          </Link>
+          <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-600">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              Respuesta en 24h
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              Atención en tu idioma
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              Sin compromiso
+            </div>
+          </div>
         </div>
       </section>
     </>

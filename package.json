@@ -11,6 +11,7 @@
     "generate-landings": "npx tsx scripts/generate-landings.ts",
     "check-landings": "npx tsx scripts/check-landings.ts",
     "retry-landings": "npx tsx scripts/retry-landings.ts",
+    "generate-cities": "npx tsx scripts/generate-city-content.ts",
     "generate-blog": "npx tsx scripts/generate-blog-posts.ts",
     "test-supabase": "npx tsx scripts/test-supabase.ts",
     "update-ciudades": "npx tsx scripts/update-ciudades.ts"

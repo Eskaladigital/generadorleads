@@ -98,7 +98,7 @@ export default async function SitemapHtmlPage() {
   
   // Obtener landing pages (servicio×ciudad)
   const allLandingPages = landingPages.map((landing: any) => ({
-    url: `/es/l/${landing.slug}`,
+    url: `/es/servicios/${landing.slug}`,
     titulo: `${landing.servicio_nombre} en ${landing.ciudad_nombre}`,
     servicio: landing.servicio_nombre,
     ciudad: landing.ciudad_nombre,
