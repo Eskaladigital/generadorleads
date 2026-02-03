@@ -64,7 +64,7 @@ async function getPopularPosts(): Promise<BlogPost[]> {
   try {
     const { data, error } = await supabase
       .from('blog_posts')
-      .select('slug, title, category, published_at, views')
+      .select('slug, title, excerpt, category, published_at, views, featured_image')
       .eq('status', 'published')
       .eq('lang', 'es')
       .order('views', { ascending: false })

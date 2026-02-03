@@ -424,32 +424,51 @@ async function checkIncompletePages() {
 // ============================================
 
 async function main() {
-  console.log('🚀 Iniciando generación de landing pages...\n');
-  
-  // Parsear argumentos
+  // Parsear argumentos desde process.argv O variables de entorno
   const args = process.argv.slice(2);
+  
+  // Debug: mostrar argumentos recibidos
+  console.log('📋 Argumentos recibidos:', args);
+  console.log('📋 Variables de entorno:', { 
+    MODE: process.env.MODE,
+    SERVICIO: process.env.SERVICIO,
+    CIUDAD: process.env.CIUDAD,
+    SLUG: process.env.SLUG
+  });
+  
   const filters: { servicio?: string; ciudad?: string; slug?: string } = {};
-  let checkOnly = false;
-  let retryFailed = false;
+  let checkOnly = process.env.MODE === 'check' || args.includes('--check') || args.includes('check');
+  let retryFailed = process.env.MODE === 'retry' || args.includes('--retry-failed') || args.includes('retry-failed');
+  
+  // Filtros desde variables de entorno o argumentos
+  if (process.env.SERVICIO) filters.servicio = process.env.SERVICIO;
+  if (process.env.CIUDAD) filters.ciudad = process.env.CIUDAD;
+  if (process.env.SLUG) filters.slug = process.env.SLUG;
   
   args.forEach(arg => {
-    if (arg === '--check') {
+    if (arg === '--check' || arg === 'check') {
       checkOnly = true;
-    } else if (arg === '--retry-failed') {
+      console.log('✓ Modo verificación activado');
+    } else if (arg === '--retry-failed' || arg === 'retry-failed') {
       retryFailed = true;
+      console.log('✓ Modo regeneración activado');
     } else {
       const [key, value] = arg.replace('--', '').split('=');
       if (key && value) {
         filters[key as keyof typeof filters] = value;
+        console.log(`✓ Filtro: ${key} = ${value}`);
       }
     }
   });
   
   // Si solo queremos verificar
   if (checkOnly) {
+    console.log('\n🔍 MODO VERIFICACIÓN - No se generará contenido nuevo\n');
     await checkIncompletePages();
     return;
   }
+  
+  console.log('\n🚀 Iniciando generación de landing pages...\n');
   
   // Obtener datos
   const servicios = await getServicios();

@@ -197,7 +197,7 @@ export interface LandingPage {
   
   // Problemas
   problem_title: string;
-  problems: Array<{ title: string; description: string }>;
+  problems: string[];
   
   // Solución
   solution_title: string;
@@ -205,7 +205,7 @@ export interface LandingPage {
   
   // Servicios
   services_title: string;
-  services: Array<{ title: string; description: string }>;
+  services: Array<{ icon?: string; title: string; description: string }>;
   
   // Por qué la ciudad
   why_city_title: string;
