@@ -52,18 +52,6 @@ export default function HomePage() {
         
         <div className="container-base relative z-10 py-12 md:py-16">
           <div className="max-w-3xl mx-auto text-center text-white">
-            {/* Logo H4S siglas color centrado */}
-            <div className="mb-8 flex justify-center">
-              <Image 
-                src="/images/logo-siglas-color.png" 
-                alt="Health4Spain" 
-                width={200}
-                height={200}
-                className="h-32 md:h-40 w-auto"
-                priority
-              />
-            </div>
-            
             {/* Logo horizontal con subtítulo */}
             <div className="mb-8">
               <Image 
@@ -71,7 +59,8 @@ export default function HomePage() {
                 alt="Health4Spain" 
                 width={400}
                 height={100}
-                className="h-16 md:h-20 w-auto mx-auto mb-4"
+                className="h-20 md:h-24 w-auto mx-auto mb-4"
+                priority
               />
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
                 Seguro de salud para tu vida en España
