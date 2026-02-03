@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { getServicios } from '@/lib/services';
 
 // Datos
 const AUDIENCIAS = [
@@ -70,7 +71,8 @@ const SERVICIOS = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const servicios = await getServicios();
   return (
     <>
       {/* Hero Section - Slider */}
@@ -196,16 +198,21 @@ export default function HomePage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SERVICIOS.map((servicio) => (
+            {servicios.map((servicio) => (
               <Link
-                key={servicio.id}
-                href={`/es/contacto?servicio=${servicio.id}`}
+                key={servicio.slug}
+                href={`/es/contacto?servicio=${servicio.slug}`}
                 className="group card card-hover p-6"
               >
-                <h3 className="font-heading text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                  {servicio.title}
-                </h3>
-                <p className="text-gray-600 mb-4">{servicio.description}</p>
+                <div className="flex items-start gap-3 mb-2">
+                  {servicio.icon && (
+                    <span className="text-2xl">{servicio.icon}</span>
+                  )}
+                  <h3 className="font-heading text-xl font-semibold text-gray-900 group-hover:text-primary transition-colors">
+                    {servicio.nombre_plural || servicio.nombre}
+                  </h3>
+                </div>
+                <p className="text-gray-600 mb-4">{servicio.descripcion_corta}</p>
                 <span className="text-primary font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                   Solicitar información
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

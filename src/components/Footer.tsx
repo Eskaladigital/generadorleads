@@ -1,13 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { getServicios } from '@/lib/services';
 
 const footerLinks = {
-  servicios: [
-    { href: '/es/servicios/seguros', label: 'Seguros de Salud' },
-    { href: '/es/servicios/abogados', label: 'Abogados' },
-    { href: '/es/servicios/inmobiliarias', label: 'Inmobiliarias' },
-    { href: '/es/servicios/gestorias', label: 'Gestorías' },
-  ],
   destinos: [
     { href: '/es/destinos/costa-blanca', label: 'Costa Blanca' },
     { href: '/es/destinos/costa-del-sol', label: 'Costa del Sol' },
@@ -28,7 +23,8 @@ const footerLinks = {
   ],
 };
 
-export default function Footer() {
+export default async function Footer() {
+  const servicios = await getServicios();
   return (
     <footer className="bg-gray-900 text-gray-300">
       {/* Main Footer */}
@@ -55,10 +51,10 @@ export default function Footer() {
           <div>
             <h4 className="font-heading font-semibold text-white mb-3">Servicios</h4>
             <ul className="space-y-1.5">
-              {footerLinks.servicios.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-primary transition-colors">
-                    {link.label}
+              {servicios.map((servicio) => (
+                <li key={servicio.slug}>
+                  <Link href={`/es/servicios/${servicio.slug}`} className="text-sm hover:text-primary transition-colors">
+                    {servicio.nombre_plural || servicio.nombre}
                   </Link>
                 </li>
               ))}

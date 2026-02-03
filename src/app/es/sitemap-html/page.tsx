@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
+import { getServicios } from '@/lib/services';
 
 export const metadata: Metadata = {
   title: 'Mapa del Sitio - Health4Spain',
@@ -33,14 +34,6 @@ const DESTINOS = [
   { slug: 'fuengirola', nombre: 'Fuengirola' },
   { slug: 'estepona', nombre: 'Estepona' },
   { slug: 'nerja', nombre: 'Nerja' },
-];
-
-// Datos de servicios - 4 servicios principales
-const SERVICIOS = [
-  { id: 'seguros', titulo: 'Seguros de Salud' },
-  { id: 'abogados', titulo: 'Abogados' },
-  { id: 'inmobiliarias', titulo: 'Inmobiliarias' },
-  { id: 'gestorias', titulo: 'Gestorías' },
 ];
 
 // Rutas estáticas principales
@@ -80,8 +73,36 @@ async function getBlogPosts() {
   }
 }
 
+// Función para obtener landing pages activas desde Supabase
+async function getLandingPages() {
+  try {
+    const { data, error } = await supabase
+      .from('landing_pages')
+      .select('slug, servicio_nombre, ciudad_nombre, meta_title')
+      .eq('activo', true)
+      .eq('idioma', 'es')
+      .order('servicio_slug')
+      .order('ciudad_slug');
+    
+    if (error) {
+      console.error('Error fetching landing pages:', error);
+      return [];
+    }
+    
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching landing pages:', error);
+    return [];
+  }
+}
+
 export default async function SitemapHtmlPage() {
-  const blogPosts = await getBlogPosts();
+  const [blogPosts, servicios, landingPages] = await Promise.all([
+    getBlogPosts(),
+    getServicios(),
+    getLandingPages(),
+  ]);
+  
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://health4spain.com';
 
   // Obtener todos los destinos
@@ -90,10 +111,18 @@ export default async function SitemapHtmlPage() {
     titulo: destino.nombre,
   }));
 
-  // Obtener todos los servicios
-  const allServicios = SERVICIOS.map(servicio => ({
-    url: `/es/servicios/${servicio.id}`,
-    titulo: servicio.titulo,
+  // Obtener todos los servicios desde BD
+  const allServicios = servicios.map(servicio => ({
+    url: `/es/servicios/${servicio.slug}`,
+    titulo: servicio.nombre_plural || servicio.nombre,
+  }));
+  
+  // Obtener landing pages (servicio×ciudad)
+  const allLandingPages = landingPages.map((landing: any) => ({
+    url: `/es/l/${landing.slug}`,
+    titulo: `${landing.servicio_nombre} en ${landing.ciudad_nombre}`,
+    servicio: landing.servicio_nombre,
+    ciudad: landing.ciudad_nombre,
   }));
 
   return (
@@ -181,6 +210,31 @@ export default async function SitemapHtmlPage() {
               </ul>
             </div>
 
+            {/* Landing Pages (servicio×ciudad) */}
+            {allLandingPages.length > 0 && (
+              <div>
+                <h2 className="font-heading text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                  Páginas Servicio × Ciudad ({allLandingPages.length} páginas)
+                </h2>
+                <p className="text-sm text-gray-600 mb-4">
+                  Páginas especializadas por servicio y ubicación
+                </p>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {allLandingPages.map((landing: any) => (
+                    <li key={landing.url} className="flex items-start gap-2">
+                      <span className="text-primary mt-1 text-xs">•</span>
+                      <Link 
+                        href={landing.url}
+                        className="text-primary hover:text-primary-dark hover:underline text-sm"
+                      >
+                        {landing.titulo}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Blog Posts */}
             <div>
               <h2 className="font-heading text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
@@ -229,7 +283,7 @@ export default async function SitemapHtmlPage() {
                 Información del Sitemap
               </h3>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Total de páginas: {RUTAS_ESTATICAS.length + allDestinos.length + allServicios.length + blogPosts.length}</li>
+                <li>• Total de páginas: {RUTAS_ESTATICAS.length + allDestinos.length + allServicios.length + allLandingPages.length + blogPosts.length}</li>
                 <li>• Última actualización: {new Date().toLocaleDateString('es-ES', { 
                   year: 'numeric', 
                   month: 'long', 
