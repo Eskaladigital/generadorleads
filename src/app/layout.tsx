@@ -4,15 +4,15 @@ import "./globals.css";
 
 // Roboto Slab para títulos
 const robotoSlab = Roboto_Slab({ 
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: '--font-heading',
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 });
 
 // Ubuntu para body
 const ubuntu = Ubuntu({ 
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: '--font-body',
   display: 'swap',
   weight: ['300', '400', '500', '700'],

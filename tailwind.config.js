@@ -9,9 +9,9 @@ module.exports = {
     extend: {
       fontFamily: {
         // Títulos: Roboto Slab
-        heading: ['Roboto Slab', 'serif'],
+        heading: ['var(--font-heading)', 'Roboto Slab', 'Georgia', 'serif'],
         // Body: Ubuntu
-        body: ['Ubuntu', 'sans-serif'],
+        body: ['var(--font-body)', 'Ubuntu', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
       },
       colors: {
         // Colores principales Health4Spain
