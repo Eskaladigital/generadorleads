@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Diseño 8: Corporate Trust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #1e3a8a;
+            background: #f8fafc;
+        }
+
+        /* Corporate header */
+        .top-bar {
+            background: #1e3a8a;
+            color: white;
+            padding: 0.8rem 5%;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav {
+            background: white;
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.8rem;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover {
+            color: #1e3a8a;
+        }
+
+        /* Hero diagonal split */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 70vh;
+            position: relative;
+        }
+
+        .hero-left {
+            background: white;
+            padding: 6rem 5% 6rem 10%;
+            display: flex;
+            align-items: center;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+        }
+
+        .hero-right {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            padding: 6rem 10% 6rem 5%;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3.5rem;
+            color: #1e3a8a;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #475569;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .btn-corporate {
+            display: inline-block;
+            padding: 1.1rem 2.5rem;
+            background: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-corporate:hover {
+            background: #1e40af;
+        }
+
+        .hero-stats {
+            color: white;
+        }
+
+        .stat-item {
+            margin-bottom: 3rem;
+        }
+
+        .stat-number {
+            font-family: 'Roboto Slab', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Partners logos */
+        .partners {
+            padding: 4rem 5%;
+            background: white;
+            text-align: center;
+        }
+
+        .partners h3 {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 60px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        /* Services table */
+        .services {
+            padding: 6rem 5%;
+            background: #f8fafc;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e3a8a;
+        }
+
+        .services-table {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 150px 150px;
+            padding: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            align-items: center;
+        }
+
+        .service-row:hover {
+            background: #f8fafc;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 1.1rem;
+        }
+
+        .service-desc {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .service-coverage {
+            text-align: center;
+            font-weight: 500;
+            color: #10b981;
+        }
+
+        .service-cta {
+            text-align: center;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.5rem;
+            background: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        /* Trust section */
+        .trust {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .trust-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+        }
+
+        .trust-item {
+            text-align: center;
+        }
+
+        .trust-icon {
+            width: 80px;
+            height: 80px;
+            background: #eff6ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .trust-item h3 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+        }
+
+        .trust-item p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        /* CTA professional */
+        .cta {
+            padding: 6rem 5%;
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-white-corp {
+            padding: 1.1rem 2.5rem;
+            background: white;
+            color: #1e3a8a;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        footer {
+            padding: 3rem 5%;
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-left { clip-path: none; }
+            .service-row { grid-template-columns: 1fr; gap: 1rem; }
+            .trust-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div>📞 +34 900 123 456</div>
+        <div>✉️ info@health4spain.com</div>
+    </div>
+
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-menu">
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-left">
+            <div class="hero-content">
+                <h1>Servicios Profesionales para Extranjeros en España</h1>
+                <p>Conexiones verificadas con abogados de extranjería, seguros de salud, inmobiliarias y gestorías. 19 ciudades españolas.</p>
+                <a href="#" class="btn-corporate">Solicitar Información</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Profesionales Verificados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">19</div>
+                    <div class="stat-label">Ciudades Españolas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Gratuito para Ti</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners">
+        <h3>Trusted by Leading Organizations</h3>
+        <div class="logos">
+            <div class="logo-placeholder">Partner 1</div>
+            <div class="logo-placeholder">Partner 2</div>
+            <div class="logo-placeholder">Partner 3</div>
+            <div class="logo-placeholder">Partner 4</div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services-container">
+            <h2>Cartera de Servicios</h2>
+            <div class="services-table">
+                <div class="service-row">
+                    <div class="service-name">Seguros de Salud</div>
+                    <div class="service-desc">Pólizas obligatorias para todos los tipos de visados</div>
+                    <div class="service-coverage">Nacional</div>
+                    <div class="service-cta">
+                        <a href="#" class="btn-small">Ver Más</a>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-name">Abogados Extranjería</div>
+                    <div class="service-desc">Arraigo, visados, NIE, reagrupación familiar</div>
+                    <div class="service-coverage">19 Ciudades</div>
+                    <div class="service-cta">
+                        <a href="#" class="btn-small">Ver Más</a>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-name">Inmobiliarias</div>
+                    <div class="service-desc">Alquiler y compra con agentes especializados</div>
+                    <div class="service-coverage">Todas Regiones</div>
+                    <div class="service-cta">
+                        <a href="#" class="btn-small">Ver Más</a>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-name">Gestorías</div>
+                    <div class="service-desc">Empadronamiento y gestión administrativa</div>
+                    <div class="service-coverage">Soporte Total</div>
+                    <div class="service-cta">
+                        <a href="#" class="btn-small">Ver Más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust">
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-icon">✓</div>
+                <h3>Verified</h3>
+                <p>All partners undergo strict verification and quality control processes.</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🔒</div>
+                <h3>Secure</h3>
+                <p>Your data is protected with enterprise-grade security protocols.</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">⚡</div>
+                <h3>Fast</h3>
+                <p>Streamlined processes ensure quick turnaround times.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Inicia Tu Proceso Hoy</h2>
+        <p>Conecta con profesionales verificados en tu ciudad de destino en España</p>
+        <a href="#" class="btn-white-corp">Contactar</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Health4Spain | Professional Services Platform</p>
+    </footer>
+</body>
+</html>

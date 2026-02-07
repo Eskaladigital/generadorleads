@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Variación 4: Editorial Refined</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #2c2c2c;
+            line-height: 1.7;
+            background: #fffef9;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        /* NAV - Refined elegant */
+        nav {
+            padding: 2rem 6%;
+            background: rgba(255, 254, 249, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e8e4d8;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c2c2c;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #6b6b6b;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #b08d57;
+        }
+
+        /* HERO - Magazine cover */
+        .hero {
+            padding: 7rem 6% 8rem;
+            background: linear-gradient(135deg, #fffef9 0%, #f9f7f0 100%);
+            border-bottom: 1px solid #e8e4d8;
+        }
+
+        .hero-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-kicker {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #b08d57;
+            margin-bottom: 2.5rem;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 7rem;
+            font-weight: 700;
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            color: #2c2c2c;
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #6b6b6b;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid #e8e4d8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .meta-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-icon {
+            width: 45px;
+            height: 45px;
+            background: #2c2c2c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .meta-text {
+            font-size: 0.75rem;
+            color: #9b9b9b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn-refined {
+            padding: 1.3rem 3rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-dark {
+            background: #2c2c2c;
+            color: #fffef9;
+            border: 2px solid #2c2c2c;
+        }
+
+        .btn-dark:hover {
+            background: #1a1a1a;
+        }
+
+        .btn-light {
+            background: transparent;
+            color: #2c2c2c;
+            border: 2px solid #e8e4d8;
+        }
+
+        .btn-light:hover {
+            border-color: #b08d57;
+            color: #b08d57;
+        }
+
+        /* STATS BAR */
+        .stats {
+            padding: 5rem 6%;
+            background: #fff;
+            border-bottom: 1px solid #e8e4d8;
+        }
+
+        .stats-grid {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem 0;
+            border-left: 2px solid #e8e4d8;
+        }
+
+        .stat-item:first-child {
+            border-left: none;
+        }
+
+        .stat-number {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #b08d57;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #9b9b9b;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* PROFILES - Editorial cards */
+        .profiles {
+            padding: 9rem 6%;
+            background: #fffef9;
+        }
+
+        .profiles-container {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-overline {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #b08d57;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #2c2c2c;
+            letter-spacing: -1px;
+        }
+
+        .section-desc {
+            font-size: 1.2rem;
+            color: #6b6b6b;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .profile-card {
+            background: #fff;
+            border: 1px solid #e8e4d8;
+            padding: 4rem 3rem;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #b08d57 0%, transparent 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .profile-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+            border-color: #b08d57;
+        }
+
+        .profile-icon {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .profile-card h3 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2c2c2c;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-meta {
+            font-size: 0.75rem;
+            color: #b08d57;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .profile-card p {
+            font-size: 1.05rem;
+            color: #6b6b6b;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .profile-link {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #2c2c2c;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #2c2c2c;
+        }
+
+        .profile-link:hover {
+            color: #b08d57;
+            border-color: #b08d57;
+        }
+
+        /* SERVICES - Two column */
+        .services {
+            padding: 9rem 6%;
+            background: #fff;
+            border-top: 1px solid #e8e4d8;
+        }
+
+        .services-container {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .service-box {
+            padding: 4rem 3rem;
+            background: #fffef9;
+            border: 1px solid #e8e4d8;
+            transition: all 0.3s;
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+
+        .service-number {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: #b08d57;
+            margin-bottom: 2rem;
+        }
+
+        .service-box h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #2c2c2c;
+            letter-spacing: -0.5px;
+        }
+
+        .service-box p {
+            font-size: 1.05rem;
+            color: #6b6b6b;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .service-link {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #2c2c2c;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 0.5rem;
+        }
+
+        .service-link:hover {
+            color: #b08d57;
+            border-color: #b08d57;
+        }
+
+        /* CTA - Editorial block */
+        .cta {
+            padding: 10rem 6%;
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #fffef9;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-overline {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #b08d57;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .cta h2 {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+        }
+
+        .cta-text {
+            font-size: 1.3rem;
+            color: rgba(255, 254, 249, 0.8);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 1.5rem 3.5rem;
+            background: #b08d57;
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-cta:hover {
+            background: #9a7a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(176, 141, 87, 0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #fffef9;
+            padding: 7rem 6% 4rem;
+            border-top: 1px solid #e8e4d8;
+        }
+
+        .footer-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 5rem;
+            margin-bottom: 5rem;
+        }
+
+        .footer-brand {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-tagline {
+            font-size: 1rem;
+            color: #6b6b6b;
+            line-height: 1.8;
+        }
+
+        .footer-section h4 {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #6b6b6b;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #b08d57;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e8e4d8;
+            padding-top: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #9b9b9b;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 5rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .profiles-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+            .hero-meta { flex-direction: column; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 3rem; }
+            .cta h2 { font-size: 3rem; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Health4Spain</div>
+            <ul class="nav-menu">
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">Stories</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-kicker">The Mediterranean Issue — 2026</div>
+            <h1>A New Life<br>in Spain</h1>
+            <p class="hero-subtitle">Thoughtfully connecting international residents with Spain's most trusted professionals for health, legal services, and beyond.</p>
+            <div class="hero-meta">
+                <div class="meta-badge">
+                    <div class="meta-icon">✓</div>
+                    <div class="meta-text">Verified</div>
+                </div>
+                <div class="meta-badge">
+                    <div class="meta-icon">🌐</div>
+                    <div class="meta-text">Multilingual</div>
+                </div>
+                <div class="meta-badge">
+                    <div class="meta-icon">🎯</div>
+                    <div class="meta-text">Curated</div>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#" class="btn-refined btn-dark">Begin Your Journey</a>
+                <a href="#" class="btn-refined btn-light">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Verified Partners</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">20</div>
+                <div class="stat-label">Spanish Cities</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">Commission</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free Service</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="profiles">
+        <div class="profiles-container">
+            <div class="section-header">
+                <div class="section-overline">Who We Serve</div>
+                <h2 class="section-title">Every Journey Matters</h2>
+                <p class="section-desc">Whether you're a student, family, professional, or retiree, we provide personalized guidance for your unique Spanish experience.</p>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-card">
+                    <span class="profile-icon">🎓</span>
+                    <h3>Students</h3>
+                    <div class="profile-meta">Ages 18-25 • Academic</div>
+                    <p>Beginning your educational journey in Spain with comprehensive support for visas, housing, and health insurance.</p>
+                    <a href="#" class="profile-link">Discover More →</a>
+                </div>
+                <div class="profile-card">
+                    <span class="profile-icon">👨‍👩‍👧‍👦</span>
+                    <h3>Families</h3>
+                    <div class="profile-meta">With Children • Relocation</div>
+                    <p>Complete family transition services including schools, housing, and residency support for a seamless move.</p>
+                    <a href="#" class="profile-link">Discover More →</a>
+                </div>
+                <div class="profile-card">
+                    <span class="profile-icon">💼</span>
+                    <h3>Professionals</h3>
+                    <div class="profile-meta">Career Focus • Growth</div>
+                    <p>Establishing your professional base in Spain with expert legal and administrative guidance.</p>
+                    <a href="#" class="profile-link">Discover More →</a>
+                </div>
+                <div class="profile-card">
+                    <span class="profile-icon">🌴</span>
+                    <h3>Retirees</h3>
+                    <div class="profile-meta">Ages 60+ • Retirement</div>
+                    <p>Enjoying your golden years under the Mediterranean sun with complete peace of mind and support.</p>
+                    <a href="#" class="profile-link">Discover More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services-container">
+            <div class="services-header">
+                <div class="section-overline">Essential Services</div>
+                <h2 class="section-title">Everything You Need</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-box">
+                    <div class="service-number">01.</div>
+                    <h3>Health Insurance</h3>
+                    <p>Comprehensive private health coverage tailored for international residents. Valid for all Spanish visa types and residence permits.</p>
+                    <a href="#" class="service-link">Learn More</a>
+                </div>
+                <div class="service-box">
+                    <div class="service-number">02.</div>
+                    <h3>Legal Services</h3>
+                    <p>Expert immigration lawyers specializing in visas, NIE, arraigo, family reunification, and all residence procedures.</p>
+                    <a href="#" class="service-link">Learn More</a>
+                </div>
+                <div class="service-box">
+                    <div class="service-number">03.</div>
+                    <h3>Real Estate</h3>
+                    <p>Trusted property agents with extensive experience serving international clients throughout Spain's best locations.</p>
+                    <a href="#" class="service-link">Learn More</a>
+                </div>
+                <div class="service-box">
+                    <div class="service-number">04.</div>
+                    <h3>Administration</h3>
+                    <p>Professional gestoría services to handle all paperwork, taxes, and bureaucratic procedures efficiently.</p>
+                    <a href="#" class="service-link">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <div class="cta-overline">Ready to Begin?</div>
+            <h2>Your Spanish Journey Starts Here</h2>
+            <p class="cta-text">Connect with verified professionals who understand your needs and speak your language. Completely free, always.</p>
+            <a href="#" class="btn-cta">Get Started Today</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Health4Spain</div>
+                <p class="footer-tagline">Thoughtfully connecting international residents with Spain's most trusted professionals since 2026.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Health Insurance</a></li>
+                    <li><a href="#">Legal Services</a></li>
+                    <li><a href="#">Real Estate</a></li>
+                    <li><a href="#">Administration</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Destinations</h4>
+                <ul>
+                    <li><a href="#">Alicante</a></li>
+                    <li><a href="#">Málaga</a></li>
+                    <li><a href="#">Barcelona</a></li>
+                    <li><a href="#">All Cities</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">For Partners</a></li>
+                    <li><a href="#">Stories</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Health4Spain. All rights reserved.</div>
+            <div>Privacy • Terms • Cookies</div>
+        </div>
+    </footer>
+</body>
+</html>

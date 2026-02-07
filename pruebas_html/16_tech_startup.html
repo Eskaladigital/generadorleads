@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Diseño 6: Tech Startup</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: #1a1a2e;
+            background: #0f0f23;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(17,153,142,0.15), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(253,29,29,0.15), transparent 50%),
+                #0f0f23;
+            z-index: -1;
+        }
+
+        /* Glassmorphism nav */
+        nav {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            padding: 1rem 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        /* Hero futurista */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed, #fd1d1d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-gradient {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #7c3aed, #fd1d1d);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-gradient:hover::before {
+            opacity: 1;
+        }
+
+        .btn-gradient span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Metrics dashboard style */
+        .metrics {
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .metric-card:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-5px);
+        }
+
+        .metric-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* Services cards modular */
+        .services {
+            padding: 6rem 5%;
+        }
+
+        .services-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed, #fd1d1d);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            color: #00d4ff;
+            text-decoration: none;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* CTA futurista */
+        .cta {
+            padding: 8rem 5%;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124,58,237,0.3), transparent);
+            border-radius: 50%;
+            filter: blur(100px);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 3rem;
+        }
+
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .metrics { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .metrics { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-links">
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Tech</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Vivir y Trabajar en España</h1>
+            <p>Plataforma inteligente que conecta extranjeros con profesionales verificados. Seguros, abogados, inmobiliarias y gestorías en 19 ciudades.</p>
+            <a href="#" class="btn-gradient"><span>Empezar Ahora</span></a>
+        </div>
+    </section>
+
+    <section class="metrics">
+            <div class="metric-card">
+                <div class="metric-number">150+</div>
+                <div class="metric-label">PROFESIONALES_VERIFICADOS</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">19</div>
+                <div class="metric-label">CIUDADES_ESPAÑA</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">0€</div>
+                <div class="metric-label">COSTE_USUARIO</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">24/7</div>
+                <div class="metric-label">SOPORTE_ACTIVO</div>
+            </div>
+    </section>
+
+    <section class="services">
+        <div class="services-wrapper">
+            <div class="section-title">
+                <h2>Core Modules</h2>
+                <p>Everything you need, powered by technology</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3>Seguros de Salud</h3>
+                    <p>Pólizas obligatorias para visados. Aprobación digital en 24-48h.</p>
+                    <a href="#" class="service-link">explorar_servicio →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>Abogados Extranjería</h3>
+                    <p>Arraigo laboral, visados, NIE, reagrupación familiar. Expertos en inmigración.</p>
+                    <a href="#" class="service-link">explorar_servicio →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Inmobiliarias</h3>
+                    <p>Agentes especializados en extranjeros. Alquiler y compra con apoyo legal.</p>
+                    <a href="#" class="service-link">explorar_servicio →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Gestorías</h3>
+                    <p>Empadronamiento, trámites administrativos, gestión de documentación.</p>
+                    <a href="#" class="service-link">explorar_servicio →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-glow"></div>
+        <div class="cta-content">
+            <h2>¿Listo para Iniciar?</h2>
+            <p>Únete a miles de extranjeros viviendo legalmente en España</p>
+            <a href="#" class="btn-gradient"><span>Analizar Mi Caso</span></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Health4Spain | Powered by Innovation</p>
+    </footer>
+</body>
+</html>

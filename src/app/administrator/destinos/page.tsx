@@ -195,15 +195,17 @@ export default function DestinosPage() {
 
   return (
     <div className="p-8">
-      {/* Header */}
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-serif font-bold text-gray-900">Destinos</h1>
-          <p className="text-gray-500 mt-1">Gestiona el catálogo de ciudades disponibles</p>
-        </div>
+      {/* Header Minimal */}
+      <div className="mb-12 pb-6 border-b border-gray-200">
+        <h1 className="text-4xl font-bold mb-2">Destinos</h1>
+        <p className="text-lg text-gray-600">Gestiona el catálogo de ciudades disponibles</p>
+      </div>
+
+      {/* Action Button */}
+      <div className="mb-8">
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-[#c7956d] text-white rounded-lg hover:bg-[#b8845c] transition"
+          className="btn-minimal"
         >
           {showForm ? 'Cancelar' : 'Nuevo Destino'}
         </button>
@@ -211,14 +213,14 @@ export default function DestinosPage() {
 
       {/* Form */}
       {showForm && (
-        <div className="bg-white p-6 rounded-lg shadow-sm border mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="bg-white p-8 border border-gray-200 mb-12">
+          <h2 className="text-2xl font-bold mb-6">
             {editingDestino ? 'Editar Destino' : 'Nuevo Destino'}
           </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="form-label-minimal">
                   Slug *
                 </label>
                 <input
@@ -227,12 +229,12 @@ export default function DestinosPage() {
                   onChange={(e) => setFormData({ ...formData, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
                   disabled={!!editingDestino}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none disabled:bg-gray-100"
+                  className="form-input-minimal disabled:opacity-50"
                   placeholder="torrevieja"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="form-label-minimal">
                   Nombre *
                 </label>
                 <input
@@ -240,12 +242,12 @@ export default function DestinosPage() {
                   value={formData.nombre}
                   onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+                  className="form-input-minimal"
                   placeholder="Torrevieja"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="form-label-minimal">
                   Provincia *
                 </label>
                 <input
@@ -253,12 +255,12 @@ export default function DestinosPage() {
                   value={formData.provincia}
                   onChange={(e) => setFormData({ ...formData, provincia: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+                  className="form-input-minimal"
                   placeholder="Alicante"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="form-label-minimal">
                   Comunidad Autónoma *
                 </label>
                 <input
@@ -266,24 +268,24 @@ export default function DestinosPage() {
                   value={formData.comunidad}
                   onChange={(e) => setFormData({ ...formData, comunidad: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+                  className="form-input-minimal"
                   placeholder="Comunidad Valenciana"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="form-label-minimal">
                   Población
                 </label>
                 <input
                   type="number"
                   value={formData.poblacion || ''}
                   onChange={(e) => setFormData({ ...formData, poblacion: e.target.value ? parseInt(e.target.value) : null })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+                  className="form-input-minimal"
                   placeholder="82000"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="form-label-minimal">
                   % Extranjeros
                 </label>
                 <input
@@ -291,38 +293,38 @@ export default function DestinosPage() {
                   step="0.01"
                   value={formData.porcentaje_extranjeros || ''}
                   onChange={(e) => setFormData({ ...formData, porcentaje_extranjeros: e.target.value ? parseFloat(e.target.value) : null })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+                  className="form-input-minimal"
                   placeholder="28.00"
                 />
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <input
                 type="checkbox"
                 id="destacada"
                 checked={formData.destacada}
                 onChange={(e) => setFormData({ ...formData, destacada: e.target.checked })}
-                className="w-4 h-4 text-[#c7956d] border-gray-300 rounded focus:ring-[#c7956d]"
+                className="w-5 h-5"
               />
-              <label htmlFor="destacada" className="text-sm font-medium text-gray-700">
+              <label htmlFor="destacada" className="text-sm font-medium">
                 Ciudad destacada (se muestra en homepage)
               </label>
             </div>
 
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-start gap-4 pt-4">
+              <button
+                type="submit"
+                className="btn-minimal"
+              >
+                {editingDestino ? 'Actualizar' : 'Crear'} Destino
+              </button>
               <button
                 type="button"
                 onClick={cancelEdit}
-                className="px-4 py-2 text-gray-600 hover:text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                className="btn-ghost-minimal"
               >
                 Cancelar
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-[#c7956d] text-white rounded-lg hover:bg-[#b8845c] transition"
-              >
-                {editingDestino ? 'Actualizar' : 'Crear'} Destino
               </button>
             </div>
           </form>
@@ -330,37 +332,37 @@ export default function DestinosPage() {
       )}
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
-          <p className="text-sm text-gray-500">Total Destinos</p>
-          <p className="text-2xl font-bold text-gray-900">{destinos.length}</p>
+      <div className="grid grid-cols-3 gap-8 mb-12">
+        <div className="border-t-3 border-red-600 pt-4">
+          <p className="text-sm uppercase tracking-widest text-gray-600 mb-1">Total Destinos</p>
+          <p className="text-4xl font-bold">{destinos.length}</p>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
-          <p className="text-sm text-gray-500">Destacados</p>
-          <p className="text-2xl font-bold text-[#c7956d]">{destinos.filter(d => d.destacada).length}</p>
+        <div className="border-t-3 border-red-600 pt-4">
+          <p className="text-sm uppercase tracking-widest text-gray-600 mb-1">Destacados</p>
+          <p className="text-4xl font-bold">{destinos.filter(d => d.destacada).length}</p>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
-          <p className="text-sm text-gray-500">Población Total</p>
-          <p className="text-2xl font-bold text-gray-900">
+        <div className="border-t-3 border-red-600 pt-4">
+          <p className="text-sm uppercase tracking-widest text-gray-600 mb-1">Población Total</p>
+          <p className="text-4xl font-bold">
             {(destinos.reduce((acc, d) => acc + (d.poblacion || 0), 0) / 1000000).toFixed(1)}M
           </p>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white p-4 rounded-lg shadow-sm border mb-6">
+      <div className="bg-gray-50 p-6 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <input
             type="text"
             placeholder="Buscar por nombre, provincia o slug..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="form-input-minimal bg-white"
           />
           <select
             value={filterDestacada}
             onChange={(e) => setFilterDestacada(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="form-input-minimal bg-white"
           >
             <option value="">Todos los destinos</option>
             <option value="true">Solo destacados</option>
@@ -368,7 +370,7 @@ export default function DestinosPage() {
           </select>
           <button
             onClick={() => { setFilterDestacada(''); setSearchTerm(''); }}
-            className="px-4 py-2 text-gray-600 hover:text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+            className="btn-ghost-minimal"
           >
             Limpiar filtros
           </button>
@@ -376,74 +378,68 @@ export default function DestinosPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
+      <div className="bg-white border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="border-b border-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Slug</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Provincia</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Comunidad</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Población</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">% Extran.</th>
-                <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Destacada</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Nombre</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Slug</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Provincia</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Comunidad</th>
+                <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-widest">Población</th>
+                <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-widest">% Extran.</th>
+                <th className="px-6 py-4 text-center text-xs font-bold uppercase tracking-widest">Destacada</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Acciones</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={8} className="px-4 py-8 text-center">
-                    <div className="w-6 h-6 border-2 border-[#c7956d] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                  <td colSpan={8} className="px-6 py-12 text-center">
+                    <div className="text-lg">Cargando...</div>
                   </td>
                 </tr>
               ) : filteredDestinos.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-4 py-8 text-center text-gray-400">
+                  <td colSpan={8} className="px-6 py-12 text-center text-gray-400">
                     No hay destinos configurados
                   </td>
                 </tr>
               ) : (
                 filteredDestinos.map((destino) => (
-                  <tr key={destino.slug} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-sm text-gray-900 font-medium">{destino.nombre}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600 font-mono">{destino.slug}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{destino.provincia}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{destino.comunidad}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600 text-right">
+                  <tr key={destino.slug} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-4 text-sm font-bold">{destino.nombre}</td>
+                    <td className="px-6 py-4 text-sm font-mono text-gray-600">{destino.slug}</td>
+                    <td className="px-6 py-4 text-sm">{destino.provincia}</td>
+                    <td className="px-6 py-4 text-sm">{destino.comunidad}</td>
+                    <td className="px-6 py-4 text-sm text-right">
                       {destino.poblacion ? destino.poblacion.toLocaleString('es-ES') : '-'}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-600 text-right">
+                    <td className="px-6 py-4 text-sm text-right">
                       {destino.porcentaje_extranjeros ? `${destino.porcentaje_extranjeros}%` : '-'}
                     </td>
-                    <td className="px-4 py-3 text-center">
+                    <td className="px-6 py-4 text-center">
                       <button
                         onClick={() => toggleDestacada(destino.slug, destino.destacada)}
-                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition ${
-                          destino.destacada
-                            ? 'bg-[#c7956d] border-[#c7956d] text-white'
-                            : 'border-gray-300 hover:border-[#c7956d]'
+                        className={`text-lg transition-opacity ${
+                          destino.destacada ? 'opacity-100' : 'opacity-20 hover:opacity-50'
                         }`}
                       >
-                        {destino.destacada && (
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
+                        ★
                       </button>
                     </td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-2">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-4">
                         <button
                           onClick={() => handleEdit(destino)}
-                          className="text-[#c7956d] hover:text-[#b8845c] text-sm font-medium"
+                          className="text-sm font-medium hover:opacity-50 transition-opacity"
                         >
                           Editar
                         </button>
                         <button
                           onClick={() => handleDelete(destino.slug)}
-                          className="text-red-600 hover:text-red-700 text-sm font-medium"
+                          className="text-sm font-medium text-red-600 hover:opacity-50 transition-opacity"
                         >
                           Eliminar
                         </button>
@@ -457,7 +453,7 @@ export default function DestinosPage() {
         </div>
 
         {/* Count */}
-        <div className="px-4 py-3 border-t text-sm text-gray-500">
+        <div className="px-6 py-4 border-t border-gray-200 text-sm text-gray-600">
           Mostrando {filteredDestinos.length} de {destinos.length} destinos
         </div>
       </div>

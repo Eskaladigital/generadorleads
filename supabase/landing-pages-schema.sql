@@ -140,10 +140,10 @@ CREATE TABLE IF NOT EXISTS servicios_catalogo (
 );
 
 INSERT INTO servicios_catalogo (slug, nombre, nombre_plural, icon, descripcion_corta, keywords) VALUES
-  ('abogados', 'Abogado Extranjería', 'Abogados de Extranjería', '⚖️', 'Especialistas en visados, NIE, arraigo y nacionalidad', ARRAY['abogado extranjeria', 'nie', 'visado', 'arraigo', 'nacionalidad']),
-  ('gestorias', 'Gestoría', 'Gestorías', '📋', 'Trámites administrativos y fiscales', ARRAY['gestoria', 'gestor', 'impuestos', 'autonomo', 'declaracion']),
-  ('inmobiliarias', 'Inmobiliaria', 'Inmobiliarias', '🏠', 'Compra, venta y alquiler de propiedades', ARRAY['inmobiliaria', 'comprar casa', 'alquilar piso', 'vivienda']),
-  ('seguros', 'Seguro de Salud', 'Seguros de Salud', '🏥', 'Seguros médicos privados para extranjeros', ARRAY['seguro salud', 'seguro medico', 'aseguradora', 'poliza'])
+  ('seguros', 'Seguro de Salud', 'Seguros de Salud', '🏥', 'Seguros médicos privados para extranjeros', ARRAY['seguro salud', 'seguro medico', 'aseguradora', 'poliza', 'cobertura medica']),
+  ('abogados', 'Abogado de Extranjería', 'Abogados de Extranjería', '⚖️', 'Especialistas en visados, NIE, arraigo y nacionalidad', ARRAY['abogado extranjeria', 'nie', 'visado', 'arraigo', 'nacionalidad', 'permiso residencia']),
+  ('inmobiliarias', 'Inmobiliaria', 'Inmobiliarias', '🏠', 'Compra, venta y alquiler de propiedades', ARRAY['inmobiliaria', 'comprar casa', 'alquilar piso', 'vivienda', 'propiedad']),
+  ('gestorias', 'Gestoría', 'Gestorías', '📋', 'Trámites administrativos, fiscales y laborales', ARRAY['gestoria', 'gestor', 'impuestos', 'autonomo', 'declaracion', 'tramites'])
 ON CONFLICT (slug) DO NOTHING;
 
 -- Tabla auxiliar de ciudades
@@ -238,52 +238,31 @@ DROP POLICY IF EXISTS "Solo admins modifican contenido ciudades" ON ciudades_con
 CREATE POLICY "Solo admins modifican contenido ciudades" ON ciudades_contenido
   FOR ALL USING (auth.role() = 'service_role');
 
-INSERT INTO ciudades_catalogo (slug, nombre, provincia, comunidad, poblacion, porcentaje_extranjeros, destacada, datos_extra) VALUES
-  ('torrevieja', 'Torrevieja', 'Alicante', 'Comunidad Valenciana', 82000, 28.00, true, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 40, "categoria": "Sol y playa", "descripcion": "Paraíso costero"}'),
-  ('alicante', 'Alicante', 'Alicante', 'Comunidad Valenciana', 340000, 15.00, true, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 15, "categoria": "Costa Blanca", "descripcion": "Sol y playa"}'),
-  ('murcia', 'Murcia', 'Murcia', 'Región de Murcia', 460000, 12.00, true, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 30, "categoria": "Levante", "descripcion": "Huerta mediterránea"}'),
-  ('mazarron', 'Mazarrón', 'Murcia', 'Región de Murcia', 35000, 25.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 45}'),
-  ('san-javier', 'San Javier', 'Murcia', 'Región de Murcia', 33000, 20.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 5}'),
-  ('cartagena', 'Cartagena', 'Murcia', 'Región de Murcia', 215000, 10.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 25}'),
-  ('orihuela', 'Orihuela', 'Alicante', 'Comunidad Valenciana', 77000, 22.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 50}'),
-  ('benidorm', 'Benidorm', 'Alicante', 'Comunidad Valenciana', 68000, 24.00, true, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 50, "categoria": "Costa Blanca", "descripcion": ""}'),
-  ('elche', 'Elche', 'Alicante', 'Comunidad Valenciana', 230000, 14.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 20}'),
-  ('lorca', 'Lorca', 'Murcia', 'Región de Murcia', 95000, 15.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 70}'),
-  ('rojales', 'Rojales', 'Alicante', 'Comunidad Valenciana', 20000, 45.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 35}'),
-  ('guardamar', 'Guardamar del Segura', 'Alicante', 'Comunidad Valenciana', 16000, 35.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 40}'),
-  ('pilar-horadada', 'Pilar de la Horadada', 'Alicante', 'Comunidad Valenciana', 25000, 30.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 20}'),
-  ('los-alcazares', 'Los Alcázares', 'Murcia', 'Región de Murcia', 16000, 35.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 10}'),
-  ('san-pedro-pinatar', 'San Pedro del Pinatar', 'Murcia', 'Región de Murcia', 25000, 28.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 15}'),
-  ('aguilas', 'Águilas', 'Murcia', 'Región de Murcia', 35000, 12.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 90}'),
-  ('la-manga', 'La Manga del Mar Menor', 'Murcia', 'Región de Murcia', 3000, 40.00, false, '{"aeropuerto_cercano": "Corvera", "distancia_aeropuerto": 25}'),
-  ('santa-pola', 'Santa Pola', 'Alicante', 'Comunidad Valenciana', 35000, 18.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 25}'),
-  ('altea', 'Altea', 'Alicante', 'Comunidad Valenciana', 22000, 30.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 60}'),
-  ('denia', 'Dénia', 'Alicante', 'Comunidad Valenciana', 42000, 28.00, false, '{"aeropuerto_cercano": "Alicante", "distancia_aeropuerto": 90}'),
-  -- Ciudades principales de España
-  ('madrid', 'Madrid', 'Madrid', 'Comunidad de Madrid', 3300000, 13.50, true, '{"aeropuerto_cercano": "Madrid-Barajas", "distancia_aeropuerto": 15, "categoria": "Centro", "descripcion": "Capital cosmopolita"}'),
-  ('barcelona', 'Barcelona', 'Barcelona', 'Cataluña', 1600000, 17.80, true, '{"aeropuerto_cercano": "Barcelona-El Prat", "distancia_aeropuerto": 20, "categoria": "Cataluña", "descripcion": "Arte y mediterráneo"}'),
-  ('valencia', 'Valencia', 'Valencia', 'Comunidad Valenciana', 800000, 12.50, true, '{"aeropuerto_cercano": "Valencia", "distancia_aeropuerto": 12, "categoria": "Levante", "descripcion": "Ciudad de las artes"}'),
-  ('malaga', 'Málaga', 'Málaga', 'Andalucía', 580000, 9.20, true, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 10, "categoria": "Costa del Sol", "descripcion": "Costa andaluza"}'),
-  ('marbella', 'Marbella', 'Málaga', 'Andalucía', 145000, 35.50, true, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 50, "categoria": "Costa del Sol", "descripcion": "Lujo y glamour"}'),
-  ('sevilla', 'Sevilla', 'Sevilla', 'Andalucía', 690000, 4.80, true, '{"aeropuerto_cercano": "Sevilla", "distancia_aeropuerto": 15, "categoria": "Andalucía", "descripcion": "Flamenco y tradición"}'),
-  ('palma', 'Palma de Mallorca', 'Baleares', 'Islas Baleares', 420000, 20.30, true, '{"aeropuerto_cercano": "Palma de Mallorca", "distancia_aeropuerto": 10, "categoria": "Islas Baleares", "descripcion": "Perla del mediterráneo"}'),
-  ('tenerife', 'Tenerife', 'Santa Cruz de Tenerife', 'Canarias', 930000, 15.60, true, '{"aeropuerto_cercano": "Tenerife Sur", "distancia_aeropuerto": 60, "categoria": "Islas Canarias", "descripcion": "Eterna primavera"}'),
-  ('las-palmas', 'Las Palmas', 'Las Palmas', 'Canarias', 380000, 12.40, true, '{"aeropuerto_cercano": "Gran Canaria", "distancia_aeropuerto": 20, "categoria": "Islas Canarias", "descripcion": "Clima tropical"}'),
-  ('ibiza', 'Ibiza', 'Baleares', 'Islas Baleares', 150000, 28.70, true, '{"aeropuerto_cercano": "Ibiza", "distancia_aeropuerto": 8, "categoria": "Islas Baleares", "descripcion": "Vida y naturaleza"}'),
-  ('granada', 'Granada', 'Granada', 'Andalucía', 230000, 6.50, true, '{"aeropuerto_cercano": "Granada-Jaén", "distancia_aeropuerto": 17, "categoria": "Andalucía", "descripcion": "Alhambra y sierra"}'),
-  ('bilbao', 'Bilbao', 'Vizcaya', 'País Vasco', 350000, 7.20, true, '{"aeropuerto_cercano": "Bilbao", "distancia_aeropuerto": 12, "categoria": "País Vasco", "descripcion": "Cultura y gastronomía"}'),
-  ('zaragoza', 'Zaragoza', 'Zaragoza', 'Aragón', 680000, 11.30, false, '{"aeropuerto_cercano": "Zaragoza", "distancia_aeropuerto": 15, "categoria": "Aragón", "descripcion": "Historia milenaria"}'),
-  ('fuengirola', 'Fuengirola', 'Málaga', 'Andalucía', 80000, 32.40, true, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 25, "categoria": "Costa del Sol", "descripcion": "Playas y familias"}'),
-  ('estepona', 'Estepona', 'Málaga', 'Andalucía', 70000, 28.60, true, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 80, "categoria": "Costa del Sol", "descripcion": "Pueblo andaluz"}'),
-  ('nerja', 'Nerja', 'Málaga', 'Andalucía', 22000, 35.80, false, '{"aeropuerto_cercano": "Málaga-Costa del Sol", "distancia_aeropuerto": 55, "categoria": "Costa del Sol", "descripcion": "Balcón de Europa"}')
-ON CONFLICT (slug) DO NOTHING;
+-- ============================================
+-- DATOS INICIALES: LAS 19 CIUDADES ESTRATÉGICAS
+-- ============================================
+-- Región de Murcia (12): Murcia, Cartagena, Lorca, Mazarrón, Torre Pacheco, 
+--                        San Javier, San Pedro del Pinatar, Molina de Segura, 
+--                        Águilas, Cieza, Jumilla, Yecla
+-- Provincia de Alicante (7): Alicante, Elche, Torrevieja, Orihuela, 
+--                            Rojales, Benidorm, Denia
+--
+-- IMPORTANTE: Las ciudades se insertan desde el archivo separado:
+-- supabase/ciudades-19-iniciales.sql
+-- 
+-- Total de landing pages: 4 servicios × 19 ciudades = 76 landing pages
+-- ============================================
+
+-- Ver archivo: supabase/ciudades-19-iniciales.sql para los INSERT statements
 
 -- ============================================
 -- COMENTARIOS
 -- ============================================
 
-COMMENT ON TABLE landing_pages IS 'Contenido SEO para landing pages de servicio×ciudad generado con IA';
-COMMENT ON COLUMN landing_pages.slug IS 'Slug único: servicio-ciudad (ej: abogados-mazarron)';
+COMMENT ON TABLE landing_pages IS 'Contenido SEO para landing pages: 4 servicios × 19 ciudades = 76 landing pages generadas con IA';
+COMMENT ON TABLE servicios_catalogo IS 'Catálogo de los 4 servicios esenciales: Seguros, Abogados, Inmobiliarias, Gestorías';
+COMMENT ON TABLE ciudades_catalogo IS 'Catálogo de las 19 ciudades estratégicas iniciales (12 Murcia + 7 Alicante)';
+COMMENT ON COLUMN landing_pages.slug IS 'Slug único: servicio-ciudad (ej: seguros-torrevieja, abogados-murcia)';
 COMMENT ON COLUMN landing_pages.hero_bullets IS 'Array JSON de bullets para el hero: ["bullet1", "bullet2"]';
 COMMENT ON COLUMN landing_pages.services IS 'Array JSON de servicios: [{"icon": "📄", "title": "NIE", "description": "..."}]';
 COMMENT ON COLUMN landing_pages.faqs IS 'Array JSON de FAQs: [{"question": "...", "answer": "..."}]';

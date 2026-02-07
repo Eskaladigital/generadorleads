@@ -1,0 +1,101 @@
+
+Health4Spain.com (ROOT)
+?
+??? 1. HOME (ESCAPARATE) [file:2]
+? ?
+? ??? Hero Section (Promesa: "Te acompañamos a vivir en España")
+? ??? Bloque: Identidad
+? ? ??? Quiénes Somos
+? ? ??? Qué NO somos (Filtro de expectativas) [file:4]
+? ? ??? Por qué H4S (Propuesta de Valor)
+? ?
+? ??? Bloque: Red de Confianza
+? ??? Partners Legales (Abogados por zona)
+? ??? Partners Salud (Seguros médicos)
+? ??? Partners Vivienda (Inmobiliarias)
+?
+??? 2. EMPIEZA AQUÍ (PERFILADOR / FILTRO) [file:4]
+? ? (URL: /empieza-aqui/)
+? ?
+? ??? Opción A: Aún en Origen (Fuera de España)
+? ? ??? Sub-bloque: Visados y Trámites
+? ? ? ??? Visado No Lucrativo
+? ? ? ??? Visado de Estudiante
+? ? ? ??? Visado de Trabajo
+? ? ??? Acción: Redirección a Hub de Ciudad (Planificación)
+? ?
+? ??? Opción B: Ya en España
+? ??? Sub-bloque: Regularización
+? ? ??? Arraigo Social/Laboral
+? ? ??? Renovación de Permisos
+? ? ??? Canje de Carnet de Conducir
+? ??? Acción: Formulario Directo a Abogado (Urgencia)
+?
+??? 3. DESTINOS (PÁGINAS ESPEJO / HUBS) [file:3]
+? ?
+? ??? HUB 1: Región de Murcia (Costa Cálida)
+? ? ??? Perfil: Trabajo & Industria
+? ? ? ??? ?? Murcia Capital
+? ? ? ??? ?? Cartagena
+? ? ? ??? ?? Lorca
+? ? ? ??? ?? Molina de Segura
+? ? ?
+? ? ??? Perfil: Retiro & Costa
+? ? ??? ?? Los Alcázares
+? ? ??? ?? San Javier
+? ? ??? ?? Mazarrón
+? ?
+? ??? HUB 2: Alicante (Costa Blanca)
+? ??? Perfil: Retiro Internacional & Lujo
+? ? ??? ?? Torrevieja (Gran Hub Británico/Eslavo) [file:8]
+? ? ??? ?? Rojales / Ciudad Quesada
+? ? ??? ?? Calpe
+? ? ??? ?? Orihuela Costa
+? ?
+? ??? Perfil: Urbano & Turismo
+? ??? ?? Alicante Capital
+? ??? ?? Benidorm
+? ??? ?? Elche (Industria)
+?
+??? 4. CONTENIDO & AUTORIDAD (BLOG) [file:4]
+? ?
+? ??? Categoría: Casos de Éxito (Historias Reales)
+? ? ??? Tag: #Jubilación
+? ? ??? Tag: #Familia
+? ? ??? Tag: #Emprendedor
+? ?
+? ??? Categoría: Actualidad Legal
+? ??? Noticias Extranjería
+? ??? Cambios en Sanidad
+?
+??? 5. CONVERSIÓN & CRM (MOTOR OCULTO) [file:4]
+?
+??? Formularios (Frontend)
+? ??? Formulario Newsletter (Footer)
+? ??? Formulario Cualificador (En /empieza-aqui/)
+? ??? Formulario Contacto Partner (En Fichas Ciudad)
+?
+??? Base de Datos (Backend / CRM)
+??? Lista: Leads Retiro (Prioridad Alta)
+??? Lista: Leads Trabajo (Prioridad Media)
+??? Lista: Partners (Gestión de Colaboradores)
+genera un
+He generado un diagrama visual basado en la estructura de árbol que has aprobado. Este esquema es ideal para compartirlo en la reunión, ya que muestra de un vistazo tanto la navegación visible (lo que ve el usuario) como la lógica de conversión oculta (lo que ocurre en el CRM).
+Cómo interpretar este gráfico en la reunión:
+1. Nivel Superior (Bloques de Color): Son los pilares de la web. Explica que no es solo una web de "páginas", sino un sistema interconectado.
+o Home: Atrae y filtra.
+o Perfilador: Segmenta al usuario (¿Trabajo o Retiro?).
+o Destinos: Aterriza el tráfico local (SEO).
+o CRM (Abajo): Recoge todos los datos.
+2. Flujo de Datos (Líneas Discontinuas):
+o Muestra cómo todas las secciones (Perfilador, Destinos, Blog) terminan enviando información al CRM.
+o Esto justifica la inversión técnica: "No estamos haciendo una web bonita, estamos construyendo una máquina de captar clientes".
+3. Doble Entrada (Origen vs. España):
+o En el bloque "Empieza Aquí", destaca la división clara entre usuarios que están fuera (necesitan visados = planificación) y los que están dentro (necesitan regularización = urgencia).
+Puedes proyectar esta imagen o imprimirla junto con el documento ejecutivo anterior para dar una presentación profesional y clara.
+
+Mapa del Sitio Visual Health4Spain
+
+?
+
+1. WhatsApp-Image-2025-12-11-at-20.22.15.jpg 

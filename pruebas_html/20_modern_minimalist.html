@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Diseño 10: Modern Minimalist</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: #000;
+            background: #fff;
+            line-height: 1.5;
+        }
+
+        /* Ultra minimal nav */
+        nav {
+            padding: 3rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #000;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.5;
+        }
+
+        /* Hero 80% blanco */
+        .hero {
+            padding: 12rem 8% 10rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 2rem;
+            letter-spacing: -3px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            color: #666;
+            max-width: 600px;
+        }
+
+        .btn-minimal {
+            display: inline-block;
+            padding: 1rem 0;
+            color: #000;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 3px solid #dc2626;
+            transition: all 0.2s;
+        }
+
+        .btn-minimal:hover {
+            border-bottom-width: 5px;
+        }
+
+        /* Services lista simple */
+        .services {
+            padding: 8rem 8%;
+            background: #fafafa;
+        }
+
+        .services-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            letter-spacing: -2px;
+        }
+
+        .service-list {
+            list-style: none;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .service-item {
+            padding: 3rem 0;
+            border-bottom: 1px solid #e5e5e5;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .service-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #dc2626;
+        }
+
+        .service-item h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .service-item p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .service-arrow {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* Stats minimal */
+        .stats {
+            padding: 8rem 8%;
+            background: #000;
+            color: #fff;
+        }
+
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5rem;
+        }
+
+        .stat h3 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -2px;
+        }
+
+        .stat p {
+            font-size: 1rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+        }
+
+        /* Profiles minimal */
+        .profiles {
+            padding: 8rem 8%;
+        }
+
+        .profiles-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .profiles h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            letter-spacing: -2px;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .profile {
+            border-top: 3px solid #dc2626;
+            padding-top: 2rem;
+        }
+
+        .profile h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .profile p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* CTA ultra simple */
+        .cta {
+            padding: 12rem 8%;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            letter-spacing: -2px;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 1.5rem 0;
+            color: #000;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-bottom: 4px solid #dc2626;
+            letter-spacing: -1px;
+        }
+
+        footer {
+            padding: 3rem 8%;
+            background: #000;
+            color: #999;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 4rem; }
+            .stats-container { grid-template-columns: 1fr; }
+            .profile-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-menu { display: none; }
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-menu">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>España.<br>Simplificado.</h1>
+        <p>Conexiones directas con profesionales verificados para extranjeros. Seguros, abogados, inmobiliarias, gestorías. Sin complicaciones.</p>
+        <a href="#" class="btn-minimal">Empezar Ahora</a>
+    </section>
+
+    <section class="services">
+        <div class="services-container">
+            <h2>Servicios</h2>
+            <ul class="service-list">
+                <li class="service-item">
+                    <div class="service-number">01</div>
+                    <div>
+                        <h3>Seguros de Salud</h3>
+                        <p>Pólizas obligatorias para visados y permisos de residencia</p>
+                    </div>
+                    <div class="service-arrow">→</div>
+                </li>
+                <li class="service-item">
+                    <div class="service-number">02</div>
+                    <div>
+                        <h3>Abogados de Extranjería</h3>
+                        <p>Arraigo, visados, NIE, reagrupación familiar</p>
+                    </div>
+                    <div class="service-arrow">→</div>
+                </li>
+                <li class="service-item">
+                    <div class="service-number">03</div>
+                    <div>
+                        <h3>Inmobiliarias</h3>
+                        <p>Agentes especializados en extranjeros</p>
+                    </div>
+                    <div class="service-arrow">→</div>
+                </li>
+                <li class="service-item">
+                    <div class="service-number">04</div>
+                    <div>
+                        <h3>Gestorías</h3>
+                        <p>Empadronamiento y gestión administrativa</p>
+                    </div>
+                    <div class="service-arrow">→</div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat">
+                <h3>150+</h3>
+                <p>Partners</p>
+            </div>
+            <div class="stat">
+                <h3>20</h3>
+                <p>Cities</p>
+            </div>
+            <div class="stat">
+                <h3>0%</h3>
+                <p>Fees</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="profiles">
+        <div class="profiles-container">
+            <h2>¿Quién Eres?</h2>
+            <div class="profile-grid">
+                <div class="profile">
+                    <h3>Jubilados</h3>
+                    <p>Retiro en Costa Blanca/Sol. Visado no lucrativo, seguro médico.</p>
+                </div>
+                <div class="profile">
+                    <h3>Trabajadores</h3>
+                    <p>Empleo en agro/industria. Arraigo laboral y reagrupación.</p>
+                </div>
+                <div class="profile">
+                    <h3>Inversores</h3>
+                    <p>Golden Visa. Inversión inmobiliaria en zonas premium.</p>
+                </div>
+                <div class="profile">
+                    <h3>Estudiantes</h3>
+                    <p>Visado estudiante. Homologación de títulos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Listo?</h2>
+        <a href="#" class="btn-cta">Empezar Ahora</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Health4Spain</p>
+    </footer>
+</body>
+</html>

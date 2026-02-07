@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Diseño 5: Mediterranean Villa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #3d3d3d;
+            background: #fffdf7;
+        }
+
+        /* Nav mediterráneo */
+        nav {
+            padding: 2rem 6%;
+            background: #fffdf7;
+            border-bottom: 2px solid #e07a5f;
+        }
+
+        .nav-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            color: #e07a5f;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #3d3d3d;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e07a5f;
+        }
+
+        /* Hero asimétrico */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            min-height: 80vh;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 6%;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Lora', serif;
+            font-size: 4.5rem;
+            color: #2d6a5d;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: #6b6b6b;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn-terracota {
+            padding: 1.2rem 2.5rem;
+            background: #e07a5f;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .btn-terracota:hover {
+            background: #c96850;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            padding: 1.2rem 2.5rem;
+            background: transparent;
+            color: #2d6a5d;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #2d6a5d;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #2d6a5d;
+            color: white;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            background: 
+                linear-gradient(rgba(45,106,93,0.2), rgba(224,122,95,0.2)),
+                url('https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800') center/cover;
+            border-radius: 8px;
+            box-shadow: 20px 20px 0 rgba(224,122,95,0.2);
+        }
+
+        /* Sección con respiración */
+        .services {
+            padding: 8rem 6%;
+            background: white;
+        }
+
+        .services-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-intro h2 {
+            font-family: 'Lora', serif;
+            font-size: 3.5rem;
+            color: #2d6a5d;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-intro p {
+            font-size: 1.2rem;
+            color: #6b6b6b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+        }
+
+        .service-box {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 3px solid #f4f4f0;
+            border-radius: 8px;
+            transition: all 0.4s;
+        }
+
+        .service-box:hover {
+            border-color: #e07a5f;
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-box h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            color: #3d3d3d;
+            margin-bottom: 1rem;
+        }
+
+        .service-box p {
+            font-size: 1rem;
+            color: #6b6b6b;
+            line-height: 1.7;
+        }
+
+        /* Galería de destinos */
+        .destinations {
+            padding: 8rem 6%;
+            background: #f4f4f0;
+        }
+
+        .dest-intro {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .dest-intro h2 {
+            font-family: 'Lora', serif;
+            font-size: 3.5rem;
+            color: #2d6a5d;
+            margin-bottom: 1.5rem;
+        }
+
+        .dest-gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .dest-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .dest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .dest-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #2d6a5d, #e07a5f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .dest-info {
+            padding: 1.5rem;
+        }
+
+        .dest-info h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.4rem;
+            color: #3d3d3d;
+            margin-bottom: 0.5rem;
+        }
+
+        .dest-info p {
+            font-size: 0.9rem;
+            color: #6b6b6b;
+        }
+
+        /* CTA cálido */
+        .cta {
+            padding: 6rem 6%;
+            background: linear-gradient(135deg, #2d6a5d, #e07a5f);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: 'Lora', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .btn-white {
+            padding: 1.2rem 2.5rem;
+            background: white;
+            color: #2d6a5d;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-white:hover {
+            background: #fffdf7;
+        }
+
+        footer {
+            padding: 4rem 6%;
+            background: #3d3d3d;
+            color: #d4d4d4;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .dest-gallery { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .dest-gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="logo">Health4Spain</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Bienvenido a tu vida mediterránea</h1>
+            <p>Conectamos extranjeros con profesionales verificados en seguros de salud, abogados de extranjería, inmobiliarias y gestorías. 19 ciudades españolas.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-terracota">Comienza Ahora</a>
+                <a href="#" class="btn-outline">Explora Destinos</a>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </section>
+
+    <section class="services">
+        <div class="services-wrapper">
+            <div class="section-intro">
+                <h2>Servicios Esenciales</h2>
+                <p>Todo lo que necesitas para vivir legalmente en España</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-box">
+                    <div class="service-icon">🏥</div>
+                    <h3>Seguros de Salud</h3>
+                    <p>Pólizas obligatorias para visados. Cobertura completa sin copagos.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">⚖️</div>
+                    <h3>Abogados de Extranjería</h3>
+                    <p>Arraigo, visados, NIE, reagrupación familiar. Expertos en inmigración.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">🏠</div>
+                    <h3>Inmobiliarias</h3>
+                    <p>Alquiler y compra. Agentes especializados en extranjeros.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="destinations">
+        <div class="dest-intro">
+            <h2>Descubre España</h2>
+        </div>
+        <div class="dest-gallery">
+            <div class="dest-card">
+                <div class="dest-img">🏖️</div>
+                <div class="dest-info">
+                    <h3>Torrevieja</h3>
+                    <p>Costa Blanca - Popular entre jubilados</p>
+                </div>
+            </div>
+            <div class="dest-card">
+                <div class="dest-img">🏭</div>
+                <div class="dest-info">
+                    <h3>Lorca</h3>
+                    <p>Murcia - Empleo agro e industria</p>
+                </div>
+            </div>
+            <div class="dest-card">
+                <div class="dest-img">🌊</div>
+                <div class="dest-info">
+                    <h3>Marbella</h3>
+                    <p>Costa del Sol - Inversión de lujo</p>
+                </div>
+            </div>
+            <div class="dest-card">
+                <div class="dest-img">🏛️</div>
+                <div class="dest-info">
+                    <h3>Murcia Capital</h3>
+                    <p>Ciudad universitaria</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Listo para dar el paso?</h2>
+        <p>Te conectamos con profesionales verificados. Servicio 100% gratuito para extranjeros.</p>
+        <a href="#" class="btn-white">Analizar Mi Caso Ahora</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Health4Spain - Tu hogar en España</p>
+    </footer>
+</body>
+</html>

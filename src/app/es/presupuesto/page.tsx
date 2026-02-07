@@ -15,20 +15,20 @@ export default function PresupuestoPage() {
             <span className="text-accent">Posiciona en Google</span>
           </h1>
           <p className="text-[1.4rem] text-gray-300 leading-relaxed max-w-[800px] mx-auto mb-12">
-            No es solo una web bonita. Es una máquina de generación de leads con 320 puertas de entrada desde Google.
+            No es solo una web bonita. Es una máquina de generación de leads con 76 puertas de entrada desde Google (4 servicios × 19 ciudades).
           </p>
           <div className="flex gap-8 justify-center items-center text-lg">
             <div className="flex items-center gap-2">
               <span className="text-accent text-2xl">✓</span>
-              <span>320 Landings SEO</span>
+              <span>76 Landings SEO</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-accent text-2xl">✓</span>
-              <span>4 Idiomas</span>
+              <span>4 Servicios</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-accent text-2xl">✓</span>
-              <span>20 Ciudades</span>
+              <span>19 Ciudades</span>
             </div>
           </div>
         </div>
@@ -70,28 +70,20 @@ export default function PresupuestoPage() {
                   <div className="flex-shrink-0 w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center font-bold">4</div>
                   <div>
                     <strong className="text-gray-900 block mb-1">Servicios específicos</strong>
-                    <p className="text-gray-600 text-sm">Seguros, Abogados, Inmobiliarias, Otros</p>
+                    <p className="text-gray-600 text-sm">Seguros, Abogados, Inmobiliarias, Gestorías</p>
                   </div>
                 </div>
                 <div className="text-3xl text-center text-gray-400">×</div>
                 <div className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center font-bold">20</div>
+                  <div className="flex-shrink-0 w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center font-bold">19</div>
                   <div>
                     <strong className="text-gray-900 block mb-1">Ciudades estratégicas</strong>
-                    <p className="text-gray-600 text-sm">Alicante, Torrevieja, Murcia, Benidorm...</p>
-                  </div>
-                </div>
-                <div className="text-3xl text-center text-gray-400">×</div>
-                <div className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center font-bold">4</div>
-                  <div>
-                    <strong className="text-gray-900 block mb-1">Idiomas clave</strong>
-                    <p className="text-gray-600 text-sm">Español, Inglés, Alemán, Francés</p>
+                    <p className="text-gray-600 text-sm">Murcia, Alicante, Torrevieja, Cartagena, Lorca...</p>
                   </div>
                 </div>
                 <div className="border-t-2 border-accent pt-4 mt-6">
                   <div className="flex gap-4 items-center">
-                    <div className="flex-shrink-0 w-14 h-14 bg-[#1a1a1a] text-white rounded-full flex items-center justify-center font-bold text-xl">320</div>
+                    <div className="flex-shrink-0 w-14 h-14 bg-[#1a1a1a] text-white rounded-full flex items-center justify-center font-bold text-xl">76</div>
                     <div>
                       <strong className="text-[#1a1a1a] text-xl block">Páginas optimizadas</strong>
                       <p className="text-gray-600">Cada una atacando una búsqueda específica en Google</p>
@@ -122,16 +114,16 @@ export default function PresupuestoPage() {
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-lg text-center">
               <div className="text-5xl mb-4">🚀</div>
               <h4 className="font-bold text-lg mb-2 text-gray-900">Ventaja Competitiva</h4>
-              <p className="text-gray-700 text-sm">Tu competencia tiene 10 páginas, tú 320</p>
+              <p className="text-gray-700 text-sm">Tu competencia tiene 10 páginas, tú 76</p>
             </div>
           </div>
 
           {/* AHORRO DESTACADO */}
-          <div className="bg-gradient-to-br from-accent to-accent/80 text-white p-12 rounded-2xl text-center shadow-2xl">
+            <div className="bg-gradient-to-br from-accent to-accent/80 text-white p-12 rounded-2xl text-center shadow-2xl">
             <div className="text-6xl mb-4">💰</div>
             <h3 className="font-lora text-[2.5rem] font-bold mb-4">El Ahorro Real</h3>
             <p className="text-xl opacity-95 mb-6 max-w-[800px] mx-auto">
-              Una campaña SEO para posicionar 320 términos te costaría <strong>12.000€ - 48.000€</strong> durante 6-12 meses, sin garantías.
+              Una campaña SEO para posicionar 76 términos específicos te costaría <strong>8.000€ - 24.000€</strong> durante 6-12 meses, sin garantías.
             </p>
             <div className="inline-block bg-white/20 backdrop-blur px-8 py-4 rounded-lg">
               <p className="text-2xl font-bold">Con esta estructura, ese trabajo YA está hecho</p>
@@ -228,17 +220,7 @@ export default function PresupuestoPage() {
               </div>
             </div>
 
-            {/* Card 7 */}
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow">
-              <div className="text-4xl mb-4">🌍</div>
-              <h3 className="font-lora text-2xl font-bold mb-3 text-[#1a1a1a]">4 Idiomas</h3>
-              <p className="text-gray-600 mb-4 leading-relaxed">
-                Web en español, inglés, alemán y francés. Switch con un clic. Textos fijos traducidos.
-              </p>
-              <div className="text-right">
-                <span className="text-[#1a1a1a] font-bold text-2xl">120€</span>
-              </div>
-            </div>
+            {/* Card 7 - ELIMINADO: Ya no tiene sentido con solo español */}
 
             {/* Card 8 - DESTACADA */}
             <div className="bg-gradient-to-br from-[#1a1a1a] to-gray-800 text-white p-8 rounded-lg shadow-2xl lg:col-span-2">
@@ -246,18 +228,18 @@ export default function PresupuestoPage() {
                 <div className="text-5xl">🚀</div>
                 <div className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-bold">NÚCLEO SEO</div>
               </div>
-              <h3 className="font-lora text-3xl font-bold mb-3">320 Landing Pages SEO</h3>
+              <h3 className="font-lora text-3xl font-bold mb-3">76 Landing Pages SEO</h3>
               <p className="text-white/90 mb-4 text-lg leading-relaxed">
-                El corazón de tu estrategia. Una página específica para cada combinación de servicio + ciudad + idioma. "Health insurance in Torrevieja", "Abogados extranjería Murcia"...
+                El corazón de tu estrategia. Una página específica para cada combinación de servicio + ciudad. "Seguros de salud en Torrevieja", "Abogados extranjería Murcia", "Inmobiliarias Alicante"...
               </p>
               <div className="bg-white/10 backdrop-blur p-4 rounded-lg mb-4">
                 <p className="text-sm text-white/90">
-                  <strong>Por qué funciona:</strong> Cuando alguien busca exactamente eso en Google, tu página aparece. Sin estas páginas, estarías invisible para el 90% de búsquedas.
+                  <strong>Por qué funciona:</strong> Cuando alguien busca exactamente eso en Google, tu página aparece. Sin estas páginas, estarías invisible para el 90% de búsquedas locales específicas.
                 </p>
               </div>
               <div className="text-right">
-                <span className="text-gray-300 text-sm">3€ × 320 páginas</span><br/>
-                <span className="font-bold text-4xl">960€</span>
+                <span className="text-gray-300 text-sm">3€ × 76 páginas</span><br/>
+                <span className="font-bold text-4xl">228€</span>
               </div>
             </div>
 
@@ -284,8 +266,8 @@ export default function PresupuestoPage() {
       <section className="py-16 px-[5%] bg-gradient-to-br from-gray-900 to-[#1a1a1a] text-white">
         <div className="max-w-[1200px] mx-auto text-center">
           <p className="text-accent uppercase tracking-[3px] text-sm font-bold mb-4">INVERSIÓN TOTAL</p>
-          <div className="text-[6rem] font-bold font-lora leading-none mb-2">2.350€</div>
-          <p className="text-gray-400 text-lg">+ IVA | Plataforma completa + 3 meses soporte</p>
+          <div className="text-[6rem] font-bold font-lora leading-none mb-2">1.498€</div>
+          <p className="text-gray-400 text-lg">+ IVA | Plataforma completa con 76 landing pages SEO + 3 meses soporte</p>
         </div>
       </section>
 
@@ -315,7 +297,7 @@ export default function PresupuestoPage() {
                 <span className="text-5xl font-bold text-accent">A+</span>
               </div>
               <h3 className="font-bold text-xl mb-3 text-gray-900">SEO Ready</h3>
-              <p className="text-gray-600">Estructura técnica lista para Google. Las 320 landings son tu base.</p>
+              <p className="text-gray-600">Estructura técnica lista para Google. Las 76 landings son tu base.</p>
             </div>
           </div>
         </div>

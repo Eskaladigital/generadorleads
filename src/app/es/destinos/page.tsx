@@ -3,68 +3,52 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Destinos en España para Expatriados',
-  description: 'Descubre los mejores destinos en España para vivir como expatriado. Costa Blanca, Costa del Sol, Madrid, Barcelona, Islas Baleares y Canarias.',
+  description: 'Descubre los mejores destinos en España para vivir como expatriado. 19 ciudades con profesionales verificados.',
 };
 
-// Destinos organizados por región
-const REGIONES = [
+// 19 CIUDADES DEL PROYECTO organizadas por zona
+const DESTINOS = [
   {
-    id: 'costa-blanca',
-    nombre: 'Costa Blanca',
-    descripcion: 'Sol, playas y la mejor calidad de vida del Mediterráneo.',
+    zona: 'Costa Blanca',
     ciudades: [
-      { slug: 'alicante', nombre: 'Alicante' },
-      { slug: 'torrevieja', nombre: 'Torrevieja' },
-      { slug: 'benidorm', nombre: 'Benidorm' },
-      { slug: 'denia', nombre: 'Dénia' },
-      { slug: 'javea', nombre: 'Jávea' },
+      { nombre: 'Torrevieja', slug: 'torrevieja' },
+      { nombre: 'Alicante', slug: 'alicante' },
+      { nombre: 'Benidorm', slug: 'benidorm' },
+      { nombre: 'Calpe', slug: 'calpe' },
     ],
   },
   {
-    id: 'costa-del-sol',
-    nombre: 'Costa del Sol',
-    descripcion: 'El destino favorito de los europeos en el sur de España.',
+    zona: 'Región de Murcia',
     ciudades: [
-      { slug: 'malaga', nombre: 'Málaga' },
-      { slug: 'marbella', nombre: 'Marbella' },
-      { slug: 'fuengirola', nombre: 'Fuengirola' },
-      { slug: 'estepona', nombre: 'Estepona' },
-      { slug: 'nerja', nombre: 'Nerja' },
+      { nombre: 'Lorca', slug: 'lorca' },
+      { nombre: 'Murcia Capital', slug: 'murcia' },
+      { nombre: 'Cartagena', slug: 'cartagena' },
+      { nombre: 'Torre Pacheco', slug: 'torre-pacheco' },
     ],
   },
   {
-    id: 'grandes-ciudades',
-    nombre: 'Grandes Ciudades',
-    descripcion: 'Oportunidades profesionales y vida cosmopolita.',
+    zona: 'Costa del Sol',
     ciudades: [
-      { slug: 'madrid', nombre: 'Madrid' },
-      { slug: 'barcelona', nombre: 'Barcelona' },
-      { slug: 'valencia', nombre: 'Valencia' },
-      { slug: 'sevilla', nombre: 'Sevilla' },
-      { slug: 'bilbao', nombre: 'Bilbao' },
+      { nombre: 'Málaga', slug: 'malaga' },
+      { nombre: 'Marbella', slug: 'marbella' },
+      { nombre: 'Fuengirola', slug: 'fuengirola' },
     ],
   },
   {
-    id: 'islas',
-    nombre: 'Islas',
-    descripcion: 'Paraísos insulares con clima privilegiado todo el año.',
+    zona: 'Levante',
     ciudades: [
-      { slug: 'palma', nombre: 'Palma de Mallorca' },
-      { slug: 'ibiza', nombre: 'Ibiza' },
-      { slug: 'tenerife', nombre: 'Tenerife' },
-      { slug: 'las-palmas', nombre: 'Las Palmas' },
-      { slug: 'lanzarote', nombre: 'Lanzarote' },
+      { nombre: 'Valencia', slug: 'valencia' },
+      { nombre: 'Orihuela Costa', slug: 'orihuela' },
     ],
   },
   {
-    id: 'levante',
-    nombre: 'Levante y Murcia',
-    descripcion: 'Costa cálida, precios accesibles y comunidad internacional.',
+    zona: 'Otras Ciudades',
     ciudades: [
-      { slug: 'murcia', nombre: 'Murcia' },
-      { slug: 'cartagena', nombre: 'Cartagena' },
-      { slug: 'orihuela', nombre: 'Orihuela Costa' },
-      { slug: 'almeria', nombre: 'Almería' },
+      { nombre: 'Barcelona', slug: 'barcelona' },
+      { nombre: 'Madrid', slug: 'madrid' },
+      { nombre: 'Almería', slug: 'almeria' },
+      { nombre: 'Sevilla', slug: 'sevilla' },
+      { nombre: 'Palma de Mallorca', slug: 'palma' },
     ],
   },
 ];
@@ -72,83 +56,57 @@ const REGIONES = [
 export default function DestinosPage() {
   return (
     <>
-      {/* Header - altura reducida */}
-      <section className="bg-gradient-secondary text-white py-12 md:py-16">
-        <div className="container-base">
-          <div className="max-w-3xl">
-            <h1 className="font-heading text-3xl md:text-4xl font-bold mb-3">
-              Destinos en España
-            </h1>
-            <p className="text-lg text-white/90">
-              Encuentra tu lugar ideal para vivir. Cada destino tiene su encanto único 
-              y una comunidad internacional que te espera.
-            </p>
-          </div>
+      {/* Header Minimal */}
+      <section className="section border-b border-gray-200">
+        <div className="container-narrow">
+          <h1 className="mb-8">Destinos en España</h1>
+          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl">
+            19 ciudades españolas. Profesionales verificados en cada una. 
+            Elige tu destino.
+          </p>
         </div>
       </section>
 
-      {/* CTA flotante - visible desde el inicio */}
-      <div className="bg-primary/10 border-b border-primary/20">
-        <div className="container-base py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-gray-700 text-center sm:text-left">
-            <strong>¿Ya sabes dónde quieres vivir?</strong> Te conectamos con profesionales locales.
-          </p>
-          <Link href="/es/contacto" className="btn-primary btn-sm whitespace-nowrap">
-            Solicitar información
-          </Link>
-        </div>
-      </div>
-
-      {/* Regiones */}
-      <section className="py-10 md:py-14">
-        <div className="container-base">
-          <div className="space-y-12">
-            {REGIONES.map((region) => (
-              <div key={region.id}>
-                <div className="mb-6">
-                  <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
-                    {region.nombre}
-                  </h2>
-                  <p className="text-gray-600">{region.descripcion}</p>
-                </div>
-                
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                  {region.ciudades.map((ciudad) => (
+      {/* Lista de Destinos por Zona */}
+      <section className="section">
+        <div className="container-narrow space-y-20">
+          {DESTINOS.map((region) => (
+            <div key={region.zona}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 border-b-3 border-red-600 pb-4 inline-block">
+                {region.zona}
+              </h2>
+              
+              <ul className="mt-12 space-y-6">
+                {region.ciudades.map((ciudad) => (
+                  <li key={ciudad.slug} className="border-b border-gray-200 pb-6">
                     <Link
-                      key={ciudad.slug}
                       href={`/es/destinos/${ciudad.slug}`}
-                      className="group card card-hover p-4 text-center"
+                      className="group flex justify-between items-center"
                     >
-                      {/* Icono monocromático */}
-                      <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                        <svg className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      </div>
-                      <h3 className="font-medium text-gray-900 group-hover:text-primary transition-colors">
+                      <h3 className="text-xl md:text-2xl font-bold group-hover:opacity-50 transition-opacity">
                         {ciudad.nombre}
                       </h3>
+                      <span className="text-2xl font-bold group-hover:translate-x-2 transition-transform">
+                        →
+                      </span>
                     </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA Final */}
-      <section className="py-10 md:py-14 bg-gray-50">
-        <div className="container-base text-center">
-          <h2 className="font-heading text-2xl font-bold text-gray-900 mb-3">
-            ¿No encuentras tu destino?
-          </h2>
-          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
-            Cuéntanos dónde quieres vivir y te ayudamos a encontrar los mejores profesionales en esa zona.
+      {/* CTA Simple */}
+      <section className="section-alt text-center">
+        <div className="container-narrow">
+          <h2 className="mb-8">¿No Encuentras Tu Ciudad?</h2>
+          <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-xl mx-auto">
+            Contáctanos y te ayudamos a encontrar profesionales verificados en tu zona
           </p>
-          <Link href="/es/contacto" className="btn-primary">
-            Contactar ahora
+          <Link href="/es/contacto" className="btn-minimal-lg">
+            Contactar Ahora
           </Link>
         </div>
       </section>

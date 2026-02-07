@@ -48,29 +48,34 @@ export const SERVICES = [
 
 export type ServiceSlug = typeof SERVICES[number]['slug'];
 
-// Ciudades disponibles
+// Ciudades disponibles - LAS 19 CIUDADES ESTRATÉGICAS
+// Región de Murcia (12) + Provincia de Alicante (7)
 export const CITIES = [
-  { slug: 'torrevieja', name: 'Torrevieja', province: 'Alicante', popular: true },
-  { slug: 'alicante', name: 'Alicante', province: 'Alicante', popular: true },
+  // REGIÓN DE MURCIA (12 ciudades)
   { slug: 'murcia', name: 'Murcia', province: 'Murcia', popular: true },
-  { slug: 'benidorm', name: 'Benidorm', province: 'Alicante', popular: true },
-  { slug: 'cartagena', name: 'Cartagena', province: 'Murcia', popular: false },
-  { slug: 'elche', name: 'Elche', province: 'Alicante', popular: false },
-  { slug: 'orihuela', name: 'Orihuela', province: 'Alicante', popular: false },
+  { slug: 'cartagena', name: 'Cartagena', province: 'Murcia', popular: true },
   { slug: 'lorca', name: 'Lorca', province: 'Murcia', popular: false },
-  { slug: 'rojales', name: 'Rojales', province: 'Alicante', popular: false },
-  { slug: 'san-javier', name: 'San Javier', province: 'Murcia', popular: false },
-  { slug: 'san-pedro-del-pinatar', name: 'San Pedro del Pinatar', province: 'Murcia', popular: false },
-  { slug: 'pilar-de-la-horadada', name: 'Pilar de la Horadada', province: 'Alicante', popular: false },
-  { slug: 'santa-pola', name: 'Santa Pola', province: 'Alicante', popular: false },
-  { slug: 'denia', name: 'Dénia', province: 'Alicante', popular: false },
-  { slug: 'javea', name: 'Jávea', province: 'Alicante', popular: false },
-  { slug: 'calpe', name: 'Calpe', province: 'Alicante', popular: false },
-  { slug: 'altea', name: 'Altea', province: 'Alicante', popular: false },
-  { slug: 'villajoyosa', name: 'Villajoyosa', province: 'Alicante', popular: false },
   { slug: 'mazarron', name: 'Mazarrón', province: 'Murcia', popular: false },
+  { slug: 'torre-pacheco', name: 'Torre Pacheco', province: 'Murcia', popular: false },
+  { slug: 'san-javier', name: 'San Javier', province: 'Murcia', popular: false },
+  { slug: 'san-pedro-pinatar', name: 'San Pedro del Pinatar', province: 'Murcia', popular: false },
+  { slug: 'molina-de-segura', name: 'Molina de Segura', province: 'Murcia', popular: false },
   { slug: 'aguilas', name: 'Águilas', province: 'Murcia', popular: false },
+  { slug: 'cieza', name: 'Cieza', province: 'Murcia', popular: false },
+  { slug: 'jumilla', name: 'Jumilla', province: 'Murcia', popular: false },
+  { slug: 'yecla', name: 'Yecla', province: 'Murcia', popular: false },
+  
+  // PROVINCIA DE ALICANTE (7 ciudades)
+  { slug: 'alicante', name: 'Alicante', province: 'Alicante', popular: true },
+  { slug: 'elche', name: 'Elche', province: 'Alicante', popular: false },
+  { slug: 'torrevieja', name: 'Torrevieja', province: 'Alicante', popular: true },
+  { slug: 'orihuela', name: 'Orihuela', province: 'Alicante', popular: false },
+  { slug: 'rojales', name: 'Rojales', province: 'Alicante', popular: false },
+  { slug: 'benidorm', name: 'Benidorm', province: 'Alicante', popular: true },
+  { slug: 'denia', name: 'Dénia', province: 'Alicante', popular: false },
 ] as const;
+
+// Total: 19 ciudades × 4 servicios = 76 landing pages
 
 export type CitySlug = typeof CITIES[number]['slug'];
 

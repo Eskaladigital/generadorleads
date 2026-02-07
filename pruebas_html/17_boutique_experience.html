@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Diseño 7: Boutique Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: #3a3a3a;
+            background: #f5efe7;
+        }
+
+        /* Minimal nav */
+        nav {
+            padding: 2.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f5efe7;
+        }
+
+        .logo {
+            font-family: 'Spectral', serif;
+            font-size: 1.6rem;
+            color: #6b8e23;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #3a3a3a;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Hero con parallax suave */
+        .hero {
+            padding: 8rem 8% 6rem;
+            text-align: center;
+            background: linear-gradient(180deg, #f5efe7 0%, #e8dfd0 100%);
+        }
+
+        .hero h1 {
+            font-family: 'Spectral', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: #3a3a3a;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #6b6b6b;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .btn-boutique {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #6b8e23;
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.4s;
+        }
+
+        .btn-boutique:hover {
+            background: #556b1e;
+            letter-spacing: 2px;
+        }
+
+        /* Single column content */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .content-block {
+            margin-bottom: 6rem;
+        }
+
+        .content-block h2 {
+            font-family: 'Spectral', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #3a3a3a;
+            margin-bottom: 2rem;
+        }
+
+        .content-block p {
+            font-size: 1.1rem;
+            color: #6b6b6b;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Accordion services */
+        .services-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .accordion-title {
+            font-family: 'Spectral', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #3a3a3a;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #d4c4b0;
+            padding: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .accordion-item:hover {
+            background: rgba(107,142,35,0.02);
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header h3 {
+            font-family: 'Spectral', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #3a3a3a;
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            color: #6b8e23;
+        }
+
+        .accordion-content {
+            margin-top: 1.5rem;
+            font-size: 1.05rem;
+            color: #6b6b6b;
+            line-height: 1.8;
+        }
+
+        /* Profiles storytelling */
+        .profiles {
+            padding: 6rem 8%;
+            background: white;
+        }
+
+        .profiles-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-story {
+            margin-bottom: 5rem;
+            padding: 3rem;
+            background: #f5efe7;
+        }
+
+        .profile-story h3 {
+            font-family: 'Spectral', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3a3a3a;
+        }
+
+        .profile-meta {
+            font-size: 0.9rem;
+            color: #6b8e23;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .profile-story p {
+            font-size: 1.05rem;
+            color: #6b6b6b;
+            line-height: 1.8;
+        }
+
+        /* Minimal CTA */
+        .cta {
+            padding: 8rem 8%;
+            text-align: center;
+            background: #6b8e23;
+            color: white;
+        }
+
+        .cta h2 {
+            font-family: 'Spectral', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .btn-white {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #6b8e23;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.4s;
+        }
+
+        .btn-white:hover {
+            background: #f5efe7;
+        }
+
+        footer {
+            padding: 3rem 8%;
+            background: #3a3a3a;
+            color: #b8b8b8;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-menu { display: none; }
+            .content, .services-accordion, .profiles-container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-menu">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Stories</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Vivir en España: Enfoque Personal</h1>
+        <p>Cada extranjero es único. Por eso conectamos con profesionales que entienden tu situación: arraigo, visados, seguros obligatorios, vivienda.</p>
+        <a href="#" class="btn-boutique">Empezar Tu Historia</a>
+    </section>
+
+    <div class="content">
+        <div class="content-block">
+            <h2>Nuestra Filosofía</h2>
+            <p>Mudarse a España no es solo papeleo. Es encontrar tu lugar, construir tu vida, crear tu historia.</p>
+            <p>Hemos seleccionado cuidadosamente profesionales que comparten esta filosofía: abogados de extranjería, corredores de seguros, agentes inmobiliarios y gestorías que se toman el tiempo de entender tu caso específico.</p>
+        </div>
+    </div>
+
+    <section class="services-accordion">
+        <h2 class="accordion-title">Servicios Esenciales</h2>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Seguros de Salud</h3>
+                <div class="accordion-icon">+</div>
+            </div>
+            <div class="accordion-content">
+                Pólizas obligatorias para visados (no lucrativo, estudios, trabajo). Sin copagos, cobertura nacional.
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Abogados de Extranjería</h3>
+                <div class="accordion-icon">+</div>
+            </div>
+            <div class="accordion-content">
+                Especialistas en arraigo laboral y social, visados, NIE, TIE y reagrupación familiar.
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Inmobiliarias</h3>
+                <div class="accordion-icon">+</div>
+            </div>
+            <div class="accordion-content">
+                Agentes que entienden las necesidades de extranjeros. Alquiler y compra con apoyo legal.
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Gestorías</h3>
+                <div class="accordion-icon">+</div>
+            </div>
+            <div class="accordion-content">
+                Empadronamiento, alta en Seguridad Social, gestión completa de documentación.
+            </div>
+        </div>
+    </section>
+
+    <section class="profiles">
+        <div class="profiles-container">
+            <div class="profile-story">
+                <h3>Jubilados Internacionales</h3>
+                <p class="profile-meta">UK, Alemania, Holanda • Retiro en España</p>
+                <p>Visado no lucrativo, seguro médico privado obligatorio, fiscalidad. Costa Blanca y Costa del Sol.</p>
+            </div>
+            <div class="profile-story">
+                <h3>Trabajadores Activos</h3>
+                <p class="profile-meta">Marruecos, Ecuador, Rumanía • Empleo</p>
+                <p>Arraigo laboral y social, reagrupación familiar, vivienda económica. Murcia interior y Almería.</p>
+            </div>
+            <div class="profile-story">
+                <h3>Inversores y Nómadas</h3>
+                <p class="profile-meta">Rusia, Ucrania, Escandinavia • Golden Visa</p>
+                <p>Inversión inmobiliaria, visa de nómada digital, colegios internacionales. Alicante y zonas premium.</p>
+            </div>
+            <div class="profile-story">
+                <h3>Jóvenes y Estudiantes</h3>
+                <p class="profile-meta">Colombia, Venezuela, Italia • Estudios</p>
+                <p>Visado de estudiante, homologación de títulos, trabajo en hostelería. Murcia y Alicante capital.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Comencemos Tu Historia en España</h2>
+        <p>Cada historia comienza con un primer paso. Servicio 100% gratuito.</p>
+        <a href="#" class="btn-white">Contactar Ahora</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Health4Spain — Crafted with care</p>
+    </footer>
+</body>
+</html>

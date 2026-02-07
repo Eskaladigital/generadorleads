@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Diseño 3: Clean Professional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1f2937;
+            background: #f9fafb;
+        }
+
+        nav {
+            background: white;
+            padding: 1.5rem 4%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .hero {
+            padding: 6rem 4%;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Georgia', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .badge {
+            text-align: center;
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-text {
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #f1f5f9;
+        }
+
+        .services {
+            padding: 5rem 4%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1f2937;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: #eff6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .profiles {
+            padding: 5rem 4%;
+            background: white;
+        }
+
+        .profiles-grid {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .profile-card {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .profile-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .profile-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-content p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .cta {
+            padding: 5rem 4%;
+            background: #1f2937;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            padding: 3rem 4%;
+            background: #111827;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .profiles-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-links">
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Vivir y Trabajar en España</h1>
+        <p>Conectamos extranjeros con profesionales verificados. Seguros, abogados de extranjería, inmobiliarias y gestorías en 19 ciudades.</p>
+        <a href="#" class="btn">Empezar Ahora</a>
+        <div class="trust-badges">
+            <div class="badge">
+                <div class="badge-icon">✓</div>
+                <div class="badge-text">150+ Profesionales Verificados</div>
+            </div>
+            <div class="badge">
+                <div class="badge-icon">🌍</div>
+                <div class="badge-text">19 Ciudades Españolas</div>
+            </div>
+            <div class="badge">
+                <div class="badge-icon">💰</div>
+                <div class="badge-text">100% Gratuito</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <h2 class="section-title">Servicios Esenciales</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏥</div>
+                <h3>Seguros de Salud</h3>
+                <p>Pólizas obligatorias para visados y residencia. Cobertura completa en toda España.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚖️</div>
+                <h3>Abogados de Extranjería</h3>
+                <p>Expertos en arraigo laboral y social, visados, NIE y reagrupación familiar.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Inmobiliarias</h3>
+                <p>Agentes que entienden las necesidades de extranjeros. Alquiler y compra.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3>Gestorías</h3>
+                <p>Empadronamiento, trámites administrativos y gestión de documentación.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="profiles">
+        <h2 class="section-title">¿Quién Eres?</h2>
+        <div class="profiles-grid">
+            <div class="profile-card">
+                <div class="profile-icon">🌴</div>
+                <div class="profile-content">
+                    <h3>Jubilados Internacionales</h3>
+                    <p>Retiro en Costa Blanca/Sol. Seguro médico, visado no lucrativo. Origen: UK, Alemania, Holanda.</p>
+                </div>
+            </div>
+            <div class="profile-card">
+                <div class="profile-icon">💼</div>
+                <div class="profile-content">
+                    <h3>Trabajadores Activos</h3>
+                    <p>Empleo en agricultura/industria. Arraigo laboral, reagrupación. Origen: Marruecos, Ecuador, Rumanía.</p>
+                </div>
+            </div>
+            <div class="profile-card">
+                <div class="profile-icon">🏡</div>
+                <div class="profile-content">
+                    <h3>Inversores y Nómadas</h3>
+                    <p>Golden Visa, inversión inmobiliaria. Origen: Rusia, Ucrania, Bélgica, Escandinavia.</p>
+                </div>
+            </div>
+            <div class="profile-card">
+                <div class="profile-icon">🎓</div>
+                <div class="profile-content">
+                    <h3>Jóvenes y Estudiantes</h3>
+                    <p>Visado estudiante, homologación títulos. Origen: Colombia, Venezuela, Italia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Listo para Mudarte a España?</h2>
+        <p>Te conectamos con profesionales verificados en tu ciudad. Servicio 100% gratuito.</p>
+        <a href="#" class="btn">Analizar Mi Caso Gratis</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Health4Spain. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,8 +1,123 @@
-# Health4Spain
+# Health4Spain (H4S)
 
-**Plataforma de generación de leads para expatriados en España**
+**Marketplace de Servicios para Extranjeros en España**
 
-Conectamos a residentes internacionales con profesionales españoles verificados: abogados, asesores fiscales, inmobiliarias, seguros, dentistas y más.
+Health4Spain es una plataforma-marketplace digital que conecta a personas extranjeras con profesionales y servicios especializados en España. No vendemos productos directamente, sino que ordenamos el mercado de servicios para facilitar que nuestros usuarios encuentren los profesionales adecuados según su perfil demográfico y ubicación.
+
+---
+
+## 📌 Resumen Ejecutivo: Los 3 Pilares del Proyecto
+
+### 1️⃣ **¿A QUIÉN AYUDAMOS?** → 4 Perfiles de Destinatarios
+
+1. **Móviles** (22-34 años) - Trabajo y estudios
+2. **Emprendedores Familiares** (35-49 años) - Reagrupación familiar
+3. **Profesionales Consolidados** (50-59 años) - Reubicación laboral
+4. **Retirados y Jubilados** (60-70 años) - Retiro en clima cálido
+
+### 2️⃣ **¿QUÉ SERVICIOS OFRECEMOS?** → 4 Servicios Esenciales
+
+1. **Seguros de Salud y Vida**
+2. **Abogados de Extranjería**
+3. **Inmobiliarias**
+4. **Gestorías y Otros Servicios**
+
+### 3️⃣ **¿DÓNDE OPERAMOS?** → 19 Destinos Iniciales
+
+- **12 ciudades en Región de Murcia**: Murcia, Cartagena, Lorca, Mazarrón, Torre Pacheco, San Javier, San Pedro del Pinatar, Molina de Segura, Águilas, Cieza, Jumilla, Yecla
+- **7 ciudades en Provincia de Alicante**: Alicante, Elche, Torrevieja, Orihuela, Rojales, Benidorm, Denia
+
+**Total de Landing Pages**: **76** (4 servicios × 19 ciudades)
+
+---
+
+## 🎯 Propuesta de Valor
+
+**"Cuéntanos tu caso y los mejores profesionales te asesorarán"**
+
+Somos el intermediario digital neutral que:
+1. Escucha el perfil de cada usuario (edad, nacionalidad, objetivo, ciudad)
+2. Clasifica según 4 perfiles demográficos clave
+3. Recomienda servicios y profesionales ajustados a su situación
+4. Conecta directamente con profesionales colaboradores
+5. No cobra comisión al usuario → monetizamos a través de comisiones de profesionales
+
+## 👥 Los 4 Perfiles de Destinatarios (Core Segmentation)
+
+Toda la estrategia de H4S se estructura alrededor de 4 buyer personas principales:
+
+### 1. **Móviles** (22-34 años)
+- **Objetivo**: Trabajo, estudios o experiencia laboral en España
+- **Necesidades**: Visado de trabajo, seguro sanitario, vivienda asequible, trámites rápidos
+- **Sectores laborales**: Agroindustria, logística, tecnología, servicios
+- **Nacionalidades frecuentes**: Ecuatorianos, colombianos, marroquíes
+
+### 2. **Emprendedores Familiares** (35-49 años)
+- **Objetivo**: Reubicación con familia, estabilidad laboral y vivienda a largo plazo
+- **Necesidades**: Reagrupación familiar, seguro completo, servicios educativos, estabilidad laboral
+- **Sectores laborales**: Industria, gestión, comercio, autónomos
+- **Nacionalidades frecuentes**: Rumanos, ecuatorianos, marroquíes
+
+### 3. **Profesionales Consolidados** (50-59 años)
+- **Objetivo**: Reubicación laboral o semirretiro activo
+- **Necesidades**: Seguro médico comprehensive, asesoramiento legal, vivienda de calidad
+- **Sectores laborales**: Consultoría, gestión, enseñanza, servicios especializados
+- **Nacionalidades frecuentes**: Británicos, alemanes, franceses
+
+### 4. **Retirados y Jubilados** (60-70 años)
+- **Objetivo**: Retiro tranquilo en clima cálido, asistencia sanitaria premium
+- **Necesidades**: Seguro de salud residencial, servicios de bienestar, comunidad de jubilados
+- **Servicios**: Cuidado a domicilio, clínicas privadas, residencias asistidas
+- **Nacionalidades frecuentes**: Británicos, alemanes, holandeses, belgas
+
+## 🛠️ Los 4 Servicios Esenciales
+
+El marketplace conecta usuarios con 4 tipos de profesionales verificados:
+
+1. **Seguros de Salud y Vida**
+   - Coberturas según edad, trabajo y tipo de visado
+   - Partners: DKV, Sanitas, Asisa, Adeslas, AXA, Allianz
+
+2. **Abogados de Extranjería**
+   - Especialistas en visados, arraigo, reagrupación familiar
+   - Red local verificada en cada ciudad
+
+3. **Inmobiliarias**
+   - Experiencia con perfiles de extranjeros
+   - Conocimiento de cada zona y ciudad
+
+4. **Gestorías y Otros Servicios**
+   - Trámites administrativos, homologaciones
+   - Clínicas privadas, academias de idiomas
+
+## 📍 Los 19 Destinos Iniciales
+
+Health4Spain opera con páginas espejo optimizadas para SEO en 19 ciudades principales:
+
+### **Región de Murcia (12 ciudades)**
+1. **Murcia** (460k hab., 13% extranjeros) - Servicios, logística, IT
+2. **Cartagena** (215k hab., 13% extranjeros) - Puerto, industria, energía
+3. **Lorca** (98k hab., 20% extranjeros) - Agroindustria, ganadería
+4. **Mazarrón** (33k hab., 20% extranjeros) - Turismo, agrícola
+5. **Torre Pacheco** (38k hab., 30% extranjeros) - Agroindustria, logística
+6. **San Javier** (33k hab., 25% extranjeros) - Turismo, hostelería
+7. **San Pedro del Pinatar** (27k hab., 20% extranjeros) - Turismo, sociosanitario
+8. **Molina de Segura** (74k hab., 15% extranjeros) - Industria agroalimentaria
+9. **Águilas** (35k hab., 15% extranjeros) - Turismo, construcción
+10. **Cieza** (28k hab., 18% extranjeros) - Agricultura
+11. **Jumilla** (24k hab., 16% extranjeros) - Vitivinicultura
+12. **Yecla** (31k hab., 14% extranjeros) - Mueble, cerámica
+
+### **Provincia de Alicante (7 ciudades)**
+13. **Alicante** (330k hab., 23% extranjeros) - Turismo, servicios, comercio
+14. **Elche** (230k hab., 20% extranjeros) - Calzado, textil, agrícola
+15. **Torrevieja** (90k hab., 28% extranjeros) - Turismo premium, retiro
+16. **Orihuela** (110k hab., 18% extranjeros) - Agrícola, turismo
+17. **Rojales** (35k hab., 22% extranjeros) - Retiro, turismo residencial
+18. **Benidorm** (70k hab., 35% extranjeros) - Turismo de masas
+19. **Denia** (42k hab., 15% extranjeros) - Turismo gastronómico, pesca
+
+> **Nota**: Cada ciudad tiene su propia página espejo optimizada para SEO con estructura uniforme: Hero + 4 Perfiles + Matriz demográfica + Servicios locales + Colaboradores + Formulario cualificador
 
 ## 🚀 Stack Tecnológico
 
@@ -14,6 +129,78 @@ Conectamos a residentes internacionales con profesionales españoles verificados
 - **Estilos**: Tailwind CSS
 - **Editor**: TinyMCE
 - **IA**: OpenAI GPT-4o-mini (generación de landings)
+
+## 🏗️ Arquitectura Web
+
+### Navegación Principal
+
+```
+HOME
+├── Cómo te ayudamos
+├── A qué vienes a España
+│   ├── Quiero estudiar
+│   ├── Quiero trabajar
+│   ├── Quiero vivir sin trabajar (no lucrativa)
+│   ├── Reagrupación familiar
+│   └── Preparar mi nacionalidad
+├── Recursos (Guías, blogs, documentos)
+├── Zonas y Consulados (19 ciudades)
+├── Para Profesionales (Colaboradores)
+├── Sobre H4S
+└── Contacto
+```
+
+### Estructura de Página Espejo (por cada ciudad)
+
+Cada una de las 19 ciudades tiene una página con estructura uniforme:
+
+1. **Hero Section**: H1 con promesa local + imágenes de la ciudad
+2. **Quién Eres Tú**: Los 4 perfiles demográficos (bloques clicables)
+3. **Matriz Demográfica**: Tabla perfil × nacionalidad × sectores × datos
+4. **Marketplace Local**: Los 4 servicios adaptados a la ciudad
+5. **Colaboradores Destacados**: Nombres de partners locales verificados
+6. **Consulados y Referencias**: Enlaces a consulados españoles relevantes
+7. **Formulario Cualificador**: "Cuéntanos tu caso" (conectado a CRM)
+8. **FAQ**: Preguntas frecuentes específicas de la ciudad
+
+## 🎯 Modelo de Negocio: Generación de Leads
+
+### Funnel de Conversión
+
+1. **Atracción** (SEO + SEM)
+   - Palabras clave: "Vivir en [Ciudad] como extranjero", "Trabajar en [Sector]"
+   - Canales: SEO orgánico, Google Ads, Meta Ads, YouTube, TikTok
+
+2. **Descubrimiento** (Landing en página espejo)
+   - Usuario ve promesa clara
+   - Se identifica con uno de los 4 perfiles
+   - Comprende su sector y oportunidades
+   - Siente confianza con los colaboradores
+
+3. **Decisión** (Lead cualificado)
+   - Completa formulario: nombre, email, teléfono, edad, nacionalidad, objetivo, ciudad, servicios
+
+4. **Conversión** (Lead entregado a colaborador)
+   - Sistema verifica colaborador adecuado al perfil
+   - Envía lead al profesional (con comisión negociada)
+   - Profesional contacta al usuario
+
+### Revenue Model
+
+- **Comisión por lead cualificado**: 10-25% del valor medio del servicio
+- **Suscripción mensual**: Colaboradores premium con visibilidad destacada
+- **Afiliación**: Comisión en seguros contratados
+
+## 📊 Diferenciación Competitiva
+
+| Aspecto | H4S | Comparador Seguros | Agencia Inmobiliaria |
+|---------|-----|-------------------|---------------------|
+| Modelo | Marketplace neutral | Vende seguros | Vende vivienda |
+| Cobertura | 4 servicios completos | Solo seguros | Solo inmobiliaria |
+| Localización | 19 ciudades con páginas espejo | Nacional genérico | 1-2 ciudades |
+| Perfiles | Segmentación por 4 perfiles + nacionalidad | Genérico | Genérico |
+| Comisión usuario | 0% (intermediarios) | Incluida en prima | 5-10% comisión |
+| Confianza | Catálogo verificado | Marca propia | Marca propia local |
 
 ## 📁 Estructura del Proyecto
 
@@ -178,11 +365,11 @@ Acceso: `/administrator/login`
 - **Leads**: Lista, filtros, cambio de estado, detalle
 - **Blog**: Lista de posts, crear/editar con TinyMCE
 - **Media**: Galería de imágenes, subir, organizar en carpetas
-- **Landings**: Lista de 120 landings, marcar revisadas/activas
+- **Landings**: Lista de 76 landings (4 servicios × 19 ciudades), marcar revisadas/activas
 
 ## 🤖 Generación de Landings con IA
 
-120 landing pages (6 servicios × 20 ciudades) generadas con GPT-4o-mini.
+76 landing pages (4 servicios × 19 ciudades) generadas con GPT-4o-mini.
 
 ```bash
 # Configurar OPENAI_API_KEY en .env.local
@@ -224,6 +411,14 @@ NEXT_PUBLIC_WHATSAPP_NUMBER=34600000000
 # Site
 NEXT_PUBLIC_SITE_URL=https://health4spain.com
 ```
+
+## 📄 Documentación Estratégica
+
+Para más detalles sobre la estrategia del proyecto, consulta:
+
+- **Propuesta Estratégica**: `pruebas_html/H4S Marketplace - Propuesta Estratégica 15012026 (1).txt`
+- **Estructura del Sitio**: `pruebas_html/Health4Spain.com (ROOT)_│_├── 1. HOME (ESCAPARATE) (2).txt`
+- **Fichas de Ciudad y Perfiles**: `pruebas_html/crea las fichas de cada ciudad y cada perfil de bu (1).txt`
 
 ## 📄 Licencia
 

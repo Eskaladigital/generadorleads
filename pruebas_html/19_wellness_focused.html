@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Diseño 9: Wellness Focused</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            color: #4a5568;
+            background: #fdfcfb;
+        }
+
+        /* Soft nav */
+        nav {
+            padding: 2rem 5%;
+            background: rgba(253,252,251,0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #87a96b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #87a96b;
+        }
+
+        /* Hero suave */
+        .hero {
+            padding: 8rem 5% 6rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(135,169,107,0.08) 0%, rgba(253,252,251,1) 100%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #718096;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-wellness {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: #87a96b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-wellness:hover {
+            background: #72945a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(135,169,107,0.3);
+        }
+
+        /* Benefits checklist */
+        .benefits {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            color: #2d3748;
+            margin-bottom: 4rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .check-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #87a96b, #a4c4a8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .benefit-content p {
+            color: #718096;
+            line-height: 1.7;
+        }
+
+        /* Services circular */
+        .services {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, #fdfcfb 0%, rgba(199,210,254,0.1) 100%);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            color: #2d3748;
+            margin-bottom: 4rem;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .service-circle {
+            text-align: center;
+        }
+
+        .service-icon-circle {
+            width: 140px;
+            height: 140px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(135,169,107,0.15);
+            transition: all 0.3s;
+        }
+
+        .service-circle:hover .service-icon-circle {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(135,169,107,0.25);
+        }
+
+        .service-circle h3 {
+            font-size: 1.3rem;
+            color: #2d3748;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .service-circle p {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            color: #2d3748;
+            margin-bottom: 4rem;
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .testimonial-card {
+            background: #f7fafc;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .testimonial-stars {
+            color: #87a96b;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        /* CTA wellness */
+        .cta {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, #87a96b, #a4c4a8);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .btn-white-wellness {
+            padding: 1.2rem 3rem;
+            background: white;
+            color: #87a96b;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-white-wellness:hover {
+            background: #fdfcfb;
+        }
+
+        footer {
+            padding: 3rem 5%;
+            background: #2d3748;
+            color: #a0aec0;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .benefits-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Tu Bienestar en España</h1>
+        <p class="hero-subtitle">Conectamos extranjeros con profesionales de confianza. Seguros de salud, abogados de extranjería, inmobiliarias y gestorías. Servicio 100% gratuito.</p>
+        <a href="#" class="btn-wellness">Empezar Tu Proceso</a>
+    </section>
+
+    <section class="benefits">
+        <div class="benefits-container">
+            <h2>Por Qué Elegirnos</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check-icon">✓</div>
+                    <div class="benefit-content">
+                        <h3>Profesionales Verificados</h3>
+                        <p>Todos los abogados, corredores de seguros y gestorías están verificados</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="check-icon">✓</div>
+                    <div class="benefit-content">
+                        <h3>Atención Personalizada</h3>
+                        <p>Cada caso es único. Entendemos tu situación específica como extranjero</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="check-icon">✓</div>
+                    <div class="benefit-content">
+                        <h3>En Tu Idioma</h3>
+                        <p>Profesionales que hablan español, inglés, francés, árabe y más</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="check-icon">✓</div>
+                    <div class="benefit-content">
+                        <h3>100% Gratuito</h3>
+                        <p>Sin comisiones ni costes ocultos. Nuestro servicio es completamente gratis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <h2>Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-circle">
+                <div class="service-icon-circle">🏥</div>
+                <h3>Seguros de Salud</h3>
+                <p>Pólizas para visados y residencia</p>
+            </div>
+            <div class="service-circle">
+                <div class="service-icon-circle">⚖️</div>
+                <h3>Abogados Extranjería</h3>
+                <p>Arraigo, visados, NIE</p>
+            </div>
+            <div class="service-circle">
+                <div class="service-icon-circle">🏠</div>
+                <h3>Inmobiliarias</h3>
+                <p>Tu hogar en España</p>
+            </div>
+            <div class="service-circle">
+                <div class="service-icon-circle">📋</div>
+                <h3>Gestorías</h3>
+                <p>Trámites sin estrés</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>Testimonios Reales</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Me ayudaron con el arraigo social y el seguro de salud. Ahora vivo legalmente en Lorca con mi familia."</p>
+                <div class="testimonial-author">— Ahmed M., Marruecos</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"El visado no lucrativo fue más fácil de lo que pensaba gracias a su abogado en Torrevieja."</p>
+                <div class="testimonial-author">— John & Patricia, Reino Unido</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Conseguimos el Golden Visa e invertimos en Alicante. Servicio profesional y en nuestro idioma."</p>
+                <div class="testimonial-author">— Dmitry K., Ucrania</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Listo para Empezar?</h2>
+        <p>Hagamos realidad tu vida en España</p>
+        <a href="#" class="btn-white-wellness">Analizar Mi Caso</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Health4Spain — Your wellness partner in Spain</p>
+    </footer>
+</body>
+</html>

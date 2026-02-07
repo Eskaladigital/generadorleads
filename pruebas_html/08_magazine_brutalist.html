@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Variación 2: Neo Brutalist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #000;
+            line-height: 1.5;
+            background: #fff;
+        }
+
+        /* NAV - Bold minimal */
+        nav {
+            padding: 2rem 3%;
+            background: #000;
+            color: #fff;
+        }
+
+        .nav-container {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.6;
+        }
+
+        /* HERO - Split bold */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            min-height: 90vh;
+        }
+
+        .hero-content {
+            background: #fff;
+            padding: 8rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 4px solid #000;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #000;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 3rem;
+            width: fit-content;
+        }
+
+        .hero h1 {
+            font-size: 7rem;
+            font-weight: 700;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            letter-spacing: -3px;
+        }
+
+        .hero-lead {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            font-weight: 400;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 0;
+        }
+
+        .btn-brutal {
+            padding: 1.5rem 2.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 3px solid #000;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-black {
+            background: #000;
+            color: #fff;
+            border-right: none;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-brutal:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        .hero-visual {
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 4rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* MARQUEE */
+        .marquee {
+            background: #000;
+            color: #fff;
+            padding: 2rem 0;
+            overflow: hidden;
+            border-top: 4px solid #000;
+            border-bottom: 4px solid #000;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 4rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            animation: scroll 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            white-space: nowrap;
+        }
+
+        /* PROFILES - Grid brutal */
+        .profiles {
+            padding: 8rem 3%;
+            background: #fff;
+        }
+
+        .profiles-container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            background: #000;
+            border: 4px solid #000;
+        }
+
+        .profile-box {
+            background: #fff;
+            padding: 4rem 3rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .profile-box:hover {
+            background: #f5f5f5;
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0 #000;
+        }
+
+        .profile-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .profile-box h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .profile-box p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .profile-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: #000;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #000;
+        }
+
+        /* SERVICES - List brutal */
+        .services {
+            padding: 8rem 3%;
+            background: #f5f5f5;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-intro {
+            margin-bottom: 5rem;
+            max-width: 700px;
+        }
+
+        .services-intro h2 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+        }
+
+        .services-intro p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 4px solid #000;
+        }
+
+        .service-row {
+            background: #fff;
+            padding: 3rem;
+            border-bottom: 4px solid #000;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .service-row:last-child {
+            border-bottom: none;
+        }
+
+        .service-row:hover {
+            background: #fff;
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0 #000;
+        }
+
+        .service-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .service-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .service-info p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .service-arrow {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* CTA - Full width brutal */
+        .cta {
+            background: #000;
+            color: #fff;
+            padding: 10rem 3%;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 3rem;
+            letter-spacing: -2px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 2rem 4rem;
+            background: #fff;
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: 4px solid #fff;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0 #fff;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #fff;
+            padding: 6rem 3% 3rem;
+            border-top: 4px solid #000;
+        }
+
+        .footer-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .footer-tagline {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .footer-section h4 {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #000;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+
+        .footer-section a:hover {
+            opacity: 0.5;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 3px solid #000;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-content { border-right: none; border-bottom: 4px solid #000; }
+            .hero h1 { font-size: 5rem; }
+            .profiles-grid { grid-template-columns: 1fr; }
+            .service-row { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+            .section-title { font-size: 3rem; }
+            .cta h2 { font-size: 3rem; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">HEALTH4SPAIN</div>
+            <ul class="nav-menu">
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">MEDITERRANEAN 2026</div>
+            <h1>Spain.<br>Simplified.</h1>
+            <p class="hero-lead">Your direct connection to verified Spanish professionals. Insurance, legal services, and housing—without the complexity.</p>
+            <div class="hero-actions">
+                <a href="#" class="btn-brutal btn-black">Get Started</a>
+                <a href="#" class="btn-brutal btn-white">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">150+</div>
+                    <div class="hero-stat-label">Partners</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">20</div>
+                    <div class="hero-stat-label">Cities</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">0%</div>
+                    <div class="hero-stat-label">Fees</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">24/7</div>
+                    <div class="hero-stat-label">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            <span class="marquee-item">ALICANTE • MÁLAGA • BARCELONA • VALENCIA • MURCIA • </span>
+            <span class="marquee-item">ALICANTE • MÁLAGA • BARCELONA • VALENCIA • MURCIA • </span>
+            <span class="marquee-item">ALICANTE • MÁLAGA • BARCELONA • VALENCIA • MURCIA • </span>
+        </div>
+    </div>
+
+    <section class="profiles">
+        <div class="profiles-container">
+            <div class="section-header">
+                <div class="section-label">[WHO_WE_SERVE]</div>
+                <h2 class="section-title">Four Profiles.<br>One Platform.</h2>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-box">
+                    <div class="profile-number">[01]</div>
+                    <h3>Students</h3>
+                    <p>Starting your Spanish academic journey with comprehensive support and guidance every step of the way.</p>
+                    <a href="#" class="profile-link">View Details →</a>
+                </div>
+                <div class="profile-box">
+                    <div class="profile-number">[02]</div>
+                    <h3>Families</h3>
+                    <p>Complete relocation solutions for families seeking quality education and Mediterranean lifestyle.</p>
+                    <a href="#" class="profile-link">View Details →</a>
+                </div>
+                <div class="profile-box">
+                    <div class="profile-number">[03]</div>
+                    <h3>Professionals</h3>
+                    <p>Career-focused individuals establishing their professional base in Spain's dynamic cities.</p>
+                    <a href="#" class="profile-link">View Details →</a>
+                </div>
+                <div class="profile-box">
+                    <div class="profile-number">[04]</div>
+                    <h3>Retirees</h3>
+                    <p>Well-deserved retirement under the Spanish sun with complete peace of mind and support.</p>
+                    <a href="#" class="profile-link">View Details →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services-container">
+            <div class="services-intro">
+                <h2>Core Services</h2>
+                <p>Every essential covered by verified professionals who understand international residents.</p>
+            </div>
+            <div class="services-list">
+                <div class="service-row">
+                    <div class="service-num">01</div>
+                    <div class="service-info">
+                        <h3>Health Insurance</h3>
+                        <p>Comprehensive coverage valid for all Spanish visa types and residence permits.</p>
+                    </div>
+                    <div class="service-arrow">→</div>
+                </div>
+                <div class="service-row">
+                    <div class="service-num">02</div>
+                    <div class="service-info">
+                        <h3>Legal Services</h3>
+                        <p>Expert immigration lawyers for visas, NIE, and all residence procedures.</p>
+                    </div>
+                    <div class="service-arrow">→</div>
+                </div>
+                <div class="service-row">
+                    <div class="service-num">03</div>
+                    <div class="service-info">
+                        <h3>Real Estate</h3>
+                        <p>Trusted property agents experienced with international client needs.</p>
+                    </div>
+                    <div class="service-arrow">→</div>
+                </div>
+                <div class="service-row">
+                    <div class="service-num">04</div>
+                    <div class="service-info">
+                        <h3>Administration</h3>
+                        <p>Gestoría professionals handling paperwork and bureaucratic processes.</p>
+                    </div>
+                    <div class="service-arrow">→</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Start<br>Your Spanish Life?</h2>
+        <a href="#" class="cta-btn">Get Connected</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">HEALTH4SPAIN</div>
+                <p class="footer-tagline">Connecting international residents with Spain's most trusted professionals since 2026.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Insurance</a></li>
+                    <li><a href="#">Legal</a></li>
+                    <li><a href="#">Real Estate</a></li>
+                    <li><a href="#">Admin</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Cities</h4>
+                <ul>
+                    <li><a href="#">Alicante</a></li>
+                    <li><a href="#">Málaga</a></li>
+                    <li><a href="#">Barcelona</a></li>
+                    <li><a href="#">All Cities</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Partners</a></li>
+                    <li><a href="#">Stories</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 HEALTH4SPAIN</div>
+            <div>PRIVACY • TERMS • COOKIES</div>
+        </div>
+    </footer>
+</body>
+</html>

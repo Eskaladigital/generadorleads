@@ -36,7 +36,7 @@
 - Integrado en el editor de blog
 
 **Gestión de Landings (`/administrator/landings`):**
-- Lista de 120 landing pages
+- Lista de 76 landing pages (4 servicios × 19 ciudades)
 - Filtros por servicio, estado de revisión
 - Toggle de revisado/activo
 - Estadísticas de progreso
@@ -102,12 +102,12 @@ supabase/
 
 **Esquema de base de datos:**
 - Tabla `landing_pages` con todos los campos para contenido dinámico
-- Soporte para 6 servicios × 20 ciudades = 120 landings
+- Soporte para 4 servicios × 19 ciudades = 76 landings
 
 **Script de generación:**
 - `scripts/generate-landings.ts` usando OpenAI GPT-4o-mini
 - Prompts optimizados para contenido SEO en español
-- Coste estimado: ~$1.50-2.50 USD
+- Coste estimado: ~$1.00-1.50 USD
 
 **Página dinámica:**
 - `/es/destinos/[slug]/page.tsx` renderiza las landings

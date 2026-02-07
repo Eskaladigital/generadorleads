@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Variación 1: Minimal Luxe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #0a0a0a;
+            line-height: 1.6;
+            background: #fafafa;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* NAV - Ultra minimal */
+        nav {
+            padding: 3rem 5%;
+            background: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #0a0a0a;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 4rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #0a0a0a;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.5;
+        }
+
+        /* HERO - Full screen minimal */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 5% 5rem;
+            background: #ffffff;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-overline {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 3rem;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 3rem;
+            color: #0a0a0a;
+            letter-spacing: -2px;
+        }
+
+        .hero-lead {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 4rem;
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1px;
+            background: #0a0a0a;
+        }
+
+        .btn-minimal {
+            background: #0a0a0a;
+            color: white;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-minimal:hover {
+            background: #333;
+        }
+
+        .btn-ghost {
+            background: white;
+            color: #0a0a0a;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-ghost:hover {
+            background: #fafafa;
+        }
+
+        /* STATS - Horizontal minimal */
+        .stats {
+            padding: 6rem 5%;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            background: white;
+        }
+
+        .stats-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+
+        .stat {
+            flex: 1;
+            text-align: center;
+            padding: 2rem 0;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: #0a0a0a;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* PROFILES - Asymmetric layout */
+        .profiles {
+            padding: 10rem 5%;
+            background: #fafafa;
+        }
+
+        .profiles-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 6rem;
+            max-width: 600px;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: #0a0a0a;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: white;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 3rem 2rem;
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #0a0a0a;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .profile-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .profile-icon {
+            width: 60px;
+            height: 60px;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .profile-card h3 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #0a0a0a;
+        }
+
+        .profile-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-link {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #0a0a0a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* SERVICES - Split screen */
+        .services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 90vh;
+        }
+
+        .service-intro {
+            background: #0a0a0a;
+            color: white;
+            padding: 8rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-intro h2 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+
+        .service-intro p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .service-list {
+            background: white;
+            padding: 8rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4rem;
+        }
+
+        .service-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 3rem;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .service-number {
+            font-size: 0.7rem;
+            color: #999;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .service-item h3 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #0a0a0a;
+        }
+
+        .service-item p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-action {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #0a0a0a;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #0a0a0a;
+        }
+
+        /* CTA - Full width minimal */
+        .cta {
+            padding: 10rem 5%;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 3rem;
+            color: #0a0a0a;
+            letter-spacing: -1px;
+        }
+
+        /* FOOTER - Minimal */
+        footer {
+            padding: 6rem 5% 4rem;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 6rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-tagline {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .footer-section h4 {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            color: #0a0a0a;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 0.5;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 3rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 4rem; }
+            .stats-grid { flex-direction: column; }
+            .stat { border-right: none; border-bottom: 1px solid #e0e0e0; }
+            .profiles-grid { grid-template-columns: repeat(2, 1fr); }
+            .services { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .profiles-grid { grid-template-columns: 1fr; }
+            .service-intro, .service-list { padding: 4rem 2rem; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Health4Spain</div>
+            <ul class="nav-menu">
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-overline">Est. 2026 — Mediterranean</div>
+            <h1>Vida Nueva</h1>
+            <p class="hero-lead">Connecting international residents with Spain's finest professionals. Health insurance, legal expertise, and trusted services—thoughtfully curated for your Spanish journey.</p>
+            <div class="hero-cta">
+                <a href="#" class="btn-minimal">Begin</a>
+                <a href="#" class="btn-ghost">Explore</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Verified Partners</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">20</div>
+                <div class="stat-label">Spanish Cities</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">User Commission</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="profiles">
+        <div class="profiles-container">
+            <div class="section-header">
+                <div class="section-label">Who We Serve</div>
+                <h2 class="section-title">Every Journey Is Unique</h2>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-card">
+                    <div class="profile-icon">🎓</div>
+                    <h3>Students</h3>
+                    <p>Starting your academic journey in Spain with the right support network.</p>
+                    <a href="#" class="profile-link">Discover →</a>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Families</h3>
+                    <p>Complete relocation support for families seeking quality life in Spain.</p>
+                    <a href="#" class="profile-link">Discover →</a>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">💼</div>
+                    <h3>Professionals</h3>
+                    <p>Career-driven individuals making Spain their new professional base.</p>
+                    <a href="#" class="profile-link">Discover →</a>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">🌴</div>
+                    <h3>Retirees</h3>
+                    <p>Enjoying well-deserved retirement under the Mediterranean sun.</p>
+                    <a href="#" class="profile-link">Discover →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="service-intro">
+            <h2>Essential Services</h2>
+            <p>Every detail of your Spanish life, carefully considered and expertly handled by verified professionals.</p>
+        </div>
+        <div class="service-list">
+            <div class="service-item">
+                <div class="service-number">01</div>
+                <h3>Health Insurance</h3>
+                <p>Comprehensive coverage tailored for international residents. Valid for all visa types.</p>
+                <a href="#" class="service-action">Learn More</a>
+            </div>
+            <div class="service-item">
+                <div class="service-number">02</div>
+                <h3>Legal Services</h3>
+                <p>Immigration lawyers specialized in visas, NIE, and residence procedures.</p>
+                <a href="#" class="service-action">Learn More</a>
+            </div>
+            <div class="service-item">
+                <div class="service-number">03</div>
+                <h3>Real Estate</h3>
+                <p>Find your ideal Spanish home with agents who understand international clients.</p>
+                <a href="#" class="service-action">Learn More</a>
+            </div>
+            <div class="service-item">
+                <div class="service-number">04</div>
+                <h3>Administration</h3>
+                <p>Gestoría services to handle all your paperwork and bureaucratic needs.</p>
+                <a href="#" class="service-action">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Begin?</h2>
+            <a href="#" class="btn-minimal">Start Your Journey</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Health4Spain</div>
+                <p class="footer-tagline">Thoughtfully connecting international residents with Spain's most trusted professionals since 2026.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Insurance</a></li>
+                    <li><a href="#">Legal</a></li>
+                    <li><a href="#">Real Estate</a></li>
+                    <li><a href="#">Administration</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Destinations</h4>
+                <ul>
+                    <li><a href="#">Alicante</a></li>
+                    <li><a href="#">Málaga</a></li>
+                    <li><a href="#">Barcelona</a></li>
+                    <li><a href="#">View All</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Stories</a></li>
+                    <li><a href="#">Partners</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Health4Spain</div>
+            <div>Privacy • Terms • Cookies</div>
+        </div>
+    </footer>
+</body>
+</html>

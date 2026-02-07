@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Diseño 1: Luxury Hospitality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2d2d;
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        /* Hero con video background style */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: white;
+            color: #2d2d2d;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+        }
+
+        .btn-luxury:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation overlay style */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 2rem 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.7;
+        }
+
+        /* Services Section - Hotel style */
+        .services {
+            padding: 8rem 4%;
+            background: #f8f8f8;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #2d2d2d;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #2d2d2d;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Profiles - Elegant cards */
+        .profiles {
+            padding: 8rem 4%;
+            background: white;
+        }
+
+        .profiles-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .profile-card {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .profile-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: #2d2d2d;
+        }
+
+        .profile-content p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 8rem 4%;
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 4% 3rem;
+            background: #1a1a1a;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .profiles-grid { grid-template-columns: 1fr; }
+            .profile-card { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3rem; }
+            .nav-menu { display: none; }
+            .services-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-menu">
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Destinations</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Vivir y Trabajar en España</h1>
+            <p>Conectamos extranjeros con profesionales verificados en salud, legal e inmobiliario. Tu nueva vida en España comienza aquí.</p>
+            <a href="#" class="btn-luxury">Empezar Ahora</a>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="section-header">
+            <h2>Servicios Esenciales</h2>
+            <p>Todo lo que necesitas para vivir y trabajar legalmente en España</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏥</div>
+                <h3>Seguros de Salud</h3>
+                <p>Pólizas obligatorias para visados y residencia. Cobertura completa en toda España.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚖️</div>
+                <h3>Abogados de Extranjería</h3>
+                <p>Expertos en arraigo, visados, NIE y reagrupación familiar.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Inmobiliarias</h3>
+                <p>Agentes que entienden las necesidades de extranjeros. Alquiler y compra.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3>Gestorías</h3>
+                <p>Trámites administrativos, empadronamiento y gestión de papeles.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="profiles">
+        <div class="section-header">
+            <h2>¿Quién Eres?</h2>
+            <p>Soluciones personalizadas según tu perfil y nacionalidad</p>
+        </div>
+        <div class="profiles-grid">
+            <div class="profile-card">
+                <div class="profile-image">🌴</div>
+                <div class="profile-content">
+                    <h3>Jubilados Internacionales</h3>
+                    <p>Retiro en Costa Blanca y Costa del Sol. Seguro médico privado, fiscalidad y visado no lucrativo. Origen: UK, Alemania, Holanda.</p>
+                    <a href="#" class="profile-link">Ver Más →</a>
+                </div>
+            </div>
+            <div class="profile-card">
+                <div class="profile-image">💼</div>
+                <div class="profile-content">
+                    <h3>Trabajadores Activos</h3>
+                    <p>Empleo en agricultura, industria y servicios. Arraigo laboral y social, reagrupación familiar. Origen: Marruecos, Ecuador, Rumanía.</p>
+                    <a href="#" class="profile-link">Ver Más →</a>
+                </div>
+            </div>
+            <div class="profile-card">
+                <div class="profile-image">🏡</div>
+                <div class="profile-content">
+                    <h3>Inversores y Nómadas</h3>
+                    <p>Golden Visa, inversión inmobiliaria, vida nómada digital. Colegios internacionales. Origen: Rusia, Ucrania, Bélgica, Escandinavia.</p>
+                    <a href="#" class="profile-link">Ver Más →</a>
+                </div>
+            </div>
+            <div class="profile-card">
+                <div class="profile-image">🎓</div>
+                <div class="profile-content">
+                    <h3>Jóvenes y Estudiantes</h3>
+                    <p>Visado de estudiante, homologación de títulos, trabajo en hostelería. Origen: Colombia, Venezuela, Italia.</p>
+                    <a href="#" class="profile-link">Ver Más →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Listo para Mudarte a España?</h2>
+        <p>Te conectamos con profesionales verificados en 19 ciudades. Servicio gratuito para extranjeros. Atención en tu idioma.</p>
+        <a href="#" class="btn-luxury">Analizar Mi Caso Gratis</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Health4Spain</div>
+                <p>Connecting international residents with Spain's most trusted professionals since 2026.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Health Insurance</a></li>
+                    <li><a href="#">Legal Services</a></li>
+                    <li><a href="#">Real Estate</a></li>
+                    <li><a href="#">Administration</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Destinations</h4>
+                <ul>
+                    <li><a href="#">Alicante</a></li>
+                    <li><a href="#">Málaga</a></li>
+                    <li><a href="#">Barcelona</a></li>
+                    <li><a href="#">All Cities</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Partners</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

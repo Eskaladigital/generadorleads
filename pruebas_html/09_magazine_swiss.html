@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Variación 3: Swiss Modern</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Helvetica+Neue:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #222;
+            line-height: 1.6;
+            background: #f8f8f8;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Crimson Pro', serif;
+        }
+
+        /* NAV - Swiss clean */
+        nav {
+            padding: 1.5rem 4%;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 500;
+            font-size: 1.3rem;
+            letter-spacing: -0.3px;
+            color: #222;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: #222;
+        }
+
+        /* HERO - Asymmetric swiss */
+        .hero {
+            background: #fff;
+            padding: 8rem 4% 6rem;
+        }
+
+        .hero-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.4fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .hero-label-col {
+            border-right: 1px solid #ddd;
+            padding-right: 3rem;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-meta {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .hero-content h1 {
+            font-size: 6.5rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 2rem;
+            color: #222;
+            letter-spacing: -3px;
+        }
+
+        .hero-lead {
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn-swiss {
+            padding: 1.2rem 2.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 0;
+        }
+
+        .btn-primary {
+            background: #222;
+            color: #fff;
+            border: 1px solid #222;
+        }
+
+        .btn-primary:hover {
+            background: #444;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #222;
+            border: 1px solid #ddd;
+        }
+
+        .btn-secondary:hover {
+            border-color: #222;
+        }
+
+        /* NUMBERS SECTION */
+        .numbers {
+            background: #f8f8f8;
+            padding: 6rem 4%;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .numbers-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5rem;
+        }
+
+        .number-item {
+            text-align: left;
+            padding-left: 2rem;
+            border-left: 2px solid #222;
+        }
+
+        .number-value {
+            font-family: 'Crimson Pro', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: #222;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .number-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        /* PROFILES - Swiss grid */
+        .profiles {
+            padding: 10rem 4%;
+            background: #fff;
+        }
+
+        .section-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-intro {
+            display: grid;
+            grid-template-columns: 0.4fr 1fr;
+            gap: 6rem;
+            margin-bottom: 6rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .section-content h2 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: #222;
+            letter-spacing: -2px;
+        }
+
+        .section-content p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .profile-card {
+            background: #f8f8f8;
+            padding: 3rem 2rem;
+            transition: all 0.3s;
+        }
+
+        .profile-card:hover {
+            background: #eee;
+            transform: translateY(-5px);
+        }
+
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+        }
+
+        .profile-card h3 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #222;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-link {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #222;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* SERVICES - List swiss */
+        .services {
+            padding: 10rem 4%;
+            background: #f8f8f8;
+        }
+
+        .services-intro {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.4fr 1fr;
+            gap: 6rem;
+            margin-bottom: 6rem;
+        }
+
+        .services-intro h2 {
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1.1;
+            color: #222;
+            letter-spacing: -2px;
+        }
+
+        .services-list {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .service-item {
+            background: #fff;
+            padding: 4rem;
+            border-bottom: 1px solid #ddd;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 4rem;
+            align-items: start;
+            transition: background 0.3s;
+        }
+
+        .service-item:hover {
+            background: #fafafa;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: #ccc;
+            letter-spacing: -1px;
+        }
+
+        .service-content h3 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #222;
+            letter-spacing: -1px;
+        }
+
+        .service-content p {
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .service-action {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #222;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+            padding-top: 1rem;
+        }
+
+        /* CTA */
+        .cta {
+            background: #222;
+            color: #fff;
+            padding: 10rem 4%;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 3rem;
+            letter-spacing: -2px;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: #fff;
+            color: #222;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-cta:hover {
+            background: #f0f0f0;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #fff;
+            padding: 8rem 4% 4rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 6rem;
+            margin-bottom: 5rem;
+        }
+
+        .footer-brand {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .footer-tagline {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .footer-section h4 {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: #222;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #ddd;
+            padding-top: 3rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; }
+            .hero-label-col { border-right: none; padding-right: 0; margin-bottom: 3rem; }
+            .hero-content h1 { font-size: 4.5rem; }
+            .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+            .section-intro { grid-template-columns: 1fr; }
+            .profiles-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-intro { grid-template-columns: 1fr; }
+            .service-item { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero-content h1 { font-size: 3rem; }
+            .numbers-grid { grid-template-columns: 1fr; }
+            .profiles-grid { grid-template-columns: 1fr; }
+            .cta h2 { font-size: 3rem; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Health4Spain</div>
+            <ul class="nav-menu">
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-label-col">
+                <div class="hero-label">Mediterranean 2026</div>
+                <div class="hero-meta">
+                    Curated connections between international residents and Spain's most trusted professionals.
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1>Your Gateway to Spanish Living</h1>
+                <p class="hero-lead">A thoughtfully designed platform connecting you with verified professionals for health insurance, legal services, real estate, and administrative support throughout Spain.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn-swiss btn-primary">Get Started</a>
+                    <a href="#" class="btn-swiss btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="numbers">
+        <div class="numbers-grid">
+            <div class="number-item">
+                <div class="number-value">150+</div>
+                <div class="number-label">Verified Partners</div>
+            </div>
+            <div class="number-item">
+                <div class="number-value">20</div>
+                <div class="number-label">Spanish Cities</div>
+            </div>
+            <div class="number-item">
+                <div class="number-value">0%</div>
+                <div class="number-label">Commission</div>
+            </div>
+            <div class="number-item">
+                <div class="number-value">100%</div>
+                <div class="number-label">Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="profiles">
+        <div class="section-container">
+            <div class="section-intro">
+                <div>
+                    <div class="section-tag">Who We Serve</div>
+                </div>
+                <div class="section-content">
+                    <h2>Tailored for Every Journey</h2>
+                    <p>Whether you're a student, family, professional, or retiree, we provide personalized connections to the services you need for a successful life in Spain.</p>
+                </div>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-card">
+                    <div class="profile-icon">🎓</div>
+                    <h3>Students</h3>
+                    <p>Academic excellence with comprehensive support for your educational journey in Spain.</p>
+                    <a href="#" class="profile-link">Learn More →</a>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Families</h3>
+                    <p>Complete family relocation services for a seamless transition to Spanish life.</p>
+                    <a href="#" class="profile-link">Learn More →</a>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">💼</div>
+                    <h3>Professionals</h3>
+                    <p>Establish your career base with expert guidance and professional services.</p>
+                    <a href="#" class="profile-link">Learn More →</a>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">🌴</div>
+                    <h3>Retirees</h3>
+                    <p>Enjoy your retirement with peace of mind and comprehensive support.</p>
+                    <a href="#" class="profile-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services-intro">
+            <div>
+                <div class="section-tag">Essential Services</div>
+            </div>
+            <div>
+                <h2>Everything You Need</h2>
+            </div>
+        </div>
+        <div class="services-list">
+            <div class="service-item">
+                <div class="service-number">01</div>
+                <div class="service-content">
+                    <h3>Health Insurance</h3>
+                    <p>Comprehensive private health insurance tailored for international residents. Valid for all Spanish visa types and residence permits.</p>
+                </div>
+                <a href="#" class="service-action">Explore</a>
+            </div>
+            <div class="service-item">
+                <div class="service-number">02</div>
+                <div class="service-content">
+                    <h3>Legal Services</h3>
+                    <p>Expert immigration lawyers specializing in visas, NIE, arraigo, family reunification, and all residence procedures.</p>
+                </div>
+                <a href="#" class="service-action">Explore</a>
+            </div>
+            <div class="service-item">
+                <div class="service-number">03</div>
+                <div class="service-content">
+                    <h3>Real Estate</h3>
+                    <p>Trusted property agents with extensive experience serving international clients throughout Spain.</p>
+                </div>
+                <a href="#" class="service-action">Explore</a>
+            </div>
+            <div class="service-item">
+                <div class="service-number">04</div>
+                <div class="service-content">
+                    <h3>Administration</h3>
+                    <p>Professional gestoría services to handle paperwork, taxes, and bureaucratic procedures efficiently.</p>
+                </div>
+                <a href="#" class="service-action">Explore</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Begin Your Spanish Journey</h2>
+            <a href="#" class="btn-cta">Get Connected</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Health4Spain</div>
+                <p class="footer-tagline">Connecting international residents with Spain's most trusted professionals since 2026.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Health Insurance</a></li>
+                    <li><a href="#">Legal Services</a></li>
+                    <li><a href="#">Real Estate</a></li>
+                    <li><a href="#">Administration</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Destinations</h4>
+                <ul>
+                    <li><a href="#">Alicante</a></li>
+                    <li><a href="#">Málaga</a></li>
+                    <li><a href="#">Barcelona</a></li>
+                    <li><a href="#">All Cities</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">For Partners</a></li>
+                    <li><a href="#">Stories</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Health4Spain. All rights reserved.</div>
+            <div>Privacy • Terms • Cookies</div>
+        </div>
+    </footer>
+</body>
+</html>

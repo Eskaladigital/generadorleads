@@ -116,7 +116,7 @@ export default function LandingsPage() {
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-serif font-bold text-gray-900">Landing Pages</h1>
-        <p className="text-gray-500 mt-1">Gestiona las 120 landing pages generadas por IA</p>
+        <p className="text-gray-500 mt-1">Gestiona las 76 landing pages generadas por IA (4 servicios × 19 ciudades)</p>
       </div>
 
       {/* Stats */}
