@@ -93,6 +93,16 @@ export default async function ServiciosPage() {
               );
             })}
           </ul>
+          
+          {/* CTA Intermedio */}
+          <div className="text-center mt-20 pt-16 border-t border-gray-200">
+            <p className="text-lg md:text-xl text-gray-600 mb-8">
+              Todos los servicios. Un solo punto de contacto.
+            </p>
+            <Link href="/es/contacto" className="btn-minimal-lg">
+              Empezar Ahora
+            </Link>
+          </div>
         </div>
       </section>
 

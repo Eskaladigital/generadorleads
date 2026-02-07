@@ -245,6 +245,10 @@ input:focus, textarea:focus, select:focus {
   .border-t-3 {
     border-top-width: 3px;
   }
+  
+  .border-l-3 {
+    border-left-width: 3px;
+  }
 }
 
 /* =============================================
@@ -271,5 +275,10 @@ input:focus, textarea:focus, select:focus {
   
   .service-item-minimal {
     @apply grid-cols-1 gap-4;
+  }
+  
+  /* Padding para el botón fijo móvil */
+  main {
+    padding-bottom: 80px;
   }
 }

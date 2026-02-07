@@ -87,10 +87,22 @@ export default function HomePage() {
                     {servicio.description}
                   </p>
                 </div>
-                <div className="service-arrow">→</div>
+                <Link 
+                  href={`/es/contacto?servicio=${servicio.id}`}
+                  className="service-arrow"
+                >
+                  →
+                </Link>
               </li>
             ))}
           </ul>
+          
+          {/* CTA Intermedio */}
+          <div className="text-center mt-20">
+            <Link href="/es/contacto" className="btn-minimal-lg">
+              Solicitar Información
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -130,13 +142,39 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          
+          {/* CTA Intermedio */}
+          <div className="text-center mt-20">
+            <p className="text-lg md:text-xl text-gray-600 mb-8">
+              ¿Te identificas con algún perfil?
+            </p>
+            <Link href="/es/contacto" className="btn-minimal-lg">
+              Recibir Asesoramiento
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Destinos Preview */}
+      <section className="section-alt">
+        <div className="container-narrow">
+          <h2 className="mb-8">19 Ciudades. Una Red.</h2>
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl">
+            Costa Blanca, Murcia, Costa del Sol, Valencia, Barcelona, Madrid...
+          </p>
+          <Link href="/es/destinos" className="btn-minimal">
+            Ver Todos los Destinos →
+          </Link>
         </div>
       </section>
 
       {/* CTA Final */}
       <section className="section text-center">
         <div className="container-narrow">
-          <h2 className="mb-12">¿Listo?</h2>
+          <h2 className="mb-8">¿Listo para Empezar?</h2>
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            Sin coste. Sin compromiso. Respuesta en 24 horas.
+          </p>
           <Link href="/es/contacto" className="btn-minimal-lg">
             Empezar Ahora
           </Link>

@@ -1,15 +1,23 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function StickyCTA() {
+  const pathname = usePathname();
+  
+  // Ocultar en la página de contacto
+  if (pathname === '/es/contacto') {
+    return null;
+  }
+  
   return (
-    <div className="sticky-cta-mobile fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40 py-3 px-4 md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-gray-800 z-40 py-4 px-4 md:hidden">
       <Link 
         href="/es/contacto" 
-        className="btn-primary w-full text-center"
+        className="block text-center text-white font-bold text-sm uppercase tracking-widest border-b-3 border-red-600 pb-2 hover:opacity-50 transition-opacity"
       >
-        Solicitar información
+        Solicitar Información
       </Link>
     </div>
   );

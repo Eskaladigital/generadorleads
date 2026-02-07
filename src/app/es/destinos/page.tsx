@@ -70,7 +70,7 @@ export default function DestinosPage() {
       {/* Lista de Destinos por Zona */}
       <section className="section">
         <div className="container-narrow space-y-20">
-          {DESTINOS.map((region) => (
+          {DESTINOS.map((region, regionIndex) => (
             <div key={region.zona}>
               <h2 className="text-3xl md:text-4xl font-bold mb-8 border-b-3 border-red-600 pb-4 inline-block">
                 {region.zona}
@@ -93,6 +93,15 @@ export default function DestinosPage() {
                   </li>
                 ))}
               </ul>
+              
+              {/* CTA después de cada 2 regiones */}
+              {(regionIndex === 1 || regionIndex === 3) && (
+                <div className="text-center mt-16 pt-16 border-t border-gray-200">
+                  <Link href="/es/contacto" className="btn-minimal">
+                    Solicitar Información →
+                  </Link>
+                </div>
+              )}
             </div>
           ))}
         </div>
