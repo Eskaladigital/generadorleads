@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Comparador de Diseños</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 3rem 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #718096;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .status {
+            background: #48bb78;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .card-number {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-style {
+            font-size: 0.875rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: #edf2f7;
+            color: #2d3748;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card-link {
+            display: block;
+            text-align: center;
+            background: #667eea;
+            color: white;
+            padding: 0.875rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .card-link:hover {
+            background: #5a67d8;
+            transform: scale(1.02);
+        }
+
+        .info-box {
+            background: #ebf8ff;
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-title {
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-list {
+            color: #2d3748;
+            line-height: 1.8;
+            padding-left: 1.5rem;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Health4Spain - 10 Diseños Completos</h1>
+        <p class="subtitle">
+            Compara 10 diseños totalmente diferentes, cada uno con el contenido correcto del proyecto:
+            4 servicios, 4 perfiles de extranjeros, 19 ciudades españolas y enfoque en trámites migratorios.
+        </p>
+
+        <div class="status">✅ TODOS CON CONTENIDO ACTUALIZADO</div>
+
+        <div class="info-box">
+            <div class="info-title">📋 Contenido presente en todos los diseños:</div>
+            <ul class="info-list">
+                <li><strong>4 Servicios:</strong> Seguros de Salud, Abogados de Extranjería, Inmobiliarias, Gestorías</li>
+                <li><strong>4 Perfiles:</strong> Jubilados (UK/Alemania), Trabajadores (Marruecos/Ecuador), Inversores (Rusia/Ucrania), Estudiantes (Colombia/Venezuela)</li>
+                <li><strong>19 Ciudades:</strong> Torrevieja, Lorca, Murcia, Alicante, Marbella, y más</li>
+                <li><strong>CTAs:</strong> "Analizar Mi Caso Gratis" - Servicio 100% gratuito</li>
+                <li><strong>Enfoque:</strong> Extranjeros, arraigo, visados, NIE, reagrupación familiar</li>
+            </ul>
+        </div>
+
+        <div class="grid">
+            <!-- Diseño 1 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #11</div>
+                    <div class="card-title">Luxury Hospitality</div>
+                    <div class="card-style">Hotel de 5 estrellas</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Elegante y premium con gradientes púrpuras, tipografía serif (Cormorant Garamond) y sensación de exclusividad tipo hotel de lujo.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Púrpura</span>
+                        <span class="feature-tag">Serif</span>
+                        <span class="feature-tag">Premium</span>
+                    </div>
+                    <a href="11_luxury_hospitality.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 2 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #12</div>
+                    <div class="card-title">Immersive Travel</div>
+                    <div class="card-style">Revista de viajes premium</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Visual y fotográfico. Hero split 50/50 con galerías de ciudades con imágenes de fondo. Estética aspiracional tipo revista de viajes.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Fotos grandes</span>
+                        <span class="feature-tag">Split 50/50</span>
+                        <span class="feature-tag">Visual</span>
+                    </div>
+                    <a href="12_immersive_travel.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 3 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #13</div>
+                    <div class="card-title">Clean Professional</div>
+                    <div class="card-style">Servicios profesionales</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Azul corporativo con trust badges. Cards redondeadas con sombras suaves. Grid limpio. Transmite confianza y profesionalidad.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Azul</span>
+                        <span class="feature-tag">Corporativo</span>
+                        <span class="feature-tag">Trust</span>
+                    </div>
+                    <a href="13_clean_professional.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 4 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #14</div>
+                    <div class="card-title">Lifestyle Relocation</div>
+                    <div class="card-style">Expatriados modernos</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Dinámico y moderno. Hero con foto de costa, secciones alternadas izquierda/derecha, timeline visual 1-2-3. Gradientes naranjas cálidos.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Naranja</span>
+                        <span class="feature-tag">Timeline</span>
+                        <span class="feature-tag">Dinámico</span>
+                    </div>
+                    <a href="14_lifestyle_relocation.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 5 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #15</div>
+                    <div class="card-title">Mediterranean Villa</div>
+                    <div class="card-style">Casa mediterránea</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Colores cálidos tipo terracota, verde oliva y beige. Hero asimétrico con sombras. Tipografía Lora. Sensación mediterránea acogedora.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Terracota</span>
+                        <span class="feature-tag">Mediterráneo</span>
+                        <span class="feature-tag">Cálido</span>
+                    </div>
+                    <a href="15_mediterranean_villa.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 6 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #16</div>
+                    <div class="card-title">Tech Startup</div>
+                    <div class="card-style">Plataforma tecnológica</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Fondo oscuro con efectos glow. Glassmorphism, gradientes cyan/purple. Métricas tipo terminal. Futurista e innovador.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Dark mode</span>
+                        <span class="feature-tag">Tech</span>
+                        <span class="feature-tag">Futurista</span>
+                    </div>
+                    <a href="16_tech_startup.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 7 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #17</div>
+                    <div class="card-title">Boutique Experience</div>
+                    <div class="card-style">Experiencia personal</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Fondo beige suave, single column. Accordion expandible. Stories detalladas de perfiles. Personal y cercano con storytelling.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Beige</span>
+                        <span class="feature-tag">Personal</span>
+                        <span class="feature-tag">Story</span>
+                    </div>
+                    <a href="17_boutique_experience.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 8 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #18</div>
+                    <div class="card-title">Corporate Trust</div>
+                    <div class="card-style">Corporativo confianza</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Azul navy, hero diagonal split. Tabla de servicios tipo Excel. Trust badges y logos. Máxima profesionalidad corporativa.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Navy</span>
+                        <span class="feature-tag">Tablas</span>
+                        <span class="feature-tag">Corp</span>
+                    </div>
+                    <a href="18_corporate_trust.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 9 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #19</div>
+                    <div class="card-title">Wellness Focused</div>
+                    <div class="card-style">Bienestar y salud</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Verde salvia y lavanda. Iconos circulares grandes. Checklist de beneficios. Testimonios reales. Tranquilo y centrado en el bienestar.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Verde</span>
+                        <span class="feature-tag">Wellness</span>
+                        <span class="feature-tag">Suave</span>
+                    </div>
+                    <a href="19_wellness_focused.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+
+            <!-- Diseño 10 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-number">DISEÑO #20</div>
+                    <div class="card-title">Modern Minimalist</div>
+                    <div class="card-style">Ultra minimalista</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">80% espacio en blanco. Solo blanco + negro + rojo. Tipografía como protagonista. Brutalist. Directo y sin florituras.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">B&N</span>
+                        <span class="feature-tag">Minimal</span>
+                        <span class="feature-tag">Brutal</span>
+                    </div>
+                    <a href="20_modern_minimalist.html" class="card-link">Ver Diseño →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Health4Spain</strong> - Conectando extranjeros con profesionales verificados en España</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">150+ profesionales • 19 ciudades • 100% gratuito</p>
+        </div>
+    </div>
+</body>
+</html>

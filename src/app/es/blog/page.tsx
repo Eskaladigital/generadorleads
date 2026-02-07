@@ -80,64 +80,23 @@ async function getPopularPosts(): Promise<BlogPost[]> {
 export default async function BlogPage() {
   const posts = await getBlogPosts();
   const popularPosts = await getPopularPosts();
-  
-  const featuredPost = posts[0];
-  const regularPosts = posts.slice(1);
 
-  // Agrupar posts por categoría
+  // Obtener categorías únicas para los filtros
   const categories = Array.from(new Set(posts.map(p => p.category)));
 
   return (
     <>
-      {/* HERO CON POST DESTACADO */}
-      {featuredPost && (
-        <section className="relative h-[600px] overflow-hidden">
-          <Image
-            src={featuredPost.featured_image || categoryImages[featuredPost.category] || categoryImages['vida-espana']}
-            alt={featuredPost.title}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-          
-          <div className="absolute inset-0 flex items-end">
-            <div className="container-base pb-16">
-              <div className="max-w-3xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className={`${categoryColors[featuredPost.category] || 'bg-accent'} text-white px-3 py-1 text-xs uppercase tracking-wider font-semibold rounded-full`}>
-                    {categoryLabels[featuredPost.category] || featuredPost.category}
-                  </span>
-                  <span className="text-white/80 text-sm">
-                    {new Date(featuredPost.published_at).toLocaleDateString('es-ES', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}
-                  </span>
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-                  <Link href={`/es/blog/${featuredPost.slug}`} className="hover:text-accent transition-colors">
-                    {featuredPost.title}
-                  </Link>
-                </h1>
-                <p className="text-lg md:text-xl text-white/90 mb-6 line-clamp-2">
-                  {featuredPost.excerpt}
-                </p>
-                <Link 
-                  href={`/es/blog/${featuredPost.slug}`}
-                  className="inline-flex items-center gap-2 bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-accent hover:text-white transition-all"
-                >
-                  Leer artículo
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      {/* HEADER */}
+      <section className="bg-gradient-to-br from-accent to-blue-600 py-16">
+        <div className="container-base">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Blog
+          </h1>
+          <p className="text-xl text-white/90 max-w-2xl">
+            Guías, consejos y recursos para vivir en España
+          </p>
+        </div>
+      </section>
 
       {/* FILTROS DE CATEGORÍAS */}
       <section className="border-b border-gray-200 bg-white sticky top-16 z-20">
@@ -167,72 +126,20 @@ export default async function BlogPage() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* POSTS PRINCIPALES */}
             <div className="lg:col-span-2">
-              {regularPosts.length === 0 ? (
+              {posts.length === 0 ? (
                 <div className="text-center py-16">
-                  <p className="text-gray-500 text-lg">No hay más artículos publicados.</p>
+                  <p className="text-gray-500 text-lg">No hay artículos publicados.</p>
                 </div>
               ) : (
-                <div className="space-y-8">
-                  {regularPosts.map((post, index) => {
+                <div className="space-y-6">
+                  {posts.map((post) => {
                     const imageUrl = post.featured_image || categoryImages[post.category] || categoryImages['vida-espana'];
                     const categoryLabel = categoryLabels[post.category] || post.category;
-                    
-                    // Diseño alternado: featured cada 3 posts
-                    const isFeatured = index % 5 === 0;
-                    
-                    if (isFeatured) {
-                      return (
-                        <article 
-                          key={post.slug}
-                          className="group bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-xl transition-all"
-                        >
-                          <div className="grid md:grid-cols-2 gap-6">
-                            <div className="relative h-64 md:h-full overflow-hidden">
-                              <Image
-                                src={imageUrl}
-                                alt={post.title}
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
-                              <span className={`absolute top-4 left-4 ${categoryColors[post.category] || 'bg-accent'} text-white px-3 py-1 text-xs uppercase tracking-wider font-semibold rounded-full`}>
-                                {categoryLabel}
-                              </span>
-                            </div>
-                            <div className="p-6 md:p-8 flex flex-col justify-center">
-                              <time className="text-sm text-gray-500 mb-3">
-                                {new Date(post.published_at).toLocaleDateString('es-ES', { 
-                                  year: 'numeric', 
-                                  month: 'long', 
-                                  day: 'numeric' 
-                                })}
-                              </time>
-                              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-accent transition-colors">
-                                <Link href={`/es/blog/${post.slug}`}>
-                                  {post.title}
-                                </Link>
-                              </h2>
-                              <p className="text-gray-600 mb-4 line-clamp-3">
-                                {post.excerpt}
-                              </p>
-                              <Link 
-                                href={`/es/blog/${post.slug}`}
-                                className="inline-flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all"
-                              >
-                                Leer más
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                              </Link>
-                            </div>
-                          </div>
-                        </article>
-                      );
-                    }
 
                     return (
                       <article 
                         key={post.slug}
-                        className="group bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-xl transition-all"
+                        className="group bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all"
                       >
                         <div className="grid md:grid-cols-3 gap-4">
                           <div className="relative h-48 md:h-full overflow-hidden">
