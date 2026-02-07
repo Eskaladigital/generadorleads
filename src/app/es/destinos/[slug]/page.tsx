@@ -302,7 +302,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
       </section>
 
       {/* CTA fijo */}
-      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+      <div className="bg-primary/10 border-b border-primary/20 sticky top-0 z-30">
         <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-gray-700 text-sm text-center sm:text-left">
             <strong>{landing.cta_title || 'Te conectamos con profesionales verificados'}</strong>
@@ -416,7 +416,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
 
             {/* Sidebar */}
             <div className="space-y-6">
-              <div className="card p-5 bg-primary/5 border-primary/20 sticky top-24">
+              <div className="card p-5 bg-primary/5 border-primary/20 sticky top-20">
                 <h3 className="font-heading font-bold text-gray-900 mb-2">
                   Solicita información
                 </h3>
@@ -491,7 +491,7 @@ function ServiceCityView({
         </div>
       </section>
 
-      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+      <div className="bg-primary/10 border-b border-primary/20 sticky top-0 z-30">
         <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-gray-700 text-sm">
             <strong>¿Necesitas {servicioInfo.nombre.toLowerCase()} en {ciudadData.nombre}?</strong>
@@ -561,7 +561,7 @@ async function CityView({
       </section>
 
       {/* Sticky CTA */}
-      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+      <div className="bg-primary/10 border-b border-primary/20 sticky top-0 z-30">
         <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-gray-700 text-sm">
             <strong>¿Quieres mudarte a {ciudad.nombre}?</strong> Te conectamos con profesionales verificados
@@ -791,7 +791,7 @@ async function CityView({
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Datos Rápidos */}
-              <div className="card p-5 sticky top-24">
+              <div className="card p-5 sticky top-20">
                 <h3 className="font-heading font-bold text-gray-900 mb-4">Datos de {ciudad.nombre}</h3>
                 <dl className="space-y-4">
                   <div>
@@ -913,7 +913,7 @@ function CityViewBasic({
       </section>
 
       {/* CTA fijo visible */}
-      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
+      <div className="bg-primary/10 border-b border-primary/20 sticky top-0 z-30">
         <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-gray-700 text-sm text-center sm:text-left">
             <strong>¿Quieres mudarte a {ciudad.nombre}?</strong> Te conectamos con profesionales verificados

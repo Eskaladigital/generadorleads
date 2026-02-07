@@ -45,6 +45,23 @@ body {
   background-color: var(--color-white);
 }
 
+/* Ocultar botón flotante cuando el formulario está activo */
+body.form-active .sticky-cta-mobile {
+  display: none;
+}
+
+/* Padding inferior en móvil para el botón flotante */
+@media (max-width: 767px) {
+  body main {
+    padding-bottom: 80px;
+  }
+  
+  /* No padding cuando el formulario está activo (botón oculto) */
+  body.form-active main {
+    padding-bottom: 0;
+  }
+}
+
 /* Títulos: tipografía system, peso bold, spacing ajustado */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;

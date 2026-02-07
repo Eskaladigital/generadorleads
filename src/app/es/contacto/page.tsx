@@ -91,38 +91,40 @@ const URGENCIAS = [
 // Componente de paso 1: Selección de servicio
 function Step1({ formData, updateFormData, errors }: StepProps) {
   return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+    <div className="space-y-12">
+      <div className="mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
           ¿Qué servicio necesitas?
         </h2>
-        <p className="text-gray-600">
+        <p className="text-lg text-gray-600">
           Selecciona el tipo de profesional que buscas
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {SERVICIOS.map((servicio) => (
-          <button
+      <ul className="service-list-minimal">
+        {SERVICIOS.map((servicio, index) => (
+          <li
             key={servicio.id}
-            type="button"
             onClick={() => updateFormData('servicio', servicio.id)}
-            className={`p-4 rounded-xl border-2 transition-all text-center ${
-              formData.servicio === servicio.id
-                ? 'border-primary bg-primary/5 shadow-md'
-                : 'border-gray-200 hover:border-primary/50'
+            className={`service-item-minimal cursor-pointer ${
+              formData.servicio === servicio.id ? 'opacity-100' : 'opacity-60 hover:opacity-100'
             }`}
           >
-            <span className="text-3xl mb-2 block">{servicio.icon}</span>
-            <span className={`font-medium ${
-              formData.servicio === servicio.id ? 'text-primary' : 'text-gray-700'
-            }`}>
-              {servicio.label}
-            </span>
-          </button>
+            <div className={`service-number ${formData.servicio === servicio.id ? 'text-red-600' : 'text-gray-400'}`}>
+              {String(index + 1).padStart(2, '0')}
+            </div>
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold mb-1">
+                {servicio.label}
+              </h3>
+            </div>
+            <div className="service-arrow">
+              {formData.servicio === servicio.id ? '✓' : '→'}
+            </div>
+          </li>
         ))}
-      </div>
-      {errors.servicio && <p className="form-error text-center">{errors.servicio}</p>}
+      </ul>
+      {errors.servicio && <p className="text-red-600 text-center mt-4">{errors.servicio}</p>}
     </div>
   );
 }
@@ -130,37 +132,38 @@ function Step1({ formData, updateFormData, errors }: StepProps) {
 // Componente de paso 2: Selección de ciudad/destino
 function Step2({ formData, updateFormData, errors }: StepProps) {
   return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+    <div className="space-y-12">
+      <div className="mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
           ¿Dónde en España?
         </h2>
-        <p className="text-gray-600">
+        <p className="text-lg text-gray-600">
           Selecciona la ciudad donde necesitas el servicio
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {CIUDADES.map((ciudad) => (
           <button
             key={ciudad.id}
             type="button"
             onClick={() => updateFormData('ciudad_interes', ciudad.id)}
-            className={`p-3 rounded-xl border-2 transition-all text-center ${
+            className={`p-4 border border-gray-200 text-left transition-opacity ${
               formData.ciudad_interes === ciudad.id
-                ? 'border-primary bg-primary/5 shadow-md'
-                : 'border-gray-200 hover:border-primary/50'
+                ? 'border-black opacity-100'
+                : 'opacity-50 hover:opacity-100'
             }`}
           >
-            <span className={`font-medium text-sm ${
-              formData.ciudad_interes === ciudad.id ? 'text-primary' : 'text-gray-700'
-            }`}>
+            <span className="font-medium">
               {ciudad.label}
             </span>
+            {formData.ciudad_interes === ciudad.id && (
+              <span className="ml-2 text-red-600">✓</span>
+            )}
           </button>
         ))}
       </div>
-      {errors.ciudad_interes && <p className="form-error text-center">{errors.ciudad_interes}</p>}
+      {errors.ciudad_interes && <p className="text-red-600 text-center mt-4">{errors.ciudad_interes}</p>}
     </div>
   );
 }
@@ -168,77 +171,81 @@ function Step2({ formData, updateFormData, errors }: StepProps) {
 // Componente de paso 3: Datos personales
 function Step3({ formData, updateFormData, errors }: StepProps) {
   return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+    <div className="space-y-12">
+      <div className="mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Cuéntanos sobre ti
         </h2>
-        <p className="text-gray-600">
-          Necesitamos algunos datos para poder ayudarte mejor
+        <p className="text-lg text-gray-600">
+          Necesitamos algunos datos para conectarte con el profesional adecuado
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="md:col-span-2">
-          <label className="form-label">Nombre completo *</label>
+      <div className="space-y-8">
+        <div>
+          <label className="form-label-minimal">Nombre completo *</label>
           <input
             type="text"
             value={formData.nombre}
             onChange={(e) => updateFormData('nombre', e.target.value)}
-            className={`form-input ${errors.nombre ? 'border-error ring-error/20' : ''}`}
+            className={`form-input-minimal ${errors.nombre ? 'border-red-600' : ''}`}
             placeholder="Tu nombre"
           />
-          {errors.nombre && <p className="form-error">{errors.nombre}</p>}
+          {errors.nombre && <p className="text-red-600 text-sm mt-2">{errors.nombre}</p>}
         </div>
 
-        <div>
-          <label className="form-label">Email *</label>
-          <input
-            type="email"
-            value={formData.email}
-            onChange={(e) => updateFormData('email', e.target.value)}
-            className={`form-input ${errors.email ? 'border-error ring-error/20' : ''}`}
-            placeholder="tu@email.com"
-          />
-          {errors.email && <p className="form-error">{errors.email}</p>}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <label className="form-label-minimal">Email *</label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e) => updateFormData('email', e.target.value)}
+              className={`form-input-minimal ${errors.email ? 'border-red-600' : ''}`}
+              placeholder="tu@email.com"
+            />
+            {errors.email && <p className="text-red-600 text-sm mt-2">{errors.email}</p>}
+          </div>
+
+          <div>
+            <label className="form-label-minimal">Teléfono *</label>
+            <input
+              type="tel"
+              value={formData.telefono}
+              onChange={(e) => updateFormData('telefono', e.target.value)}
+              className={`form-input-minimal ${errors.telefono ? 'border-red-600' : ''}`}
+              placeholder="+34 600 000 000"
+            />
+            {errors.telefono && <p className="text-red-600 text-sm mt-2">{errors.telefono}</p>}
+          </div>
         </div>
 
-        <div>
-          <label className="form-label">Teléfono *</label>
-          <input
-            type="tel"
-            value={formData.telefono}
-            onChange={(e) => updateFormData('telefono', e.target.value)}
-            className={`form-input ${errors.telefono ? 'border-error ring-error/20' : ''}`}
-            placeholder="+34 600 000 000"
-          />
-          {errors.telefono && <p className="form-error">{errors.telefono}</p>}
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <label className="form-label-minimal">País de origen *</label>
+            <select
+              value={formData.pais_origen}
+              onChange={(e) => updateFormData('pais_origen', e.target.value)}
+              className={`form-input-minimal ${errors.pais_origen ? 'border-red-600' : ''}`}
+            >
+              <option value="">Selecciona tu país</option>
+              {PAISES.map((pais) => (
+                <option key={pais} value={pais}>{pais}</option>
+              ))}
+            </select>
+            {errors.pais_origen && <p className="text-red-600 text-sm mt-2">{errors.pais_origen}</p>}
+          </div>
 
-        <div>
-          <label className="form-label">País de origen *</label>
-          <select
-            value={formData.pais_origen}
-            onChange={(e) => updateFormData('pais_origen', e.target.value)}
-            className={`form-input ${errors.pais_origen ? 'border-error ring-error/20' : ''}`}
-          >
-            <option value="">Selecciona tu país</option>
-            {PAISES.map((pais) => (
-              <option key={pais} value={pais}>{pais}</option>
-            ))}
-          </select>
-          {errors.pais_origen && <p className="form-error">{errors.pais_origen}</p>}
-        </div>
-
-        <div>
-          <label className="form-label">Ciudad de origen</label>
-          <input
-            type="text"
-            value={formData.ciudad_origen}
-            onChange={(e) => updateFormData('ciudad_origen', e.target.value)}
-            className="form-input"
-            placeholder="Tu ciudad actual"
-          />
+          <div>
+            <label className="form-label-minimal">Ciudad de origen</label>
+            <input
+              type="text"
+              value={formData.ciudad_origen}
+              onChange={(e) => updateFormData('ciudad_origen', e.target.value)}
+              className="form-input-minimal"
+              placeholder="Tu ciudad actual"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -249,78 +256,80 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
 // Componente de paso 4: Detalles finales
 function Step4({ formData, updateFormData, errors }: StepProps) {
   return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="font-heading text-2xl font-bold text-gray-900 mb-2">
+    <div className="space-y-12">
+      <div className="mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Últimos detalles
         </h2>
-        <p className="text-gray-600">
+        <p className="text-lg text-gray-600">
           Esto nos ayudará a encontrar el profesional ideal para ti
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-10">
         {/* Presupuesto */}
         <div>
-          <label className="form-label">¿Cuál es tu presupuesto aproximado? *</label>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
+          <label className="form-label-minimal mb-6">¿Cuál es tu presupuesto aproximado? *</label>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
             {PRESUPUESTOS.map((option) => (
               <button
                 key={option.id}
                 type="button"
                 onClick={() => updateFormData('presupuesto', option.id)}
-                className={`p-3 rounded-xl border-2 transition-all text-center ${
+                className={`p-4 border border-gray-200 text-left transition-opacity ${
                   formData.presupuesto === option.id
-                    ? 'border-primary bg-primary/5'
-                    : 'border-gray-200 hover:border-primary/50'
+                    ? 'border-black opacity-100'
+                    : 'opacity-50 hover:opacity-100'
                 }`}
               >
-                <span className={`font-medium text-sm ${
-                  formData.presupuesto === option.id ? 'text-primary' : 'text-gray-700'
-                }`}>
+                <span className="font-medium text-sm">
                   {option.label}
                 </span>
+                {formData.presupuesto === option.id && (
+                  <span className="ml-2 text-red-600">✓</span>
+                )}
               </button>
             ))}
           </div>
-          {errors.presupuesto && <p className="form-error">{errors.presupuesto}</p>}
+          {errors.presupuesto && <p className="text-red-600 text-sm mt-4">{errors.presupuesto}</p>}
         </div>
 
         {/* Urgencia */}
         <div>
-          <label className="form-label">¿Cuándo lo necesitas? *</label>
-          <div className="grid grid-cols-2 gap-3 mt-2">
+          <label className="form-label-minimal mb-6">¿Cuándo lo necesitas? *</label>
+          <div className="grid grid-cols-2 gap-4 mt-6">
             {URGENCIAS.map((option) => (
               <button
                 key={option.id}
                 type="button"
                 onClick={() => updateFormData('urgencia', option.id)}
-                className={`p-3 rounded-xl border-2 transition-all text-center ${
+                className={`p-4 border border-gray-200 text-left transition-opacity ${
                   formData.urgencia === option.id
-                    ? 'border-primary bg-primary/5'
-                    : 'border-gray-200 hover:border-primary/50'
+                    ? 'border-black opacity-100'
+                    : 'opacity-50 hover:opacity-100'
                 }`}
               >
-                <span className={`font-medium text-sm ${
-                  formData.urgencia === option.id ? 'text-primary' : 'text-gray-700'
-                }`}>
+                <span className="font-medium text-sm">
                   {option.label}
                 </span>
+                {formData.urgencia === option.id && (
+                  <span className="ml-2 text-red-600">✓</span>
+                )}
               </button>
             ))}
           </div>
-          {errors.urgencia && <p className="form-error">{errors.urgencia}</p>}
+          {errors.urgencia && <p className="text-red-600 text-sm mt-4">{errors.urgencia}</p>}
         </div>
 
         {/* Mensaje opcional */}
         <div>
-          <label className="form-label">
+          <label className="form-label-minimal">
             ¿Algo más que debamos saber? <span className="text-gray-400">(opcional)</span>
           </label>
           <textarea
             value={formData.mensaje}
             onChange={(e) => updateFormData('mensaje', e.target.value)}
-            className="form-input min-h-[100px]"
+            className="form-input-minimal min-h-[120px] mt-4"
             placeholder="Cuéntanos más sobre tu situación..."
           />
         </div>
@@ -382,6 +391,14 @@ function ContactPageContent() {
       setCurrentStep(2); // Si solo tiene ciudad, va al paso 2 (ubicación ya seleccionada)
     }
   }, [searchParams]);
+
+  // Ocultar el botón flotante cuando el formulario está activo
+  useEffect(() => {
+    document.body.classList.add('form-active');
+    return () => {
+      document.body.classList.remove('form-active');
+    };
+  }, []);
 
   const updateFormData = (field: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -513,74 +530,47 @@ function ContactPageContent() {
   // Pantalla de éxito
   if (isSuccess) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center px-4">
-        <div className="max-w-md text-center">
-          <div className="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-10 h-10 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
+      <div className="section">
+        <div className="container-narrow text-center">
+          <div className="mb-12">
+            <div className="text-6xl mb-8">✓</div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Solicitud Recibida
+            </h1>
+            <p className="text-xl text-gray-600 mb-12 max-w-lg mx-auto">
+              Gracias por confiar en Health4Spain. Un profesional se pondrá en contacto contigo en menos de 24 horas.
+            </p>
+            <Link href="/es" className="btn-minimal-lg">
+              Volver al Inicio
+            </Link>
           </div>
-          <h1 className="font-heading text-3xl font-bold text-gray-900 mb-4">
-            ¡Solicitud recibida!
-          </h1>
-          <p className="text-gray-600 mb-8">
-            Gracias por confiar en Health4Spain. Un profesional de nuestro equipo 
-            se pondrá en contacto contigo en menos de 24 horas.
-          </p>
-          <Link href="/es" className="btn-primary">
-            Volver al inicio
-          </Link>
         </div>
       </div>
     );
   }
 
   const totalSteps = 4;
-  const progress = (currentStep / totalSteps) * 100;
 
   return (
-    <div className="min-h-[80vh] py-8 md:py-12">
-      <div className="container-base max-w-2xl">
-        {/* Progress bar */}
-        <div className="mb-8">
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
-            <span>Paso {currentStep} de {totalSteps}</span>
-            <span>{Math.round(progress)}% completado</span>
+    <div className="section">
+      <div className="container-narrow">
+        {/* Progress indicator minimal */}
+        <div className="mb-16">
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-sm font-medium uppercase tracking-widest">
+              Paso {currentStep} / {totalSteps}
+            </span>
           </div>
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-px bg-gray-200">
             <div 
-              className="h-full bg-primary transition-all duration-300"
-              style={{ width: `${progress}%` }}
+              className="h-px bg-black transition-all duration-300"
+              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
             />
           </div>
         </div>
 
-        {/* Step indicators */}
-        <div className="flex justify-center gap-2 mb-8">
-          {[1, 2, 3, 4].map((step) => (
-            <div
-              key={step}
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all ${
-                step === currentStep
-                  ? 'bg-primary text-white'
-                  : step < currentStep
-                  ? 'bg-primary/20 text-primary'
-                  : 'bg-gray-200 text-gray-400'
-              }`}
-            >
-              {step < currentStep ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              ) : (
-                step
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Form card */}
-        <div className="bg-white rounded-2xl shadow-soft border border-gray-100 p-6 md:p-8">
+        {/* Form content */}
+        <div className="bg-white border border-gray-200 p-8 md:p-12">
           {/* Steps content */}
           {currentStep === 1 && (
             <Step1 formData={formData} updateFormData={updateFormData} errors={errors} />
@@ -596,16 +586,12 @@ function ContactPageContent() {
           )}
 
           {/* Navigation buttons */}
-          <div className="flex justify-between mt-8 pt-6 border-t border-gray-100">
+          <div className="flex justify-between mt-12 pt-8 border-t border-gray-200">
             <button
               type="button"
               onClick={prevStep}
               disabled={currentStep === 1}
-              className={`btn ${
-                currentStep === 1
-                  ? 'invisible'
-                  : 'btn-ghost'
-              }`}
+              className={`btn-ghost-minimal ${currentStep === 1 ? 'invisible' : ''}`}
             >
               ← Anterior
             </button>
@@ -614,7 +600,7 @@ function ContactPageContent() {
               <button
                 type="button"
                 onClick={nextStep}
-                className="btn-primary"
+                className="btn-minimal"
               >
                 Siguiente →
               </button>
@@ -623,31 +609,18 @@ function ContactPageContent() {
                 type="button"
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="btn-primary btn-lg"
+                className="btn-minimal"
               >
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                    </svg>
-                    Enviando...
-                  </>
-                ) : (
-                  'Enviar solicitud'
-                )}
+                {isSubmitting ? 'Enviando...' : 'Enviar Solicitud'}
               </button>
             )}
           </div>
         </div>
 
-        {/* Trust indicators */}
+        {/* Trust indicator */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-            <svg className="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-            </svg>
-            Tus datos están seguros y protegidos
+          <p className="text-sm text-gray-600">
+            🔒 Tus datos están seguros y protegidos
           </p>
         </div>
       </div>
