@@ -107,7 +107,7 @@ export default function BlogListPage() {
         </div>
         <Link
           href="/administrator/blog/new"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-[#c7956d] text-white rounded-lg hover:bg-[#b8845c] transition"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-[red-600] text-white rounded-lg hover:bg-[red-700] transition"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -124,12 +124,12 @@ export default function BlogListPage() {
             placeholder="Buscar por título..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
           />
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
           >
             <option value="">Todos los estados</option>
             {Object.entries(statusLabels).map(([value, label]) => (
@@ -139,7 +139,7 @@ export default function BlogListPage() {
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
           >
             <option value="">Todas las categorías</option>
             {Object.entries(categoryLabels).map(([value, label]) => (
@@ -173,7 +173,7 @@ export default function BlogListPage() {
               {loading ? (
                 <tr>
                   <td colSpan={6} className="px-4 py-8 text-center">
-                    <div className="w-6 h-6 border-2 border-[#c7956d] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-6 h-6 border-2 border-[red-600] border-t-transparent rounded-full animate-spin mx-auto"></div>
                   </td>
                 </tr>
               ) : filteredPosts.length === 0 ? (
@@ -209,7 +209,7 @@ export default function BlogListPage() {
                       <div className="flex items-center gap-2">
                         <Link
                           href={`/administrator/blog/${post.slug}`}
-                          className="text-[#c7956d] hover:text-[#b8845c] text-sm font-medium"
+                          className="text-[red-600] hover:text-[red-700] text-sm font-medium"
                         >
                           Editar
                         </Link>

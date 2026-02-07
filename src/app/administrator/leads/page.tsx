@@ -138,12 +138,12 @@ export default function LeadsPage() {
             placeholder="Buscar por nombre, email o teléfono..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
           />
           <select
             value={filterStatus}
             onChange={(e) => { setFilterStatus(e.target.value); setPage(1); }}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
           >
             <option value="">Todos los estados</option>
             {Object.entries(statusLabels).map(([value, label]) => (
@@ -153,7 +153,7 @@ export default function LeadsPage() {
           <select
             value={filterServicio}
             onChange={(e) => { setFilterServicio(e.target.value); setPage(1); }}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
           >
             <option value="">Todos los servicios</option>
             <option value="seguros">Seguros</option>
@@ -164,7 +164,7 @@ export default function LeadsPage() {
           <select
             value={filterCiudad}
             onChange={(e) => { setFilterCiudad(e.target.value); setPage(1); }}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c7956d] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
           >
             <option value="">Todas las ciudades</option>
             <option value="torrevieja">Torrevieja</option>
@@ -203,7 +203,7 @@ export default function LeadsPage() {
               {loading ? (
                 <tr>
                   <td colSpan={9} className="px-4 py-8 text-center">
-                    <div className="w-6 h-6 border-2 border-[#c7956d] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-6 h-6 border-2 border-[red-600] border-t-transparent rounded-full animate-spin mx-auto"></div>
                   </td>
                 </tr>
               ) : filteredLeads.length === 0 ? (
@@ -244,7 +244,7 @@ export default function LeadsPage() {
                     <td className="px-4 py-3">
                       <button
                         onClick={() => setSelectedLead(lead)}
-                        className="text-[#c7956d] hover:text-[#b8845c] text-sm font-medium"
+                        className="text-[red-600] hover:text-[red-700] text-sm font-medium"
                       >
                         Ver
                       </button>

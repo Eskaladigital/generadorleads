@@ -162,54 +162,46 @@ export default function DashboardPage() {
 
   return (
     <div className="p-8">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-serif font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-500 mt-1">Resumen general de Health4Spain</p>
+      {/* Header Minimal */}
+      <div className="mb-16 pb-8 border-b border-gray-200">
+        <h1 className="text-4xl md:text-5xl font-bold mb-2">Dashboard</h1>
+        <p className="text-lg text-gray-600">Resumen general de Health4Spain</p>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <p className="text-sm text-gray-500 mb-1">Total Leads</p>
-          <p className="text-3xl font-bold text-gray-900">{stats?.totalLeads}</p>
+      {/* Stats Cards - Minimal Style */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="border-t-3 border-red-600 pt-6">
+          <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">Total Leads</p>
+          <p className="text-4xl font-bold">{stats?.totalLeads}</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <p className="text-sm text-gray-500 mb-1">Leads Este Mes</p>
-          <p className="text-3xl font-bold text-[#c7956d]">{stats?.leadsThisMonth}</p>
+        <div className="border-t-3 border-red-600 pt-6">
+          <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">Leads Este Mes</p>
+          <p className="text-4xl font-bold">{stats?.leadsThisMonth}</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <p className="text-sm text-gray-500 mb-1">Posts Publicados</p>
-          <p className="text-3xl font-bold text-gray-900">
-            {stats?.publishedPosts} <span className="text-lg text-gray-400">/ {stats?.totalPosts}</span>
+        <div className="border-t-3 border-red-600 pt-6">
+          <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">Posts Publicados</p>
+          <p className="text-4xl font-bold">
+            {stats?.publishedPosts} <span className="text-xl text-gray-400">/ {stats?.totalPosts}</span>
           </p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <p className="text-sm text-gray-500 mb-1">Landings Revisadas</p>
-          <p className="text-3xl font-bold text-gray-900">
-            {stats?.reviewedLandings} <span className="text-lg text-gray-400">/ {stats?.totalLandings}</span>
+        <div className="border-t-3 border-red-600 pt-6">
+          <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">Landings Revisadas</p>
+          <p className="text-4xl font-bold">
+            {stats?.reviewedLandings} <span className="text-xl text-gray-400">/ {stats?.totalLandings}</span>
           </p>
         </div>
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
         {/* Por Servicio */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <h3 className="font-semibold text-gray-900 mb-4">Leads por Servicio</h3>
-          <div className="space-y-3">
+        <div className="bg-gray-50 p-8 border border-gray-200">
+          <h3 className="text-xl font-bold mb-6">Leads por Servicio</h3>
+          <div className="space-y-4">
             {stats?.leadsByService.map((item, i) => (
-              <div key={i} className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 capitalize">{item.servicio}</span>
-                <div className="flex items-center gap-2">
-                  <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-[#c7956d] rounded-full"
-                      style={{ width: `${(item.count / (stats?.totalLeads || 1)) * 100}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-sm font-medium text-gray-900 w-8 text-right">{item.count}</span>
-                </div>
+              <div key={i} className="flex items-center justify-between py-2 border-b border-gray-200">
+                <span className="text-sm font-medium capitalize">{item.servicio}</span>
+                <span className="text-2xl font-bold">{item.count}</span>
               </div>
             ))}
             {stats?.leadsByService.length === 0 && (
@@ -219,21 +211,13 @@ export default function DashboardPage() {
         </div>
 
         {/* Por Ciudad */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <h3 className="font-semibold text-gray-900 mb-4">Leads por Ciudad</h3>
-          <div className="space-y-3">
+        <div className="bg-gray-50 p-8 border border-gray-200">
+          <h3 className="text-xl font-bold mb-6">Leads por Ciudad</h3>
+          <div className="space-y-4">
             {stats?.leadsByCity.map((item, i) => (
-              <div key={i} className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 capitalize">{item.ciudad}</span>
-                <div className="flex items-center gap-2">
-                  <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-blue-500 rounded-full"
-                      style={{ width: `${(item.count / (stats?.totalLeads || 1)) * 100}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-sm font-medium text-gray-900 w-8 text-right">{item.count}</span>
-                </div>
+              <div key={i} className="flex items-center justify-between py-2 border-b border-gray-200">
+                <span className="text-sm font-medium capitalize">{item.ciudad}</span>
+                <span className="text-2xl font-bold">{item.count}</span>
               </div>
             ))}
             {stats?.leadsByCity.length === 0 && (
@@ -243,15 +227,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Por Status */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <h3 className="font-semibold text-gray-900 mb-4">Estado de Leads</h3>
-          <div className="space-y-2">
+        <div className="bg-gray-50 p-8 border border-gray-200">
+          <h3 className="text-xl font-bold mb-6">Estado de Leads</h3>
+          <div className="space-y-4">
             {stats?.leadsByStatus.map((item, i) => (
-              <div key={i} className="flex items-center justify-between">
-                <span className={`text-xs px-2 py-1 rounded-full ${statusColors[item.status] || 'bg-gray-100 text-gray-800'}`}>
+              <div key={i} className="flex items-center justify-between py-2 border-b border-gray-200">
+                <span className="text-sm font-medium">
                   {statusLabels[item.status] || item.status}
                 </span>
-                <span className="text-sm font-medium text-gray-900">{item.count}</span>
+                <span className="text-2xl font-bold">{item.count}</span>
               </div>
             ))}
             {stats?.leadsByStatus.length === 0 && (
@@ -262,42 +246,42 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Leads */}
-      <div className="bg-white rounded-lg shadow-sm border">
-        <div className="p-6 border-b">
-          <h3 className="font-semibold text-gray-900">Últimos Leads</h3>
+      <div className="bg-white border border-gray-200">
+        <div className="p-8 border-b border-gray-200">
+          <h3 className="text-2xl font-bold">Últimos Leads</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Servicio</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ciudad</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Nombre</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Email</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Servicio</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Ciudad</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Estado</th>
+                <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Fecha</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody>
               {stats?.recentLeads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-900">{lead.nombre}</td>
+                <tr key={lead.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 text-sm font-bold">{lead.nombre}</td>
                   <td className="px-6 py-4 text-sm text-gray-600">{lead.email}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600 capitalize">{lead.servicio}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600 capitalize">{lead.ciudad}</td>
+                  <td className="px-6 py-4 text-sm capitalize">{lead.servicio}</td>
+                  <td className="px-6 py-4 text-sm capitalize">{lead.ciudad}</td>
                   <td className="px-6 py-4">
-                    <span className={`text-xs px-2 py-1 rounded-full ${statusColors[lead.status] || 'bg-gray-100 text-gray-800'}`}>
+                    <span className="text-xs px-2 py-1 bg-gray-100 uppercase tracking-wider">
                       {statusLabels[lead.status] || lead.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-600">
                     {new Date(lead.created_at).toLocaleDateString('es-ES')}
                   </td>
                 </tr>
               ))}
               {stats?.recentLeads.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-gray-400">
+                  <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
                     No hay leads todavía
                   </td>
                 </tr>

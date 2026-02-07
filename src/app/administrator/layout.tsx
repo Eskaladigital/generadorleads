@@ -79,18 +79,18 @@ function AdminSidebar() {
   };
 
   return (
-    <aside className="w-64 bg-white shadow-md flex flex-col shrink-0">
+    <aside className="w-64 bg-white border-r border-gray-200 flex flex-col shrink-0">
       {/* Logo */}
-      <div className="p-6 border-b">
+      <div className="p-8 border-b border-gray-200">
         <Link href="/administrator" className="block">
-          <h1 className="text-xl font-serif font-bold text-gray-900">Health4Spain</h1>
-          <p className="text-xs text-gray-500 mt-1">Panel Admin</p>
+          <h1 className="text-2xl font-bold tracking-tight">Health4Spain</h1>
+          <p className="text-xs uppercase tracking-widest text-gray-600 mt-2">Panel Admin</p>
         </Link>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 overflow-y-auto">
-        <ul className="space-y-1">
+      <nav className="flex-1 p-6 overflow-y-auto">
+        <ul className="space-y-2">
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href, item.exact);
@@ -98,10 +98,10 @@ function AdminSidebar() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition ${
+                  className={`flex items-center gap-3 px-4 py-3 transition-opacity ${
                     active
-                      ? 'bg-[#c7956d] text-white'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'opacity-100 border-l-3 border-red-600 font-bold'
+                      : 'opacity-60 hover:opacity-100'
                   }`}
                 >
                   <Icon />
@@ -114,14 +114,14 @@ function AdminSidebar() {
       </nav>
 
       {/* User & Logout */}
-      <div className="p-4 border-t">
-        <div className="mb-3 px-4">
-          <p className="text-xs text-gray-500">Conectado como</p>
-          <p className="text-sm font-medium text-gray-700 truncate">{user?.email}</p>
+      <div className="p-6 border-t border-gray-200">
+        <div className="mb-4">
+          <p className="text-xs uppercase tracking-widest text-gray-600 mb-1">Conectado</p>
+          <p className="text-sm font-medium truncate">{user?.email}</p>
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-2.5 w-full text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition"
+          className="flex items-center gap-3 w-full py-2 hover:opacity-50 transition-opacity"
         >
           <LogoutIcon />
           <span className="font-medium">Cerrar Sesión</span>
@@ -141,7 +141,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-100 flex">
+      <div className="min-h-screen bg-white flex">
         <AdminSidebar />
         <main className="flex-1 overflow-auto">
           {children}

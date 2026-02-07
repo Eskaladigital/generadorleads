@@ -159,7 +159,7 @@ export default function MediaPage() {
           <h1 className="text-2xl font-serif font-bold text-gray-900">Media</h1>
           <p className="text-gray-500 mt-1">Gestiona las imágenes del blog</p>
         </div>
-        <label className="inline-flex items-center gap-2 px-4 py-2 bg-[#c7956d] text-white rounded-lg hover:bg-[#b8845c] cursor-pointer transition">
+        <label className="inline-flex items-center gap-2 px-4 py-2 bg-[red-600] text-white rounded-lg hover:bg-[red-700] cursor-pointer transition">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
           </svg>
@@ -181,7 +181,7 @@ export default function MediaPage() {
         onDragLeave={handleDragLeave}
         className={`mb-6 border-2 border-dashed rounded-lg p-8 text-center transition ${
           dragOver
-            ? 'border-[#c7956d] bg-[#c7956d]/5'
+            ? 'border-[red-600] bg-[red-600]/5'
             : 'border-gray-300 hover:border-gray-400'
         }`}
       >
@@ -190,7 +190,7 @@ export default function MediaPage() {
         </svg>
         <p className="text-gray-600">
           Arrastra imágenes aquí o{' '}
-          <label className="text-[#c7956d] hover:underline cursor-pointer">
+          <label className="text-[red-600] hover:underline cursor-pointer">
             selecciona archivos
             <input
               type="file"
@@ -324,7 +324,7 @@ export default function MediaPage() {
                 <div className="mt-6 pt-6 border-t space-y-2">
                   <button
                     onClick={() => copyUrl(selectedFile.url)}
-                    className="w-full py-2 px-4 bg-[#c7956d] text-white rounded-lg hover:bg-[#b8845c] transition text-sm"
+                    className="w-full py-2 px-4 bg-[red-600] text-white rounded-lg hover:bg-[red-700] transition text-sm"
                   >
                     Copiar URL
                   </button>
