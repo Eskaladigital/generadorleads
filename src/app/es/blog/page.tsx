@@ -87,9 +87,9 @@ export default async function BlogPage() {
   return (
     <>
       {/* HEADER */}
-      <section className="bg-gradient-to-br from-accent to-blue-600 py-16">
+      <section className="section-blue-dark">
         <div className="container-base">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-white mb-4">
             Blog
           </h1>
           <p className="text-xl text-white/90 max-w-2xl">
@@ -104,14 +104,14 @@ export default async function BlogPage() {
           <div className="flex items-center gap-3 min-w-max">
             <Link 
               href="/es/blog"
-              className="px-4 py-2 rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 transition-colors"
+              className="px-4 py-2 text-sm font-medium bg-[#293f92] text-white hover:opacity-90 transition-opacity"
             >
               Todos
             </Link>
             {categories.map((cat) => (
               <button
                 key={cat}
-                className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors whitespace-nowrap"
+                className="px-4 py-2 text-sm font-medium text-gray-700 hover:opacity-70 transition-opacity whitespace-nowrap border-b-2 border-transparent hover:border-gray-300"
               >
                 {categoryLabels[cat] || cat}
               </button>
@@ -121,7 +121,7 @@ export default async function BlogPage() {
       </section>
 
       {/* CONTENIDO PRINCIPAL CON SIDEBAR */}
-      <section className="py-12 bg-gray-50">
+      <section className="section-alt">
         <div className="container-base">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* POSTS PRINCIPALES */}
@@ -139,7 +139,7 @@ export default async function BlogPage() {
                     return (
                       <article 
                         key={post.slug}
-                        className="group bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all"
+                        className="group bg-white border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors"
                       >
                         <div className="grid md:grid-cols-3 gap-4">
                           <div className="relative h-48 md:h-full overflow-hidden">
@@ -149,7 +149,7 @@ export default async function BlogPage() {
                               fill
                               className="object-cover group-hover:scale-105 transition-transform duration-300"
                             />
-                            <span className={`absolute top-3 left-3 ${categoryColors[post.category] || 'bg-accent'} text-white px-2 py-1 text-xs uppercase tracking-wider font-semibold rounded`}>
+                            <span className={`absolute top-3 left-3 ${categoryColors[post.category] || 'bg-red-600'} text-white px-2 py-1 text-xs uppercase tracking-wider font-semibold`}>
                               {categoryLabel}
                             </span>
                           </div>
@@ -161,7 +161,7 @@ export default async function BlogPage() {
                                 day: 'numeric' 
                               })}
                             </time>
-                            <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-accent transition-colors line-clamp-2">
+                            <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors line-clamp-2">
                               <Link href={`/es/blog/${post.slug}`}>
                                 {post.title}
                               </Link>
@@ -171,7 +171,7 @@ export default async function BlogPage() {
                             </p>
                             <Link 
                               href={`/es/blog/${post.slug}`}
-                              className="inline-flex items-center gap-1 text-sm text-accent font-medium hover:gap-2 transition-all"
+                              className="inline-flex items-center gap-1 text-sm text-red-600 font-medium hover:gap-2 transition-all border-b-2 border-red-600"
                             >
                               Leer más
                               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -190,8 +190,8 @@ export default async function BlogPage() {
             {/* SIDEBAR */}
             <div className="space-y-8">
               {/* Newsletter */}
-              <div className="bg-gradient-to-br from-accent to-blue-600 rounded-xl p-6 text-white">
-                <h3 className="text-xl font-bold mb-2">Newsletter</h3>
+              <div className="bg-[#293f92] text-white p-6">
+                <h3 className="text-xl font-bold mb-2 text-white">Newsletter</h3>
                 <p className="text-white/90 text-sm mb-4">
                   Recibe las últimas guías y consejos para vivir en España
                 </p>
@@ -199,9 +199,9 @@ export default async function BlogPage() {
                   <input
                     type="email"
                     placeholder="tu@email.com"
-                    className="w-full px-4 py-2 rounded-lg text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50"
+                    className="w-full px-4 py-2 text-gray-900 placeholder:text-gray-500 focus:outline-none border-2 border-white/30 focus:border-white"
                   />
-                  <button className="w-full bg-white text-accent font-semibold py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                  <button className="w-full bg-white text-[#293f92] font-semibold py-2 hover:opacity-90 transition-opacity border-b-3 border-red-600">
                     Suscribirse
                   </button>
                 </form>
@@ -209,9 +209,9 @@ export default async function BlogPage() {
 
               {/* Posts Populares */}
               {popularPosts.length > 0 && (
-                <div className="bg-white rounded-xl p-6 shadow-sm">
+                <div className="bg-white border border-gray-200 p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                     Más Leídos
@@ -223,11 +223,11 @@ export default async function BlogPage() {
                         href={`/es/blog/${post.slug}`}
                         className="group flex gap-3 items-start"
                       >
-                        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-600 group-hover:bg-accent group-hover:text-white transition-colors">
+                        <span className="flex-shrink-0 w-8 h-8 bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-600 group-hover:bg-red-600 group-hover:text-white transition-colors">
                           {index + 1}
                         </span>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-sm font-semibold text-gray-900 group-hover:text-accent transition-colors line-clamp-2 mb-1">
+                          <h4 className="text-sm font-semibold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2 mb-1">
                             {post.title}
                           </h4>
                           <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -247,7 +247,7 @@ export default async function BlogPage() {
               )}
 
               {/* Categorías */}
-              <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="bg-white border border-gray-200 p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Categorías</h3>
                 <div className="space-y-2">
                   {categories.map((cat) => {
@@ -257,10 +257,10 @@ export default async function BlogPage() {
                         key={cat}
                         className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors text-left group"
                       >
-                        <span className="text-sm font-medium text-gray-700 group-hover:text-accent transition-colors">
+                        <span className="text-sm font-medium text-gray-700 group-hover:text-red-600 transition-colors">
                           {categoryLabels[cat] || cat}
                         </span>
-                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1">
                           {count}
                         </span>
                       </button>
@@ -270,14 +270,14 @@ export default async function BlogPage() {
               </div>
 
               {/* CTA */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border-2 border-accent/20">
+              <div className="bg-white border-t-3 border-red-600 p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">¿Necesitas ayuda?</h3>
                 <p className="text-sm text-gray-600 mb-4">
                   Conectamos con profesionales verificados en España
                 </p>
                 <Link 
                   href="/es/contacto"
-                  className="block w-full text-center bg-accent text-white font-semibold py-2 rounded-lg hover:bg-accent/90 transition-colors"
+                  className="block w-full text-center btn-minimal-lg text-center py-3"
                 >
                   Solicitar información
                 </Link>

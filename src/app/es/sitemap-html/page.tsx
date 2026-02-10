@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const RUTAS_ESTATICAS = [
   { url: '/es', titulo: 'Inicio', descripcion: 'Página principal' },
   { url: '/es/destinos', titulo: 'Destinos', descripcion: 'Guía de destinos en España' },
-  { url: '/es/servicios', titulo: 'Servicios', descripcion: 'Servicios para expatriados' },
+  { url: '/es/servicios', titulo: 'Servicios', descripcion: 'Servicios para extranjeros' },
   { url: '/es/blog', titulo: 'Blog', descripcion: 'Artículos y guías' },
   { url: '/es/profesionales', titulo: 'Profesionales', descripcion: 'Directorio de profesionales' },
   { url: '/es/sobre-nosotros', titulo: 'Sobre Nosotros', descripcion: 'Quiénes somos' },

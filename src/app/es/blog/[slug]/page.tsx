@@ -112,20 +112,20 @@ export default async function BlogPostPage({
   return (
     <>
       {/* ARTICLE HEADER */}
-      <article className="py-16 px-[5%]">
-        <div className="max-w-[900px] mx-auto">
+      <article className="section">
+        <div className="container-narrow">
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center gap-2 text-sm text-gray-500">
-            <Link href="/es" className="hover:text-accent">Inicio</Link>
+            <Link href="/es" className="hover:text-red-600">Inicio</Link>
             <span>/</span>
-            <Link href="/es/blog" className="hover:text-accent">Blog</Link>
+            <Link href="/es/blog" className="hover:text-red-600">Blog</Link>
             <span>/</span>
             <span className="text-gray-900">{categoryLabel}</span>
           </nav>
 
           {/* Category & Date */}
           <div className="flex items-center gap-4 mb-6">
-            <span className="uppercase text-[0.8rem] text-accent tracking-wider font-semibold">
+            <span className="uppercase text-[0.8rem] text-red-600 tracking-wider font-semibold">
               {categoryLabel}
             </span>
             <span className="text-gray-400">•</span>
@@ -141,18 +141,18 @@ export default async function BlogPostPage({
           </div>
 
           {/* Title */}
-          <h1 className="font-lora text-[3.5rem] font-bold leading-[1.2] mb-6 text-[#1a1a1a]">
+          <h1 className="leading-[1.2] mb-6">
             {post.title}
           </h1>
 
           {/* Excerpt */}
-          <p className="text-[1.3rem] text-gray-600 leading-relaxed mb-8 border-l-4 border-accent pl-6">
+          <p className="text-[1.3rem] text-gray-600 leading-relaxed mb-8 border-l-4 border-red-600 pl-6">
             {post.excerpt}
           </p>
 
           {/* Author */}
           <div className="flex items-center gap-4 mb-12 pb-8 border-b border-gray-200">
-            <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white font-bold">
+            <div className="w-12 h-12 bg-[#293f92] flex items-center justify-center text-white font-bold">
               H4S
             </div>
             <div>
@@ -163,7 +163,7 @@ export default async function BlogPostPage({
         </div>
 
         {/* Featured Image */}
-        <div className="max-w-[1200px] mx-auto mb-16">
+        <div className="container-base mb-16">
           <div 
             className="w-full h-[500px] bg-cover bg-center border-[15px] border-gray-100"
             style={{
@@ -173,14 +173,14 @@ export default async function BlogPostPage({
         </div>
 
         {/* Article Content */}
-        <div className="max-w-[800px] mx-auto">
+        <div className="container-narrow">
           <div 
             className="prose prose-lg max-w-none
-              prose-headings:font-lora prose-headings:text-[#1a1a1a]
+              prose-headings:text-[#293f92]
               prose-h2:text-3xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6
               prose-h3:text-2xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-4
               prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
-              prose-a:text-accent prose-a:no-underline prose-a:font-medium hover:prose-a:underline
+              prose-a:text-red-600 prose-a:no-underline prose-a:font-medium hover:prose-a:underline
               prose-strong:text-[#1a1a1a] prose-strong:font-semibold
               prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
               prose-ol:my-6 prose-ol:list-decimal prose-ol:pl-6
@@ -190,8 +190,8 @@ export default async function BlogPostPage({
           />
 
           {/* CTA Box */}
-          <div className="mt-16 p-10 bg-gray-50 border-l-4 border-accent">
-            <h3 className="font-lora text-2xl font-bold mb-4">
+          <div className="mt-16 p-10 bg-gray-50 border-l-4 border-red-600">
+            <h3 className="text-2xl font-bold mb-4">
               ¿Necesitas ayuda para establecerte en España?
             </h3>
             <p className="text-gray-600 mb-6 leading-relaxed">
@@ -199,7 +199,7 @@ export default async function BlogPostPage({
             </p>
             <Link
               href="/es/contacto"
-              className="inline-block bg-[#1a1a1a] text-white py-4 px-8 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-accent"
+              className="btn-minimal-lg"
             >
               Hablar con un Experto
             </Link>
@@ -208,7 +208,7 @@ export default async function BlogPostPage({
           {/* Related Articles */}
           {relatedPosts.length > 0 && (
             <div className="mt-20 pt-12 border-t border-gray-200">
-              <h3 className="font-lora text-2xl font-bold mb-8">Artículos Relacionados</h3>
+              <h3 className="text-2xl font-bold mb-8">Artículos Relacionados</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {relatedPosts.map((relatedPost) => {
                   const relatedImage = relatedPost.featured_image || categoryImages[relatedPost.category];
@@ -224,8 +224,8 @@ export default async function BlogPostPage({
                           }}
                         />
                       </div>
-                      <div className="text-xs uppercase text-accent font-semibold mb-2">{relatedCategory}</div>
-                      <h4 className="font-lora text-lg font-semibold text-[#1a1a1a] group-hover:text-accent transition-colors">
+                      <div className="text-xs uppercase text-red-600 font-semibold mb-2">{relatedCategory}</div>
+                      <h4 className="text-lg font-semibold text-[#1a1a1a] group-hover:text-red-600 transition-colors">
                         {relatedPost.title}
                       </h4>
                     </Link>

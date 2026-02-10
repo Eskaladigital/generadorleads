@@ -3,8 +3,8 @@ import { Metadata } from 'next';
 import { getServicios } from '@/lib/services';
 
 export const metadata: Metadata = {
-  title: 'Servicios para Expatriados en España',
-  description: 'Seguros de salud, abogados, inmobiliarias y gestorías. Profesionales que hablan tu idioma.',
+  title: 'Servicios para Extranjeros en España | Health4Spain',
+  description: 'Seguros de salud, abogados, inmobiliarias y gestorías para extranjeros. Profesionales que hablan tu idioma.',
 };
 
 // 4 SERVICIOS PRINCIPALES con detalles
@@ -41,18 +41,38 @@ export default async function ServiciosPage() {
   return (
     <>
       {/* Header Minimal */}
-      <section className="section border-b border-gray-200">
+      <section className="section">
         <div className="container-narrow">
           <h1 className="mb-8">Servicios</h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl">
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl">
             Cuatro servicios esenciales. Profesionales verificados. 
             Todo lo que necesitas para vivir legalmente en España.
           </p>
+          
+          {/* Stats rápidas */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-gray-300">
+            <div>
+              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">4</div>
+              <div className="text-sm uppercase tracking-widest text-gray-500">Servicios</div>
+            </div>
+            <div>
+              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">150+</div>
+              <div className="text-sm uppercase tracking-widest text-gray-500">Profesionales</div>
+            </div>
+            <div>
+              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">19</div>
+              <div className="text-sm uppercase tracking-widest text-gray-500">Ciudades</div>
+            </div>
+            <div>
+              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">0€</div>
+              <div className="text-sm uppercase tracking-widest text-gray-500">Para ti</div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Lista de Servicios - Minimal Style */}
-      <section className="section">
+      <section className="section-alt">
         <div className="container-narrow">
           <ul className="service-list-minimal">
             {servicios.map((servicio, index) => {
@@ -60,49 +80,41 @@ export default async function ServiciosPage() {
               const numero = String(index + 1).padStart(2, '0');
               
               return (
-                <li key={servicio.slug} className="service-item-minimal">
-                  <div className="service-number">{numero}</div>
-                  
-                  <div>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                      {servicio.nombre_plural || servicio.nombre}
-                    </h2>
-                    <p className="text-base md:text-lg text-gray-600 mb-6">
-                      {servicio.descripcion_corta}
-                    </p>
-                    
-                    {beneficios.length > 0 && (
-                      <ul className="space-y-2">
-                        {beneficios.map((beneficio, idx) => (
-                          <li key={idx} className="text-sm md:text-base text-gray-700 flex items-start gap-2">
-                            <span className="mt-1">•</span>
-                            <span>{beneficio}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  
-                  <Link 
-                    href={`/es/contacto?servicio=${servicio.slug}`}
-                    className="service-arrow"
+                <li key={servicio.slug}>
+                  <Link
+                    href={`/es/servicios/${servicio.slug}`}
+                    className="service-item-minimal block w-full hover:bg-white hover:pl-4 transition-all group"
                   >
-                    →
+                    <div className="service-number">{numero}</div>
+                    
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-bold mb-3">
+                        {servicio.nombre_plural || servicio.nombre}
+                      </h2>
+                      <p className="text-base md:text-lg text-gray-600 mb-6">
+                        {servicio.descripcion_corta}
+                      </p>
+                      
+                      {beneficios.length > 0 && (
+                        <ul className="space-y-2">
+                          {beneficios.map((beneficio, idx) => (
+                            <li key={idx} className="text-sm md:text-base text-gray-700 flex items-start gap-3">
+                              <svg className="w-5 h-5 text-red-600 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                              <span>{beneficio}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    
+                    <span className="service-arrow group-hover:translate-x-2 transition-transform">→</span>
                   </Link>
                 </li>
               );
             })}
           </ul>
-          
-          {/* CTA Intermedio */}
-          <div className="text-center mt-20 pt-16 border-t border-gray-200">
-            <p className="text-lg md:text-xl text-gray-600 mb-8">
-              Todos los servicios. Un solo punto de contacto.
-            </p>
-            <Link href="/es/contacto" className="btn-minimal-lg">
-              Empezar Ahora
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -110,12 +122,33 @@ export default async function ServiciosPage() {
       <section className="section text-center">
         <div className="container-narrow">
           <h2 className="mb-8">¿No Sabes Qué Necesitas?</h2>
-          <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-xl mx-auto">
-            Cuéntanos tu situación y te orientamos sin compromiso
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            Cuéntanos tu situación y te orientamos sin compromiso. 
+            Todos los servicios en un solo punto de contacto.
           </p>
           <Link href="/es/contacto" className="btn-minimal-lg">
-            Contactar Ahora
+            Solicitar Información Ahora
           </Link>
+          <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-600">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Respuesta en 24h
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Sin compromiso
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Profesionales verificados
+            </div>
+          </div>
         </div>
       </section>
     </>

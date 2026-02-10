@@ -79,7 +79,7 @@ export const BLOG_CATEGORIES: BlogCategoryInfo[] = [
   {
     slug: 'noticias',
     name: { es: 'Noticias', en: 'News' },
-    description: { es: 'Actualidad para expatriados', en: 'News for expats' },
+    description: { es: 'Actualidad para extranjeros', en: 'News for foreigners' },
     color: 'orange',
   },
   {

@@ -1,24 +1,24 @@
 export default function CookiesPage() {
   return (
-    <div className="py-16 px-[5%]">
-      <div className="max-w-[900px] mx-auto">
-        <h1 className="font-lora text-[3.5rem] font-bold mb-8">Política de Cookies</h1>
+    <div className="section">
+      <div className="container-narrow">
+        <h1 className="mb-12">Política de Cookies</h1>
         
-        <div className="prose prose-lg">
-          <p className="text-gray-600 mb-8">
-            <strong>Última actualización:</strong> Enero 2026
-          </p>
+        <p className="text-gray-600 mb-12">
+          <strong>Última actualización:</strong> Enero 2026
+        </p>
 
-          <section className="mb-12">
-            <h2 className="font-lora text-[2rem] font-semibold mb-4">¿Qué son las cookies?</h2>
+        <div className="space-y-12">
+          <section>
+            <h2 className="mb-6 text-2xl font-bold">¿Qué son las cookies?</h2>
             <p className="text-gray-700 leading-relaxed">
               Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas 
               nuestro sitio web. Nos ayudan a mejorar tu experiencia y entender cómo utilizas nuestro sitio.
             </p>
           </section>
 
-          <section className="mb-12">
-            <h2 className="font-lora text-[2rem] font-semibold mb-4">Cookies que utilizamos</h2>
+          <section>
+            <h2 className="mb-6 text-2xl font-bold">Cookies que utilizamos</h2>
             
             <div className="mb-8">
               <h3 className="font-semibold text-xl mb-3">Cookies Esenciales</h3>
@@ -53,8 +53,8 @@ export default function CookiesPage() {
             </div>
           </section>
 
-          <section className="mb-12">
-            <h2 className="font-lora text-[2rem] font-semibold mb-4">Gestión de cookies</h2>
+          <section>
+            <h2 className="mb-6 text-2xl font-bold">Gestión de cookies</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               Puedes controlar y/o eliminar las cookies como desees. Puedes eliminar todas las cookies 
               que ya están en tu dispositivo y configurar la mayoría de los navegadores para que no se coloquen.
@@ -65,8 +65,8 @@ export default function CookiesPage() {
             </p>
           </section>
 
-          <section className="mb-12">
-            <h2 className="font-lora text-[2rem] font-semibold mb-4">Cookies de terceros</h2>
+          <section>
+            <h2 className="mb-6 text-2xl font-bold">Cookies de terceros</h2>
             <p className="text-gray-700 leading-relaxed">
               Utilizamos servicios de terceros que pueden establecer cookies en tu dispositivo:
             </p>
@@ -76,19 +76,19 @@ export default function CookiesPage() {
             </ul>
           </section>
 
-          <section className="mb-12">
-            <h2 className="font-lora text-[2rem] font-semibold mb-4">Actualizaciones de esta política</h2>
+          <section>
+            <h2 className="mb-6 text-2xl font-bold">Actualizaciones de esta política</h2>
             <p className="text-gray-700 leading-relaxed">
               Podemos actualizar esta política de cookies periódicamente. Te recomendamos que la revises 
               regularmente para estar informado sobre cómo utilizamos las cookies.
             </p>
           </section>
 
-          <section className="mb-12">
-            <h2 className="font-lora text-[2rem] font-semibold mb-4">Contacto</h2>
+          <section>
+            <h2 className="mb-6 text-2xl font-bold">Contacto</h2>
             <p className="text-gray-700 leading-relaxed">
               Si tienes preguntas sobre nuestra política de cookies, contáctanos en: 
-              <a href="mailto:info@health4spain.com" className="text-accent hover:underline ml-1">info@health4spain.com</a>
+              <a href="mailto:info@health4spain.com" className="text-red-600 hover:underline font-medium ml-1">info@health4spain.com</a>
             </p>
           </section>
         </div>

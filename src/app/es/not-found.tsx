@@ -2,15 +2,15 @@ import Link from 'next/link';
 
 export default function NotFoundES() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-[5%] py-24">
-      <div className="max-w-[800px] mx-auto text-center">
+    <div className="section min-h-[70vh] flex items-center justify-center">
+      <div className="container-narrow text-center">
         {/* Large 404 */}
-        <div className="font-lora text-[12rem] md:text-[16rem] font-bold text-gray-200 leading-none mb-8">
+        <div className="text-[12rem] md:text-[16rem] font-bold text-gray-200 leading-none mb-8">
           404
         </div>
 
         {/* Message */}
-        <h1 className="font-lora text-[3rem] md:text-[4rem] font-bold mb-6 text-[#1a1a1a]">
+        <h1 className="mb-6">
           Página No Encontrada
         </h1>
         
@@ -22,13 +22,13 @@ export default function NotFoundES() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
             href="/es"
-            className="inline-block bg-[#1a1a1a] text-white py-5 px-10 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-accent"
+            className="btn-minimal-lg"
           >
             Volver al Inicio
           </Link>
           <Link
             href="/es/contacto"
-            className="inline-block border-2 border-[#1a1a1a] text-[#1a1a1a] py-5 px-10 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-[#1a1a1a] hover:text-white"
+            className="inline-block border-2 border-[#293f92] text-[#293f92] py-3 px-8 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-[#293f92] hover:text-white"
           >
             Contactar
           </Link>
@@ -42,25 +42,25 @@ export default function NotFoundES() {
           <div className="flex flex-wrap justify-center gap-6">
             <Link 
               href="/es/destinos" 
-              className="text-accent hover:underline text-sm uppercase tracking-wider"
+              className="text-red-600 hover:underline text-sm uppercase tracking-wider font-medium"
             >
               Destinos
             </Link>
             <Link 
               href="/es/servicios" 
-              className="text-accent hover:underline text-sm uppercase tracking-wider"
+              className="text-red-600 hover:underline text-sm uppercase tracking-wider font-medium"
             >
               Servicios
             </Link>
             <Link 
               href="/es/blog" 
-              className="text-accent hover:underline text-sm uppercase tracking-wider"
+              className="text-red-600 hover:underline text-sm uppercase tracking-wider font-medium"
             >
-              Historias
+              Blog
             </Link>
             <Link 
               href="/es/sobre-nosotros" 
-              className="text-accent hover:underline text-sm uppercase tracking-wider"
+              className="text-red-600 hover:underline text-sm uppercase tracking-wider font-medium"
             >
               Sobre Nosotros
             </Link>

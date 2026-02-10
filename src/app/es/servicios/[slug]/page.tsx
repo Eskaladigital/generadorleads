@@ -38,7 +38,7 @@ const SERVICIOS_DATA: Record<string, {
 }> = {
   'seguros': {
     titulo: 'Seguros de Salud',
-    subtitulo: 'Cobertura médica completa para expatriados en España',
+    subtitulo: 'Cobertura médica completa para extranjeros en España',
     descripcion: 'El sistema sanitario español es de los mejores del mundo, pero como extranjero necesitas un seguro privado para acceder a él sin esperas. Te conectamos con las mejores aseguradoras que ofrecen pólizas adaptadas a residentes internacionales.',
     beneficios: [
       {
@@ -115,7 +115,7 @@ const SERVICIOS_DATA: Record<string, {
   'inmobiliarias': {
     titulo: 'Inmobiliarias',
     subtitulo: 'Encuentra tu hogar ideal en España',
-    descripcion: 'Comprar o alquilar en España siendo extranjero tiene sus particularidades. Trabajamos con inmobiliarias que entienden las necesidades de los expatriados y te acompañan en todo el proceso.',
+    descripcion: 'Comprar o alquilar en España siendo extranjero tiene sus particularidades. Trabajamos con inmobiliarias que entienden las necesidades de los extranjeros y te acompañan en todo el proceso.',
     beneficios: [
       {
         titulo: 'Búsqueda personalizada',
@@ -149,44 +149,6 @@ const SERVICIOS_DATA: Record<string, {
       },
     ],
     ciudadesPopulares: ['marbella', 'alicante', 'torrevieja', 'palma', 'tenerife'],
-  },
-  'dentistas': {
-    titulo: 'Clínicas Dentales',
-    subtitulo: 'Odontología de calidad a precios competitivos',
-    descripcion: 'España es conocida por su excelente relación calidad-precio en tratamientos dentales. Muchos europeos viajan específicamente para hacerse tratamientos aquí. Te conectamos con las mejores clínicas.',
-    beneficios: [
-      {
-        titulo: 'Precios competitivos',
-        descripcion: 'Tratamientos hasta un 50-70% más baratos que en otros países europeos.',
-      },
-      {
-        titulo: 'Tecnología avanzada',
-        descripcion: 'Clínicas equipadas con la última tecnología: escáneres 3D, implantes guiados por ordenador.',
-      },
-      {
-        titulo: 'Profesionales cualificados',
-        descripcion: 'Dentistas con formación en las mejores universidades españolas y europeas.',
-      },
-      {
-        titulo: 'Facilidades de pago',
-        descripcion: 'Financiación sin intereses y presupuestos cerrados sin sorpresas.',
-      },
-    ],
-    faqs: [
-      {
-        pregunta: '¿Son buenos los dentistas en España?',
-        respuesta: 'España tiene excelentes facultades de odontología y los profesionales están muy bien formados. La calidad es comparable a cualquier país europeo.',
-      },
-      {
-        pregunta: '¿Cuánto cuesta un implante dental?',
-        respuesta: 'Un implante completo (incluida corona) cuesta entre 800€ y 1.500€ dependiendo de la clínica y materiales.',
-      },
-      {
-        pregunta: '¿Hablan inglés en las clínicas?',
-        respuesta: 'Muchas clínicas en zonas con expatriados tienen personal que habla inglés, alemán y otros idiomas.',
-      },
-    ],
-    ciudadesPopulares: ['barcelona', 'madrid', 'valencia', 'malaga', 'alicante'],
   },
   'gestorias': {
     titulo: 'Gestorías',
@@ -239,7 +201,6 @@ const CIUDADES_NOMBRES: Record<string, string> = {
   'torrevieja': 'Torrevieja',
   'palma': 'Palma de Mallorca',
   'tenerife': 'Tenerife',
-  'bilbao': 'Bilbao',
 };
 
 export async function generateMetadata({ 
@@ -259,17 +220,6 @@ export async function generateMetadata({
         keywords: Array.isArray(landing.meta_keywords) 
           ? landing.meta_keywords.join(', ') 
           : landing.meta_keywords || undefined,
-        openGraph: {
-          title: landing.meta_title,
-          description: landing.meta_description,
-          type: 'website',
-          locale: 'es_ES',
-        },
-        twitter: {
-          card: 'summary_large_image',
-          title: landing.meta_title,
-          description: landing.meta_description,
-        },
       };
     }
   }
@@ -282,7 +232,7 @@ export async function generateMetadata({
   }
   
   return {
-    title: `${servicio.titulo} para Expatriados en España`,
+    title: `${servicio.titulo} para Extranjeros en España | Health4Spain`,
     description: servicio.descripcion.slice(0, 155) + '...',
   };
 }
@@ -315,46 +265,31 @@ export default async function ServicioPage({
 
   return (
     <>
-      {/* Header reducido - misma estructura que destinos */}
-      <section className="bg-gradient-secondary text-white py-10 md:py-12">
-        <div className="container-base">
-          <div className="flex items-center gap-2 text-white/70 text-sm mb-3">
-            <Link href="/es/servicios" className="hover:text-white transition-colors">
+      {/* Header - Diseño minimalista */}
+      <section className="section">
+        <div className="container-narrow">
+          <div className="flex items-center gap-2 text-gray-500 text-sm mb-6">
+            <Link href="/es/servicios" className="hover:text-black">
               Servicios
             </Link>
             <span>/</span>
-            <span>{servicio.titulo}</span>
+            <span className="text-black">{servicio.titulo}</span>
           </div>
-          <h1 className="font-heading text-3xl md:text-4xl font-bold mb-2">
+          <h1 className="mb-8">
             {servicio.titulo}
           </h1>
-          <p className="text-lg text-white/90 max-w-2xl">
+          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl">
             {servicio.subtitulo}
           </p>
         </div>
       </section>
 
-      {/* CTA fijo visible */}
-      <div className="bg-primary/10 border-b border-primary/20 sticky top-16 z-30">
-        <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-gray-700 text-sm text-center sm:text-left">
-            <strong>¿Necesitas {servicio.titulo.toLowerCase()}?</strong> Te conectamos con profesionales verificados.
-          </p>
-          <Link 
-            href={`/es/contacto?servicio=${slug}`} 
-            className="btn-primary btn-sm whitespace-nowrap"
-          >
-            Solicitar información
-          </Link>
-        </div>
-      </div>
-
       {/* Contenido principal */}
-      <section className="py-10 md:py-12">
-        <div className="container-base">
-          <div className="grid lg:grid-cols-3 gap-8">
+      <section className="section-alt">
+        <div className="container-narrow">
+          <div className="grid lg:grid-cols-3 gap-16">
             {/* Columna principal */}
-            <div className="lg:col-span-2 space-y-10">
+            <div className="lg:col-span-2 space-y-16">
               {/* Descripción */}
               <div>
                 <p className="text-gray-700 text-lg leading-relaxed">
@@ -364,40 +299,38 @@ export default async function ServicioPage({
 
               {/* Beneficios */}
               <div>
-                <h2 className="font-heading text-xl font-bold text-gray-900 mb-6">
+                <h2 className="mb-8">
                   ¿Por qué elegirnos?
                 </h2>
-                <div className="grid sm:grid-cols-2 gap-4">
+                <ul className="service-list-minimal">
                   {servicio.beneficios.map((beneficio, index) => (
-                    <div key={index} className="card p-5">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                        <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                    <li key={index} className="service-item-minimal">
+                      <div className="service-number">0{index + 1}</div>
+                      <div>
+                        <h3 className="text-2xl md:text-3xl font-bold mb-2">
+                          {beneficio.titulo}
+                        </h3>
+                        <p className="text-base md:text-lg text-gray-600">
+                          {beneficio.descripcion}
+                        </p>
                       </div>
-                      <h3 className="font-semibold text-gray-900 mb-1">
-                        {beneficio.titulo}
-                      </h3>
-                      <p className="text-gray-600 text-sm">
-                        {beneficio.descripcion}
-                      </p>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
               {/* FAQs */}
               <div>
-                <h2 className="font-heading text-xl font-bold text-gray-900 mb-6">
+                <h2 className="mb-8">
                   Preguntas frecuentes
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {servicio.faqs.map((faq, index) => (
-                    <div key={index} className="card p-5">
-                      <h3 className="font-semibold text-gray-900 mb-2">
+                    <div key={index} className="border-t-3 border-gray-300 pt-6">
+                      <h3 className="text-xl font-bold mb-3">
                         {faq.pregunta}
                       </h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-600 leading-relaxed">
                         {faq.respuesta}
                       </p>
                     </div>
@@ -407,65 +340,67 @@ export default async function ServicioPage({
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               {/* CTA Card */}
-              <div className="card p-5 bg-primary/5 border-primary/20">
-                <h3 className="font-heading font-bold text-gray-900 mb-2">
+              <div className="bg-white border-t-3 border-red-600 p-6 sticky top-20">
+                <h3 className="text-xl font-bold mb-4">
                   Solicita información
                 </h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-gray-600 mb-6">
                   Te conectamos con profesionales verificados en menos de 24 horas.
                 </p>
                 <Link 
                   href={`/es/contacto?servicio=${slug}`}
-                  className="btn-primary w-full text-center"
+                  className="btn-minimal-lg w-full text-center block mb-4"
                 >
                   Comenzar ahora
                 </Link>
-                <p className="text-xs text-gray-500 text-center mt-3">
+                <p className="text-xs text-gray-500 text-center">
                   Sin compromiso · 100% gratuito
                 </p>
               </div>
 
               {/* Ciudades populares */}
-              <div className="card p-5">
-                <h3 className="font-heading font-bold text-gray-900 mb-4">
-                  Ciudades populares
-                </h3>
-                <div className="space-y-2">
-                  {servicio.ciudadesPopulares.map((ciudadSlug) => (
-                    <Link
-                      key={ciudadSlug}
-                      href={`/es/contacto?servicio=${slug}&ciudad=${ciudadSlug}`}
-                      className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors group"
-                    >
-                      <span className="text-gray-700 group-hover:text-primary transition-colors">
-                        {CIUDADES_NOMBRES[ciudadSlug]}
-                      </span>
-                      <svg className="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  ))}
+              {servicio.ciudadesPopulares.length > 0 && (
+                <div className="bg-white border-t-3 border-gray-300 p-6">
+                  <h3 className="text-xl font-bold mb-4">
+                    Ciudades populares
+                  </h3>
+                  <div className="space-y-3">
+                    {servicio.ciudadesPopulares.map((ciudadSlug) => (
+                      <Link
+                        key={ciudadSlug}
+                        href={`/es/contacto?servicio=${slug}&ciudad=${ciudadSlug}`}
+                        className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0 hover:pl-2 transition-all group"
+                      >
+                        <span className="text-gray-700 font-medium group-hover:text-red-600">
+                          {CIUDADES_NOMBRES[ciudadSlug]}
+                        </span>
+                        <svg className="w-4 h-4 text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Final */}
-      <section className="py-10 md:py-12 bg-gray-50">
-        <div className="container-base text-center">
-          <h2 className="font-heading text-2xl font-bold text-gray-900 mb-3">
-            ¿Listo para encontrar tu {servicio.titulo.toLowerCase().replace('seguros de ', '').replace('clínicas ', '').replace('abogados de extranjería', 'abogados')}?
+      <section className="section text-center">
+        <div className="container-narrow">
+          <h2 className="mb-8">
+            ¿Listo para encontrar tu {servicio.titulo.toLowerCase().replace('abogados', 'abogado').replace('seguros de ', 'seguro de ')}?
           </h2>
-          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
             Te conectamos con profesionales verificados que hablan tu idioma. Sin compromiso.
           </p>
           <Link 
             href={`/es/contacto?servicio=${slug}`} 
-            className="btn-primary btn-lg"
+            className="btn-minimal-lg"
           >
             Solicitar información gratuita
           </Link>
@@ -475,78 +410,61 @@ export default async function ServicioPage({
   );
 }
 
-// Componente para renderizar landing pages dinámicas
+// Componente para renderizar landing pages dinámicas (diseño minimalista)
 function LandingPageView({ landing }: { landing: LandingPage }) {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-secondary text-white py-10 md:py-12">
-        <div className="container-base">
-          <div className="max-w-4xl">
-            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              {landing.hero_title}
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-6 leading-relaxed">
-              {landing.hero_subtitle}
-            </p>
-            {landing.hero_bullets && landing.hero_bullets.length > 0 && (
-              <ul className="flex flex-wrap gap-4 mb-6">
-                {landing.hero_bullets.slice(0, 3).map((bullet, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-white/90 text-sm md:text-base">
-                    <svg className="w-5 h-5 text-white shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-            )}
-            <Link 
-              href={`/es/contacto?slug=${landing.slug}`}
-              className="btn-primary btn-lg inline-block"
-            >
-              Solicitar información gratuita
-            </Link>
-          </div>
+      <section className="section">
+        <div className="container-narrow">
+          <h1 className="mb-8">
+            {landing.hero_title}
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl">
+            {landing.hero_subtitle}
+          </p>
+          {landing.hero_bullets && landing.hero_bullets.length > 0 && (
+            <div className="flex flex-wrap gap-8 mb-12 pt-8 border-t border-gray-300">
+              {landing.hero_bullets.slice(0, 3).map((bullet, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <svg className="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-gray-700 font-medium">{bullet}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <Link 
+            href={`/es/contacto?slug=${landing.slug}`}
+            className="btn-minimal-lg"
+          >
+            Solicitar información gratuita
+          </Link>
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <div className="bg-primary/10 border-b border-primary/20">
-        <div className="container-base py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-gray-700 text-sm text-center sm:text-left">
-            <strong>{landing.cta_title || 'Te conectamos con profesionales verificados'}</strong>
-          </p>
-          <Link 
-            href={`/es/contacto?slug=${landing.slug}`}
-            className="btn-primary btn-sm"
-          >
-            {landing.cta_subtitle || 'Solicitar información'}
-          </Link>
-        </div>
-      </div>
-
       {/* Contenido Principal */}
-      <section className="py-10 md:py-14">
-        <div className="container-base">
-          <div className="grid lg:grid-cols-3 gap-8">
+      <section className="section-alt">
+        <div className="container-narrow">
+          <div className="grid lg:grid-cols-3 gap-16">
             
             {/* Columna Principal */}
-            <div className="lg:col-span-2 space-y-10">
+            <div className="lg:col-span-2 space-y-16">
               
               {/* Problema */}
               {landing.problem_title && landing.problems && landing.problems.length > 0 && (
                 <div>
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                  <h2 className="mb-8">
                     {landing.problem_title}
                   </h2>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {landing.problems.map((problem, idx) => (
-                      <div key={idx} className="flex items-start gap-3 text-gray-700">
-                        <svg className="w-6 h-6 text-red-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <div key={idx} className="flex items-start gap-4 pb-4 border-b border-gray-200 last:border-0">
+                        <svg className="w-6 h-6 text-red-600 mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                         </svg>
-                        <span className="leading-relaxed">{problem}</span>
+                        <p className="text-gray-700 text-lg">{problem}</p>
                       </div>
                     ))}
                   </div>
@@ -555,11 +473,11 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
 
               {/* Solución */}
               {landing.solution_title && landing.solution_text && (
-                <div className="card p-6 md:p-8 bg-green-50 border-green-200">
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                <div className="bg-white border-t-3 border-red-600 p-8">
+                  <h2 className="mb-6">
                     {landing.solution_title}
                   </h2>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line text-base md:text-lg">
+                  <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
                     {landing.solution_text}
                   </p>
                 </div>
@@ -568,42 +486,42 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
               {/* Servicios Específicos */}
               {landing.services_title && landing.services && landing.services.length > 0 && (
                 <div>
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                  <h2 className="mb-8">
                     {landing.services_title}
                   </h2>
-                  <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
+                  <ul className="service-list-minimal">
                     {landing.services.map((service, idx) => (
-                      <div key={idx} className="card p-5 md:p-6 hover:shadow-lg transition-shadow">
-                        {service.icon && (
-                          <div className="text-4xl mb-3">{service.icon}</div>
-                        )}
-                        <h3 className="font-heading font-bold text-gray-900 mb-2 text-lg">
-                          {service.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
-                      </div>
+                      <li key={idx} className="service-item-minimal">
+                        <div className="text-3xl">{service.icon || `0${idx + 1}`}</div>
+                        <div>
+                          <h3 className="text-2xl md:text-3xl font-bold mb-2">
+                            {service.title}
+                          </h3>
+                          <p className="text-base md:text-lg text-gray-600">{service.description}</p>
+                        </div>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               )}
 
               {/* Por qué esta ciudad */}
               {landing.why_city_title && landing.why_city_text && (
                 <div>
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                  <h2 className="mb-8">
                     {landing.why_city_title}
                   </h2>
-                  <p className="text-gray-700 leading-relaxed mb-6 whitespace-pre-line text-base md:text-lg">
+                  <p className="text-gray-700 text-lg leading-relaxed mb-8 whitespace-pre-line">
                     {landing.why_city_text}
                   </p>
                   {landing.why_city_stats && landing.why_city_stats.length > 0 && (
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                       {landing.why_city_stats.map((stat, idx) => (
-                        <div key={idx} className="text-center card p-4">
-                          <div className="text-3xl md:text-4xl font-bold text-primary mb-1">
+                        <div key={idx} className="text-center">
+                          <div className="text-5xl md:text-6xl font-bold text-red-600 mb-2">
                             {stat.value}
                           </div>
-                          <div className="text-sm text-gray-600">{stat.label}</div>
+                          <div className="text-sm uppercase tracking-widest text-gray-500">{stat.label}</div>
                         </div>
                       ))}
                     </div>
@@ -614,19 +532,16 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
               {/* FAQs */}
               {landing.faqs && landing.faqs.length > 0 && (
                 <div>
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+                  <h2 className="mb-8">
                     Preguntas frecuentes
                   </h2>
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {landing.faqs.map((faq, idx) => (
-                      <div key={idx} className="card p-5 md:p-6">
-                        <h3 className="font-heading font-semibold text-gray-900 mb-3 text-lg flex items-start gap-2">
-                          <svg className="w-5 h-5 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                          </svg>
+                      <div key={idx} className="border-t-3 border-gray-300 pt-6">
+                        <h3 className="text-xl font-bold mb-3">
                           {faq.question}
                         </h3>
-                        <p className="text-gray-600 text-sm md:text-base leading-relaxed whitespace-pre-line pl-7">
+                        <p className="text-gray-600 leading-relaxed whitespace-pre-line">
                           {faq.answer}
                         </p>
                       </div>
@@ -638,36 +553,36 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
-              <div className="card p-6 bg-primary/5 border-primary/20 sticky top-24">
-                <h3 className="font-heading font-bold text-gray-900 mb-3 text-lg">
+            <div className="space-y-8">
+              <div className="bg-white border-t-3 border-red-600 p-6 sticky top-20">
+                <h3 className="text-xl font-bold mb-4">
                   Solicita información
                 </h3>
-                <p className="text-gray-600 text-sm mb-5 leading-relaxed">
+                <p className="text-gray-600 mb-6">
                   Te conectamos con profesionales verificados en menos de 24 horas.
                 </p>
                 <Link 
                   href={`/es/contacto?slug=${landing.slug}`}
-                  className="btn-primary w-full text-center block mb-3"
+                  className="btn-minimal-lg w-full text-center block mb-4"
                 >
                   Comenzar ahora
                 </Link>
                 <div className="space-y-2 text-xs text-gray-500">
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     Sin compromiso
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     100% gratuito
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     Profesionales verificados
                   </div>
@@ -680,36 +595,36 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
       </section>
 
       {/* CTA Final */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="container-base text-center">
-          <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+      <section className="section text-center">
+        <div className="container-narrow">
+          <h2 className="mb-8">
             {landing.cta_title || '¿Listo para empezar?'}
           </h2>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
             {landing.cta_subtitle || 'Te conectamos con profesionales que hablan tu idioma'}
           </p>
           <Link 
             href={`/es/contacto?slug=${landing.slug}`}
-            className="btn-primary btn-lg inline-block"
+            className="btn-minimal-lg"
           >
             Solicitar información gratuita
           </Link>
-          <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-600">
+          <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-600">
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Respuesta en 24h
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Atención en tu idioma
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Sin compromiso
             </div>
