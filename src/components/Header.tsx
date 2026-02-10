@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 const LANGUAGES = [
   { code: 'es', label: 'ES', flag: '🇪🇸' },
@@ -72,10 +73,14 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* LOGO */}
           <Link href={`/${currentLang}`} className="flex items-center gap-2">
-            <span className="text-2xl">🏥</span>
-            <span className="text-xl font-bold text-gray-900">
-              Health<span className="text-blue-600">4</span>Spain
-            </span>
+            <Image
+              src="/images/logo-siglas-color.png"
+              alt="Health4Spain"
+              height={50}
+              width={50}
+              className="h-[50px] w-auto"
+              priority
+            />
           </Link>
 
           {/* NAV DESKTOP */}
@@ -84,9 +89,9 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                  pathname === item.href 
-                    ? 'text-blue-600' 
+                className={`text-sm font-medium transition-colors hover:text-[#3bbdda] ${
+                  pathname === item.href
+                    ? 'text-[#293f92]'
                     : 'text-gray-700'
                 }`}
               >
@@ -101,7 +106,7 @@ export default function Header() {
             <div className="relative">
               <button
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-[#3bbdda] transition-colors"
               >
                 {LANGUAGES.find(l => l.code === currentLang)?.flag}
                 <span className="hidden sm:inline ml-1">{currentLang.toUpperCase()}</span>
@@ -123,7 +128,7 @@ export default function Header() {
                         href={switchLanguage(lang.code)}
                         onClick={() => setIsLangMenuOpen(false)}
                         className={`flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                          currentLang === lang.code ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
+                          currentLang === lang.code ? 'text-[#293f92] bg-blue-50' : 'text-gray-700'
                         }`}
                       >
                         <span>{lang.flag}</span>
@@ -138,7 +143,7 @@ export default function Header() {
             {/* CTA Button */}
             <Link
               href={`/${currentLang}/contacto`}
-              className="hidden sm:inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-all shadow-md hover:shadow-lg"
+              className="hidden sm:inline-flex items-center gap-2 bg-[#293f92] text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-[#3bbdda] transition-all shadow-md hover:shadow-lg"
             >
               {currentLang === 'es' ? 'Solicitar ayuda' : 'Get help'}
               <span>→</span>
@@ -147,7 +152,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-700 hover:text-blue-600"
+              className="lg:hidden p-2 text-gray-700 hover:text-[#3bbdda]"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -176,9 +181,9 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={`block px-4 py-3 rounded-lg font-medium transition-colors ${
-                pathname === item.href 
-                  ? 'bg-blue-50 text-blue-600' 
-                  : 'text-gray-700 hover:bg-gray-50'
+                pathname === item.href
+                  ? 'bg-blue-50 text-[#293f92]'
+                  : 'text-gray-700 hover:bg-gray-50 hover:text-[#3bbdda]'
               }`}
             >
               {item.label}
@@ -186,7 +191,7 @@ export default function Header() {
           ))}
           <Link
             href={`/${currentLang}/contacto`}
-            className="block mt-4 bg-blue-600 text-white text-center px-4 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            className="block mt-4 bg-[#293f92] text-white text-center px-4 py-3 rounded-lg font-semibold hover:bg-[#3bbdda] transition-colors"
           >
             {currentLang === 'es' ? 'Solicitar ayuda gratis' : 'Get free help'}
           </Link>

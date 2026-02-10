@@ -1,59 +1,28 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { getCiudades } from '@/lib/ciudades';
 
 export const metadata: Metadata = {
   title: 'Destinos en España para Expatriados',
-  description: 'Descubre los mejores destinos en España para vivir como expatriado. 19 ciudades con profesionales verificados.',
+  description: 'Descubre los mejores destinos en España para vivir como expatriado. Ciudades con profesionales verificados.',
 };
 
-// 19 CIUDADES DEL PROYECTO organizadas por zona
-const DESTINOS = [
-  {
-    zona: 'Costa Blanca',
-    ciudades: [
-      { nombre: 'Torrevieja', slug: 'torrevieja' },
-      { nombre: 'Alicante', slug: 'alicante' },
-      { nombre: 'Benidorm', slug: 'benidorm' },
-      { nombre: 'Calpe', slug: 'calpe' },
-    ],
-  },
-  {
-    zona: 'Región de Murcia',
-    ciudades: [
-      { nombre: 'Lorca', slug: 'lorca' },
-      { nombre: 'Murcia Capital', slug: 'murcia' },
-      { nombre: 'Cartagena', slug: 'cartagena' },
-      { nombre: 'Torre Pacheco', slug: 'torre-pacheco' },
-    ],
-  },
-  {
-    zona: 'Costa del Sol',
-    ciudades: [
-      { nombre: 'Málaga', slug: 'malaga' },
-      { nombre: 'Marbella', slug: 'marbella' },
-      { nombre: 'Fuengirola', slug: 'fuengirola' },
-    ],
-  },
-  {
-    zona: 'Levante',
-    ciudades: [
-      { nombre: 'Valencia', slug: 'valencia' },
-      { nombre: 'Orihuela Costa', slug: 'orihuela' },
-    ],
-  },
-  {
-    zona: 'Otras Ciudades',
-    ciudades: [
-      { nombre: 'Barcelona', slug: 'barcelona' },
-      { nombre: 'Madrid', slug: 'madrid' },
-      { nombre: 'Almería', slug: 'almeria' },
-      { nombre: 'Sevilla', slug: 'sevilla' },
-      { nombre: 'Palma de Mallorca', slug: 'palma' },
-    ],
-  },
-];
+export default async function DestinosPage() {
+  const ciudades = await getCiudades();
 
-export default function DestinosPage() {
+  // Agrupar por comunidad
+  const porComunidad = ciudades.reduce<Record<string, { nombre: string; slug: string }[]>>(
+    (acc, c) => {
+      const zona = c.comunidad || 'Otras';
+      if (!acc[zona]) acc[zona] = [];
+      acc[zona].push({ nombre: c.nombre, slug: c.slug });
+      return acc;
+    },
+    {}
+  );
+
+  const regiones = Object.entries(porComunidad);
+
   return (
     <>
       {/* Header Minimal */}
@@ -61,7 +30,7 @@ export default function DestinosPage() {
         <div className="container-narrow">
           <h1 className="mb-8">Destinos en España</h1>
           <p className="text-xl md:text-2xl text-gray-600 max-w-2xl">
-            19 ciudades españolas. Profesionales verificados en cada una. 
+            {ciudades.length} ciudades españolas. Profesionales verificados en cada una.
             Elige tu destino.
           </p>
         </div>
@@ -70,14 +39,14 @@ export default function DestinosPage() {
       {/* Lista de Destinos por Zona */}
       <section className="section">
         <div className="container-narrow space-y-20">
-          {DESTINOS.map((region, regionIndex) => (
-            <div key={region.zona}>
+          {regiones.map(([zona, ciudadesZona], regionIndex) => (
+            <div key={zona}>
               <h2 className="text-3xl md:text-4xl font-bold mb-8 border-b-3 border-red-600 pb-4 inline-block">
-                {region.zona}
+                {zona}
               </h2>
-              
+
               <ul className="mt-12 space-y-6">
-                {region.ciudades.map((ciudad) => (
+                {ciudadesZona.map((ciudad) => (
                   <li key={ciudad.slug} className="border-b border-gray-200 pb-6">
                     <Link
                       href={`/es/destinos/${ciudad.slug}`}
@@ -93,9 +62,9 @@ export default function DestinosPage() {
                   </li>
                 ))}
               </ul>
-              
+
               {/* CTA después de cada 2 regiones */}
-              {(regionIndex === 1 || regionIndex === 3) && (
+              {(regionIndex === 1 || regionIndex === 3) && regiones.length > 2 && (
                 <div className="text-center mt-16 pt-16 border-t border-gray-200">
                   <Link href="/es/contacto" className="btn-minimal">
                     Solicitar Información →

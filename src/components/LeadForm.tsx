@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface LeadFormProps {
   servicio?: string;
@@ -23,20 +23,6 @@ const SERVICIOS = [
   { value: 'inmobiliarias', label: 'Agente Inmobiliario' },
   { value: 'gestorias', label: 'Gestoría' },
   { value: 'otro', label: 'Otro servicio' },
-];
-
-const CIUDADES = [
-  { value: 'torrevieja', label: 'Torrevieja' },
-  { value: 'alicante', label: 'Alicante' },
-  { value: 'murcia', label: 'Murcia' },
-  { value: 'benidorm', label: 'Benidorm' },
-  { value: 'cartagena', label: 'Cartagena' },
-  { value: 'elche', label: 'Elche' },
-  { value: 'orihuela', label: 'Orihuela' },
-  { value: 'lorca', label: 'Lorca' },
-  { value: 'rojales', label: 'Rojales' },
-  { value: 'san-javier', label: 'San Javier' },
-  { value: 'otra', label: 'Otra ciudad' },
 ];
 
 const URGENCIAS = [
@@ -66,6 +52,23 @@ export default function LeadForm({
   source,
   campaign,
 }: LeadFormProps) {
+  const [ciudades, setCiudades] = useState<{ value: string; label: string }[]>([]);
+
+  useEffect(() => {
+    const fetchCiudades = async () => {
+      try {
+        const res = await fetch('/api/ciudades');
+        if (res.ok) {
+          const data = await res.json();
+          setCiudades(data);
+        }
+      } catch (err) {
+        console.error('Error fetching ciudades:', err);
+      }
+    };
+    fetchCiudades();
+  }, []);
+
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
@@ -247,7 +250,7 @@ export default function LeadForm({
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
                 >
                   <option value="">Selecciona una ciudad</option>
-                  {CIUDADES.map(c => (
+                  {ciudades.map((c) => (
                     <option key={c.value} value={c.value}>{c.label}</option>
                   ))}
                 </select>
