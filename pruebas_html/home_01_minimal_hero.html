@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - España. Simplificado.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #dc2626;
+            --color-blue: #293f92;
+            --color-gray: #666666;
+            --color-gray-light: #fafafa;
+            --color-border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--color-black);
+            line-height: 1.5;
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1;
+            color: var(--color-blue);
+            letter-spacing: -0.03em;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3rem 6%;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-black);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.5;
+        }
+
+        /* Hero Section - Con imagen de fondo sutil */
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 6%;
+            background: linear-gradient(135deg, rgba(41, 63, 146, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .badge-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-red);
+        }
+
+        .badge-label {
+            font-size: 0.9rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-black);
+            text-decoration: none;
+            border-bottom: 3px solid var(--color-red);
+            transition: all 0.2s;
+        }
+
+        .cta-primary:hover {
+            border-bottom-width: 4px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 6%;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .section-header {
+            max-width: 900px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        .service-list {
+            border-top: 1px solid var(--color-border);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+        }
+
+        .service-item:hover {
+            opacity: 0.7;
+        }
+
+        .service-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-red);
+        }
+
+        .service-content h3 {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-content p {
+            font-size: 1.1rem;
+            color: var(--color-gray);
+        }
+
+        .service-arrow {
+            font-size: 2rem;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .service-item:hover .service-arrow {
+            transform: translateX(0.5rem);
+        }
+
+        /* Profiles Section */
+        .profiles {
+            padding: 8rem 6%;
+            background: var(--color-gray-light);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-card {
+            background: white;
+            border-top: 3px solid var(--color-red);
+            padding: 2.5rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+        }
+
+        .profile-card:hover {
+            opacity: 0.85;
+        }
+
+        .profile-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-card p {
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--color-black);
+            color: white;
+            padding: 8rem 6%;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-decoration: none;
+            color: white;
+            transition: opacity 0.2s;
+        }
+
+        .stat-item:hover {
+            opacity: 0.7;
+        }
+
+        .stat-number {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 6%;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-header h2,
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            nav {
+                padding: 2rem 6%;
+            }
+
+            .hero,
+            .services,
+            .profiles,
+            .stats,
+            .cta-section {
+                padding: 4rem 6%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-links">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#destinos">Destinos</a></li>
+            <li><a href="#profesionales">Profesionales</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>España.<br>Simplificado.</h1>
+            <p class="hero-subtitle">
+                Conexiones directas con profesionales verificados para extranjeros. 
+                Seguros, abogados, inmobiliarias, gestorías. Sin complicaciones.
+            </p>
+            
+            <div class="trust-badges">
+                <div class="badge">
+                    <div class="badge-number">150+</div>
+                    <div class="badge-label">Profesionales</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-number">19</div>
+                    <div class="badge-label">Ciudades</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-number">0€</div>
+                    <div class="badge-label">Coste</div>
+                </div>
+            </div>
+
+            <a href="#contacto" class="cta-primary">Empezar Ahora</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicios">
+        <div class="section-header">
+            <h2>Servicios</h2>
+            <p class="section-subtitle">
+                Cuatro servicios esenciales. Todo lo que necesitas para vivir legalmente en España.
+            </p>
+        </div>
+
+        <div class="service-list">
+            <a href="#contacto" class="service-item">
+                <div class="service-number">01</div>
+                <div class="service-content">
+                    <h3>Seguros de Salud</h3>
+                    <p>Pólizas obligatorias para visados y permisos de residencia</p>
+                </div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="#contacto" class="service-item">
+                <div class="service-number">02</div>
+                <div class="service-content">
+                    <h3>Abogados</h3>
+                    <p>Familia, civil, laboral, extranjería y más</p>
+                </div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="#contacto" class="service-item">
+                <div class="service-number">03</div>
+                <div class="service-content">
+                    <h3>Inmobiliarias</h3>
+                    <p>Agentes especializados en extranjeros</p>
+                </div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="#contacto" class="service-item">
+                <div class="service-number">04</div>
+                <div class="service-content">
+                    <h3>Gestorías</h3>
+                    <p>Empadronamiento y gestión administrativa</p>
+                </div>
+                <div class="service-arrow">→</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Profiles Section -->
+    <section class="profiles">
+        <div class="section-header">
+            <h2>¿Quién Eres?</h2>
+            <p class="section-subtitle">
+                Identifica tu perfil y descubre cómo podemos ayudarte
+            </p>
+        </div>
+
+        <div class="profile-grid">
+            <a href="#contacto" class="profile-card">
+                <h3>Jubilados</h3>
+                <p>Retiro en Costa Blanca/Sol. Visado no lucrativo, seguro médico.</p>
+            </a>
+
+            <a href="#contacto" class="profile-card">
+                <h3>Trabajadores</h3>
+                <p>Empleo en agro/industria. Arraigo laboral y reagrupación.</p>
+            </a>
+
+            <a href="#contacto" class="profile-card">
+                <h3>Inversores</h3>
+                <p>Golden Visa. Inversión inmobiliaria en zonas premium.</p>
+            </a>
+
+            <a href="#contacto" class="profile-card">
+                <h3>Estudiantes</h3>
+                <p>Visado estudiante. Homologación de títulos.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <a href="#profesionales" class="stat-item">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Profesionales Verificados</div>
+            </a>
+
+            <a href="#destinos" class="stat-item">
+                <div class="stat-number">19</div>
+                <div class="stat-label">Ciudades Españolas</div>
+            </a>
+
+            <a href="#contacto" class="stat-item">
+                <div class="stat-number">0€</div>
+                <div class="stat-label">Coste para Ti</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <h2>¿Listo para Empezar?</h2>
+        <p>Sin coste. Sin compromiso. Respuesta en 24 horas.</p>
+        <a href="#contacto" class="cta-primary">Empezar Ahora</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div>© 2025 Health4Spain. Todos los derechos reservados.</div>
+        <div>Privacidad · Términos · Contacto</div>
+    </footer>
+</body>
+</html>

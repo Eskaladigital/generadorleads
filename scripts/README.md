@@ -4,6 +4,19 @@ Esta carpeta contiene scripts para automatizar tareas administrativas y de gener
 
 ---
 
+## ✅ ESTADO ACTUAL (7 Febrero 2026)
+
+**76 landing pages generadas exitosamente** (4 servicios × 19 ciudades)
+
+- ✅ Abogados: 19/19
+- ✅ Seguros: 19/19  
+- ✅ Inmobiliarias: 19/19
+- ✅ Gestorías: 19/19
+
+**Coste total:** ~$0.17 USD (129,200 tokens con GPT-4o-mini)
+
+---
+
 ## 📍 generate-city-content.ts ⭐ NUEVO
 
 Script para generar contenido SEO extenso y detallado para páginas de ciudades usando OpenAI GPT-4o.
@@ -153,22 +166,29 @@ Cada landing incluye:
 - **FAQs**: 4-5 preguntas frecuentes
 - **CTA**: título y subtítulo de llamada a la acción
 
-### Servicios (6)
+### Servicios (4) ✅ ACTUALIZADO
 
 | Slug | Nombre |
 |------|--------|
-| abogados | Abogados de Extranjería |
+| abogados | Abogados |
 | seguros | Seguros de Salud |
 | inmobiliarias | Inmobiliarias |
-| dentistas | Clínicas Dentales |
 | gestorias | Gestorías |
-| clinicas | Clínicas Médicas |
 
-### Coste Estimado
+### Ciudades (19) ✅ ACTUALIZADO
+
+**Región de Murcia (12):**  
+Murcia, Cartagena, Lorca, Mazarrón, Torre Pacheco, San Javier, San Pedro del Pinatar, Molina de Segura, Águilas, Cieza, Jumilla, Yecla
+
+**Provincia de Alicante (7):**  
+Alicante, Elche, Torrevieja, Orihuela, Rojales, Benidorm, Dénia
+
+### Coste Real (7 Feb 2026)
 
 - **Modelo**: gpt-4o-mini
-- **Tokens por landing**: ~2,000-3,000
-- **Total 6×40 ciudades = 240 landings**: ~$2.00-4.00
+- **Tokens por landing**: ~1,700 tokens promedio
+- **Total 4×19 ciudades = 76 landings**: ~$0.15-0.20 USD
+- **Tiempo de generación**: ~12 minutos
 
 ---
 
@@ -293,14 +313,20 @@ Accede a `/administrator/landings` y `/administrator/blog` para revisar y activa
 
 ---
 
-## 💰 Resumen de Costes
+## 💰 Resumen de Costes (Actualizado 7 Feb 2026)
 
-| Script | Modelo | Contenido | Coste Aprox |
-|--------|--------|-----------|-------------|
-| `generate-city-content.ts` | GPT-4o | 40 ciudades | $1.00-1.60 |
-| `generate-landings.ts` | GPT-4o-mini | 240 landings | $2.00-4.00 |
+| Script | Modelo | Contenido | Coste Real |
+|--------|--------|-----------|------------|
+| `generate-landings.ts` (76) | GPT-4o-mini | 76 landings | **$0.15-0.20** ✅ |
+| `generate-city-content.ts` | GPT-4o | 19 ciudades | $0.40-0.76 |
 | `generate-blog-posts.ts` | GPT-4o-mini | 30 posts | $0.50-1.00 |
-| **TOTAL** | | | **$3.50-6.60** |
+| **SUBTOTAL GENERADO** | | | **$0.15-0.20** |
+| **TOTAL COMPLETO** | | | **$1.05-1.96** |
+
+**Estado actual:**
+- ✅ Landing pages: Completadas (76/76)
+- ⏸️ Contenido ciudades: Pendiente (opcional)
+- ⏸️ Blog posts: Pendiente (opcional)
 
 ---
 

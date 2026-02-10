@@ -416,7 +416,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
     <>
       {/* Hero Section */}
       <section className="section">
-        <div className="container-narrow">
+        <div className="container-base">
           <h1 className="mb-8">
             {landing.hero_title}
           </h1>
@@ -446,7 +446,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
 
       {/* Contenido Principal */}
       <section className="section-alt">
-        <div className="container-narrow">
+        <div className="container-base">
           <div className="grid lg:grid-cols-3 gap-16">
             
             {/* Columna Principal */}
@@ -596,7 +596,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
 
       {/* CTA Final */}
       <section className="section text-center">
-        <div className="container-narrow">
+        <div className="container-base">
           <h2 className="mb-8">
             {landing.cta_title || '¿Listo para empezar?'}
           </h2>

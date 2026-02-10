@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Testimonios y Confianza</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #dc2626;
+            --color-blue: #293f92;
+            --color-gray: #666666;
+            --color-gray-light: #fafafa;
+            --color-border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--color-black);
+            line-height: 1.5;
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-blue);
+            letter-spacing: -0.03em;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 6%;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        /* Hero Alternativo - Con valor de confianza arriba */
+        .hero {
+            padding: 6rem 6% 4rem;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .trust-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            padding: 1rem;
+            background: var(--color-gray-light);
+            border-radius: 0;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+
+        .trust-icon {
+            font-size: 1.2rem;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-black);
+            text-decoration: none;
+            border-bottom: 3px solid var(--color-red);
+            transition: all 0.2s;
+        }
+
+        .cta-primary:hover {
+            border-bottom-width: 4px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 8rem 6%;
+            background: var(--color-gray-light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-left: 3px solid var(--color-red);
+        }
+
+        .testimonial-quote {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            color: var(--color-black);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--color-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-detail {
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 8rem 6%;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-red);
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-blue);
+        }
+
+        .step-description {
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        /* Services Compact */
+        .services {
+            padding: 8rem 6%;
+            background: var(--color-black);
+            color: white;
+        }
+
+        .services h2 {
+            color: white;
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            text-decoration: none;
+            color: white;
+            transition: opacity 0.2s;
+        }
+
+        .service-card:hover {
+            opacity: 0.7;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .service-desc {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Partners/Logos Section */
+        .partners {
+            padding: 6rem 6%;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .partners h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            opacity: 0.5;
+        }
+
+        .partner-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 6%;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 6%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-header h2,
+            .services h2,
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .trust-bar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .process-steps,
+            .service-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero,
+            .testimonials,
+            .process,
+            .services,
+            .cta-section {
+                padding: 4rem 6%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Health4Spain</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="trust-bar">
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>150+ Profesionales Verificados</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>19 Ciudades Españolas</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>Sin Coste para Ti</span>
+            </div>
+        </div>
+
+        <h1>España. Simplificado.</h1>
+        <p class="hero-subtitle">
+            Conexiones directas con profesionales verificados que entienden tu situación. 
+            Seguros, abogados, inmobiliarias, gestorías.
+        </p>
+        <a href="#contacto" class="cta-primary">Empezar Ahora</a>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>Lo Que Dicen Nuestros Usuarios</h2>
+        </div>
+
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "Gracias a Health4Spain encontré un abogado que habla inglés y me ayudó con mi visa en menos de un mes. Todo muy profesional."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JM</div>
+                    <div class="author-info">
+                        <div class="author-name">John Morrison</div>
+                        <div class="author-detail">Reino Unido → Murcia</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "Necesitaba seguro médico para mi visado no lucrativo. Me conectaron con una aseguradora y en 48 horas tenía mi póliza. Increíble."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MP</div>
+                    <div class="author-info">
+                        <div class="author-name">Maria Petersen</div>
+                        <div class="author-detail">Alemania → Alicante</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "El proceso fue transparente y sin costes ocultos. Me ayudaron a encontrar piso y gestionar todo el papeleo. Muy recomendable."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AS</div>
+                    <div class="author-info">
+                        <div class="author-name">Ahmed Saidi</div>
+                        <div class="author-detail">Marruecos → Cartagena</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="section-header">
+            <h2>Cómo Funciona</h2>
+        </div>
+
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Cuéntanos</h3>
+                <p class="step-description">
+                    Tu situación, tus necesidades, tu perfil. Sin compromiso.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Te Conectamos</h3>
+                <p class="step-description">
+                    Con profesionales verificados en tu ciudad que hablan tu idioma.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Ellos Te Asesoran</h3>
+                <p class="step-description">
+                    Recibes asesoramiento personalizado en 24 horas. Gratis.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Tú Decides</h3>
+                <p class="step-description">
+                    Sin presión. Contratas solo si estás 100% convencido.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2>Nuestros Servicios</h2>
+
+        <div class="service-grid">
+            <a href="#contacto" class="service-card">
+                <div class="service-icon">🏥</div>
+                <h3 class="service-title">Seguros de Salud</h3>
+                <p class="service-desc">Pólizas obligatorias para visados y residencia</p>
+            </a>
+
+            <a href="#contacto" class="service-card">
+                <div class="service-icon">⚖️</div>
+                <h3 class="service-title">Abogados</h3>
+                <p class="service-desc">Extranjería, familia, civil y laboral</p>
+            </a>
+
+            <a href="#contacto" class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3 class="service-title">Inmobiliarias</h3>
+                <p class="service-desc">Especialistas en clientes extranjeros</p>
+            </a>
+
+            <a href="#contacto" class="service-card">
+                <div class="service-icon">📋</div>
+                <h3 class="service-title">Gestorías</h3>
+                <p class="service-desc">Trámites y gestión administrativa</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners">
+        <h3>Trabajamos con los mejores</h3>
+        <div class="partner-logos">
+            <div class="partner-logo">DKV</div>
+            <div class="partner-logo">SANITAS</div>
+            <div class="partner-logo">ASISA</div>
+            <div class="partner-logo">AXA</div>
+            <div class="partner-logo">ALLIANZ</div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <h2>¿Listo para Empezar?</h2>
+        <p>Sin coste. Sin compromiso. Respuesta en 24 horas.</p>
+        <a href="#contacto" class="cta-primary">Empezar Ahora</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Health4Spain. Todos los derechos reservados.</p>
+        <p style="margin-top: 1rem;">Privacidad · Términos · Contacto</p>
+    </footer>
+</body>
+</html>

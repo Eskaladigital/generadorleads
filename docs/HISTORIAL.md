@@ -1,5 +1,30 @@
 # Historial de Desarrollo - Health4Spain
 
+## Versión 2.4.0 (Febrero 2025)
+
+### Migración Destinos a Supabase
+
+- **Fuente única**: Destinos y ciudades desde `ciudades_catalogo` (Supabase)
+- **`/es/destinos`**: Usa `getCiudades()`, agrupa por comunidad
+- **`/es/contacto`**: Server component que pasa ciudades desde Supabase al formulario
+- **`/api/ciudades`**: Nuevo endpoint para componentes cliente (LeadForm)
+- **Eliminado**: `src/lib/destinos.ts` (duplicado estático)
+
+### Abogados Generalizado
+
+- **De "Abogados de Extranjería" a "Abogados"** en toda la web
+- Incluye: familia, civil, laboral, extranjería y más
+- Migración SQL: `supabase/03-actualizar-abogados.sql`
+
+### Diseño y UX
+
+- **Diseño minimalista**: Negro, blanco, rojo. Panel admin actualizado
+- **CTAs ampliados**: Servicios, destinos, perfiles y stats totalmente clicables
+- **Botón móvil fijo**: "Solicitar Información" en la parte inferior (oculto en contacto)
+- **Perfiles actualizados**: Jubilados, Trabajadores, Inversores, Estudiantes
+
+---
+
 ## Versión 2.3.0 (Enero 2025)
 
 ### Panel de Administración Completo
@@ -100,18 +125,37 @@ supabase/
 
 ### Sistema de Landing Pages con IA
 
+**✅ COMPLETADO**: 76 landing pages generadas exitosamente (7 Febrero 2026)
+
 **Esquema de base de datos:**
 - Tabla `landing_pages` con todos los campos para contenido dinámico
-- Soporte para 4 servicios × 19 ciudades = 76 landings
+- Tabla `ciudades_catalogo` con 19 ciudades estratégicas
+- Tabla `servicios_catalogo` con 4 servicios esenciales
+- Tabla `landing_generation_log` para tracking de generaciones
+- 4 servicios × 19 ciudades = 76 landings
 
 **Script de generación:**
 - `scripts/generate-landings.ts` usando OpenAI GPT-4o-mini
+- `scripts/retry-landings.ts` para regenerar landing pages incompletas
+- `scripts/check-landings.ts` para verificar estado
+- `scripts/verify-landings.ts` para detectar qué faltan
 - Prompts optimizados para contenido SEO en español
-- Coste estimado: ~$1.00-1.50 USD
+- Coste real: ~$0.15-0.20 USD (129,200 tokens)
+
+**Proceso de generación:**
+- Primera ejecución: 68 exitosas, 8 con errores de JSON
+- Corrección manual: Detectada y corregida `gestorias-zaragoza` → `gestorias-san-javier`
+- Limpieza de logs: 222 registros obsoletos eliminados
+- Tiempo total: ~12 minutos
+- Estado final: 76/76 ✅
 
 **Página dinámica:**
 - `/es/destinos/[slug]/page.tsx` renderiza las landings
 - URL pattern: `/es/destinos/{servicio}-{ciudad}`
+
+**Ciudades incluidas:**
+- Región de Murcia (12): Murcia, Cartagena, Lorca, Mazarrón, Torre Pacheco, San Javier, San Pedro del Pinatar, Molina de Segura, Águilas, Cieza, Jumilla, Yecla
+- Provincia de Alicante (7): Alicante, Elche, Torrevieja, Orihuela, Rojales, Benidorm, Dénia
 
 ### Documentación
 

@@ -12,18 +12,14 @@
 
 En **SQL Editor**, ejecutar en orden:
 
-```bash
-# 1. Esquema principal (leads, blog_posts)
-supabase/schema.sql
-
-# 2. Tabla de landing pages
-supabase/landing-pages-schema.sql
-
-# 3. Políticas RLS para tablas (opcional)
-supabase/rls-policies.sql
-
-# 4. Políticas de Storage
-supabase/storage-policies.sql
+```
+1. schema.sql              # Esquema principal (leads, blog_posts)
+2. landing-pages-schema.sql # Landings + ciudades_catalogo + servicios_catalogo
+3. 01-limpiar-ciudades.sql  # (Opcional) Limpia ciudades no estratégicas
+4. 02-insertar-19-ciudades.sql  # 19 ciudades: 12 Murcia + 7 Alicante
+5. 03-actualizar-abogados.sql   # Abogados general (no solo extranjería)
+6. rls-policies.sql         # Políticas RLS
+7. storage-policies.sql     # Políticas Storage
 ```
 
 ## 3. Configurar Storage
@@ -71,7 +67,10 @@ NEXT_PUBLIC_ADMIN_EMAILS=tu-email@gmail.com
 | Archivo | Descripción |
 |---------|-------------|
 | `schema.sql` | Tablas principales (leads, blog_posts) |
-| `landing-pages-schema.sql` | Tabla landing_pages |
+| `landing-pages-schema.sql` | Tabla landing_pages, ciudades_catalogo, servicios_catalogo |
+| `01-limpiar-ciudades.sql` | Limpieza de ciudades no estratégicas |
+| `02-insertar-19-ciudades.sql` | Las 19 ciudades iniciales (12 Murcia + 7 Alicante) |
+| `03-actualizar-abogados.sql` | Actualiza abogados a formato general (no solo extranjería) |
 | `rls-policies.sql` | Row Level Security para tablas |
 | `storage-policies.sql` | Políticas para bucket blog-images |
 

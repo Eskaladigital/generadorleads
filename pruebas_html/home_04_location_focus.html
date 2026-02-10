@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Tu Ciudad, Tus Profesionales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #dc2626;
+            --color-blue: #293f92;
+            --color-gray: #666666;
+            --color-gray-light: #fafafa;
+            --color-border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--color-black);
+            line-height: 1.5;
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-blue);
+            letter-spacing: -0.03em;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 6%;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        /* Hero con enfoque en ubicación */
+        .hero {
+            padding: 6rem 6%;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Location Selector */
+        .location-selector {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .location-input {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            font-size: 1.25rem;
+            border: 2px solid var(--color-border);
+            transition: border 0.2s;
+            font-family: inherit;
+        }
+
+        .location-input:focus {
+            outline: none;
+            border-color: var(--color-black);
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-black);
+            text-decoration: none;
+            border-bottom: 3px solid var(--color-red);
+            transition: all 0.2s;
+        }
+
+        .cta-primary:hover {
+            border-bottom-width: 4px;
+        }
+
+        /* Cities Section */
+        .cities {
+            padding: 8rem 6%;
+            background: var(--color-gray-light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        .region-group {
+            margin-bottom: 5rem;
+        }
+
+        .region-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-blue);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--color-red);
+            display: inline-block;
+        }
+
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0;
+            border-top: 1px solid var(--color-border);
+            max-width: 1200px;
+        }
+
+        .city-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--color-border);
+            border-right: 1px solid var(--color-border);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s;
+            background: white;
+        }
+
+        .city-item:hover {
+            background: var(--color-gray-light);
+        }
+
+        .city-name {
+            font-weight: 600;
+            font-size: 1.15rem;
+        }
+
+        .city-arrow {
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .city-item:hover .city-arrow {
+            transform: translateX(0.3rem);
+        }
+
+        /* Value Props Section */
+        .value-props {
+            padding: 8rem 6%;
+        }
+
+        .props-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .prop-card {
+            text-align: center;
+        }
+
+        .prop-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prop-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-blue);
+        }
+
+        .prop-desc {
+            color: var(--color-gray);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* Services Overview */
+        .services {
+            padding: 8rem 6%;
+            background: var(--color-black);
+            color: white;
+        }
+
+        .services h2 {
+            color: white;
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .service-box {
+            padding: 4rem 3rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: background 0.2s;
+        }
+
+        .service-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .service-box:nth-child(2n) {
+            border-right: none;
+        }
+
+        .service-box:nth-child(n+3) {
+            border-bottom: none;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .service-desc {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            padding: 4rem 6%;
+            background: var(--color-gray-light);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--color-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 6%;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 6%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-header h2,
+            .services h2,
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .city-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-box {
+                border-right: none !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+            }
+
+            .service-box:last-child {
+                border-bottom: none !important;
+            }
+
+            .hero,
+            .cities,
+            .value-props,
+            .services,
+            .cta-section {
+                padding: 4rem 6%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Health4Spain</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Profesionales Locales.<br>En Tu Ciudad.</h1>
+        <p class="hero-subtitle">
+            150+ profesionales verificados en 19 ciudades españolas. 
+            Encuentra expertos cerca de ti que hablan tu idioma.
+        </p>
+
+        <div class="location-selector">
+            <input type="text" class="location-input" placeholder="¿En qué ciudad vives o quieres vivir?">
+        </div>
+
+        <a href="#contacto" class="cta-primary">Buscar Profesionales</a>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stats-grid">
+            <div>
+                <div class="stat-number">19</div>
+                <div class="stat-label">Ciudades</div>
+            </div>
+            <div>
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Profesionales</div>
+            </div>
+            <div>
+                <div class="stat-number">4</div>
+                <div class="stat-label">Servicios</div>
+            </div>
+            <div>
+                <div class="stat-number">0€</div>
+                <div class="stat-label">Coste</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities Section -->
+    <section class="cities">
+        <div class="section-header">
+            <h2>Nuestras Ciudades</h2>
+            <p class="section-subtitle">
+                Profesionales verificados en las principales ciudades del sureste de España
+            </p>
+        </div>
+
+        <div class="region-group">
+            <h3 class="region-title">Región de Murcia</h3>
+            <div class="city-grid">
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Murcia</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Cartagena</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Lorca</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Mazarrón</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Torre Pacheco</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">San Javier</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Molina de Segura</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Águilas</span>
+                    <span class="city-arrow">→</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="region-group">
+            <h3 class="region-title">Provincia de Alicante</h3>
+            <div class="city-grid">
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Alicante</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Elche</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Torrevieja</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Orihuela</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Benidorm</span>
+                    <span class="city-arrow">→</span>
+                </a>
+                <a href="#contacto" class="city-item">
+                    <span class="city-name">Denia</span>
+                    <span class="city-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Props Section -->
+    <section class="value-props">
+        <div class="section-header">
+            <h2>Por Qué Elegirnos</h2>
+        </div>
+
+        <div class="props-grid">
+            <div class="prop-card">
+                <div class="prop-icon">📍</div>
+                <h3 class="prop-title">Conocimiento Local</h3>
+                <p class="prop-desc">
+                    Profesionales que conocen tu ciudad, sus particularidades y el mercado local.
+                </p>
+            </div>
+
+            <div class="prop-card">
+                <div class="prop-icon">🌍</div>
+                <h3 class="prop-title">Tu Idioma</h3>
+                <p class="prop-desc">
+                    Expertos que hablan inglés, alemán, francés y entienden tu cultura.
+                </p>
+            </div>
+
+            <div class="prop-card">
+                <div class="prop-icon">✓</div>
+                <h3 class="prop-title">Verificados</h3>
+                <p class="prop-desc">
+                    Todos nuestros profesionales están verificados y tienen experiencia con extranjeros.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2>Nuestros Servicios</h2>
+
+        <div class="service-grid">
+            <a href="#contacto" class="service-box">
+                <div class="service-icon">🏥</div>
+                <h3 class="service-title">Seguros de Salud</h3>
+                <p class="service-desc">Pólizas para visados y residencia</p>
+            </a>
+
+            <a href="#contacto" class="service-box">
+                <div class="service-icon">⚖️</div>
+                <h3 class="service-title">Abogados</h3>
+                <p class="service-desc">Extranjería, familia y más</p>
+            </a>
+
+            <a href="#contacto" class="service-box">
+                <div class="service-icon">🏠</div>
+                <h3 class="service-title">Inmobiliarias</h3>
+                <p class="service-desc">Alquiler y compra especializada</p>
+            </a>
+
+            <a href="#contacto" class="service-box">
+                <div class="service-icon">📋</div>
+                <h3 class="service-title">Gestorías</h3>
+                <p class="service-desc">Trámites administrativos completos</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <h2>¿Listo para Empezar?</h2>
+        <p>Encuentra profesionales verificados en tu ciudad. Sin coste. Respuesta en 24 horas.</p>
+        <a href="#contacto" class="cta-primary">Empezar Ahora</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Health4Spain. Todos los derechos reservados.</p>
+        <p style="margin-top: 1rem;">Privacidad · Términos · Contacto</p>
+    </footer>
+</body>
+</html>

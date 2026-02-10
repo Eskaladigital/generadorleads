@@ -60,7 +60,7 @@
 
 #### LOS 4 SERVICIOS ESENCIALES:
 1. **Seguros de Salud y Vida** 🏥
-2. **Abogados de Extranjería** ⚖️
+2. **Abogados** ⚖️
 3. **Inmobiliarias** 🏠
 4. **Gestorías y Otros Servicios** 📋
 

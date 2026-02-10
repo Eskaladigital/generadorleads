@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Beneficios Claros</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #dc2626;
+            --color-blue: #293f92;
+            --color-gray: #666666;
+            --color-gray-light: #fafafa;
+            --color-border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--color-black);
+            line-height: 1.5;
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-blue);
+            letter-spacing: -0.03em;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 6%;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        /* Hero con Problema/Solución */
+        .hero {
+            padding: 6rem 6%;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-black);
+            text-decoration: none;
+            border-bottom: 3px solid var(--color-red);
+            transition: all 0.2s;
+        }
+
+        .cta-primary:hover {
+            border-bottom-width: 4px;
+        }
+
+        .hero-benefits {
+            background: var(--color-gray-light);
+            padding: 3rem 2.5rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .benefit-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .benefit-icon {
+            font-size: 1.5rem;
+            color: var(--color-red);
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--color-blue);
+        }
+
+        .benefit-desc {
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        /* Problem Section - Fondo oscuro */
+        .problem {
+            background: var(--color-black);
+            color: white;
+            padding: 8rem 6%;
+            text-align: center;
+        }
+
+        .problem h2 {
+            color: white;
+            font-size: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .problem-item {
+            text-align: left;
+        }
+
+        .problem-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-red);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .problem-text {
+            font-size: 1.5rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 8rem 6%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .solution-card {
+            text-align: center;
+        }
+
+        .solution-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--color-red);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .solution-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-blue);
+        }
+
+        .solution-desc {
+            color: var(--color-gray);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* Services Detailed */
+        .services {
+            padding: 8rem 6%;
+            background: var(--color-gray-light);
+        }
+
+        .service-list {
+            border-top: 1px solid var(--color-border);
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 3rem;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .service-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-red);
+        }
+
+        .service-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-content p {
+            font-size: 1.1rem;
+            color: var(--color-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--color-gray);
+        }
+
+        .feature-check {
+            color: var(--color-red);
+            font-weight: 700;
+        }
+
+        /* Guarantee Section */
+        .guarantee {
+            padding: 8rem 6%;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .guarantee h2 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .guarantee-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .guarantee-list {
+            text-align: left;
+            margin: 3rem 0;
+        }
+
+        .guarantee-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.15rem;
+        }
+
+        .guarantee-check {
+            color: var(--color-red);
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 6%;
+            text-align: center;
+            background: var(--color-black);
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-white {
+            display: inline-block;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-bottom: 3px solid white;
+            transition: all 0.2s;
+        }
+
+        .cta-white:hover {
+            border-bottom-width: 4px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 6%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-gray);
+            background: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .section-header h2,
+            .problem h2,
+            .guarantee h2,
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .service-features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero,
+            .problem,
+            .solution,
+            .services,
+            .guarantee,
+            .cta-section {
+                padding: 4rem 6%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Health4Spain</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>Vivir en España.<br>Sin Complicaciones.</h1>
+                <p class="hero-subtitle">
+                    Te conectamos con profesionales verificados que resuelven todos tus trámites legales. 
+                    Sin coste para ti.
+                </p>
+                <a href="#contacto" class="cta-primary">Empezar Ahora</a>
+            </div>
+
+            <div class="hero-benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Sin Coste Para Ti</div>
+                        <div class="benefit-desc">Los profesionales nos pagan a nosotros. Tú no pagas nada extra.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Respuesta en 24 Horas</div>
+                        <div class="benefit-desc">Un profesional verificado te contactará en menos de 24 horas.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Profesionales Verificados</div>
+                        <div class="benefit-desc">Todos nuestros colaboradores están verificados y especializados en extranjeros.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Tu Idioma</div>
+                        <div class="benefit-desc">Profesionales que hablan inglés, alemán, francés y más.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <h2>¿Te Suena Familiar?</h2>
+
+        <div class="problem-grid">
+            <div class="problem-item">
+                <div class="problem-label">Problema #1</div>
+                <p class="problem-text">
+                    "No sé qué seguro necesito para mi visado y tengo miedo de equivocarme"
+                </p>
+            </div>
+
+            <div class="problem-item">
+                <div class="problem-label">Problema #2</div>
+                <p class="problem-text">
+                    "Los abogados son caros y no sé si me están cobrando de más"
+                </p>
+            </div>
+
+            <div class="problem-item">
+                <div class="problem-label">Problema #3</div>
+                <p class="problem-text">
+                    "Buscar piso siendo extranjero es una pesadilla. Nadie me alquila."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="section-header">
+            <h2>Tu Solución en 3 Pasos</h2>
+            <p class="section-subtitle">
+                Simple. Rápido. Sin Complicaciones.
+            </p>
+        </div>
+
+        <div class="solution-grid">
+            <div class="solution-card">
+                <div class="solution-number">1</div>
+                <h3 class="solution-title">Cuéntanos</h3>
+                <p class="solution-desc">
+                    Rellena un formulario simple. Nos cuentas tu situación: qué necesitas, dónde vives, tu perfil.
+                </p>
+            </div>
+
+            <div class="solution-card">
+                <div class="solution-number">2</div>
+                <h3 class="solution-title">Te Conectamos</h3>
+                <p class="solution-desc">
+                    En menos de 24 horas, un profesional verificado de tu ciudad te contacta directamente.
+                </p>
+            </div>
+
+            <div class="solution-card">
+                <div class="solution-number">3</div>
+                <h3 class="solution-title">Resuelves</h3>
+                <p class="solution-desc">
+                    Recibes asesoramiento experto. Si te convence, contratas. Si no, no pasa nada. Sin compromiso.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="section-header">
+            <h2>Servicios Que Ofrecemos</h2>
+        </div>
+
+        <div class="service-list">
+            <div class="service-item">
+                <div class="service-number">01</div>
+                <div class="service-content">
+                    <h3>Seguros de Salud</h3>
+                    <p>Pólizas obligatorias para todos los tipos de visado y permisos de residencia.</p>
+                    <div class="service-features">
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Aprobación en 24-48h</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Sin copagos</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Atención en tu idioma</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-number">02</div>
+                <div class="service-content">
+                    <h3>Abogados de Extranjería</h3>
+                    <p>Especialistas en visados, NIE, nacionalidad, reagrupación familiar y más.</p>
+                    <div class="service-features">
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Especializados en extranjeros</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Presupuesto transparente</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Primera consulta gratis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-number">03</div>
+                <div class="service-content">
+                    <h3>Inmobiliarias</h3>
+                    <p>Agentes especializados en clientes extranjeros, conocen el mercado local.</p>
+                    <div class="service-features">
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Experiencia con extranjeros</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Alquiler y compra</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Apoyo legal incluido</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-number">04</div>
+                <div class="service-content">
+                    <h3>Gestorías</h3>
+                    <p>Empadronamiento, homologaciones, trámites administrativos y más.</p>
+                    <div class="service-features">
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Todo el papeleo resuelto</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Experiencia con extranjeros</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-check">✓</span>
+                            <span>Acompañamiento completo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee">
+        <h2>Nuestra Garantía</h2>
+
+        <div class="guarantee-content">
+            <div class="guarantee-list">
+                <div class="guarantee-item">
+                    <span class="guarantee-check">✓</span>
+                    <span>100% Gratis para ti. Sin letra pequeña.</span>
+                </div>
+                <div class="guarantee-item">
+                    <span class="guarantee-check">✓</span>
+                    <span>Solo profesionales verificados y especializados.</span>
+                </div>
+                <div class="guarantee-item">
+                    <span class="guarantee-check">✓</span>
+                    <span>Respuesta garantizada en 24 horas.</span>
+                </div>
+                <div class="guarantee-item">
+                    <span class="guarantee-check">✓</span>
+                    <span>Sin compromiso. Decides tú si contratas o no.</span>
+                </div>
+            </div>
+
+            <a href="#contacto" class="cta-primary">Empezar Ahora</a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <h2>¿Listo para Empezar?</h2>
+        <p>Cuéntanos tu caso y un profesional te contactará en 24 horas.</p>
+        <a href="#contacto" class="cta-white">Empezar Ahora</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Health4Spain. Todos los derechos reservados.</p>
+        <p style="margin-top: 1rem;">Privacidad · Términos · Contacto</p>
+    </footer>
+</body>
+</html>

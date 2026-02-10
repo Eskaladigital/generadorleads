@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinos - Bloques 3D | Health4Spain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #dc2626;
+            --color-blue: #293f92;
+            --color-gray: #666666;
+            --color-gray-light: #fafafa;
+            --color-border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--color-black);
+            background-color: var(--color-gray-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-blue);
+            letter-spacing: -0.03em;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+        }
+
+        /* Contenedor 3D */
+        .scene-3d {
+            perspective: 1200px;
+            width: 100%;
+            max-width: 900px;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            padding: 2rem;
+        }
+
+        /* Escena 3D - los bloques dentro */
+        .scene-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            transform-style: preserve-3d;
+        }
+
+        /* Bloque 3D - Wrapper */
+        .block-3d {
+            display: block;
+            perspective: 800px;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* Bloque 3D - Murcia: rotado a la izquierda */
+        .block-3d.murcia {
+            transform: rotateY(-15deg) rotateX(5deg);
+        }
+
+        /* Bloque 3D - Valencia: rotado a la derecha */
+        .block-3d.valencia {
+            transform: rotateY(15deg) rotateX(5deg);
+        }
+
+        /* Hover: levanta y reduce rotación */
+        .block-3d:hover {
+            transform: rotateY(-5deg) rotateX(0deg) translateY(-20px) scale(1.02);
+            z-index: 10;
+        }
+
+        .block-3d.valencia:hover {
+            transform: rotateY(5deg) rotateX(0deg) translateY(-20px) scale(1.02);
+            z-index: 10;
+        }
+
+        /* Caja 3D - 6 caras */
+        .block-box {
+            position: relative;
+            width: 280px;
+            height: 320px;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease;
+        }
+
+        .block-3d:hover .block-box {
+            transform: rotateX(5deg);
+        }
+
+        /* CARA FRONTAL */
+        .block-face {
+            position: absolute;
+            width: 280px;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 2rem;
+            background: var(--color-white);
+            border: 3px solid var(--color-border);
+            backface-visibility: visible;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .block-face-front {
+            border-top: 3px solid var(--color-red);
+            transform: translateZ(0);
+            /* Sombra múltiple = sensación de grosor 3D */
+            box-shadow: 
+                6px 6px 0 rgba(41, 63, 146, 0.08),
+                12px 12px 0 rgba(41, 63, 146, 0.04);
+        }
+
+        .block-3d:hover .block-face-front {
+            box-shadow: 
+                10px 10px 0 rgba(41, 63, 146, 0.1),
+                20px 20px 0 rgba(41, 63, 146, 0.05);
+        }
+
+
+        /* Contenido del bloque */
+        .block-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-red);
+        }
+
+        .block-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .block-subtitle {
+            font-size: 0.9rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .block-stat {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-red);
+        }
+
+        .block-label {
+            font-size: 0.85rem;
+            color: var(--color-gray);
+            margin-top: 0.25rem;
+        }
+
+        .block-arrow {
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .block-3d:hover .block-arrow {
+            transform: translateX(8px);
+        }
+
+
+        /* CTA debajo */
+        .cta-link {
+            margin-top: 3rem;
+            font-size: 1rem;
+            color: var(--color-gray);
+            text-decoration: none;
+            border-bottom: 2px solid var(--color-red);
+            padding-bottom: 2px;
+            transition: border-width 0.2s;
+        }
+
+        .cta-link:hover {
+            border-bottom-width: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .scene-inner {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .block-3d.murcia,
+            .block-3d.valencia {
+                transform: rotateY(0deg) rotateX(5deg);
+            }
+
+            .block-3d:hover {
+                transform: rotateY(0deg) rotateX(0deg) translateY(-20px) scale(1.02);
+            }
+
+            .block-3d.valencia:hover {
+                transform: rotateY(0deg) rotateX(0deg) translateY(-20px) scale(1.02);
+            }
+
+            .block-face,
+            .block-face-front {
+                width: 260px;
+                height: 300px;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section-header">
+        <h2>Nuestros Destinos</h2>
+        <p>Regiones donde operamos. Profesionales verificados en cada una.</p>
+    </div>
+
+    <div class="scene-3d">
+        <div class="scene-inner">
+            <!-- Bloque Murcia -->
+            <a href="/es/destinos?region=murcia" class="block-3d murcia">
+                <div class="block-box">
+                    <div class="block-face block-face-front">
+                        <div class="block-icon">📍</div>
+                        <h3 class="block-title">Región de Murcia</h3>
+                        <p class="block-subtitle">12 ciudades</p>
+                        <div class="block-stat">12</div>
+                        <div class="block-label">Ciudades</div>
+                        <div class="block-arrow">→</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Bloque Valencia -->
+            <a href="/es/destinos?region=alicante" class="block-3d valencia">
+                <div class="block-box">
+                    <div class="block-face block-face-front">
+                        <div class="block-icon">📍</div>
+                        <h3 class="block-title">Provincia de Alicante</h3>
+                        <p class="block-subtitle">7 ciudades</p>
+                        <div class="block-stat">7</div>
+                        <div class="block-label">Ciudades</div>
+                        <div class="block-arrow">→</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <a href="/es/destinos" class="cta-link">Ver todas las ciudades →</a>
+</body>
+</html>

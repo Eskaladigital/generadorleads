@@ -1,7 +1,7 @@
 # ✅ 10 DISEÑOS COMPLETOS CON CONTENIDO CORRECTO
 
 **TODOS actualizados con:**
-- 4 Servicios: Seguros, Abogados Extranjería, Inmobiliarias, Gestorías
+- 4 Servicios: Seguros, Abogados, Inmobiliarias, Gestorías
 - 4 Perfiles: Jubilados (UK/Alemania), Trabajadores (Marruecos/Ecuador), Inversores (Rusia/Ucrania), Estudiantes (Colombia/Venezuela)
 - 19 ciudades españolas
 - Enfoque en extranjeros y trámites migratorios (arraigo, visados, NIE)
@@ -129,7 +129,7 @@
 
 ## 📋 CONTENIDO COMÚN EN TODAS:
 
-✅ **4 Servicios:** Seguros salud, Abogados extranjería, Inmobiliarias, Gestorías
+✅ **4 Servicios:** Seguros salud, Abogados, Inmobiliarias, Gestorías
 ✅ **4 Perfiles:** Jubilados (UK), Trabajadores (Marruecos), Inversores (Rusia), Estudiantes (Colombia)
 ✅ **Ciudades:** Torrevieja, Lorca, Murcia, Alicante, Marbella, etc. (19 total)
 ✅ **Trámites:** Arraigo, visados, NIE, reagrupación familiar

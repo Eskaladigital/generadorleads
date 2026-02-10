@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { HERO_IMAGE_URL } from '@/lib/constants';
 
 // Datos - 4 PERFILES CORRECTOS
 const AUDIENCIAS = [
@@ -128,10 +129,10 @@ const TrustIcons = {
 export default function HomePage() {
   return (
     <>
-      {/* Hero Section con imagen de fondo */}
+      {/* Hero: pon hero-spain.jpg en public/images/ para que se vea */}
       <section 
         className="hero-with-image" 
-        style={{ backgroundImage: 'url(/images/AdobeStock_85606851.jpeg)' }}
+        style={{ backgroundImage: `url(${HERO_IMAGE_URL})` }}
       >
         <div className="hero-content-box">
           <h1 className="mb-8" style={{ lineHeight: '0.95' }}>

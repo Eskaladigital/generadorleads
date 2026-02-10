@@ -64,7 +64,7 @@
 
 ### 4. **LAYOUT** (`src/app/es/layout.tsx`)
 **Cambios:**
-- ❌ Eliminado `<StickyCTA />` (no necesario en minimal)
+- ✅ `<StickyCTA />` - Botón móvil fijo "Solicitar Información" (oculto en /contacto)
 - ❌ Eliminado `pt-16` en main (nav no es fixed)
 
 ---
@@ -78,9 +78,9 @@
 
 **Diseño nuevo:**
 - Hero: Título gigante "España. Simplificado."
-- Lista de servicios con números rojos 01-04
-- Stats negros: 150+ | 19 | 0€
-- Cards de perfiles con borde superior rojo
+- Lista de servicios con números rojos 01-04 — **todo clicable** (contacto)
+- Stats negros: 150+ | 19 | 0€ — **clicable** (Profesionales, Destinos, Contacto)
+- Cards de perfiles con borde superior rojo — **clicable** (contacto)
 - CTAs con borde inferior rojo
 
 ---
@@ -93,20 +93,21 @@
 **Diseño nuevo:**
 - Header minimal con título grande
 - Listas por zona con títulos con borde inferior rojo
+- **Filas completas clicables** (no solo el título)
 - Links con flecha → a la derecha
 - Sin cards, solo líneas horizontales
-- Hover: opacity 50%
+- Hover: opacity 80%, subrayado
 
 ---
 
 ### 7. **PÁGINA SERVICIOS** (`src/app/es/servicios/page.tsx`)
 **Contenido preservado:**
 ✅ 4 servicios con beneficios detallados
-✅ Arraigo, visados, NIE en Abogados
+✅ Abogados: familia, civil, laboral, extranjería
 ✅ Pólizas obligatorias en Seguros
 
 **Diseño nuevo:**
-- Lista con números 01-04 rojos
+- Lista con números 01-04 rojos — **todo clicable** (contacto)
 - Grid 3 columnas: número + info + flecha
 - Beneficios en bullet points simples
 - Sin cards
@@ -141,11 +142,11 @@
 6. `src/app/es/destinos/page.tsx` - Destinos lista
 7. `src/app/es/servicios/page.tsx` - Servicios lista
 
-⏳ **Pendientes (requieren ajuste menor):**
-- `src/app/es/contacto/page.tsx` - Formulario (muy complejo, requiere revisión)
-- `src/app/es/blog/page.tsx` - Blog
-- `src/app/es/sobre-nosotros/page.tsx` - Sobre nosotros
-- Páginas individuales de destinos/servicios
+✅ **Completadas posteriormente:**
+- `src/app/es/contacto/page.tsx` - Formulario multi-paso minimal
+- Panel administrator - Colores negro/blanco/rojo
+- Destinos desde Supabase (`ciudades_catalogo`)
+- Elementos clicables ampliados en toda la web
 
 ---
 

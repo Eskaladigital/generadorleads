@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - Tu Perfil, Tu Solución</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #dc2626;
+            --color-blue: #293f92;
+            --color-gray: #666666;
+            --color-gray-light: #fafafa;
+            --color-border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--color-black);
+            line-height: 1.5;
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-blue);
+            letter-spacing: -0.03em;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 6%;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        /* Hero Simple */
+        .hero {
+            padding: 6rem 6%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .scroll-hint {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-gray);
+            margin-top: 3rem;
+        }
+
+        /* Profiles Section - Grande y prominente */
+        .profiles {
+            padding: 8rem 6%;
+            background: var(--color-gray-light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            border: 1px solid var(--color-border);
+        }
+
+        .profile-card {
+            padding: 5rem 4rem;
+            border-right: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            background: white;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .profile-card:hover {
+            background: var(--color-gray-light);
+            transform: translateY(-2px);
+        }
+
+        .profile-card:nth-child(2n) {
+            border-right: none;
+        }
+
+        .profile-card:nth-child(n+3) {
+            border-bottom: none;
+        }
+
+        .profile-icon {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--color-blue);
+        }
+
+        .profile-age {
+            font-size: 1rem;
+            color: var(--color-gray);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .profile-desc {
+            font-size: 1.15rem;
+            color: var(--color-gray);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .profile-needs {
+            list-style: none;
+        }
+
+        .profile-needs li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--color-gray);
+        }
+
+        .check-icon {
+            color: var(--color-red);
+            font-weight: 700;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 8rem 6%;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-number {
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--color-red);
+            line-height: 1;
+        }
+
+        .timeline-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content p {
+            font-size: 1.15rem;
+            color: var(--color-gray);
+            line-height: 1.7;
+        }
+
+        /* Services Grid Compact */
+        .services {
+            padding: 8rem 6%;
+            background: var(--color-black);
+            color: white;
+        }
+
+        .services h2 {
+            color: white;
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-list {
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            color: white;
+            transition: opacity 0.2s;
+        }
+
+        .service-item:hover {
+            opacity: 0.7;
+        }
+
+        .service-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-red);
+        }
+
+        .service-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .service-arrow {
+            font-size: 2rem;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .service-item:hover .service-arrow {
+            transform: translateX(0.5rem);
+        }
+
+        /* Trust Section */
+        .trust {
+            padding: 8rem 6%;
+            text-align: center;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .trust-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--color-red);
+            margin-bottom: 1rem;
+        }
+
+        .trust-label {
+            font-size: 1.15rem;
+            color: var(--color-gray);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 6%;
+            text-align: center;
+            background: var(--color-gray-light);
+        }
+
+        .cta-section h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-black);
+            text-decoration: none;
+            border-bottom: 3px solid var(--color-red);
+            transition: all 0.2s;
+        }
+
+        .cta-primary:hover {
+            border-bottom-width: 4px;
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray);
+            text-decoration: none;
+            border-bottom: 3px solid var(--color-border);
+            transition: all 0.2s;
+        }
+
+        .cta-secondary:hover {
+            color: var(--color-black);
+            border-color: var(--color-black);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 6%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-header h2,
+            .services h2,
+            .trust h2,
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card {
+                border-right: none !important;
+                border-bottom: 1px solid var(--color-border) !important;
+                padding: 3rem 2rem;
+            }
+
+            .profile-card:last-child {
+                border-bottom: none !important;
+            }
+
+            .timeline-item {
+                grid-template-columns: 60px 1fr;
+                gap: 1.5rem;
+            }
+
+            .timeline-number {
+                font-size: 3rem;
+            }
+
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero,
+            .profiles,
+            .how-it-works,
+            .services,
+            .trust,
+            .cta-section {
+                padding: 4rem 6%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Health4Spain</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>¿Quién Eres?</h1>
+        <p class="hero-subtitle">
+            Cada perfil tiene necesidades únicas. Encuentra profesionales especializados 
+            en tu situación específica.
+        </p>
+        <p class="scroll-hint">↓ Selecciona tu perfil</p>
+    </section>
+
+    <!-- Profiles Section - Principal -->
+    <section class="profiles">
+        <div class="section-header">
+            <h2>4 Perfiles. Tu Solución.</h2>
+            <p class="section-subtitle">
+                Identifica tu perfil y descubre cómo podemos ayudarte exactamente
+            </p>
+        </div>
+
+        <div class="profile-grid">
+            <a href="#contacto" class="profile-card">
+                <div class="profile-icon">🏖️</div>
+                <h3 class="profile-title">Jubilados</h3>
+                <p class="profile-age">60-70 años</p>
+                <p class="profile-desc">
+                    Retiro tranquilo en clima cálido con asistencia sanitaria premium.
+                </p>
+                <ul class="profile-needs">
+                    <li><span class="check-icon">✓</span> Visado no lucrativo</li>
+                    <li><span class="check-icon">✓</span> Seguro médico residencial</li>
+                    <li><span class="check-icon">✓</span> Vivienda cerca del mar</li>
+                    <li><span class="check-icon">✓</span> Servicios de bienestar</li>
+                </ul>
+            </a>
+
+            <a href="#contacto" class="profile-card">
+                <div class="profile-icon">💼</div>
+                <h3 class="profile-title">Trabajadores</h3>
+                <p class="profile-age">22-49 años</p>
+                <p class="profile-desc">
+                    Empleo en España con estabilidad laboral y vivienda a largo plazo.
+                </p>
+                <ul class="profile-needs">
+                    <li><span class="check-icon">✓</span> Arraigo laboral</li>
+                    <li><span class="check-icon">✓</span> Seguro sanitario obligatorio</li>
+                    <li><span class="check-icon">✓</span> Vivienda asequible</li>
+                    <li><span class="check-icon">✓</span> Reagrupación familiar</li>
+                </ul>
+            </a>
+
+            <a href="#contacto" class="profile-card">
+                <div class="profile-icon">💰</div>
+                <h3 class="profile-title">Inversores</h3>
+                <p class="profile-age">35-59 años</p>
+                <p class="profile-desc">
+                    Golden Visa mediante inversión inmobiliaria en zonas premium.
+                </p>
+                <ul class="profile-needs">
+                    <li><span class="check-icon">✓</span> Golden Visa</li>
+                    <li><span class="check-icon">✓</span> Inversión inmobiliaria</li>
+                    <li><span class="check-icon">✓</span> Asesoramiento legal especializado</li>
+                    <li><span class="check-icon">✓</span> Optimización fiscal</li>
+                </ul>
+            </a>
+
+            <a href="#contacto" class="profile-card">
+                <div class="profile-icon">🎓</div>
+                <h3 class="profile-title">Estudiantes</h3>
+                <p class="profile-age">18-34 años</p>
+                <p class="profile-desc">
+                    Estudios en España con homologación de títulos y visado estudiante.
+                </p>
+                <ul class="profile-needs">
+                    <li><span class="check-icon">✓</span> Visado de estudiante</li>
+                    <li><span class="check-icon">✓</span> Seguro médico para estudiantes</li>
+                    <li><span class="check-icon">✓</span> Homologación de títulos</li>
+                    <li><span class="check-icon">✓</span> Vivienda compartida</li>
+                </ul>
+            </a>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="section-header">
+            <h2>Cómo Funciona</h2>
+            <p class="section-subtitle">Simple y rápido. Sin complicaciones.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-number">1</div>
+                <div class="timeline-content">
+                    <h3>Identifica Tu Perfil</h3>
+                    <p>Selecciona el perfil que mejor describe tu situación: jubilado, trabajador, inversor o estudiante.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number">2</div>
+                <div class="timeline-content">
+                    <h3>Te Conectamos</h3>
+                    <p>En 24 horas, un profesional especializado en tu perfil te contactará directamente.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number">3</div>
+                <div class="timeline-content">
+                    <h3>Recibes Asesoramiento</h3>
+                    <p>Expertos que entienden exactamente tu situación te guían en todo el proceso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2>Servicios para Todos los Perfiles</h2>
+
+        <div class="service-list">
+            <a href="#contacto" class="service-item">
+                <div class="service-number">01</div>
+                <div class="service-title">Seguros de Salud</div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="#contacto" class="service-item">
+                <div class="service-number">02</div>
+                <div class="service-title">Abogados de Extranjería</div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="#contacto" class="service-item">
+                <div class="service-number">03</div>
+                <div class="service-title">Inmobiliarias</div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="#contacto" class="service-item">
+                <div class="service-number">04</div>
+                <div class="service-title">Gestorías</div>
+                <div class="service-arrow">→</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust">
+        <div class="section-header">
+            <h2>Nuestra Red</h2>
+        </div>
+
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-number">150+</div>
+                <p class="trust-label">Profesionales Verificados</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-number">19</div>
+                <p class="trust-label">Ciudades Españolas</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-number">4</div>
+                <p class="trust-label">Perfiles Especializados</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-number">0€</div>
+                <p class="trust-label">Coste para Ti</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <h2>¿Listo para Empezar?</h2>
+        <p>Cuéntanos tu perfil y situación. Te conectamos con el profesional adecuado.</p>
+        
+        <div class="cta-buttons">
+            <a href="#contacto" class="cta-primary">Empezar Ahora</a>
+            <a href="#destinos" class="cta-secondary">Ver Destinos</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Health4Spain. Todos los derechos reservados.</p>
+        <p style="margin-top: 1rem;">Privacidad · Términos · Contacto</p>
+    </footer>
+</body>
+</html>

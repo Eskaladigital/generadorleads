@@ -12,10 +12,11 @@
    - Pólizas obligatorias para visados y residencia
    - Cobertura completa en toda España
 
-2. **Abogados de Extranjería** ⚖️
-   - Arraigo laboral y social
-   - Visados (trabajo, estudios, no lucrativo)
-   - NIE y reagrupación familiar
+2. **Abogados** ⚖️
+   - Familia: divorcio, custodia, herencias
+   - Civil: contratos, reclamaciones
+   - Laboral: despido, conflictos
+   - Extranjería: visados, NIE, nacionalidad
 
 3. **Inmobiliarias** 🏠
    - Agentes especializados en extranjeros

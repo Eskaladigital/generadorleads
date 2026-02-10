@@ -10,17 +10,17 @@ Health4Spain es una plataforma-marketplace digital que conecta a personas extran
 
 ### 1️⃣ **¿A QUIÉN AYUDAMOS?** → 4 Perfiles de Destinatarios
 
-1. **Móviles** (22-34 años) - Trabajo y estudios
-2. **Emprendedores Familiares** (35-49 años) - Reagrupación familiar
-3. **Profesionales Consolidados** (50-59 años) - Reubicación laboral
-4. **Retirados y Jubilados** (60-70 años) - Retiro en clima cálido
+1. **Jubilados** - Retiro en Costa Blanca/Sol. Visado no lucrativo, seguro médico
+2. **Trabajadores** - Empleo en agro/industria. Arraigo laboral y reagrupación
+3. **Inversores** - Golden Visa. Inversión inmobiliaria en zonas premium
+4. **Estudiantes** - Visado estudiante. Homologación de títulos
 
 ### 2️⃣ **¿QUÉ SERVICIOS OFRECEMOS?** → 4 Servicios Esenciales
 
-1. **Seguros de Salud y Vida**
-2. **Abogados de Extranjería**
+1. **Seguros de Salud**
+2. **Abogados** (familia, civil, laboral, extranjería)
 3. **Inmobiliarias**
-4. **Gestorías y Otros Servicios**
+4. **Gestorías**
 
 ### 3️⃣ **¿DÓNDE OPERAMOS?** → 19 Destinos Iniciales
 
@@ -28,6 +28,8 @@ Health4Spain es una plataforma-marketplace digital que conecta a personas extran
 - **7 ciudades en Provincia de Alicante**: Alicante, Elche, Torrevieja, Orihuela, Rojales, Benidorm, Denia
 
 **Total de Landing Pages**: **76** (4 servicios × 19 ciudades)
+
+**✅ ESTADO**: Proyecto completado - 76 landing pages generadas (7 Feb 2026)
 
 ---
 
@@ -78,8 +80,8 @@ El marketplace conecta usuarios con 4 tipos de profesionales verificados:
    - Coberturas según edad, trabajo y tipo de visado
    - Partners: DKV, Sanitas, Asisa, Adeslas, AXA, Allianz
 
-2. **Abogados de Extranjería**
-   - Especialistas en visados, arraigo, reagrupación familiar
+2. **Abogados**
+   - Familia, civil, laboral, extranjería y más
    - Red local verificada en cada ciudad
 
 3. **Inmobiliarias**
@@ -210,40 +212,51 @@ health4spain/
 │   ├── app/
 │   │   ├── api/                    # API Routes
 │   │   │   ├── blog/               # CRUD blog posts
+│   │   │   ├── ciudades/           # Lista de ciudades (Supabase)
 │   │   │   ├── leads/              # Gestión de leads
 │   │   │   ├── landings/           # Landing pages
 │   │   │   └── upload/             # Subida de imágenes
 │   │   ├── administrator/          # Panel de administración
 │   │   │   ├── login/              # Login admin
+│   │   │   ├── destinos/           # Catálogo de ciudades
 │   │   │   ├── leads/              # Gestión de leads
 │   │   │   ├── blog/               # Editor de posts
 │   │   │   ├── media/              # Gestor de imágenes
+│   │   │   ├── servicios/          # Catálogo de servicios
 │   │   │   └── landings/           # Gestión de landings
 │   │   ├── es/                     # Rutas en español
 │   │   │   ├── blog/               # Blog público
-│   │   │   └── destinos/           # Landing pages
+│   │   │   ├── contacto/           # Formulario multi-paso
+│   │   │   ├── destinos/           # Ciudades desde Supabase
+│   │   │   └── servicios/          # Servicios desde Supabase
 │   │   └── en/                     # Rutas en inglés
 │   ├── components/
 │   │   ├── admin/                  # Componentes del admin
-│   │   └── ...                     # Componentes públicos
+│   │   ├── Navigation.tsx          # Nav minimalista
+│   │   ├── Footer.tsx
+│   │   ├── StickyCTA.tsx           # Botón móvil fijo
+│   │   └── ...
 │   ├── hooks/
 │   │   └── useAuth.ts              # Hook de autenticación
 │   └── lib/
 │       ├── supabase.ts             # Cliente Supabase
-│       ├── auth.ts                 # Validación de auth en APIs
+│       ├── ciudades.ts             # getCiudades() desde Supabase
+│       ├── services.ts             # getServicios() desde Supabase
 │       └── types.ts                # TypeScript types
 ├── supabase/
-│   ├── schema.sql                  # Esquema de base de datos
-│   ├── landing-pages-schema.sql    # Tabla de landings
-│   ├── rls-policies.sql            # Políticas RLS
-│   └── storage-policies.sql        # Políticas de Storage
+│   ├── schema.sql                  # Esquema principal
+│   ├── landing-pages-schema.sql    # Landings + ciudades_catalogo + servicios_catalogo
+│   ├── 01-limpiar-ciudades.sql     # Limpieza de ciudades
+│   ├── 02-insertar-19-ciudades.sql # 19 ciudades estratégicas
+│   ├── 03-actualizar-abogados.sql  # Abogados general (no solo extranjería)
+│   └── ...
 ├── scripts/
 │   └── generate-landings.ts        # Generador de landings con IA
 ├── docs/
-│   ├── ESTRATEGIA_BLOG.md          # Estrategia de contenido
-│   ├── MODELO_NEGOCIO.md           # Modelo de negocio
-│   └── HISTORIAL.md                # Historial de cambios
-└── public/                         # Assets estáticos
+│   ├── ESTRATEGIA_BLOG.md
+│   ├── MODELO_NEGOCIO.md
+│   └── HISTORIAL.md
+└── public/
 ```
 
 ## 🔐 Sistema de Autenticación
@@ -303,6 +316,9 @@ Editar `.env.local` con tus credenciales.
 2. Ejecutar los scripts SQL en orden:
    - `supabase/schema.sql`
    - `supabase/landing-pages-schema.sql`
+   - `supabase/01-limpiar-ciudades.sql` (opcional, limpia ciudades)
+   - `supabase/02-insertar-19-ciudades.sql` (19 ciudades estratégicas)
+   - `supabase/03-actualizar-abogados.sql` (abogados general)
    - `supabase/rls-policies.sql`
    - `supabase/storage-policies.sql`
 3. Crear bucket `blog-images` (público)
@@ -323,6 +339,7 @@ npm run dev
 |--------|----------|-------------|
 | GET | `/api/blog` | Listar posts publicados |
 | GET | `/api/blog/[slug]` | Obtener post por slug |
+| GET | `/api/ciudades` | Lista de ciudades desde Supabase |
 | GET | `/api/landings` | Listar landings activas |
 | GET | `/api/landings/[slug]` | Obtener landing |
 | POST | `/api/leads` | Crear nuevo lead |
@@ -365,18 +382,46 @@ Acceso: `/administrator/login`
 - **Leads**: Lista, filtros, cambio de estado, detalle
 - **Blog**: Lista de posts, crear/editar con TinyMCE
 - **Media**: Galería de imágenes, subir, organizar en carpetas
+- **Servicios**: Catálogo de servicios (seguros, abogados, inmobiliarias, gestorías)
+- **Destinos**: Catálogo de ciudades desde `ciudades_catalogo`
 - **Landings**: Lista de 76 landings (4 servicios × 19 ciudades), marcar revisadas/activas
 
 ## 🤖 Generación de Landings con IA
 
+**✅ ESTADO ACTUAL**: 76 landing pages generadas exitosamente (7 Feb 2026)
+
 76 landing pages (4 servicios × 19 ciudades) generadas con GPT-4o-mini.
 
+### Scripts Disponibles
+
 ```bash
-# Configurar OPENAI_API_KEY en .env.local
+# Generar todas las 76 landing pages
 npm run generate-landings
+
+# Verificar estado actual
+npm run check-landings
+
+# Reintentar landings incompletas
+npm run retry-landings
+
+# Generar contenido extendido para las 19 ciudades (opcional)
+npm run generate-cities
+
+# Limpiar base de datos
+npm run fix-database
+npm run clear-landings
+npm run clean-auxiliary
 ```
 
-Ver `scripts/README.md` para más detalles.
+Ver `scripts/README.md` y `ESTADO_PROYECTO.md` para más detalles.
+
+### Estadísticas de Generación
+
+- **Total generadas**: 76/76 ✅
+- **Tiempo de generación**: ~12 minutos
+- **Modelo usado**: GPT-4o-mini
+- **Tokens totales**: ~129,200 tokens
+- **Coste aprox**: $0.15 - $0.20 USD
 
 ## 📝 Scripts Disponibles
 
@@ -419,6 +464,13 @@ Para más detalles sobre la estrategia del proyecto, consulta:
 - **Propuesta Estratégica**: `pruebas_html/H4S Marketplace - Propuesta Estratégica 15012026 (1).txt`
 - **Estructura del Sitio**: `pruebas_html/Health4Spain.com (ROOT)_│_├── 1. HOME (ESCAPARATE) (2).txt`
 - **Fichas de Ciudad y Perfiles**: `pruebas_html/crea las fichas de cada ciudad y cada perfil de bu (1).txt`
+
+## 🎨 Diseño Minimalista
+
+- **Estilo**: Modern Minimalist (negro, blanco, rojo)
+- **CTAs**: Elementos clicables en toda la web (servicios, destinos, perfiles, stats)
+- **Botón móvil fijo**: "Solicitar Información" en la parte inferior (oculto en página de contacto)
+- **Fuente de datos**: Destinos y ciudades desde Supabase (`ciudades_catalogo`)
 
 ## 📄 Licencia
 

@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health4Spain - España. Simplificado.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #dc2626;
+            --color-blue: #293f92;
+            --color-blue-light: #f0f2f9;
+            --color-gray: #666666;
+            --color-gray-light: #fafafa;
+            --color-border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--color-black);
+            line-height: 1.5;
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-blue);
+            letter-spacing: -0.03em;
+        }
+
+        /* Navigation */
+        nav {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 6%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-black);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.5;
+        }
+
+        /* Hero Section - Con imagen de España */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 6%;
+            background: url('../images/AdobeStock_85606851.jpeg') center/cover no-repeat;
+            overflow: hidden;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(41, 63, 146, 0.3) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 4rem 4rem 4rem 4rem;
+            clip-path: polygon(0 0, calc(100% - 3rem) 0, 100% 3rem, 100% 100%, 0 100%);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            margin-bottom: 2rem;
+            line-height: 0.95;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .badge-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-red);
+        }
+
+        .badge-label {
+            font-size: 0.9rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1.25rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-black);
+            text-decoration: none;
+            border-bottom: 3px solid var(--color-red);
+            transition: all 0.2s;
+        }
+
+        .cta-primary:hover {
+            border-bottom-width: 5px;
+            color: var(--color-red);
+        }
+
+        /* Services Section - Fondo blanco */
+        .services {
+            padding: 8rem 6%;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .section-header {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        .service-list {
+            border-top: 1px solid var(--color-border);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+
+        .service-item:hover {
+            padding-left: 1rem;
+            background: rgba(41, 63, 146, 0.01);
+        }
+
+        .service-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-red);
+        }
+
+        .service-content h3 {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-content p {
+            font-size: 1.1rem;
+            color: var(--color-gray);
+        }
+
+        .service-arrow {
+            font-size: 2rem;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .service-item:hover .service-arrow {
+            transform: translateX(0.5rem);
+        }
+
+        /* Profiles Section - Grid 2x2 más simple */
+        .profiles {
+            padding: 8rem 6%;
+            background: var(--color-blue-light);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-top: 3px solid var(--color-red);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .profile-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-card p {
+            color: var(--color-gray);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* How It Works - Fondo gris claro */
+        .how-it-works {
+            padding: 8rem 6%;
+            background: var(--color-gray-light);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .timeline {
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .timeline-item {
+            text-align: center;
+        }
+
+        .timeline-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--color-red);
+            margin-bottom: 1.5rem;
+            line-height: 1;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content p {
+            font-size: 1.05rem;
+            color: var(--color-gray);
+            line-height: 1.7;
+        }
+
+        .banner-cta {
+            padding: 8rem 6%;
+            background: var(--color-blue);
+            color: white;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .banner-text h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .banner-text p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+
+        .cta-white {
+            display: inline-block;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-bottom: 3px solid var(--color-red);
+            transition: all 0.2s;
+        }
+
+        .cta-white:hover {
+            border-bottom-width: 4px;
+            padding-left: 0.5rem;
+        }
+
+        .banner-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .benefit-icon {
+            font-size: 1.5rem;
+            color: var(--color-red);
+            flex-shrink: 0;
+            background: white;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+        }
+
+        .benefit-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: white;
+        }
+
+        .benefit-desc {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Trust/Network Section - Mejorada con iconos */
+        .trust {
+            padding: 8rem 6%;
+            text-align: center;
+            background: var(--color-blue-light);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 4rem auto 0;
+        }
+
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem 2rem;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .trust-item:hover {
+            border-color: var(--color-blue);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(41, 63, 146, 0.1);
+        }
+
+        .trust-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--color-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .trust-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-blue);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .trust-label {
+            font-size: 1.05rem;
+            color: var(--color-gray);
+            font-weight: 500;
+        }
+
+        /* Destinos - Fondo blanco */
+        .destinos-3d {
+            padding: 8rem 6%;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .destinos-3d .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .destinos-columnas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .destinos-columna h3 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--color-red);
+            display: inline-block;
+            width: 100%;
+        }
+
+        .destinos-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .destinos-lista a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--color-border);
+            text-decoration: none;
+            color: var(--color-black);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.2s;
+        }
+
+        .destinos-lista a:hover {
+            color: var(--color-red);
+            padding-left: 0.5rem;
+        }
+
+        .destinos-lista a span {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .destinos-cta {
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .destinos-cta a {
+            font-size: 1.1rem;
+            color: var(--color-black);
+            text-decoration: none;
+            border-bottom: 2px solid var(--color-red);
+            padding-bottom: 4px;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .destinos-cta a:hover {
+            border-bottom-width: 4px;
+            color: var(--color-red);
+        }
+
+        /* CTA Section - Fondo blanco */
+        .cta-section {
+            padding: 8rem 6%;
+            text-align: center;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .cta-section h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--color-gray);
+            background: var(--color-white);
+        }
+
+        footer a:hover {
+            color: var(--color-red);
+            transition: color 0.2s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 70vh;
+                padding: 5rem 6%;
+                background-position: center;
+            }
+
+            .hero-content {
+                padding: 3rem 2.5rem;
+                clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 2rem, 100% 100%, 0 100%);
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .section-header h2,
+            .banner-text h2,
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .section-subtitle,
+            .hero-subtitle,
+            .cta-section p {
+                font-size: 1.15rem;
+            }
+
+            .trust-badges {
+                flex-direction: row;
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .badge {
+                min-width: calc(50% - 1rem);
+            }
+
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2.5rem 0;
+            }
+
+            .service-number {
+                font-size: 2rem;
+            }
+
+            .service-content h3 {
+                font-size: 1.75rem;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .profile-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .timeline-number {
+                font-size: 3rem;
+            }
+
+            .banner-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .banner-text h2 {
+                font-size: 2.5rem;
+            }
+
+            .destinos-columnas {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .trust-item {
+                padding: 2rem 1.5rem;
+            }
+
+            .trust-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 1.75rem;
+            }
+
+            .trust-number {
+                font-size: 2.75rem;
+            }
+
+            .trust-label {
+                font-size: 0.95rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            nav {
+                padding: 2rem 6%;
+            }
+
+            .hero,
+            .services,
+            .profiles,
+            .destinos-3d,
+            .how-it-works,
+            .banner-cta,
+            .trust,
+            .cta-section {
+                padding: 5rem 6%;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                padding: 2.5rem 6%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Health4Spain</div>
+        <ul class="nav-links">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#perfiles">Perfiles</a></li>
+            <li><a href="#destinos">Destinos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section con imagen de fondo clara -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>España.<br>Simplificado.</h1>
+            <p class="hero-subtitle">
+                Conexiones directas con profesionales verificados para extranjeros. 
+                Seguros, abogados, inmobiliarias, gestorías. Sin complicaciones.
+            </p>
+            
+            <div class="trust-badges">
+                <div class="badge">
+                    <div class="badge-number">150+</div>
+                    <div class="badge-label">Profesionales</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-number">19</div>
+                    <div class="badge-label">Ciudades</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-number">0€</div>
+                    <div class="badge-label">Coste</div>
+                </div>
+            </div>
+
+            <a href="#contacto" class="cta-primary">Solicitar Información</a>
+        </div>
+    </section>
+
+    <!-- Services Section - Lista numerada -->
+    <section class="services" id="servicios">
+        <div class="section-header">
+            <h2>Servicios</h2>
+            <p class="section-subtitle">
+                Cuatro servicios esenciales. Todo lo que necesitas para vivir legalmente en España.
+            </p>
+        </div>
+
+        <div class="service-list">
+            <a href="/es/contacto?servicio=seguros" class="service-item">
+                <div class="service-number">01</div>
+                <div class="service-content">
+                    <h3>Seguros de Salud</h3>
+                    <p>Pólizas obligatorias para visados y permisos de residencia</p>
+                </div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="/es/contacto?servicio=abogados" class="service-item">
+                <div class="service-number">02</div>
+                <div class="service-content">
+                    <h3>Abogados</h3>
+                    <p>Familia, civil, laboral, extranjería y más</p>
+                </div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="/es/contacto?servicio=inmobiliarias" class="service-item">
+                <div class="service-number">03</div>
+                <div class="service-content">
+                    <h3>Inmobiliarias</h3>
+                    <p>Agentes especializados en extranjeros</p>
+                </div>
+                <div class="service-arrow">→</div>
+            </a>
+
+            <a href="/es/contacto?servicio=gestorias" class="service-item">
+                <div class="service-number">04</div>
+                <div class="service-content">
+                    <h3>Gestorías</h3>
+                    <p>Empadronamiento y gestión administrativa</p>
+                </div>
+                <div class="service-arrow">→</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Profiles Section - Grid 2x2 simplificado -->
+    <section class="profiles" id="perfiles">
+        <div class="section-header">
+            <h2>¿Quién Eres?</h2>
+            <p class="section-subtitle">
+                Identifica tu perfil y descubre cómo podemos ayudarte
+            </p>
+        </div>
+
+        <div class="profile-grid">
+            <a href="/es/contacto?perfil=jubilados" class="profile-card">
+                <h3>Jubilados</h3>
+                <p>Retiro en Costa Blanca/Sol. Visado no lucrativo, seguro médico.</p>
+            </a>
+
+            <a href="/es/contacto?perfil=trabajadores" class="profile-card">
+                <h3>Trabajadores</h3>
+                <p>Empleo en agro/industria. Arraigo laboral y reagrupación.</p>
+            </a>
+
+            <a href="/es/contacto?perfil=inversores" class="profile-card">
+                <h3>Inversores</h3>
+                <p>Golden Visa. Inversión inmobiliaria en zonas premium.</p>
+            </a>
+
+            <a href="/es/contacto?perfil=estudiantes" class="profile-card">
+                <h3>Estudiantes</h3>
+                <p>Visado estudiante. Homologación de títulos.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Destinos - Dos columnas con listas -->
+    <section class="destinos-3d" id="destinos">
+        <div class="section-header">
+            <h2>Nuestros Destinos</h2>
+            <p class="section-subtitle">
+                Profesionales verificados en cada ciudad.
+            </p>
+        </div>
+
+        <div class="destinos-columnas">
+            <!-- Columna Murcia -->
+            <div class="destinos-columna">
+                <h3>Región de Murcia</h3>
+                <div class="destinos-lista">
+                    <a href="/es/destinos/murcia">Murcia <span>→</span></a>
+                    <a href="/es/destinos/cartagena">Cartagena <span>→</span></a>
+                    <a href="/es/destinos/lorca">Lorca <span>→</span></a>
+                    <a href="/es/destinos/mazarron">Mazarrón <span>→</span></a>
+                    <a href="/es/destinos/torre-pacheco">Torre Pacheco <span>→</span></a>
+                    <a href="/es/destinos/san-javier">San Javier <span>→</span></a>
+                    <a href="/es/destinos/san-pedro-pinatar">San Pedro del Pinatar <span>→</span></a>
+                    <a href="/es/destinos/molina-de-segura">Molina de Segura <span>→</span></a>
+                    <a href="/es/destinos/aguilas">Águilas <span>→</span></a>
+                    <a href="/es/destinos/cieza">Cieza <span>→</span></a>
+                    <a href="/es/destinos/jumilla">Jumilla <span>→</span></a>
+                    <a href="/es/destinos/yecla">Yecla <span>→</span></a>
+                </div>
+            </div>
+
+            <!-- Columna Alicante -->
+            <div class="destinos-columna">
+                <h3>Provincia de Alicante</h3>
+                <div class="destinos-lista">
+                    <a href="/es/destinos/alicante">Alicante <span>→</span></a>
+                    <a href="/es/destinos/elche">Elche <span>→</span></a>
+                    <a href="/es/destinos/torrevieja">Torrevieja <span>→</span></a>
+                    <a href="/es/destinos/orihuela">Orihuela <span>→</span></a>
+                    <a href="/es/destinos/rojales">Rojales <span>→</span></a>
+                    <a href="/es/destinos/benidorm">Benidorm <span>→</span></a>
+                    <a href="/es/destinos/denia">Denia <span>→</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="destinos-cta">
+            <a href="/es/destinos">Ver todas las ciudades →</a>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="section-header">
+            <h2>Cómo Funciona</h2>
+            <p class="section-subtitle">Simple y rápido. Sin complicaciones.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-number">1</div>
+                <div class="timeline-content">
+                    <h3>Cuéntanos</h3>
+                    <p>Tu situación, tus necesidades, tu perfil. Sin compromiso.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number">2</div>
+                <div class="timeline-content">
+                    <h3>Te Conectamos</h3>
+                    <p>Con profesionales verificados en tu ciudad que hablan tu idioma.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number">3</div>
+                <div class="timeline-content">
+                    <h3>Tú Decides</h3>
+                    <p>Recibes asesoramiento en 24h. Sin presión. Contratas solo si quieres.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner CTA con beneficios -->
+    <section class="banner-cta">
+        <div class="banner-content">
+            <div class="banner-text">
+                <h2>¿Por Qué Elegirnos?</h2>
+                <p>
+                    Somos el único marketplace neutral que conecta extranjeros con profesionales 
+                    verificados sin coste adicional.
+                </p>
+                <a href="#contacto" class="cta-white">Solicitar Contacto Ahora</a>
+            </div>
+
+            <div class="banner-benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Sin Coste Para Ti</div>
+                        <div class="benefit-desc">Los profesionales nos pagan a nosotros. Tú no pagas nada extra.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Respuesta en 24 Horas</div>
+                        <div class="benefit-desc">Un profesional verificado te contactará en menos de 24 horas.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Profesionales Verificados</div>
+                        <div class="benefit-desc">Todos nuestros colaboradores están verificados y especializados en extranjeros.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Tu Idioma</div>
+                        <div class="benefit-desc">Profesionales que hablan inglés, alemán, francés y más.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust/Network Section -->
+    <section class="trust">
+        <div class="section-header">
+            <h2>Nuestra Red</h2>
+            <p class="section-subtitle">
+                Cifras que respaldan nuestro compromiso con la comunidad extranjera en España
+            </p>
+        </div>
+
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.3503 17.623 3.8507 18.1676 4.55231C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="trust-number">150+</div>
+                <p class="trust-label">Profesionales Verificados</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="trust-number">19</div>
+                <p class="trust-label">Ciudades Españolas</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 11L12 14L22 4M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="trust-number">4</div>
+                <p class="trust-label">Servicios Esenciales</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1V23M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="trust-number">0€</div>
+                <p class="trust-label">Coste para Ti</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 6V12L16 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="trust-number">&lt;24h</div>
+                <p class="trust-label">Tiempo de Respuesta</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="trust-number">2</div>
+                <p class="trust-label">Regiones Activas</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="trust-number">5+</div>
+                <p class="trust-label">Idiomas Disponibles</p>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999M22 4L12 14.01L9 11.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="trust-number">100%</div>
+                <p class="trust-label">Profesionales Verificados</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <h2>¿Listo para Empezar?</h2>
+        <p>Sin coste. Sin compromiso. Respuesta en 24 horas.</p>
+        <a href="/es/contacto" class="cta-primary">Solicitar Información Ahora</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div>© 2025 Health4Spain. Todos los derechos reservados.</div>
+        <div>
+            <a href="/es/privacidad" style="color: var(--color-gray); text-decoration: none; margin: 0 0.5rem;">Privacidad</a> · 
+            <a href="/es/terminos" style="color: var(--color-gray); text-decoration: none; margin: 0 0.5rem;">Términos</a> · 
+            <a href="/es/contacto" style="color: var(--color-gray); text-decoration: none; margin: 0 0.5rem;">Contacto</a>
+        </div>
+    </footer>
+</body>
+</html>

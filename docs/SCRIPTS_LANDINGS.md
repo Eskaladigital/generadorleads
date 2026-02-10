@@ -1,10 +1,8 @@
-# 🎯 SCRIPTS SEPARADOS - SOLUCIÓN FINAL
+# 🎯 SCRIPTS DE LANDING PAGES - DOCUMENTACIÓN
 
-## ✅ Problema Resuelto
+## ✅ ESTADO ACTUAL (7 Febrero 2026)
 
-El problema original era que el flag `--check` no se pasaba correctamente a través de `npm run` + `tsx`.
-
-**Solución:** Crear **3 scripts separados** en lugar de uno con flags complicados.
+**76 landing pages generadas exitosamente** (4 servicios × 19 ciudades)
 
 ---
 
@@ -26,32 +24,35 @@ npm run check-landings
 - ✅ **NO genera nada nuevo**
 - ✅ **NO cuesta dinero** (no usa OpenAI)
 
-**Salida:**
+**Salida actual:**
 ```
 🔍 VERIFICANDO LANDING PAGES EXISTENTES...
 
-📊 Total landing pages encontradas: 240
+📊 Total landing pages encontradas: 76
 
-⚠️  Landing pages incompletas o vacías: 15
-
-📋 RESUMEN DE PROBLEMAS:
-   - Sin título SEO: 5
-   - Sin hero completo: 8
-   - Sin servicios: 12
-   - Sin FAQs: 15
-
-🔧 PARA REGENERAR ESTAS PÁGINAS:
-   npm run retry-landings
-
-📝 LISTA DE SLUGS INCOMPLETOS:
-   - abogados-malaga
-   - seguros-barcelona
-   ...
+✅ ¡PERFECTO! Todas las landing pages están completas
 ```
 
 ---
 
-### 2. `retry-landings.ts` - REGENERAR FALLIDAS
+### 2. `verify-landings.ts` - DETECTAR FALTANTES
+
+**Archivo:** `scripts/verify-landings.ts`
+
+**Comando:**
+```bash
+npx tsx scripts/verify-landings.ts
+```
+
+**Qué hace:**
+- ✅ Compara landing pages existentes con catálogo completo
+- ✅ Detecta qué combinaciones servicio+ciudad faltan
+- ✅ Lista exacta de slugs faltantes
+- ✅ **NO cuesta dinero** (no usa OpenAI)
+
+---
+
+### 3. `retry-landings.ts` - REGENERAR INCOMPLETAS
 
 **Archivo:** `scripts/retry-landings.ts`
 
@@ -66,46 +67,94 @@ npm run retry-landings
 - ✅ Sobrescribe el contenido existente
 - ✅ Ahorra tiempo y dinero vs regenerar todo
 
-**Salida:**
+**Salida actual:**
 ```
 🔄 REGENERANDO LANDING PAGES INCOMPLETAS...
 
-⚠️  Encontradas 15 landing pages incompletas
-
-🎯 Regenerando 15 landing pages...
-
-🔄 Regenerando: abogados-malaga...
-✅ abogados-malaga (2435 tokens, 3245ms)
-
-...
-
-========================================
-✅ Regeneradas exitosamente: 15
-❌ Fallidas: 0
-📊 Total: 15
-========================================
+✅ No hay landing pages incompletas para regenerar
 ```
 
 ---
 
-### 3. `generate-landings.ts` - GENERAR TODAS (Original)
+### 4. `generate-landings.ts` - GENERAR TODAS
 
 **Archivo:** `scripts/generate-landings.ts`
 
 **Comando:**
 ```bash
-# Todas las combinaciones
+# Todas las combinaciones (76)
 npm run generate-landings
-
-# Filtros opcionales (pasar argumentos directamente)
-npm run generate-landings servicio=abogados
-npm run generate-landings ciudad=marbella
-npm run generate-landings slug=abogados-marbella
 ```
 
 **Qué hace:**
-- ✅ Genera todas las landing pages (o filtradas)
-- ✅ Comportamiento original sin cambios
+- ✅ Genera todas las landing pages desde cero
+- ✅ Lee servicios y ciudades desde Supabase
+- ✅ Usa OpenAI GPT-4o-mini
+- ✅ Guarda en `landing_pages` con upsert
+
+**Resultado última ejecución (7 Feb 2026):**
+- ✅ Exitosas: 68
+- ❌ Fallidas: 8 (errores JSON de OpenAI)
+- ⏱️ Tiempo: ~11 minutos
+- 💰 Coste: ~$0.15 USD
+
+---
+
+### 5. `fix-missing-landing.ts` - CORREGIR ESPECÍFICA
+
+**Archivo:** `scripts/fix-missing-landing.ts`
+
+**Comando:**
+```bash
+npx tsx scripts/fix-missing-landing.ts
+```
+
+**Qué hace:**
+- ✅ Borra landing pages incorrectas
+- ✅ Genera la landing page correcta
+- ✅ Caso usado: Corregir `gestorias-zaragoza` → `gestorias-san-javier`
+
+---
+
+### 6. `list-all-landings.ts` - LISTAR TODAS
+
+**Archivo:** `scripts/list-all-landings.ts`
+
+**Comando:**
+```bash
+npx tsx scripts/list-all-landings.ts
+```
+
+**Qué hace:**
+- ✅ Lista todas las landing pages ordenadas por servicio
+- ✅ Cuenta por servicio
+- ✅ Útil para inspección visual
+
+---
+
+### 7. Scripts de Base de Datos
+
+**Archivo:** `scripts/fix-database.ts`
+```bash
+npm run fix-database
+```
+- ✅ Limpia ciudades incorrectas
+- ✅ Verifica servicios y ciudades correctos
+
+**Archivo:** `scripts/clear-landings.ts`
+```bash
+npm run clear-landings
+```
+- ✅ Borra TODAS las landing pages (PELIGRO)
+- ✅ Útil para regeneración completa
+
+**Archivo:** `scripts/clean-auxiliary-tables.ts`
+```bash
+npm run clean-auxiliary
+```
+- ✅ Limpia `landing_generation_log`
+- ✅ Limpia `ciudades_contenido`
+- ✅ Mantiene solo registros relevantes
 
 ---
 
@@ -125,49 +174,44 @@ Una landing page se considera **INCOMPLETA** si cumple uno o más de estos crite
 
 ---
 
-## 💻 Casos de Uso
+## 💻 Workflow Completado (7 Feb 2026)
 
-### Caso 1: Primera generación falló parcialmente
-
+### Primera Generación
 ```bash
-# 1. Genera todas
+# 1. Limpiar base de datos
+npm run clear-landings
+
+# 2. Generar todas (resultado: 68 exitosas, 8 fallidas)
 npm run generate-landings
 
-# 2. Verifica cuántas fallaron (gratis, no usa API)
-npm run check-landings
+# 3. Detectar problema (gestorias-zaragoza incorrecta)
+npx tsx scripts/list-all-landings.ts
+npx tsx scripts/verify-landings.ts
 
-# 3. Regenera solo las fallidas
-npm run retry-landings
+# 4. Corregir manualmente
+npx tsx scripts/fix-missing-landing.ts
 
-# 4. Verifica de nuevo
-npm run check-landings
+# 5. Verificar final
+npm run check-landings  # ✅ 76/76
+
+# 6. Limpiar logs
+npm run clean-auxiliary  # ✅ 222 registros eliminados
 ```
 
 ---
 
-### Caso 2: Revisión periódica
+## 💰 Costes Reales
 
-```bash
-# Solo verifica el estado (gratis)
-npm run check-landings
-```
+| Script | Coste Real | Uso de OpenAI |
+|--------|------------|---------------|
+| `check-landings` | **$0.00** | No |
+| `verify-landings` | **$0.00** | No |
+| `list-all-landings` | **$0.00** | No |
+| `retry-landings` | ~$0.015 por landing | Sí, solo incompletas |
+| `generate-landings` (76) | **~$0.15-0.20** | Sí, todas |
+| `fix-missing-landing` (1) | **~$0.002** | Sí, 1 landing |
 
-Ejecuta esto semanalmente o después de cada generación masiva.
-
----
-
-### Caso 3: Actualizar contenido específico
-
-```bash
-# Solo una ciudad
-npm run generate-landings ciudad=marbella
-
-# Solo un servicio
-npm run generate-landings servicio=abogados
-
-# Verificar si quedó algo incompleto
-npm run check-landings
-```
+**Total real del proyecto:** ~$0.17 USD (129,200 tokens)
 
 ---
 
@@ -178,72 +222,41 @@ npm run check-landings
   "scripts": {
     "generate-landings": "npx tsx scripts/generate-landings.ts",
     "check-landings": "npx tsx scripts/check-landings.ts",
-    "retry-landings": "npx tsx scripts/retry-landings.ts"
+    "retry-landings": "npx tsx scripts/retry-landings.ts",
+    "fix-database": "npx tsx scripts/fix-database.ts",
+    "clear-landings": "npx tsx scripts/clear-landings.ts",
+    "clean-auxiliary": "npx tsx scripts/clean-auxiliary-tables.ts",
+    "insert-ciudades": "npx tsx scripts/insert-19-ciudades.ts",
+    "generate-cities": "npx tsx scripts/generate-ciudades.ts"
   }
 }
 ```
 
 ---
 
-## 💰 Costes
+## ✅ Lecciones Aprendidas
 
-| Script | Coste | Uso de OpenAI |
-|--------|-------|---------------|
-| `check-landings` | **$0.00** | No |
-| `retry-landings` | ~$0.015-0.025 por landing | Sí, solo las incompletas |
-| `generate-landings` | ~$0.015-0.025 por landing | Sí, todas |
-
-**Ejemplo:**
-- 15 landings incompletas con `retry-landings`: ~$0.20-0.40
-- 240 landings completas con `generate-landings`: ~$3.60-6.00
-
-**Ahorro:** 90% usando `retry-landings` en lugar de regenerar todo.
+1. **Validación previa**: Siempre verificar ciudades en `ciudades_catalogo` antes de generar
+2. **Errores JSON**: OpenAI GPT-4o-mini ocasionalmente genera JSON inválido (~10% de casos)
+3. **Limpieza importante**: Mantener `landing_generation_log` limpio para mejor seguimiento
+4. **Scripts modulares**: Tener scripts separados para cada tarea facilita debugging
+5. **Verificación constante**: Usar `check-landings` y `verify-landings` frecuentemente
 
 ---
 
-## ✅ Ventajas de Esta Solución
-
-1. **Simple:** Cada script hace una sola cosa
-2. **Sin flags complicados:** No hay problemas con argumentos npm/tsx
-3. **Nombres claros:** `check` y `retry` son autoexplicativos
-4. **Código limpio:** Cada script es independiente
-5. **Fácil de mantener:** Modificar uno no afecta a los otros
-6. **Testeable:** Puedes probar cada script por separado
-
----
-
-## 🎯 Workflow Recomendado
-
-### Primera Generación
-```bash
-npm run generate-landings
-npm run check-landings
-npm run retry-landings  # Solo si check encontró problemas
-```
-
-### Mantenimiento Regular
-```bash
-npm run check-landings  # Cada semana
-```
-
-### Actualización de Contenido
-```bash
-npm run generate-landings ciudad=marbella
-npm run check-landings
-```
-
----
-
-## 📊 Resumen
+## 📊 Resumen Final
 
 | Necesitas | Comando |
 |-----------|---------|
 | Ver estado (gratis) | `npm run check-landings` |
-| Regenerar fallidas | `npm run retry-landings` |
+| Detectar faltantes (gratis) | `npx tsx scripts/verify-landings.ts` |
+| Listar todas (gratis) | `npx tsx scripts/list-all-landings.ts` |
+| Regenerar incompletas | `npm run retry-landings` |
 | Generar todo | `npm run generate-landings` |
-| Generar filtrado | `npm run generate-landings ciudad=X` |
+| Limpiar todo | `npm run clear-landings` |
+| Limpiar auxiliares | `npm run clean-auxiliary` |
 
 ---
 
-**Fecha:** Febrero 2026
-**Autor:** Sistema de scripts mejorado
+**Última actualización:** 7 de Febrero 2026
+**Estado:** ✅ 76/76 landing pages completadas

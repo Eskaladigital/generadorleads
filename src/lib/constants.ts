@@ -2,6 +2,9 @@
 // HEALTH4SPAIN - Constantes de la aplicación
 // =============================================
 
+// Imagen hero home. Para usar tu imagen: ponla en public/images/hero-spain.jpg y cambia a '/images/hero-spain.jpg'
+export const HERO_IMAGE_URL = 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=1920&q=80';
+
 // Configuración del sitio
 export const SITE_CONFIG = {
   name: 'Health4Spain',

@@ -97,7 +97,7 @@ npm run test-supabase       # Test de conexión a Supabase
 
 ### Los 4 Servicios Esenciales:
 1. **Seguros de Salud y Vida** 🏥
-2. **Abogados de Extranjería** ⚖️
+2. **Abogados** ⚖️
 3. **Inmobiliarias** 🏠
 4. **Gestorías y Otros Servicios** 📋
 
