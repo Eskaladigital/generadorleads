@@ -27,6 +27,7 @@ interface StepProps {
   updateFormData: (field: keyof FormData, value: string) => void;
   errors: Partial<Record<keyof FormData, string>>;
   ciudades?: { id: string; label: string }[];
+  onAutoAdvance?: () => void;
 }
 
 const PAISES = [
@@ -61,7 +62,17 @@ const URGENCIAS = [
   { id: 'solo-informacion', label: 'Solo busco información', score: 5 },
 ];
 
-function Step1({ formData, updateFormData, errors }: StepProps) {
+function Step1({ formData, updateFormData, errors, onAutoAdvance }: StepProps) {
+  const handleServicioClick = (servicioId: string) => {
+    updateFormData('servicio', servicioId);
+    // Auto-avanzar después de un pequeño delay para que el usuario vea la selección
+    if (onAutoAdvance) {
+      setTimeout(() => {
+        onAutoAdvance();
+      }, 300);
+    }
+  };
+
   return (
     <div className="space-y-12">
       <div className="mb-12">
@@ -72,7 +83,7 @@ function Step1({ formData, updateFormData, errors }: StepProps) {
         {SERVICIOS.map((servicio, index) => (
           <li
             key={servicio.id}
-            onClick={() => updateFormData('servicio', servicio.id)}
+            onClick={() => handleServicioClick(servicio.id)}
             className={`service-item-minimal cursor-pointer ${
               formData.servicio === servicio.id ? 'opacity-100' : 'opacity-60 hover:opacity-100'
             }`}
@@ -94,7 +105,17 @@ function Step1({ formData, updateFormData, errors }: StepProps) {
   );
 }
 
-function Step2({ formData, updateFormData, errors, ciudades = [] }: StepProps) {
+function Step2({ formData, updateFormData, errors, ciudades = [], onAutoAdvance }: StepProps) {
+  const handleCiudadClick = (ciudadId: string) => {
+    updateFormData('ciudad_interes', ciudadId);
+    // Auto-avanzar después de un pequeño delay para que el usuario vea la selección
+    if (onAutoAdvance) {
+      setTimeout(() => {
+        onAutoAdvance();
+      }, 300);
+    }
+  };
+
   return (
     <div className="space-y-12">
       <div className="mb-12">
@@ -106,7 +127,7 @@ function Step2({ formData, updateFormData, errors, ciudades = [] }: StepProps) {
           <button
             key={ciudad.id}
             type="button"
-            onClick={() => updateFormData('ciudad_interes', ciudad.id)}
+            onClick={() => handleCiudadClick(ciudad.id)}
             className={`p-4 border border-gray-200 text-left transition-opacity ${
               formData.ciudad_interes === ciudad.id
                 ? 'border-black opacity-100'
@@ -483,13 +504,21 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
 
   const totalSteps = flowType === 'default' ? 4 : 3;
   
+  // Función para auto-avanzar al siguiente paso
+  const autoAdvanceToNextStep = () => {
+    const maxSteps = totalSteps;
+    if (currentStep < maxSteps) {
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
+  
   // Función para renderizar el paso correcto según el flujo
   const renderStep = () => {
     if (flowType === 'from-service') {
       // Flujo: ciudad → datos → detalles
       switch (currentStep) {
         case 1:
-          return <Step2 formData={formData} updateFormData={updateFormData} errors={errors} ciudades={ciudades} />;
+          return <Step2 formData={formData} updateFormData={updateFormData} errors={errors} ciudades={ciudades} onAutoAdvance={autoAdvanceToNextStep} />;
         case 2:
           return <Step3 formData={formData} updateFormData={updateFormData} errors={errors} />;
         case 3:
@@ -501,7 +530,7 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
       // Flujo: servicio → datos → detalles
       switch (currentStep) {
         case 1:
-          return <Step1 formData={formData} updateFormData={updateFormData} errors={errors} />;
+          return <Step1 formData={formData} updateFormData={updateFormData} errors={errors} onAutoAdvance={autoAdvanceToNextStep} />;
         case 2:
           return <Step3 formData={formData} updateFormData={updateFormData} errors={errors} />;
         case 3:
@@ -513,9 +542,9 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
       // Flujo default: servicio → ciudad → datos → detalles
       switch (currentStep) {
         case 1:
-          return <Step1 formData={formData} updateFormData={updateFormData} errors={errors} />;
+          return <Step1 formData={formData} updateFormData={updateFormData} errors={errors} onAutoAdvance={autoAdvanceToNextStep} />;
         case 2:
-          return <Step2 formData={formData} updateFormData={updateFormData} errors={errors} ciudades={ciudades} />;
+          return <Step2 formData={formData} updateFormData={updateFormData} errors={errors} ciudades={ciudades} onAutoAdvance={autoAdvanceToNextStep} />;
         case 3:
           return <Step3 formData={formData} updateFormData={updateFormData} errors={errors} />;
         case 4:
