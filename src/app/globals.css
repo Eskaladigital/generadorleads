@@ -181,6 +181,72 @@ h4 { font-size: 1.5rem; }
 }
 
 /* =============================================
+   SERVICE GRID 2x2 - HOME
+   ============================================= */
+.service-grid-2x2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-top: 3px solid var(--color-red);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.service-card .service-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-red);
+  margin-bottom: 0.25rem;
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: var(--color-gray-text);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.service-card .service-arrow {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.service-card:hover .service-arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .service-grid-2x2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* =============================================
    STATS SECTION - MINIMALIST (fondo negro)
    ============================================= */
 @layer components {

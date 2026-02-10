@@ -164,7 +164,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Servicios - Lista Minimal */}
+      {/* Servicios - Grid 2x2 */}
       <section className="section">
         <div className="container-narrow text-center mb-16">
           <h2 className="mb-6">Servicios</h2>
@@ -173,27 +173,20 @@ export default function HomePage() {
           </p>
         </div>
         <div className="container-narrow">
-          <ul className="service-list-minimal">
+          <div className="service-grid-2x2">
             {SERVICIOS.map((servicio) => (
-              <li key={servicio.id}>
-                <Link
-                  href={`/es/contacto?servicio=${servicio.id}`}
-                  className="service-item-minimal block w-full hover:bg-blue-50 hover:pl-4 transition-all group"
-                >
-                  <div className="service-number">{servicio.number}</div>
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold mb-2">
-                      {servicio.title}
-                    </h3>
-                    <p className="text-base md:text-lg text-gray-600">
-                      {servicio.description}
-                    </p>
-                  </div>
-                  <span className="service-arrow group-hover:translate-x-2 transition-transform">→</span>
-                </Link>
-              </li>
+              <Link
+                key={servicio.id}
+                href={`/es/contacto?servicio=${servicio.id}`}
+                className="service-card"
+              >
+                <div className="service-number">{servicio.number}</div>
+                <h3>{servicio.title}</h3>
+                <p>{servicio.description}</p>
+                <span className="service-arrow">→</span>
+              </Link>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
