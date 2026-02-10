@@ -150,10 +150,16 @@ async function main() {
   console.log('🔄 Regenerando landing pages de abogados con OpenAI...\n');
   console.log('   Servicio: ABOGADOS EN GENERAL (familia, civil, laboral, extranjería, penal, herencias...)\n');
 
-  const { data: landings, error: fetchError } = await supabase
-    .from('landing_pages')
-    .select('*')
-    .eq('servicio_slug', 'abogados');
+  const slugFilter = process.argv.find((a) => a.startsWith('--slug='));
+  const onlySlug = slugFilter ? slugFilter.split('=')[1] : null;
+
+  let query = supabase.from('landing_pages').select('*').eq('servicio_slug', 'abogados');
+  if (onlySlug) {
+    query = query.eq('slug', onlySlug);
+    console.log(`   Solo: ${onlySlug}\n`);
+  }
+
+  const { data: landings, error: fetchError } = await query;
 
   if (fetchError) {
     console.error('❌ Error:', fetchError.message);
@@ -216,8 +222,7 @@ async function main() {
       ok++;
     }
 
-    // Pequeña pausa para no saturar la API
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 300));
   }
 
   console.log(`\n✅ ${ok} landings regeneradas`);
