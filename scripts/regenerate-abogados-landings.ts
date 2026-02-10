@@ -43,39 +43,46 @@ CONTEXTO:
 - NO es solo "abogados de extranjería". Es un despacho/plataforma que conecta con abogados de TODAS las especialidades.
 - Público: extranjeros que viven o quieren vivir en España y necesitan asesoría legal.
 
+REGLAS SEO ESTRICTAS:
+1. USA KEYWORDS REALES que la gente busca: "abogado divorcio", "abogado despido", "abogado herencias", NO "solución legal", "asesoría integral"
+2. El H1 debe ser DIRECTO: "Abogados en ${ciudad}" + especialidades concretas
+3. Los títulos deben incluir las palabras que la gente teclea en Google
+4. Evita lenguaje marketing fluff, sé específico y claro
+5. Menciona problemas legales CONCRETOS: divorcio, despido, testamento, NIE, reclamación
+
 TAREA:
-Reescribe TODO el contenido para reflejar abogados generales. Incluye variedad de servicios:
-- Derecho de familia (divorcios, custodia)
-- Civil (contratos, reclamaciones)
-- Laboral (despidos, contratos)
-- Extranjería (NIE, visados, residencia)
-- Penal
-- Herencias y sucesiones
+Reescribe TODO el contenido para reflejar abogados generales con KEYWORDS SEO. Incluye variedad de servicios:
+- Derecho de familia (divorcios, custodia, pensión alimenticia)
+- Civil (contratos, reclamaciones, indemnizaciones)
+- Laboral (despidos, finiquitos, reclamaciones salariales)
+- Extranjería (NIE, visados, residencia, nacionalidad)
+- Penal (denuncias, defensa penal)
+- Herencias (testamentos, sucesiones, impuesto de sucesiones)
 
 Responde SOLO con un JSON válido con esta estructura exacta (sin markdown):
 
 {
-  "meta_title": "Máx 60 caracteres, incluir Abogados y ${ciudad}",
-  "meta_description": "Máx 155 caracteres",
-  "meta_keywords": "abogados, ${ciudad}, familia, civil, laboral, extranjería, herencias, separados por comas",
-  "hero_title": "Pregunta o afirmación sobre Abogados en ${ciudad} (NO decir 'extranjería')",
-  "hero_subtitle": "2-3 frases sobre asesoría legal amplia",
-  "hero_bullets": ["4 bullets: asesoría personalizada, múltiples especialidades, etc."],
-  "problem_title": "¿Te suena esto?",
-  "problems": ["5 problemas legales comunes (variados: familia, trabajo, documentos, etc.)"],
-  "solution_title": "Nuestra solución",
-  "solution_text": "Párrafo sobre cómo conectamos con abogados de todas las especialidades en ${ciudad}",
-  "services_title": "Nuestros servicios legales",
+  "meta_title": "Abogados en ${ciudad} - Divorcio, Laboral, Civil | Health4Spain (máx 60 caracteres)",
+  "meta_description": "Abogados en ${ciudad} especializados en divorcio, despido, herencias, extranjería. Consulta gratuita. (máx 155 caracteres)",
+  "meta_keywords": "abogados ${ciudad}, abogado divorcio ${ciudad}, abogado despido, abogado herencias, abogado extranjería, abogado ${provincia}",
+  "hero_title": "Abogados en ${ciudad} - Divorcio, Laboral, Civil, Extranjería (H1 con keywords SEO, NO usar frases marketing como 'solución legal')",
+  "hero_subtitle": "Abogados especializados en ${ciudad} para divorcios, despidos, herencias, trámites de extranjería y más. Primera consulta gratuita.",
+  "hero_bullets": ["4 bullets con beneficios concretos, NO frases genéricas"],
+  "problem_title": "¿Necesitas un abogado? Estos son los casos más comunes en ${ciudad}",
+  "problems": ["5 problemas legales CONCRETOS con keywords: 'Trámites de divorcio complicados', 'Despido improcedente', 'Problemas con herencias', 'Obtener el NIE o visado', 'Reclamación de deudas'"],
+  "solution_title": "Abogados especializados en ${ciudad}",
+  "solution_text": "Te conectamos con abogados expertos en ${ciudad} especializados en divorcio, derecho laboral, herencias, extranjería y más. Primera consulta gratuita.",
+  "services_title": "Especialidades legales en ${ciudad}",
   "services": [
-    {"icon": "emoji", "title": "Derecho de Familia", "description": "Divorcios, custodia, modificación medidas"},
-    {"icon": "emoji", "title": "Extranjería", "description": "NIE, visados, residencia, nacionalidad"},
-    {"icon": "emoji", "title": "Laboral", "description": "Despidos, reclamaciones, contratos"},
-    {"icon": "emoji", "title": "Civil y Contratos", "description": "Reclamaciones, indemnizaciones"},
-    {"icon": "emoji", "title": "Herencias", "description": "Sucesiones, testamentos"},
-    {"icon": "emoji", "title": "Consultas Iniciales", "description": "Evaluación gratuita de tu caso"}
+    {"icon": "emoji", "title": "Abogado de Familia", "description": "Divorcio, custodia, pensión alimenticia, modificación de medidas"},
+    {"icon": "emoji", "title": "Abogado Extranjería", "description": "NIE, visados, residencia, nacionalidad española, arraigo"},
+    {"icon": "emoji", "title": "Abogado Laboral", "description": "Despido improcedente, finiquito, reclamación salarial, accidentes laborales"},
+    {"icon": "emoji", "title": "Abogado Civil", "description": "Reclamaciones, contratos, indemnizaciones, responsabilidad civil"},
+    {"icon": "emoji", "title": "Abogado Herencias", "description": "Testamentos, sucesiones, impuesto de sucesiones, reparto herencia"},
+    {"icon": "emoji", "title": "Consulta Gratuita", "description": "Primera consulta sin compromiso para evaluar tu caso"}
   ],
-  "why_city_title": "¿Por qué Abogados en ${ciudad}?",
-  "why_city_text": "Párrafo sobre la relevancia de tener abogados en ${ciudad}",
+  "why_city_title": "Abogados locales en ${ciudad}",
+  "why_city_text": "Párrafo breve sobre ventajas de tener abogado local en ${ciudad} (conocimiento normativa local, oficinas cercanas, etc.)",
   "why_city_stats": [
     {"value": "dato", "label": "Habitantes"},
     {"value": "dato", "label": "Población extranjera"},
@@ -83,13 +90,13 @@ Responde SOLO con un JSON válido con esta estructura exacta (sin markdown):
     {"value": "dato", "label": "Oficinas de Extranjería en la región"}
   ],
   "faqs": [
-    {"question": "Pregunta 1 sobre abogados en ${ciudad}", "answer": "Respuesta"},
-    {"question": "Pregunta 2", "answer": "Respuesta"},
-    {"question": "Pregunta 3", "answer": "Respuesta"},
-    {"question": "Pregunta 4", "answer": "Respuesta"}
+    {"question": "¿Cuánto cuesta un abogado en ${ciudad}?", "answer": "Respuesta con precios aproximados y mención de primera consulta gratuita"},
+    {"question": "¿Qué abogado necesito para un divorcio en ${ciudad}?", "answer": "Respuesta sobre abogado de familia y proceso divorcio"},
+    {"question": "¿Cómo reclamar un despido improcedente?", "answer": "Respuesta sobre abogado laboral y reclamación despido"},
+    {"question": "¿Cuánto tarda el trámite de NIE o residencia?", "answer": "Respuesta sobre tiempos y proceso extranjería"}
   ],
-  "cta_title": "¿Necesitas un abogado en ${ciudad}?",
-  "cta_subtitle": "Te conectamos con profesionales verificados en menos de 24 horas"
+  "cta_title": "Encuentra tu abogado en ${ciudad}",
+  "cta_subtitle": "Primera consulta gratuita. Te conectamos en menos de 24 horas"
 }`;
 }
 

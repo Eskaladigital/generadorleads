@@ -4,6 +4,10 @@ import { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase';
 import { LandingPage } from '@/lib/types';
 
+// Evitar caché: siempre datos frescos de Supabase
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Función para obtener landing page desde la BD
 async function getLanding(slug: string): Promise<LandingPage | null> {
   try {

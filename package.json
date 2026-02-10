@@ -20,7 +20,10 @@
     "test-supabase": "npx tsx scripts/test-supabase.ts",
     "update-ciudades": "npx tsx scripts/update-ciudades.ts",
     "fix-abogados-landings": "npx tsx scripts/fix-abogados-landings.ts",
-    "regenerate-abogados-landings": "npx tsx scripts/regenerate-abogados-landings.ts"
+    "regenerate-abogados-landings": "npx tsx scripts/regenerate-abogados-landings.ts",
+    "regenerate-gestorias-landings": "npx tsx scripts/regenerate-gestorias-landings.ts",
+    "regenerate-inmobiliarias-landings": "npx tsx scripts/regenerate-inmobiliarias-landings.ts",
+    "regenerate-seguros-landings": "npx tsx scripts/regenerate-seguros-landings.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",

@@ -279,6 +279,9 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  
+  // Determinar el flujo: si viene con servicio preseleccionado, primero pedimos ciudad
+  const [flowType, setFlowType] = useState<'default' | 'from-service' | 'from-city'>('default');
 
   const [formData, setFormData] = useState<FormData>({
     nombre: '',
@@ -314,9 +317,24 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
       landing_page: typeof window !== 'undefined' ? window.location.href : '',
     }));
 
-    if (servicio && ciudad) setCurrentStep(2);
-    else if (servicio) setCurrentStep(2);
-    else if (ciudad) setCurrentStep(2);
+    // Determinar el tipo de flujo
+    if (servicio && ciudad) {
+      // Ambos preseleccionados: saltar a paso 3 (datos personales)
+      setCurrentStep(3);
+      setFlowType('default');
+    } else if (servicio) {
+      // Viene desde página de servicio: primero elegir ciudad
+      setFlowType('from-service');
+      setCurrentStep(1);
+    } else if (ciudad) {
+      // Viene desde página de ciudad: primero elegir servicio
+      setFlowType('from-city');
+      setCurrentStep(1);
+    } else {
+      // Sin preselección: flujo normal (servicio → ciudad → datos)
+      setFlowType('default');
+      setCurrentStep(1);
+    }
   }, [searchParams]);
 
   useEffect(() => {
@@ -333,25 +351,60 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
 
   const validateStep = (step: number): boolean => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
-    if (step === 1 && !formData.servicio) newErrors.servicio = 'Selecciona un servicio';
-    if (step === 2 && !formData.ciudad_interes) newErrors.ciudad_interes = 'Selecciona una ciudad';
-    if (step === 3) {
-      if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
-      if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email no válido';
-      if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
-      if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
+    
+    // Validación según el tipo de flujo
+    if (flowType === 'from-service') {
+      // Flujo: ciudad → datos → detalles
+      if (step === 1 && !formData.ciudad_interes) newErrors.ciudad_interes = 'Selecciona una ciudad';
+      if (step === 2) {
+        if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
+        if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email no válido';
+        if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
+        if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
+      }
+      if (step === 3) {
+        if (!formData.presupuesto) newErrors.presupuesto = 'Selecciona tu presupuesto';
+        if (!formData.urgencia) newErrors.urgencia = 'Selecciona cuándo lo necesitas';
+      }
+    } else if (flowType === 'from-city') {
+      // Flujo: servicio → datos → detalles
+      if (step === 1 && !formData.servicio) newErrors.servicio = 'Selecciona un servicio';
+      if (step === 2) {
+        if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
+        if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email no válido';
+        if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
+        if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
+      }
+      if (step === 3) {
+        if (!formData.presupuesto) newErrors.presupuesto = 'Selecciona tu presupuesto';
+        if (!formData.urgencia) newErrors.urgencia = 'Selecciona cuándo lo necesitas';
+      }
+    } else {
+      // Flujo default: servicio → ciudad → datos → detalles
+      if (step === 1 && !formData.servicio) newErrors.servicio = 'Selecciona un servicio';
+      if (step === 2 && !formData.ciudad_interes) newErrors.ciudad_interes = 'Selecciona una ciudad';
+      if (step === 3) {
+        if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
+        if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email no válido';
+        if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
+        if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
+      }
+      if (step === 4) {
+        if (!formData.presupuesto) newErrors.presupuesto = 'Selecciona tu presupuesto';
+        if (!formData.urgencia) newErrors.urgencia = 'Selecciona cuándo lo necesitas';
+      }
     }
-    if (step === 4) {
-      if (!formData.presupuesto) newErrors.presupuesto = 'Selecciona tu presupuesto';
-      if (!formData.urgencia) newErrors.urgencia = 'Selecciona cuándo lo necesitas';
-    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const nextStep = () => {
-    if (validateStep(currentStep)) setCurrentStep((prev) => Math.min(prev + 1, 4));
+    const maxSteps = flowType === 'default' ? 4 : 3;
+    if (validateStep(currentStep)) setCurrentStep((prev) => Math.min(prev + 1, maxSteps));
   };
 
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
@@ -369,7 +422,8 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
   };
 
   const handleSubmit = async () => {
-    if (!validateStep(4)) return;
+    const lastStep = flowType === 'default' ? 4 : 3;
+    if (!validateStep(lastStep)) return;
     setIsSubmitting(true);
     try {
       const score = calculateScore();
@@ -427,7 +481,50 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
     );
   }
 
-  const totalSteps = 4;
+  const totalSteps = flowType === 'default' ? 4 : 3;
+  
+  // Función para renderizar el paso correcto según el flujo
+  const renderStep = () => {
+    if (flowType === 'from-service') {
+      // Flujo: ciudad → datos → detalles
+      switch (currentStep) {
+        case 1:
+          return <Step2 formData={formData} updateFormData={updateFormData} errors={errors} ciudades={ciudades} />;
+        case 2:
+          return <Step3 formData={formData} updateFormData={updateFormData} errors={errors} />;
+        case 3:
+          return <Step4 formData={formData} updateFormData={updateFormData} errors={errors} />;
+        default:
+          return null;
+      }
+    } else if (flowType === 'from-city') {
+      // Flujo: servicio → datos → detalles
+      switch (currentStep) {
+        case 1:
+          return <Step1 formData={formData} updateFormData={updateFormData} errors={errors} />;
+        case 2:
+          return <Step3 formData={formData} updateFormData={updateFormData} errors={errors} />;
+        case 3:
+          return <Step4 formData={formData} updateFormData={updateFormData} errors={errors} />;
+        default:
+          return null;
+      }
+    } else {
+      // Flujo default: servicio → ciudad → datos → detalles
+      switch (currentStep) {
+        case 1:
+          return <Step1 formData={formData} updateFormData={updateFormData} errors={errors} />;
+        case 2:
+          return <Step2 formData={formData} updateFormData={updateFormData} errors={errors} ciudades={ciudades} />;
+        case 3:
+          return <Step3 formData={formData} updateFormData={updateFormData} errors={errors} />;
+        case 4:
+          return <Step4 formData={formData} updateFormData={updateFormData} errors={errors} />;
+        default:
+          return null;
+      }
+    }
+  };
 
   return (
     <div className="section">
@@ -447,18 +544,32 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
         </div>
 
         <div className="bg-white border border-gray-200 p-8 md:p-12">
-          {currentStep === 1 && (
-            <Step1 formData={formData} updateFormData={updateFormData} errors={errors} />
+          {/* Banner de información preseleccionada */}
+          {(formData.servicio || formData.ciudad_interes) && (
+            <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800 font-medium mb-2">Ya has seleccionado:</p>
+              <div className="flex flex-wrap gap-3">
+                {formData.servicio && (
+                  <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full text-sm">
+                    <span className="text-blue-600">✓</span>
+                    <span className="font-medium">
+                      {SERVICIOS.find(s => s.id === formData.servicio)?.label}
+                    </span>
+                  </div>
+                )}
+                {formData.ciudad_interes && (
+                  <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full text-sm">
+                    <span className="text-green-600">📍</span>
+                    <span className="font-medium">
+                      {ciudades.find(c => c.id === formData.ciudad_interes)?.label}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
           )}
-          {currentStep === 2 && (
-            <Step2 formData={formData} updateFormData={updateFormData} errors={errors} ciudades={ciudades} />
-          )}
-          {currentStep === 3 && (
-            <Step3 formData={formData} updateFormData={updateFormData} errors={errors} />
-          )}
-          {currentStep === 4 && (
-            <Step4 formData={formData} updateFormData={updateFormData} errors={errors} />
-          )}
+          
+          {renderStep()}
 
           <div className="flex justify-between mt-12 pt-8 border-t border-gray-200">
             <button
@@ -469,7 +580,7 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
             >
               ← Anterior
             </button>
-            {currentStep < 4 ? (
+            {currentStep < totalSteps ? (
               <button type="button" onClick={nextStep} className="btn-minimal">
                 Siguiente →
               </button>
