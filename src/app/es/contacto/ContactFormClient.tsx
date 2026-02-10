@@ -41,7 +41,7 @@ const PAISES = [
 
 const SERVICIOS = [
   { id: 'seguros', label: 'Seguros de Salud', icon: '🏥' },
-  { id: 'abogados', label: 'Abogados de Extranjería', icon: '⚖️' },
+  { id: 'abogados', label: 'Abogados', icon: '⚖️' },
   { id: 'inmobiliarias', label: 'Inmobiliarias', icon: '🏠' },
   { id: 'gestorias', label: 'Gestorías', icon: '📋' },
 ];

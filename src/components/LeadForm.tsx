@@ -19,7 +19,7 @@ interface LeadFormProps {
 
 const SERVICIOS = [
   { value: 'seguros', label: 'Seguro de Salud' },
-  { value: 'abogados', label: 'Abogado de Extranjería' },
+  { value: 'abogados', label: 'Abogado' },
   { value: 'inmobiliarias', label: 'Agente Inmobiliario' },
   { value: 'gestorias', label: 'Gestoría' },
   { value: 'otro', label: 'Otro servicio' },

@@ -75,13 +75,13 @@ const SERVICIOS_DATA: Record<string, {
     ciudadesPopulares: ['madrid', 'barcelona', 'valencia', 'malaga', 'alicante'],
   },
   'abogados': {
-    titulo: 'Abogados de Extranjería',
-    subtitulo: 'Expertos en visados, residencia y nacionalidad española',
-    descripcion: 'La burocracia española puede ser compleja para extranjeros. Nuestros abogados especializados en extranjería te guían en cada paso: desde la obtención del NIE hasta la nacionalidad española.',
+    titulo: 'Abogados',
+    subtitulo: 'Expertos en todas las materias: familia, civil, laboral, extranjería',
+    descripcion: 'Necesitas un abogado para divorcio, herencias, contratos laborales, visados o cualquier asunto legal. Te conectamos con profesionales verificados que hablan tu idioma y conocen la legislación española.',
     beneficios: [
       {
-        titulo: 'Especialización en extranjería',
-        descripcion: 'Abogados que se dedican exclusivamente a derecho de extranjería e inmigración.',
+        titulo: 'Todas las especialidades',
+        descripcion: 'Abogados en familia, civil, laboral, extranjería, penal y más. Encuentra el profesional adecuado para tu caso.',
       },
       {
         titulo: 'Gestión completa',
@@ -458,7 +458,7 @@ export default async function ServicioPage({
       <section className="py-10 md:py-12 bg-gray-50">
         <div className="container-base text-center">
           <h2 className="font-heading text-2xl font-bold text-gray-900 mb-3">
-            ¿Listo para encontrar tu {servicio.titulo.toLowerCase().replace('seguros de ', '').replace('clínicas ', '').replace('abogados de ', '')}?
+            ¿Listo para encontrar tu {servicio.titulo.toLowerCase().replace('seguros de ', '').replace('clínicas ', '').replace('abogados de extranjería', 'abogados')}?
           </h2>
           <p className="text-gray-600 mb-6 max-w-xl mx-auto">
             Te conectamos con profesionales verificados que hablan tu idioma. Sin compromiso.

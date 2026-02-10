@@ -4,7 +4,7 @@ import { getServicios } from '@/lib/services';
 
 export const metadata: Metadata = {
   title: 'Servicios para Expatriados en España',
-  description: 'Seguros de salud, abogados de extranjería, inmobiliarias y gestorías. Profesionales que hablan tu idioma.',
+  description: 'Seguros de salud, abogados, inmobiliarias y gestorías. Profesionales que hablan tu idioma.',
 };
 
 // 4 SERVICIOS PRINCIPALES con detalles
@@ -16,10 +16,10 @@ const BENEFICIOS_POR_SERVICIO: Record<string, string[]> = {
     'Aprobación en 24-48 horas',
   ],
   abogados: [
-    'Arraigo laboral y social',
-    'Visados: trabajo, estudios, no lucrativo',
-    'NIE y reagrupación familiar',
-    'Seguimiento completo del expediente',
+    'Familia: divorcio, custodia, herencias',
+    'Civil: contratos, reclamaciones',
+    'Laboral: despido, conflictos',
+    'Extranjería: visados, NIE, nacionalidad',
   ],
   inmobiliarias: [
     'Agentes especializados en extranjeros',

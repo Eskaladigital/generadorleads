@@ -720,7 +720,7 @@ async function CityView({
                   </div>
                   <div className="mt-6 card p-5 bg-blue-50 border-blue-200">
                     <p className="text-sm text-gray-700 mb-3">
-                      <strong>💡 Recomendación:</strong> Los trámites de extranjería pueden ser complejos. 
+                      <strong>💡 Recomendación:</strong> Los trámites pueden ser complejos. 
                       Te conectamos con abogados y gestores especializados que hablan tu idioma y te guiarán 
                       en todo el proceso.
                     </p>

@@ -22,7 +22,7 @@ export default function ProfesionalesPage() {
       <section className="py-16 px-[5%]">
         <div className="max-w-[900px] mx-auto">
           <p className="text-[1.3rem] text-gray-700 leading-relaxed border-l-4 border-accent pl-8">
-            Si eres abogado de extranjería, corredor de seguros, agente inmobiliario o gestor administrativo, Health4Spain puede ser tu mejor fuente de clientes cualificados. Solo pagas por resultados reales, sin cuotas mensuales ni compromisos de permanencia.
+            Si eres abogado, corredor de seguros, agente inmobiliario o gestor administrativo, Health4Spain puede ser tu mejor fuente de clientes cualificados. Solo pagas por resultados reales, sin cuotas mensuales ni compromisos de permanencia.
           </p>
         </div>
       </section>
@@ -77,7 +77,7 @@ export default function ProfesionalesPage() {
               {
                 icon: '⚖️',
                 title: 'Abogados',
-                description: 'Especialistas en extranjería, visados, NIE, arraigo, nacionalidad'
+                description: 'Familia, civil, laboral, extranjería y más. Todas las especialidades.'
               },
               {
                 icon: '🏥',

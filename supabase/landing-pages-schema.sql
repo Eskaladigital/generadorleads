@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS servicios_catalogo (
 
 INSERT INTO servicios_catalogo (slug, nombre, nombre_plural, icon, descripcion_corta, keywords) VALUES
   ('seguros', 'Seguro de Salud', 'Seguros de Salud', '🏥', 'Seguros médicos privados para extranjeros', ARRAY['seguro salud', 'seguro medico', 'aseguradora', 'poliza', 'cobertura medica']),
-  ('abogados', 'Abogado de Extranjería', 'Abogados de Extranjería', '⚖️', 'Especialistas en visados, NIE, arraigo y nacionalidad', ARRAY['abogado extranjeria', 'nie', 'visado', 'arraigo', 'nacionalidad', 'permiso residencia']),
+  ('abogados', 'Abogado', 'Abogados', '⚖️', 'Familia, civil, laboral, extranjería y más. Todas las especialidades.', ARRAY['abogado', 'abogados', 'familia', 'civil', 'laboral', 'extranjeria', 'visado', 'nie', 'divorcio', 'herencias']),
   ('inmobiliarias', 'Inmobiliaria', 'Inmobiliarias', '🏠', 'Compra, venta y alquiler de propiedades', ARRAY['inmobiliaria', 'comprar casa', 'alquilar piso', 'vivienda', 'propiedad']),
   ('gestorias', 'Gestoría', 'Gestorías', '📋', 'Trámites administrativos, fiscales y laborales', ARRAY['gestoria', 'gestor', 'impuestos', 'autonomo', 'declaracion', 'tramites'])
 ON CONFLICT (slug) DO NOTHING;

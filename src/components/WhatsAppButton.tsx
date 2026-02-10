@@ -17,7 +17,7 @@ const CONTENT = {
     responseTime: 'Respondemos en minutos',
     quickMessages: [
       { icon: '🏥', text: 'Necesito información sobre seguros de salud' },
-      { icon: '⚖️', text: 'Quiero consultar con un abogado de extranjería' },
+      { icon: '⚖️', text: 'Quiero consultar con un abogado' },
       { icon: '🏠', text: 'Busco ayuda para encontrar vivienda' },
       { icon: '📋', text: 'Necesito ayuda con trámites y papeleos' },
       { icon: '❓', text: 'Tengo otra consulta' },

@@ -230,7 +230,7 @@ export default function PresupuestoPage() {
               </div>
               <h3 className="font-lora text-3xl font-bold mb-3">76 Landing Pages SEO</h3>
               <p className="text-white/90 mb-4 text-lg leading-relaxed">
-                El corazón de tu estrategia. Una página específica para cada combinación de servicio + ciudad. "Seguros de salud en Torrevieja", "Abogados extranjería Murcia", "Inmobiliarias Alicante"...
+                El corazón de tu estrategia. Una página específica para cada combinación de servicio + ciudad. "Seguros de salud en Torrevieja", "Abogados Murcia", "Inmobiliarias Alicante"...
               </p>
               <div className="bg-white/10 backdrop-blur p-4 rounded-lg mb-4">
                 <p className="text-sm text-white/90">

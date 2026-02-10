@@ -35,8 +35,8 @@ const SERVICIOS = [
   {
     id: 'abogados',
     number: '02',
-    title: 'Abogados de Extranjería',
-    description: 'Arraigo, visados, NIE, reagrupación familiar',
+    title: 'Abogados',
+    description: 'Familia, civil, laboral, extranjería y más',
   },
   {
     id: 'inmobiliarias',

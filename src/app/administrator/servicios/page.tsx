@@ -215,7 +215,7 @@ export default function ServiciosPage() {
                   onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
-                  placeholder="Abogado Extranjería"
+                  placeholder="Abogado"
                 />
               </div>
               <div>
@@ -228,7 +228,7 @@ export default function ServiciosPage() {
                   onChange={(e) => setFormData({ ...formData, nombre_plural: e.target.value })}
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
-                  placeholder="Abogados de Extranjería"
+                  placeholder="Abogados"
                 />
               </div>
               <div>
