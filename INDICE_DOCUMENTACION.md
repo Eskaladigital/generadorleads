@@ -1,7 +1,7 @@
 # 📚 Índice de Documentación - Health4Spain
 
 **Fecha:** 11 de Febrero 2026  
-**Estado del Proyecto:** ✅ 76 Landing Pages | URL www | Blog en navbar | UX unificada | Cookies GDPR
+**Estado:** ✅ Optimizado y Production-Ready | WebP | UX Condensada | Formulario Compacto
 
 ---
 
@@ -11,24 +11,24 @@
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| **[ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md)** | 📊 Estado actual completo del proyecto | ✅ Actualizado |
-| **[RESUMEN_ACTUALIZACIONES.md](./RESUMEN_ACTUALIZACIONES.md)** | 📝 Resumen de actualizaciones recientes | ✅ Actualizado |
-| **[README.md](./README.md)** | 📘 Visión general y documentación principal | ✅ Actualizado |
+| **[README.md](./README.md)** | 📘 Visión general, stack, estructura | ✅ Actualizado |
+| **[ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md)** | 📊 Estado actual + optimizaciones | ✅ Actualizado |
+| **[RESUMEN_ACTUALIZACIONES.md](./RESUMEN_ACTUALIZACIONES.md)** | 📝 Log de actualizaciones | ✅ Actualizado |
 
 ### 📋 Guías y Correcciones
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| **[GUIA_FINAL.md](./GUIA_FINAL.md)** | 🎓 Guía completa del proceso de corrección | ✅ Completo |
-| **[CORRECCIONES_FINALES.md](./CORRECCIONES_FINALES.md)** | ✏️ Detalle de todas las correcciones realizadas | ✅ Completo |
+| **[GUIA_FINAL.md](./GUIA_FINAL.md)** | 🎓 Proceso de corrección completo | ✅ Completo |
+| **[CORRECCIONES_FINALES.md](./CORRECCIONES_FINALES.md)** | ✏️ Detalle de correcciones | ✅ Completo |
 
 ### ⚙️ Configuración
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| **[CONFIGURACION_COMPLETADA.md](./CONFIGURACION_COMPLETADA.md)** | 🔧 Configuración del proyecto | ✅ Completo |
-| **[CONFIGURACION_VERCEL.md](./CONFIGURACION_VERCEL.md)** | 🚀 Deployment en Vercel | 📖 Referencia |
-| **[GUIA_CONFIGURACION_SUPABASE.md](./GUIA_CONFIGURACION_SUPABASE.md)** | 🗄️ Configuración de Supabase | 📖 Referencia |
+| **[CONFIGURACION_COMPLETADA.md](./CONFIGURACION_COMPLETADA.md)** | 🔧 Setup del proyecto | ✅ Completo |
+| **[CONFIGURACION_VERCEL.md](./CONFIGURACION_VERCEL.md)** | 🚀 Deploy en Vercel | 📖 Referencia |
+| **[GUIA_CONFIGURACION_SUPABASE.md](./GUIA_CONFIGURACION_SUPABASE.md)** | 🗄️ Setup Supabase | 📖 Referencia |
 
 ---
 
@@ -38,33 +38,34 @@
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| **[AUDITORIA.md](./docs/AUDITORIA.md)** | 🔍 Auditoría completa: rutas, datos, CTAs, leads | ✅ Nuevo |
-| **[HISTORIAL.md](./docs/HISTORIAL.md)** | 📜 Historial de cambios del proyecto | ✅ Actualizado |
-| **[SCRIPTS_LANDINGS.md](./docs/SCRIPTS_LANDINGS.md)** | 🤖 Documentación de scripts de landings | ✅ Actualizado |
-| **[MODELO_NEGOCIO.md](./docs/MODELO_NEGOCIO.md)** | 💰 Modelo de negocio y monetización | 📖 Referencia |
-| **[MODELO_PARTNERS_LEADS.md](./docs/MODELO_PARTNERS_LEADS.md)** | 🤝 Sistema de partners y leads | 📖 Referencia |
-| **[ESTRATEGIA_BLOG.md](./docs/ESTRATEGIA_BLOG.md)** | ✍️ Estrategia de contenido SEO | 📖 Referencia |
-| **[REGENERACION_LANDINGS.md](./docs/REGENERACION_LANDINGS.md)** | 🔄 Proceso de regeneración | 📖 Histórico |
+| **[AUDITORIA.md](./docs/AUDITORIA.md)** | 🔍 Auditoría completa del sistema | ✅ Actualizado |
+| **[HISTORIAL.md](./docs/HISTORIAL.md)** | 📜 Historial de cambios | ✅ Actualizado |
+| **[SCRIPTS_LANDINGS.md](./docs/SCRIPTS_LANDINGS.md)** | 🤖 Scripts de generación | ✅ Actualizado |
+| **[MODELO_NEGOCIO.md](./docs/MODELO_NEGOCIO.md)** | 💰 Modelo de negocio | 📖 Referencia |
+| **[MODELO_PARTNERS_LEADS.md](./docs/MODELO_PARTNERS_LEADS.md)** | 🤝 Partners y leads | 📖 Referencia |
+| **[ESTRATEGIA_BLOG.md](./docs/ESTRATEGIA_BLOG.md)** | ✍️ Estrategia SEO blog | 📖 Referencia |
+| **[REGENERACION_LANDINGS.md](./docs/REGENERACION_LANDINGS.md)** | 🔄 Proceso regeneración | 📖 Histórico |
 
-### 📂 `/scripts` - Scripts y Automatización
+### 📂 `/scripts` - Automatización
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| **[README.md](./scripts/README.md)** | 🛠️ Documentación de todos los scripts | ✅ Actualizado |
+| **[README.md](./scripts/README.md)** | 🛠️ Todos los scripts disponibles | ✅ Actualizado |
+| **convert-images-to-webp.ts** | 📸 Conversión PNG → WebP | ✅ Nuevo |
 
 ### 📂 `/supabase` - Base de Datos
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| **[README.md](./supabase/README.md)** | 🗄️ Documentación de esquemas SQL | 📖 Referencia |
+| **[README.md](./supabase/README.md)** | 🗄️ Esquemas SQL | 📖 Referencia |
 
-### 📂 `/pruebas_html` - Diseños HTML
+### 📂 `/pruebas_html` - Diseños
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| **[RESUMEN_ACTUALIZADO.md](./pruebas_html/RESUMEN_ACTUALIZADO.md)** | 🎨 Resumen de diseños | 📖 Referencia |
+| **[RESUMEN_10_DISENOS.md](./pruebas_html/RESUMEN_10_DISENOS.md)** | 🎨 Galería diseños | 📖 Referencia |
+| **[RESUMEN_ACTUALIZADO.md](./pruebas_html/RESUMEN_ACTUALIZADO.md)** | 🖼️ Resumen actualizado | 📖 Referencia |
 | **[CONTENIDO_CORRECTO.md](./pruebas_html/CONTENIDO_CORRECTO.md)** | ✅ Contenido validado | 📖 Referencia |
-| **[RESUMEN_10_DISENOS.md](./pruebas_html/RESUMEN_10_DISENOS.md)** | 🖼️ Galería de diseños | 📖 Referencia |
 
 ---
 
@@ -72,120 +73,125 @@
 
 ### Para Desarrolladores
 
-**¿Necesitas entender el proyecto?**
-1. Lee [README.md](./README.md) - Visión general
-2. Lee [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Auditoría: cómo funciona todo
-3. Lee [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Estado actual
-4. Revisa [docs/HISTORIAL.md](./docs/HISTORIAL.md) - Evolución del proyecto
+**¿Entender el proyecto?**
+1. [README.md](./README.md) - Stack y estructura
+2. [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Cómo funciona todo
+3. [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Estado y optimizaciones
 
-**¿Necesitas saber de dónde vienen los datos?**
-- [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Sección "Fuentes de Datos" y "Flujo de CTAs"
+**¿Optimizaciones recientes?**
+- [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Sección "Últimas Optimizaciones"
 
-**¿Necesitas saber qué componente es el navbar?**
-- **Único navbar del sitio público**: `Navigation.tsx` (usado en `src/app/es/layout.tsx`)
-- `Header.tsx` existe pero no se usa (legacy)
+**¿Scripts disponibles?**
+- [scripts/README.md](./scripts/README.md) - Todos los scripts
+- `npm run images:webp` - Conversión WebP
+- `npm run generate-landings` - 76 landings
 
-**¿Necesitas generar contenido?**
-1. Lee [scripts/README.md](./scripts/README.md) - Todos los scripts disponibles
-2. Lee [docs/SCRIPTS_LANDINGS.md](./docs/SCRIPTS_LANDINGS.md) - Detalle de scripts de landings
-
-**¿Necesitas configurar el proyecto?**
-1. Lee [CONFIGURACION_COMPLETADA.md](./CONFIGURACION_COMPLETADA.md) - Setup completo
-2. Lee [GUIA_CONFIGURACION_SUPABASE.md](./GUIA_CONFIGURACION_SUPABASE.md) - Base de datos
+**¿Configuración?**
+1. [CONFIGURACION_COMPLETADA.md](./CONFIGURACION_COMPLETADA.md)
+2. [GUIA_CONFIGURACION_SUPABASE.md](./GUIA_CONFIGURACION_SUPABASE.md)
 
 ### Para Stakeholders
 
-**¿Necesitas conocer el estado?**
-1. Lee [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Estado completo y números
+**¿Estado del proyecto?**
+- [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Estado completo
 
-**¿Necesitas entender el negocio?**
-1. Lee [docs/MODELO_NEGOCIO.md](./docs/MODELO_NEGOCIO.md) - Modelo de negocio
-2. Lee [docs/MODELO_PARTNERS_LEADS.md](./docs/MODELO_PARTNERS_LEADS.md) - Partners y leads
+**¿Modelo de negocio?**
+- [docs/MODELO_NEGOCIO.md](./docs/MODELO_NEGOCIO.md) - Revenue, partners, leads
+- [docs/MODELO_PARTNERS_LEADS.md](./docs/MODELO_PARTNERS_LEADS.md) - Sistema partners
 
-**¿Necesitas ver el contenido?**
-1. Lee [README.md](./README.md) - Sección "Los 3 Pilares"
-2. Lee [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Servicios y ciudades
-
----
-
-## 🔍 Búsqueda Rápida
-
-### Por Tema
-
-**Landing Pages:**
-- [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Cómo funcionan rutas dinámicas y datos
-- [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Estado actual (76/76)
-- [docs/SCRIPTS_LANDINGS.md](./docs/SCRIPTS_LANDINGS.md) - Scripts de generación
-- [GUIA_FINAL.md](./GUIA_FINAL.md) - Proceso completo
-
-**Base de Datos:**
-- [supabase/README.md](./supabase/README.md) - Esquemas SQL
-- [GUIA_CONFIGURACION_SUPABASE.md](./GUIA_CONFIGURACION_SUPABASE.md) - Configuración
-
-**Diseño:**
-- [pruebas_html/RESUMEN_10_DISENOS.md](./pruebas_html/RESUMEN_10_DISENOS.md) - Galería de diseños
-- [pruebas_html/RESUMEN_ACTUALIZADO.md](./pruebas_html/RESUMEN_ACTUALIZADO.md) - Resumen actualizado
-
-**SEO y Contenido:**
-- [docs/ESTRATEGIA_BLOG.md](./docs/ESTRATEGIA_BLOG.md) - Estrategia de blog
-- [docs/MODELO_NEGOCIO.md](./docs/MODELO_NEGOCIO.md) - Keywords y estrategia
+**¿Estrategia de contenido?**
+- [docs/ESTRATEGIA_BLOG.md](./docs/ESTRATEGIA_BLOG.md) - Blog SEO
+- [README.md](./README.md) - Los 3 pilares
 
 ---
 
-## 📊 Estadísticas de Documentación
+## 🔍 Búsqueda Rápida por Tema
+
+### Performance y Optimización
+- [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Sección "Performance y LCP"
+- `scripts/convert-images-to-webp.ts` - Script conversión
+- `src/lib/constants.ts` - LOGO_PATHS (WebP)
+- `src/components/OptimizedImage.tsx` - Componentes Image
+
+### UX y Diseño
+- [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Sección "UX y Espaciado"
+- [MINIMALIST_ACTUALIZADO.md](./MINIMALIST_ACTUALIZADO.md) - Diseño minimalist
+- `src/app/globals.css` - Estilos condensados
+- `src/app/es/contacto/ContactFormClient.tsx` - Formulario optimizado
+
+### Landing Pages
+- [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Auditoría rutas y datos
+- [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - 76/76 landings
+- [docs/SCRIPTS_LANDINGS.md](./docs/SCRIPTS_LANDINGS.md) - Scripts generación
+
+### Base de Datos
+- [supabase/README.md](./supabase/README.md) - Esquemas
+- [GUIA_CONFIGURACION_SUPABASE.md](./GUIA_CONFIGURACION_SUPABASE.md) - Setup
+
+---
+
+## 📊 Estadísticas
 
 | Categoría | Archivos | Estado |
 |-----------|----------|--------|
-| 📊 Estado y Resumen | 3 | ✅ Actualizado |
+| 📊 Estado | 3 | ✅ Actualizado |
 | 📋 Guías | 2 | ✅ Completo |
-| ⚙️ Configuración | 3 | 📖 Referencia |
-| 📁 Docs Técnica | 7 | ✅ (+ AUDITORIA.md) |
-| 🛠️ Scripts | 1 | ✅ Actualizado |
-| 🗄️ Base de Datos | 1 | 📖 Referencia |
-| 🎨 Diseño | 3 | 📖 Referencia |
-| **TOTAL** | **20 archivos** | ✅ |
+| ⚙️ Config | 3 | 📖 Referencia |
+| 📁 Docs Técnica | 7 | ✅ Actualizado |
+| 🛠️ Scripts | 2 | ✅ Actualizado |
+| 🗄️ DB | 1 | 📖 Referencia |
+| 🎨 Diseño | 4 | 📖 Referencia |
+| **TOTAL** | **22 archivos** | ✅ |
 
 ---
 
-## 🎯 Últimas Actualizaciones
+## 🎯 Últimas Actualizaciones (11 Feb 2026)
 
-**11 de Febrero 2026:**
-- ✅ **Banner cookies GDPR** — CookieConsent (categorías, personalizar, enlace footer)
-- ✅ **docs/AUDITORIA.md** — Auditoría completa: rutas, datos, CTAs, flujo leads
-- ✅ URL canónica con www (redirect 301, metadataBase)
-- ✅ Tamaños "Solicitar →" unificados en /destinos y /servicios
-- ✅ Blog accesible desde navbar (Navigation.tsx)
-- ✅ Corrección parpadeo menú móvil
-- ✅ Documentación optimizada (README con flujo datos, INDICE, etc.)
+### Optimización Performance
+- ✅ Logos PNG → WebP (script `convert-images-to-webp.ts`)
+- ✅ Hero con Next.js Image (priority + fetchPriority)
+- ✅ LOGO_PATHS centralizadas en constants.ts
+- ✅ 60-70% reducción tamaño imágenes
 
-**7 de Febrero 2026:**
-- ✅ Generadas 76 landing pages (4 servicios × 19 ciudades)
-- ✅ Actualizada documentación completa
-- ✅ Scripts de verificación y limpieza ejecutados
-- ✅ Base de datos validada y limpia
+### Condensación UX (50% menos scroll)
+- ✅ Secciones: py-16/32 → py-8/16
+- ✅ Hero: 65vh → 55vh
+- ✅ Headings: reducidos 30-40%
+- ✅ Service items: py-12 → py-6/8
+- ✅ Containers: px-16 → px-12
+
+### Formulario Ultra-Compacto
+- ✅ Servicios: grid 2x2 → lista vertical (sin iconos emoji)
+- ✅ Ciudades: grid 3-5 columnas, botones pequeños
+- ✅ Todo el espaciado reducido: space-y-12 → space-y-3
+- ✅ Padding container: p-8/12 → p-4/6
+- ✅ **Todo visible sin scroll en cada paso**
+
+### Anteriores
+- ✅ Banner cookies GDPR
+- ✅ docs/AUDITORIA.md completa
+- ✅ URL canónica con www
+- ✅ Blog en navbar
+- ✅ Tamaños unificados "Solicitar →"
 
 ---
 
-## 💡 Consejos de Navegación
+## 💡 Navegación de Documentación
 
-1. **Empieza por [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md)** - Te dará la visión completa actual
-2. **Usa este índice** como punto de partida para encontrar lo que necesitas
-3. **Los archivos con ✅ Actualizado** contienen información vigente
-4. **Los archivos con 📖 Referencia** contienen información histórica o de consulta
+### Empezar por aquí
+1. **[ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md)** - Visión actual completa
+2. **Este índice** - Encontrar documentación específica
+3. **[README.md](./README.md)** - Detalles técnicos
 
----
-
-## 📞 Estructura de Soporte
-
-**¿No encuentras lo que buscas?**
-
-1. Consulta este índice
-2. Busca en [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md)
-3. Revisa [README.md](./README.md)
-4. Consulta la carpeta `/docs` para documentación técnica específica
+### Por tipo de tarea
+- **Desarrollar**: README.md + docs/AUDITORIA.md
+- **Optimizar**: ESTADO_PROYECTO.md sección Performance
+- **Generar contenido**: scripts/README.md
+- **Configurar**: CONFIGURACION_*.md
+- **Negocio**: docs/MODELO_NEGOCIO.md
 
 ---
 
 **Última actualización:** 11 de Febrero 2026  
-**Mantenido por:** Sistema de documentación Health4Spain  
-**Estado:** ✅ COMPLETO Y ACTUALIZADO (incl. cookies GDPR)
+**Estado:** ✅ OPTIMIZADO Y DOCUMENTADO  
+**Versión:** 2.6.0
