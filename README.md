@@ -136,9 +136,10 @@ Health4Spain opera con páginas espejo optimizadas para SEO en 19 ciudades princ
 
 ### Navegación Principal
 
-**⚠️ Único navbar del sitio público**: `Navigation.tsx`  
-No hay otro componente de navbar. El layout (`src/app/es/layout.tsx`) usa solo `Navigation.tsx`.  
-(Existe `Header.tsx` en el proyecto pero no se usa — legacy/inactivo.)
+**Navbar único del sitio**: `Navigation.tsx`  
+- Desktop: navbar fijo superior con links y CTA
+- Mobile: off-canvas lateral derecho con redes sociales y selector de idioma
+- El layout (`src/app/es/layout.tsx`) usa solo `Navigation.tsx`
 
 | Enlace | Ruta |
 |--------|------|
@@ -146,7 +147,7 @@ No hay otro componente de navbar. El layout (`src/app/es/layout.tsx`) usa solo `
 | Destinos | `/es/destinos` |
 | Servicios | `/es/servicios` |
 | Blog | `/es/blog` |
-| Contacto | `/es/contacto` |
+| Nosotros | `/es/sobre-nosotros` |
 
 ### Flujo de Datos y Fuentes
 
@@ -253,8 +254,7 @@ health4spain/
 │   │   └── en/                     # Rutas en inglés
 │   ├── components/
 │   │   ├── admin/                  # Componentes del admin
-│   │   ├── Navigation.tsx          # ÚNICO navbar del sitio (usado en layout)
-│   │   ├── Header.tsx             # No usado (legacy)
+│   │   ├── Navigation.tsx          # Navbar único: desktop + off-canvas lateral mobile
 │   │   ├── Footer.tsx
 │   │   ├── CookieConsent.tsx       # Banner GDPR (categorías, personalizar, footer)
 │   │   ├── CookieConsentLink.tsx   # Enlace "Modificar consentimiento" en footer
@@ -411,7 +411,37 @@ Acceso: `/administrator/login`
 - **Destinos**: Catálogo de ciudades desde `ciudades_catalogo`
 - **Landings**: Lista de 76 landings (4 servicios × 19 ciudades), marcar revisadas/activas
 
-## 🤖 Generación de Landings con IA
+## 🎨 Diseño y Navegación
+
+### Navigation Component (Navbar)
+
+El sitio usa un **único componente de navegación** (`Navigation.tsx`) con:
+
+#### Desktop:
+- Navbar fijo superior con logo, links y CTA
+- Links: Inicio, Destinos, Servicios, Blog, Nosotros
+- Estado activo marcado en azul oscuro (`#293f92`)
+- Botón CTA "Solicitar ayuda" destacado
+
+#### Mobile:
+- Off-canvas lateral derecho (panel deslizante)
+- Backdrop oscuro con blur al abrir
+- Header con logo y botón cerrar (X)
+- Links con estado activo (fondo gris + texto azul)
+- CTA destacado full-width
+- Selector de idioma en grid 4x1 con banderas
+- Redes sociales en botones horizontales
+- Cierre automático al navegar
+
+**Nota técnica**: Sin pathname congelado - usa detección directa para evitar saltos visuales.
+
+### Estilo General
+- **Diseño**: Modern Minimalist (negro, blanco, acento azul `#3bbdda`)
+- **CTAs**: Elementos clicables en toda la web (servicios, destinos, perfiles, stats)
+- **Botón móvil fijo**: "Solicitar Información" en la parte inferior (oculto en página de contacto)
+- **"Solicitar →" unificado**: Tamaño homogéneo (text-base md:text-lg) en Home, /destinos, /servicios
+- **Fuente de datos**: Destinos y ciudades desde Supabase (`ciudades_catalogo`)
+- **Cookies GDPR**: Banner de consentimiento (Esenciales, Análisis, Marketing). Enlace "Modificar consentimiento" en footer
 
 **✅ ESTADO ACTUAL**: 76 landing pages generadas exitosamente (7 Feb 2026)
 
