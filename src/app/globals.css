@@ -350,19 +350,39 @@ input:focus, textarea:focus, select:focus {
 
 @media (max-width: 768px) {
   .hero-with-image {
-    min-height: 70vh;
-    padding: 5rem 6%;
+    min-height: 75vh;
+    padding: 4rem 5%;
     background-position: center;
   }
 
   .hero-with-image.hero-compact {
-    min-height: 35vh;
-    padding: 5rem 6%;
+    min-height: auto;
+    padding: 3rem 5%;
   }
 
   .hero-content-box {
-    padding: 3rem 2.5rem;
-    clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 2rem, 100% 100%, 0 100%);
+    padding: 2rem 1.5rem;
+    clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 1.5rem, 100% 100%, 0 100%);
+    width: 100%;
+  }
+  
+  /* Ajustar estadísticas en hero móvil */
+  .hero-content-box h1 {
+    font-size: 2.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .hero-content-box p {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .hero-content-box .text-4xl {
+    font-size: 2rem !important;
+  }
+  
+  .hero-content-box .text-3xl {
+    font-size: 1.75rem !important;
   }
 }
 
@@ -515,15 +535,17 @@ input:focus, textarea:focus, select:focus {
 }
 
 .destinos-lista a span {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   transition: transform 0.2s ease;
   flex-shrink: 0;
   margin-left: 0.5rem;
+  color: var(--color-gray-text);
 }
 
 .destinos-lista a:hover span {
   transform: translateX(4px);
+  color: var(--color-accent);
 }
 
 @media (max-width: 768px) {
@@ -541,7 +563,7 @@ input:focus, textarea:focus, select:focus {
   
   .destinos-lista a {
     padding: 1.25rem 1rem;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     min-height: 64px;
     font-weight: 600;
   }
@@ -551,8 +573,9 @@ input:focus, textarea:focus, select:focus {
   }
   
   .destinos-lista a span {
-    font-size: 1.75rem;
+    font-size: 1rem;
     margin-left: 1rem;
+    font-weight: 600;
   }
 }
 
