@@ -63,7 +63,11 @@ export default function CookiesPage() {
           <section>
             <h2 className="mb-6 text-2xl font-bold">Gestión de cookies</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Puedes controlar y/o eliminar las cookies como desees. Puedes eliminar todas las cookies 
+              Puedes modificar tu consentimiento en cualquier momento mediante el enlace &quot;Modificar consentimiento 
+              de cookies&quot; que encontrarás en el pie de página de nuestro sitio web.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              También puedes controlar y/o eliminar las cookies como desees. Puedes eliminar todas las cookies 
               que ya están en tu dispositivo y configurar la mayoría de los navegadores para que no se coloquen.
             </p>
             <p className="text-gray-700 leading-relaxed">

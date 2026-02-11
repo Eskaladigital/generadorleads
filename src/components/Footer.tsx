@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getServicios } from '@/lib/services';
+import CookieConsentLink from './CookieConsentLink';
 
 const footerLinks = {
   destinos: [
@@ -185,6 +186,9 @@ export default async function Footer() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <CookieConsentLink lang="es" />
+                </li>
               </ul>
             </div>
           </div>
