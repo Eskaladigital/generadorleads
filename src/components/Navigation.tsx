@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -27,9 +27,30 @@ const socialLinks = [
   { name: 'Twitter', href: 'https://twitter.com/health4spain' },
 ];
 
+// Inicio (/es) solo activo con coincidencia exacta; el resto con startsWith
+function isLinkActive(pathname: string, href: string): boolean {
+  const cleanPath = pathname.replace(/\/$/, '') || '/';
+  if (href === '/es' || href === '/en' || href === '/de' || href === '/fr') {
+    return cleanPath === href;
+  }
+  return cleanPath === href || cleanPath.startsWith(href + '/');
+}
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const pathnameWhenOpened = useRef<string | null>(null);
+
+  // Congelar pathname al abrir menú para evitar el "rebote" durante hidratación
+  useEffect(() => {
+    if (isOpen) {
+      pathnameWhenOpened.current = pathname;
+    } else {
+      pathnameWhenOpened.current = null;
+    }
+  }, [isOpen, pathname]);
+
+  const activePathname = isOpen && pathnameWhenOpened.current !== null ? pathnameWhenOpened.current : pathname;
 
   const currentLang = pathname.startsWith('/en') ? 'en' :
     pathname.startsWith('/de') ? 'de' :
@@ -145,7 +166,11 @@ export default function Navigation() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block px-4 py-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-[#3bbdda] transition-colors"
+                  className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors ${
+                    isLinkActive(activePathname, link.href)
+                      ? 'bg-gray-100 text-[#293f92]'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-[#3bbdda]'
+                  }`}
                 >
                   {link.label}
                 </Link>
