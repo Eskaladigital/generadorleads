@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getServicios } from '@/lib/services';
-import PreFooterCTA from './PreFooterCTA';
 
 const footerLinks = {
   destinos: [
@@ -65,11 +64,6 @@ export default async function Footer() {
   const servicios = await getServicios();
   
   return (
-    <>
-      {/* Pre-Footer CTA Section - oculto en /contacto (ya tiene formulario) */}
-      <PreFooterCTA />
-
-      {/* Main Footer */}
       <footer className="stats-minimal">
         <div className="container-base">
           {/* Logo & Description */}
@@ -206,6 +200,5 @@ export default async function Footer() {
           </div>
         </div>
       </footer>
-    </>
   );
 }

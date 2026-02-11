@@ -12,8 +12,19 @@ const trustBadges = [
 export default function PreFooterCTA() {
   const pathname = usePathname();
   
-  // Ocultar en la página de contacto (ya tiene su propio formulario)
-  if (pathname === '/es/contacto') {
+  // Ocultar en:
+  // - Página de contacto (ya tiene su propio formulario)
+  // - Home (no necesita formulario, todo va a /contacto)
+  // - Páginas de listado (/servicios, /destinos) - solo tienen CTAs a formulario
+  // Solo mostrar en landings específicas como /servicios/abogados-murcia, /destinos/murcia
+  const hiddenPages = [
+    '/es/contacto',
+    '/es',
+    '/es/servicios',
+    '/es/destinos',
+  ];
+  
+  if (hiddenPages.includes(pathname)) {
     return null;
   }
   
