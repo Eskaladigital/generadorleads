@@ -129,7 +129,7 @@ Sigue la guía en `CONFIGURACION_VERCEL.md`:
 ### Vercel (Producción)
 - [ ] Variables de entorno de Supabase configuradas
 - [ ] `NEXT_PUBLIC_ADMIN_EMAILS` configurado
-- [ ] `NEXT_PUBLIC_SITE_URL` configurado con dominio real
+- [ ] `NEXT_PUBLIC_SITE_URL` configurado con `https://www.health4spain.com` (producción)
 - [ ] TinyMCE API Key configurada
 - [ ] WhatsApp configurado (opcional)
 - [ ] Google Analytics configurado (opcional)

@@ -136,21 +136,42 @@ Health4Spain opera con páginas espejo optimizadas para SEO en 19 ciudades princ
 
 ### Navegación Principal
 
-```
-HOME
-├── Cómo te ayudamos
-├── A qué vienes a España
-│   ├── Quiero estudiar
-│   ├── Quiero trabajar
-│   ├── Quiero vivir sin trabajar (no lucrativa)
-│   ├── Reagrupación familiar
-│   └── Preparar mi nacionalidad
-├── Recursos (Guías, blogs, documentos)
-├── Zonas y Consulados (19 ciudades)
-├── Para Profesionales (Colaboradores)
-├── Sobre H4S
-└── Contacto
-```
+**⚠️ Único navbar del sitio público**: `Navigation.tsx`  
+No hay otro componente de navbar. El layout (`src/app/es/layout.tsx`) usa solo `Navigation.tsx`.  
+(Existe `Header.tsx` en el proyecto pero no se usa — legacy/inactivo.)
+
+| Enlace | Ruta |
+|--------|------|
+| Inicio | `/es` |
+| Destinos | `/es/destinos` |
+| Servicios | `/es/servicios` |
+| Blog | `/es/blog` |
+| Contacto | `/es/contacto` |
+
+### Flujo de Datos y Fuentes
+
+| Fuente | Tabla/Fichero | Usado en |
+|--------|---------------|----------|
+| **Supabase** | `ciudades_catalogo` | destinos, contacto, footer |
+| **Supabase** | `servicios_catalogo` | servicios, footer |
+| **Supabase** | `landing_pages` | servicios/[slug], destinos/[slug] (landings 76) |
+| **Supabase** | `blog_posts` | blog |
+| **Supabase** | `leads` | Formulario contacto → POST /api/leads |
+| **Estático** | page.tsx (Home) | AUDIENCIAS, SERVICIOS, CIUDADES |
+| **Estático** | ContactFormClient | SERVICIOS, PRESUPUESTOS, URGENCIAS, PAISES |
+| **Estático** | servicios/[slug] | SERVICIOS_DATA (fallback) |
+
+Ver **[docs/AUDITORIA.md](docs/AUDITORIA.md)** para auditoría completa.
+
+### CTAs — Todos a Contacto
+
+Todos los botones "Solicitar" envían a `/es/contacto` con query params:
+- `?servicio=abogados` — desde servicios
+- `?ciudad=murcia` — desde destinos
+- `?slug=abogados-murcia` — desde landing
+- `?perfil=jubilados` — desde home perfiles
+
+El formulario pre-rellena según los params de la URL.
 
 ### Estructura de Página Espejo (por cada ciudad)
 
@@ -232,7 +253,8 @@ health4spain/
 │   │   └── en/                     # Rutas en inglés
 │   ├── components/
 │   │   ├── admin/                  # Componentes del admin
-│   │   ├── Navigation.tsx          # Nav minimalista
+│   │   ├── Navigation.tsx          # ÚNICO navbar del sitio (usado en layout)
+│   │   ├── Header.tsx             # No usado (legacy)
 │   │   ├── Footer.tsx
 │   │   ├── StickyCTA.tsx           # Botón móvil fijo
 │   │   └── ...
@@ -453,11 +475,20 @@ NEXT_PUBLIC_TINYMCE_API_KEY=
 # WhatsApp
 NEXT_PUBLIC_WHATSAPP_NUMBER=34600000000
 
-# Site
-NEXT_PUBLIC_SITE_URL=https://health4spain.com
+# Site (URL canónica: siempre con www)
+NEXT_PUBLIC_SITE_URL=https://www.health4spain.com
 ```
 
-## 📄 Documentación Estratégica
+## 📄 Documentación
+
+### Técnica y Auditoría
+
+- **[docs/AUDITORIA.md](docs/AUDITORIA.md)** — Auditoría completa: rutas, datos, CTAs, flujo leads
+- **[docs/HISTORIAL.md](docs/HISTORIAL.md)** — Historial de cambios
+- **[ESTADO_PROYECTO.md](ESTADO_PROYECTO.md)** — Estado actual
+- **[INDICE_DOCUMENTACION.md](INDICE_DOCUMENTACION.md)** — Índice de toda la documentación
+
+### Estratégica
 
 Para más detalles sobre la estrategia del proyecto, consulta:
 
@@ -467,10 +498,17 @@ Para más detalles sobre la estrategia del proyecto, consulta:
 
 ## 🎨 Diseño Minimalista
 
-- **Estilo**: Modern Minimalist (negro, blanco, rojo)
+- **Estilo**: Modern Minimalist (negro, blanco, acento azul)
 - **CTAs**: Elementos clicables en toda la web (servicios, destinos, perfiles, stats)
 - **Botón móvil fijo**: "Solicitar Información" en la parte inferior (oculto en página de contacto)
+- **"Solicitar →" unificado**: Tamaño homogéneo (text-base md:text-lg) en Home, /destinos, /servicios
 - **Fuente de datos**: Destinos y ciudades desde Supabase (`ciudades_catalogo`)
+
+## 🌐 URL Canónica
+
+- **Dominio**: `https://www.health4spain.com` (siempre con www)
+- **Redirect 301**: `health4spain.com` → `www.health4spain.com`
+- **Configurar** `NEXT_PUBLIC_SITE_URL` en Vercel con la URL con www
 
 ## 📄 Licencia
 

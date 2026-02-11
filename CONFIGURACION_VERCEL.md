@@ -27,7 +27,7 @@ Debes configurar estas variables de entorno en tu proyecto de Vercel:
 
 | Variable | Valor | Descripción |
 |----------|-------|-------------|
-| `NEXT_PUBLIC_SITE_URL` | `https://tu-dominio.com` | URL de producción |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.health4spain.com` | URL canónica (siempre con www) |
 | `NEXT_PUBLIC_SITE_NAME` | `Health4Spain` | Nombre del sitio |
 
 #### 📝 TINYMCE (Obligatorio para Blog)
@@ -105,7 +105,7 @@ Después de configurar Vercel, verifica que todo funcione:
 
 ## 🔄 Entornos
 
-- **Production**: Tu dominio principal (ej: health4spain.com)
+- **Production**: Tu dominio principal (ej: `https://www.health4spain.com` - siempre con www)
 - **Preview**: Branches de Git (para testing)
 - **Development**: Local (usa `.env.local`)
 
@@ -148,7 +148,7 @@ Asegúrate de que en Supabase tengas configurado:
 
 - [ ] Variables de Supabase configuradas en Vercel
 - [ ] `NEXT_PUBLIC_ADMIN_EMAILS` configurado
-- [ ] `NEXT_PUBLIC_SITE_URL` configurado con tu dominio
+- [ ] `NEXT_PUBLIC_SITE_URL` configurado con `https://www.health4spain.com`
 - [ ] TinyMCE API Key obtenida y configurada
 - [ ] Proyecto redeployado en Vercel
 - [ ] Login de Google funcionando

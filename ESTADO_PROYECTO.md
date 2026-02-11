@@ -1,6 +1,6 @@
 # 📊 Estado del Proyecto Health4Spain
 
-**Fecha de última actualización:** 7 de Febrero 2026
+**Fecha de última actualización:** 11 de Febrero 2026
 
 ---
 
@@ -260,6 +260,7 @@ npx tsx scripts/verify-landings.ts
 ## 📝 Documentación Complementaria
 
 - [README.md](./README.md) - Visión general del proyecto
+- [docs/AUDITORIA.md](./docs/AUDITORIA.md) - **Auditoría completa**: rutas, datos, CTAs, flujo leads
 - [docs/HISTORIAL.md](./docs/HISTORIAL.md) - Historial de cambios
 - [CORRECCIONES_FINALES.md](./CORRECCIONES_FINALES.md) - Resumen de correcciones
 - [GUIA_FINAL.md](./GUIA_FINAL.md) - Guía completa del proceso
@@ -270,11 +271,16 @@ npx tsx scripts/verify-landings.ts
 
 ## 🚀 Próximos Pasos (Opcionales)
 
+### Mejoras Completadas (11 Feb 2026)
+- [x] URL canónica con www (redirect 301, metadataBase)
+- [x] Tamaños "Solicitar →" unificados en /destinos y /servicios
+- [x] Blog accesible desde navbar (Navigation.tsx)
+
 ### Corto Plazo
 - [ ] Generar contenido extendido para las 19 ciudades (`npm run generate-cities`)
 - [ ] Validar contenido de landing pages manualmente
 - [ ] Optimizar imágenes y assets
-- [ ] Configurar sitemap.xml
+- [ ] Configurar sitemap.xml (sitemap.ts ya genera sitemap dinámico)
 - [ ] Implementar schema markup (JSON-LD)
 
 ### Medio Plazo
@@ -315,6 +321,6 @@ Para cualquier consulta o soporte técnico, consulta la documentación completa 
 
 **Estado**: ✅ PROYECTO COMPLETADO Y OPERATIVO
 
-**Última verificación**: 7 de Febrero 2026, 12:00 PM CET
+**Última verificación**: 11 de Febrero 2026
 
 **Próxima acción sugerida**: Generar contenido de ciudades con `npm run generate-cities`

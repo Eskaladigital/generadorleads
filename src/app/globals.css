@@ -178,6 +178,17 @@ h4 { font-size: 1.5rem; }
   .service-arrow {
     @apply text-base md:text-lg font-semibold text-gray-600;
   }
+  
+  /* Override para service-item-minimal (/servicios): mismo tamaño que home */
+  .service-item-minimal .service-arrow {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #666666;
+  }
+  
+  .service-item-minimal:hover .service-arrow {
+    color: var(--color-accent);
+  }
 }
 
 /* =============================================

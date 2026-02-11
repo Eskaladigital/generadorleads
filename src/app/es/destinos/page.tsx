@@ -95,7 +95,7 @@ export default async function DestinosPage() {
                         </p>
                       )}
                     </div>
-                    <span className="text-2xl font-bold group-hover:translate-x-2 transition-transform">
+                    <span className="service-arrow group-hover:translate-x-2 transition-transform">
                       Solicitar →
                     </span>
                   </Link>

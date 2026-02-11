@@ -49,18 +49,18 @@ CATEGORÍAS:
 ARTÍCULOS:
 /{idioma}/blog/{slug-del-articulo}/
 
-EJEMPLO COMPLETO:
-health4spain.com/blog/                           → Índice ES
-health4spain.com/blog/guias/                     → Categoría guías ES
-health4spain.com/blog/arraigo-social-requisitos/ → Artículo ES
+EJEMPLO COMPLETO (URL canónica: www.health4spain.com):
+www.health4spain.com/es/blog/                           → Índice ES
+www.health4spain.com/es/blog/guias/                     → Categoría guías ES
+www.health4spain.com/es/blog/arraigo-social-requisitos/ → Artículo ES
 
-health4spain.com/en/blog/                        → Índice EN
-health4spain.com/en/blog/guides/                 → Categoría guías EN
-health4spain.com/en/blog/social-roots-requirements/ → Artículo EN
+www.health4spain.com/en/blog/                        → Índice EN
+www.health4spain.com/en/blog/guides/                 → Categoría guías EN
+www.health4spain.com/en/blog/social-roots-requirements/ → Artículo EN
 
-health4spain.com/de/blog/                        → Índice DE
-health4spain.com/de/blog/ratgeber/               → Categoría guías DE
-health4spain.com/de/blog/soziale-verwurzelung-anforderungen/ → Artículo DE
+www.health4spain.com/de/blog/                        → Índice DE
+www.health4spain.com/de/blog/ratgeber/               → Categoría guías DE
+www.health4spain.com/de/blog/soziale-verwurzelung-anforderungen/ → Artículo DE
 ```
 
 ---

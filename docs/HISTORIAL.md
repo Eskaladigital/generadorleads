@@ -1,5 +1,40 @@
 # Historial de Desarrollo - Health4Spain
 
+## Versión 2.5.0 (11 Febrero 2026)
+
+### URL Canónica con www
+
+- **Dominio**: `https://www.health4spain.com` (siempre con www)
+- **Redirect 301**: `health4spain.com` → `www.health4spain.com` (next.config.js)
+- **metadataBase**: layout.tsx actualizado para canonical y Open Graph
+- **Sitemap**: sitemap.ts, sitemap-html con URL www
+- **Variables**: .env.example, constants.ts
+
+### UX: Tamaños "Solicitar →" unificados
+
+- **Estándar**: 1rem móvil, 1.125rem desktop, font-weight 600
+- **Aplicado en**: /destinos (lista de ciudades), /servicios (lista de servicios)
+- **Antes**: destinos usaba text-2xl; ahora usa clase service-arrow
+- **Override**: service-item-minimal .service-arrow en globals.css
+
+### Navegación: Blog en navbar
+
+- **Componente**: `Navigation.tsx` — **único navbar del sitio público**
+- **Nota**: El layout usa solo `Navigation.tsx`. No existe otro navbar activo. (`Header.tsx` existe pero no se usa.)
+- **Añadido**: Enlace Blog entre Servicios y Contacto
+- **Orden**: Inicio → Destinos → Servicios → Blog → Contacto
+
+### Documentación
+
+- **docs/AUDITORIA.md** (NUEVO): Auditoría completa — rutas, fuentes de datos, CTAs, flujo leads
+- README.md: Flujo de datos, CTAs, referencia a auditoría
+- RESUMEN_ACTUALIZACIONES.md: Nueva sección mejoras 11 Feb
+- CONFIGURACION_VERCEL.md: NEXT_PUBLIC_SITE_URL con www
+- docs/ESTRATEGIA_BLOG.md: URLs de ejemplo con www
+- INDICE_DOCUMENTACION.md: Fecha actualizada, enlace a auditoría
+
+---
+
 ## Versión 2.4.0 (Febrero 2025)
 
 ### Migración Destinos a Supabase

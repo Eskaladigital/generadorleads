@@ -39,7 +39,9 @@
 
 ---
 
-### 2. **NAVIGATION** (`src/components/Navigation.tsx`)
+### 2. **NAVIGATION** (`src/components/Navigation.tsx`) — **ÚNICO NAVBAR**
+**Importante:** Este es el único componente de navbar del sitio público. El layout usa solo `Navigation.tsx`. No hay otro navbar activo. (`Header.tsx` existe pero no se usa.)
+
 **Cambios:**
 - ❌ Sin logo image (logo texto "Health4Spain")
 - ❌ Sin fixed position

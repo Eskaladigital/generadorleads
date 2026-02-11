@@ -1,7 +1,7 @@
 # 📚 Índice de Documentación - Health4Spain
 
-**Fecha:** 7 de Febrero 2026  
-**Estado del Proyecto:** ✅ 76 Landing Pages Completadas
+**Fecha:** 11 de Febrero 2026  
+**Estado del Proyecto:** ✅ 76 Landing Pages Completadas | URL www | Blog en navbar | UX unificada
 
 ---
 
@@ -38,6 +38,7 @@
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
+| **[AUDITORIA.md](./docs/AUDITORIA.md)** | 🔍 Auditoría completa: rutas, datos, CTAs, leads | ✅ Nuevo |
 | **[HISTORIAL.md](./docs/HISTORIAL.md)** | 📜 Historial de cambios del proyecto | ✅ Actualizado |
 | **[SCRIPTS_LANDINGS.md](./docs/SCRIPTS_LANDINGS.md)** | 🤖 Documentación de scripts de landings | ✅ Actualizado |
 | **[MODELO_NEGOCIO.md](./docs/MODELO_NEGOCIO.md)** | 💰 Modelo de negocio y monetización | 📖 Referencia |
@@ -73,8 +74,16 @@
 
 **¿Necesitas entender el proyecto?**
 1. Lee [README.md](./README.md) - Visión general
-2. Lee [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Estado actual
-3. Revisa [docs/HISTORIAL.md](./docs/HISTORIAL.md) - Evolución del proyecto
+2. Lee [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Auditoría: cómo funciona todo
+3. Lee [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Estado actual
+4. Revisa [docs/HISTORIAL.md](./docs/HISTORIAL.md) - Evolución del proyecto
+
+**¿Necesitas saber de dónde vienen los datos?**
+- [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Sección "Fuentes de Datos" y "Flujo de CTAs"
+
+**¿Necesitas saber qué componente es el navbar?**
+- **Único navbar del sitio público**: `Navigation.tsx` (usado en `src/app/es/layout.tsx`)
+- `Header.tsx` existe pero no se usa (legacy)
 
 **¿Necesitas generar contenido?**
 1. Lee [scripts/README.md](./scripts/README.md) - Todos los scripts disponibles
@@ -104,6 +113,7 @@
 ### Por Tema
 
 **Landing Pages:**
+- [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Cómo funcionan rutas dinámicas y datos
 - [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Estado actual (76/76)
 - [docs/SCRIPTS_LANDINGS.md](./docs/SCRIPTS_LANDINGS.md) - Scripts de generación
 - [GUIA_FINAL.md](./GUIA_FINAL.md) - Proceso completo
@@ -129,15 +139,22 @@
 | 📊 Estado y Resumen | 3 | ✅ Actualizado |
 | 📋 Guías | 2 | ✅ Completo |
 | ⚙️ Configuración | 3 | 📖 Referencia |
-| 📁 Docs Técnica | 6 | ✅ Actualizado |
+| 📁 Docs Técnica | 7 | ✅ (+ AUDITORIA.md) |
 | 🛠️ Scripts | 1 | ✅ Actualizado |
 | 🗄️ Base de Datos | 1 | 📖 Referencia |
 | 🎨 Diseño | 3 | 📖 Referencia |
-| **TOTAL** | **19 archivos** | ✅ |
+| **TOTAL** | **20 archivos** | ✅ |
 
 ---
 
 ## 🎯 Últimas Actualizaciones
+
+**11 de Febrero 2026:**
+- ✅ **docs/AUDITORIA.md** — Auditoría completa: rutas, datos, CTAs, flujo leads
+- ✅ URL canónica con www (redirect 301, metadataBase)
+- ✅ Tamaños "Solicitar →" unificados en /destinos y /servicios
+- ✅ Blog accesible desde navbar (Navigation.tsx)
+- ✅ Documentación optimizada (README con flujo datos, INDICE, etc.)
 
 **7 de Febrero 2026:**
 - ✅ Generadas 76 landing pages (4 servicios × 19 ciudades)
@@ -167,6 +184,6 @@
 
 ---
 
-**Última actualización:** 7 de Febrero 2026  
+**Última actualización:** 11 de Febrero 2026  
 **Mantenido por:** Sistema de documentación Health4Spain  
 **Estado:** ✅ COMPLETO Y ACTUALIZADO

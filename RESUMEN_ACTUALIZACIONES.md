@@ -1,6 +1,32 @@
-# 📋 Resumen de Actualizaciones - 7 Febrero 2026
+# 📋 Resumen de Actualizaciones - Health4Spain
 
-## ✅ Documentos Actualizados
+## 🆕 Mejoras UX y Configuración - 11 Febrero 2026
+
+### 1. **URL Canónica con www**
+- **Dominio**: `https://www.health4spain.com` (siempre con www)
+- **Redirect 301**: `health4spain.com` → `www.health4spain.com` (next.config.js)
+- **Actualizado**: metadataBase, sitemap, constants, .env.example
+- **Archivos**: layout.tsx, sitemap.ts, constants.ts, sitemap-html, BlogPostForm, presupuesto
+
+### 2. **Tamaños "Solicitar →" unificados**
+- **Estándar**: text-base (1rem) móvil, text-lg (1.125rem) desktop, font-weight 600
+- **Aplicado en**: /destinos (lista ciudades), /servicios (lista servicios)
+- **Archivos**: destinos/page.tsx, globals.css (service-item-minimal .service-arrow)
+
+### 3. **Blog en navegación**
+- **Componente**: `Navigation.tsx` — **único navbar del sitio** (no hay otro)
+- **Añadido**: Enlace Blog entre Servicios y Contacto
+- **Orden**: Inicio → Destinos → Servicios → **Blog** → Contacto
+
+### 4. **Documentación actualizada**
+- **docs/AUDITORIA.md** (NUEVO) — Auditoría completa: rutas, datos, CTAs, flujo leads
+- README.md — Flujo de datos, CTAs, referencia a auditoría
+- ESTADO_PROYECTO.md, CONFIGURACION_VERCEL.md, INDICE_DOCUMENTACION.md
+- docs/ESTRATEGIA_BLOG.md (URLs con www)
+
+---
+
+## ✅ Documentos Actualizados (7 Febrero 2026)
 
 ### 1. **ESTADO_PROYECTO.md** (NUEVO)
 Documento maestro del estado actual del proyecto con:
@@ -90,12 +116,15 @@ Documento maestro del estado actual del proyecto con:
 ## 📝 Archivos Creados/Actualizados
 
 ```
-✅ ESTADO_PROYECTO.md                      (NUEVO - Documento maestro)
-✅ README.md                               (ACTUALIZADO)
-✅ docs/HISTORIAL.md                       (ACTUALIZADO)
+✅ ESTADO_PROYECTO.md                      (Documento maestro)
+✅ README.md                               (ACTUALIZADO - 11 Feb)
+✅ docs/HISTORIAL.md                       (ACTUALIZADO - 11 Feb)
 ✅ docs/SCRIPTS_LANDINGS.md                (ACTUALIZADO)
 ✅ scripts/README.md                       (ACTUALIZADO)
-✅ RESUMEN_ACTUALIZACIONES.md              (NUEVO - Este archivo)
+✅ RESUMEN_ACTUALIZACIONES.md              (Este archivo - 11 Feb)
+✅ CONFIGURACION_VERCEL.md                 (ACTUALIZADO - URL www)
+✅ INDICE_DOCUMENTACION.md                 (ACTUALIZADO - 11 Feb)
+✅ docs/ESTRATEGIA_BLOG.md                 (URLs con www)
 ```
 
 ---
@@ -142,6 +171,6 @@ Documento maestro del estado actual del proyecto con:
 
 ---
 
-**Fecha de actualización:** 7 de Febrero 2026  
-**Responsable:** Sistema de documentación automatizada  
+**Fecha de actualización:** 11 de Febrero 2026  
+**Últimas mejoras:** URL www, UX Solicitar unificado, Blog en navbar, docs actualizados  
 **Estado:** ✅ COMPLETADO
