@@ -117,7 +117,7 @@ export default async function ServiciosPage() {
                       )}
                     </div>
                     
-                    <span className="service-arrow group-hover:translate-x-2 transition-transform pt-[10px]">Solicitar →</span>
+                    <span className="service-arrow group-hover:translate-x-2 transition-transform">Solicitar →</span>
                   </Link>
                 </li>
               );

@@ -184,11 +184,23 @@ h4 { font-size: 1.5rem; }
     font-size: 1.125rem;
     font-weight: 600;
     color: #666666;
-    margin-top: 15px;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    display: inline-block;
+    transition: color 0.2s ease, transform 0.2s ease;
   }
   
   .service-item-minimal:hover .service-arrow {
     color: var(--color-accent);
+  }
+  
+  /* En móvil, más separación cuando el layout es columna */
+  @media (max-width: 768px) {
+    .service-item-minimal .service-arrow {
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+    }
   }
 }
 
