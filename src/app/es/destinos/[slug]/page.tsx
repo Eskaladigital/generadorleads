@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase';
 import { LandingPage } from '@/lib/types';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 // Pre-renderizar en build para SEO. Revalidar cada 24h.
 export const revalidate = 86400;
@@ -199,11 +200,19 @@ export default async function DestinoPage({
 
 // Componente para landing pages de BD (diseño minimalista)
 function LandingPageView({ landing }: { landing: LandingPage }) {
+  // Extraer ciudad y servicio del slug si existen
+  const slugParts = landing.slug.split('-');
+  
   return (
     <>
       {/* Hero Section - Diseño minimalista */}
       <section className="section">
         <div className="container-base">
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/es' },
+            { label: 'Destinos', href: '/es/destinos' },
+            { label: landing.hero_title }
+          ]} />
           <h1 className="mb-8">
             {landing.hero_title}
           </h1>
@@ -429,13 +438,12 @@ function ServiceCityView({
     <>
       <section className="section">
         <div className="container-narrow">
-          <div className="flex items-center gap-2 text-gray-500 text-sm mb-6">
-            <Link href="/es/servicios" className="hover:text-black">Servicios</Link>
-            <span>/</span>
-            <Link href={`/es/servicios/${servicio}`} className="hover:text-black">{servicioInfo.nombre}</Link>
-            <span>/</span>
-            <span className="text-black">{ciudadData.nombre}</span>
-          </div>
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/es' },
+            { label: 'Servicios', href: '/es/servicios' },
+            { label: servicioInfo.nombre, href: `/es/servicios/${servicio}` },
+            { label: ciudadData.nombre }
+          ]} />
           <h1 className="mb-8">
             {servicioInfo.nombre} en {ciudadData.nombre}
           </h1>
@@ -483,11 +491,11 @@ async function CityView({
       {/* Hero Section */}
       <section className="section">
         <div className="container-narrow">
-          <div className="flex items-center gap-2 text-gray-500 text-sm mb-6">
-            <Link href="/es/destinos" className="hover:text-black">Destinos</Link>
-            <span>/</span>
-            <span className="text-black">{ciudadData.comunidad}</span>
-          </div>
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/es' },
+            { label: 'Destinos', href: '/es/destinos' },
+            { label: ciudadData.nombre }
+          ]} />
           <h1 className="mb-8">
             Vivir en {ciudadData.nombre}
           </h1>
@@ -761,11 +769,11 @@ function CityViewBasic({
     <>
       <section className="section">
         <div className="container-narrow">
-          <div className="flex items-center gap-2 text-gray-500 text-sm mb-6">
-            <Link href="/es/destinos" className="hover:text-black">Destinos</Link>
-            <span>/</span>
-            <span className="text-black">{ciudadData.comunidad}</span>
-          </div>
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/es' },
+            { label: 'Destinos', href: '/es/destinos' },
+            { label: ciudadData.nombre }
+          ]} />
           <h1 className="mb-8">
             Vivir en {ciudadData.nombre}
           </h1>

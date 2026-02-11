@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { getCiudades } from '@/lib/ciudades';
 import { HERO_IMAGE_URL } from '@/lib/constants';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Destinos - 19 Ciudades | Health4Spain',
@@ -71,6 +72,10 @@ export default async function DestinosPage() {
       {/* Lista de Destinos por Zona */}
       <section className="section-alt">
         <div className="container-narrow space-y-20">
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/es' },
+            { label: 'Destinos' }
+          ]} />
           {regiones.map(([zona, ciudadesZona], regionIndex) => (
             <div key={zona}>
               <h2 className="mb-8 pb-4 border-b-3 border-accent inline-block">

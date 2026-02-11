@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { getServicios } from '@/lib/services';
 import { HERO_IMAGE_URL } from '@/lib/constants';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Servicios para Extranjeros en España | Health4Spain',
@@ -81,6 +82,10 @@ export default async function ServiciosPage() {
       {/* Lista de Servicios - Minimal Style */}
       <section className="section-alt">
         <div className="container-narrow">
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/es' },
+            { label: 'Servicios' }
+          ]} />
           <ul className="service-list-minimal">
             {servicios.map((servicio, index) => {
               const beneficios = BENEFICIOS_POR_SERVICIO[servicio.slug] || [];
