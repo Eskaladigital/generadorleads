@@ -322,7 +322,7 @@ export default function PresupuestoPage() {
             <div className="bg-white p-6 rounded-lg border-l-4 border-gray-300">
               <div className="text-3xl mb-3">🌐</div>
               <h3 className="font-bold mb-2 text-gray-900">Dominio</h3>
-              <p className="text-gray-600 text-sm mb-2">Tu dirección web (health4spain.com)</p>
+              <p className="text-gray-600 text-sm mb-2">Tu dirección web (www.health4spain.com)</p>
               <p className="text-accent font-semibold">~12€/año</p>
             </div>
             <div className="bg-white p-6 rounded-lg border-l-4 border-gray-300">

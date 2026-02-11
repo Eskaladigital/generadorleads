@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://health4spain.com';
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com';
 
 // Páginas estáticas
 const STATIC_PAGES = [

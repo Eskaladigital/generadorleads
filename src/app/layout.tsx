@@ -19,7 +19,7 @@ const ubuntu = Ubuntu({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://health4spain.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com'),
   title: {
     default: "Health4Spain - Tu Nueva Vida en España",
     template: "%s | Health4Spain"

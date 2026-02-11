@@ -9,7 +9,7 @@ export const HERO_IMAGE_URL = 'https://images.unsplash.com/photo-1543783207-ec64
 export const SITE_CONFIG = {
   name: 'Health4Spain',
   tagline: 'Tu nueva vida en España',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://health4spain.com',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com',
   email: 'info@health4spain.com',
   phone: '+34 600 000 000',
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '34600000000',

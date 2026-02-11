@@ -38,6 +38,17 @@ const nextConfig = {
   },
   // Compresión
   compress: true,
+  // Canonical: redirigir health4spain.com → www.health4spain.com
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'health4spain.com' }],
+        destination: 'https://www.health4spain.com/:path*',
+        permanent: true,
+      },
+    ];
+  },
   // Headers de seguridad y caché
   async headers() {
     return [

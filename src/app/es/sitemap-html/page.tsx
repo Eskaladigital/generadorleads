@@ -81,7 +81,7 @@ export default async function SitemapHtmlPage() {
     getLandingPages(),
   ]);
   
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://health4spain.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com';
 
   // Obtener todos los destinos desde BD
   const allDestinos = ciudades.map(ciudad => ({

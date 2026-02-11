@@ -396,7 +396,7 @@ export default function BlogPostForm({ initialData, onSubmit, isLoading }: BlogP
                     {formData.meta_title || formData.title || 'Título del artículo'}
                   </p>
                   <p className="text-green-700 text-xs truncate">
-                    health4spain.com/es/blog/{formData.slug || 'url-del-articulo'}
+                    www.health4spain.com/es/blog/{formData.slug || 'url-del-articulo'}
                   </p>
                   <p className="text-gray-600 text-xs sm:text-sm line-clamp-2">
                     {formData.meta_description || formData.excerpt || 'Descripción del artículo...'}
