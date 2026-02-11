@@ -81,7 +81,7 @@ export default async function DestinosPage() {
                 {ciudadesZona.map((ciudad) => (
                   <Link
                     key={ciudad.slug}
-                    href={`/es/destinos/${ciudad.slug}`}
+                    href={`/es/contacto?ciudad=${ciudad.slug}`}
                     className="group flex justify-between items-center py-6 border-b border-gray-300 hover:bg-white hover:pl-4 transition-all"
                   >
                     <div>
@@ -95,7 +95,7 @@ export default async function DestinosPage() {
                       )}
                     </div>
                     <span className="text-2xl font-bold group-hover:translate-x-2 transition-transform">
-                      →
+                      Solicitar →
                     </span>
                   </Link>
                 ))}

@@ -89,7 +89,7 @@ export default async function ServiciosPage() {
               return (
                 <li key={servicio.slug}>
                   <Link
-                    href={`/es/servicios/${servicio.slug}`}
+                    href={`/es/contacto?servicio=${servicio.slug}`}
                     className="service-item-minimal block w-full hover:bg-white hover:pl-4 transition-all group"
                   >
                     <div className="service-number">{numero}</div>
@@ -116,7 +116,7 @@ export default async function ServiciosPage() {
                       )}
                     </div>
                     
-                    <span className="service-arrow group-hover:translate-x-2 transition-transform">→</span>
+                    <span className="service-arrow group-hover:translate-x-2 transition-transform">Solicitar →</span>
                   </Link>
                 </li>
               );

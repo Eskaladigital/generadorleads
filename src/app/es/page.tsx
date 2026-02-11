@@ -198,7 +198,7 @@ export default function HomePage() {
                 <div className="service-number">{servicio.number}</div>
                 <h3>{servicio.title}</h3>
                 <p>{servicio.description}</p>
-                <span className="service-arrow">→</span>
+                <span className="service-arrow">Solicitar →</span>
               </Link>
             ))}
           </div>
@@ -248,7 +248,7 @@ export default function HomePage() {
             <h3>Región de Murcia</h3>
             <div className="destinos-lista">
               {CIUDADES_MURCIA.map((ciudad) => (
-                <Link key={ciudad.slug} href={`/es/destinos/${ciudad.slug}`}>
+                <Link key={ciudad.slug} href={`/es/contacto?ciudad=${ciudad.slug}`}>
                   {ciudad.nombre} <span>→</span>
                 </Link>
               ))}
@@ -260,7 +260,7 @@ export default function HomePage() {
             <h3>Provincia de Alicante</h3>
             <div className="destinos-lista">
               {CIUDADES_ALICANTE.map((ciudad) => (
-                <Link key={ciudad.slug} href={`/es/destinos/${ciudad.slug}`}>
+                <Link key={ciudad.slug} href={`/es/contacto?ciudad=${ciudad.slug}`}>
                   {ciudad.nombre} <span>→</span>
                 </Link>
               ))}
