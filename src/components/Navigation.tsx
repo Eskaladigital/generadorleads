@@ -38,15 +38,6 @@ function isLinkActive(pathname: string, href: string): boolean {
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const pathnameWhenOpened = useRef<string | null>(null);
-
-  // Congelar pathname al abrir para evitar rebote
-  useEffect(() => {
-    if (isOpen) pathnameWhenOpened.current = pathname;
-    else pathnameWhenOpened.current = null;
-  }, [isOpen, pathname]);
-
-  const activePathname = isOpen && pathnameWhenOpened.current !== null ? pathnameWhenOpened.current : pathname;
 
   const currentLang = pathname.startsWith('/en') ? 'en' :
     pathname.startsWith('/de') ? 'de' :
@@ -163,7 +154,7 @@ export default function Navigation() {
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors ${
-                    isLinkActive(activePathname, link.href) 
+                    isLinkActive(pathname, link.href) 
                       ? 'bg-gray-100 text-[#293f92]' 
                       : 'text-gray-700 hover:text-[#3bbdda]'
                   }`}
