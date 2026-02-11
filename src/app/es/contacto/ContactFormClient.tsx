@@ -79,22 +79,21 @@ function Step1({ formData, updateFormData, errors, onAutoAdvance }: StepProps) {
         <h2 className="text-xl md:text-2xl font-bold mb-1">¿Qué servicio necesitas?</h2>
         <p className="text-sm md:text-base text-gray-600">Selecciona el tipo de profesional que buscas</p>
       </div>
-      <div className="grid grid-cols-2 gap-2 md:gap-3">
+      <div className="space-y-2">
         {SERVICIOS.map((servicio) => (
           <button
             key={servicio.id}
             type="button"
             onClick={() => handleServicioClick(servicio.id)}
-            className={`p-3 md:p-4 border-2 rounded-lg text-left transition-all ${
+            className={`w-full p-3 md:p-4 border-2 rounded-lg text-left transition-all flex items-center justify-between ${
               formData.servicio === servicio.id
                 ? 'border-black bg-gray-50'
                 : 'border-gray-200 hover:border-gray-400'
             }`}
           >
-            <div className="text-2xl md:text-3xl mb-1.5">{servicio.icon}</div>
-            <h3 className="text-sm md:text-base font-bold mb-0.5">{servicio.label}</h3>
+            <span className="text-sm md:text-base font-semibold">{servicio.label}</span>
             {formData.servicio === servicio.id && (
-              <span className="text-accent text-lg">✓</span>
+              <span className="text-accent text-xl">✓</span>
             )}
           </button>
         ))}
