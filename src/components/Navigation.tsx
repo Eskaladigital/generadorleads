@@ -162,8 +162,10 @@ export default function Navigation() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors hover:text-[#3bbdda] ${
-                    isLinkActive(activePathname, link.href) ? 'text-[#293f92]' : 'text-gray-700'
+                  className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors ${
+                    isLinkActive(activePathname, link.href) 
+                      ? 'bg-gray-100 text-[#293f92]' 
+                      : 'text-gray-700 hover:text-[#3bbdda]'
                   }`}
                 >
                   {link.label}
