@@ -202,24 +202,6 @@ export default async function BlogPage() {
 
             {/* SIDEBAR */}
             <div className="space-y-8">
-              {/* Newsletter */}
-              <div className="bg-[#293f92] text-white p-6">
-                <h3 className="text-xl font-bold mb-2 text-white">Newsletter</h3>
-                <p className="text-white/90 text-sm mb-4">
-                  Recibe las últimas guías y consejos para vivir en España
-                </p>
-                <form className="space-y-3">
-                  <input
-                    type="email"
-                    placeholder="tu@email.com"
-                    className="w-full px-4 py-2 text-gray-900 placeholder:text-gray-500 focus:outline-none border-2 border-white/30 focus:border-white"
-                  />
-                  <button className="w-full bg-white text-[#293f92] font-semibold py-2 hover:opacity-90 transition-opacity border-b-3 border-accent">
-                    Suscribirse
-                  </button>
-                </form>
-              </div>
-
               {/* Posts Populares */}
               {popularPosts.length > 0 && (
                 <div className="bg-white border border-gray-200 p-6">
