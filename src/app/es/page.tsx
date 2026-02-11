@@ -249,7 +249,7 @@ export default function HomePage() {
             <div className="destinos-lista">
               {CIUDADES_MURCIA.map((ciudad) => (
                 <Link key={ciudad.slug} href={`/es/contacto?ciudad=${ciudad.slug}`}>
-                  {ciudad.nombre} <span>→</span>
+                  {ciudad.nombre} <span>Solicitar →</span>
                 </Link>
               ))}
             </div>
@@ -261,7 +261,7 @@ export default function HomePage() {
             <div className="destinos-lista">
               {CIUDADES_ALICANTE.map((ciudad) => (
                 <Link key={ciudad.slug} href={`/es/contacto?ciudad=${ciudad.slug}`}>
-                  {ciudad.nombre} <span>→</span>
+                  {ciudad.nombre} <span>Solicitar →</span>
                 </Link>
               ))}
             </div>
