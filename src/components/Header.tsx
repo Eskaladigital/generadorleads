@@ -74,7 +74,7 @@ export default function Header() {
           {/* LOGO */}
           <Link href={`/${currentLang}`} className="flex items-center gap-2">
             <Image
-              src="/images/logo-siglas-color.png"
+              src="/images/logo-siglas.png"
               alt="H4S - Health4Spain"
               height={36}
               width={72}

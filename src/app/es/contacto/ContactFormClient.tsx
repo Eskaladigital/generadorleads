@@ -561,7 +561,16 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
         <div className="mb-16">
           <div className="flex justify-between items-center mb-4">
             <span className="text-sm font-medium uppercase tracking-widest">
-              Paso {currentStep} / {totalSteps}
+              {(() => {
+                // Mostrar mensaje más claro según el contexto
+                if (flowType === 'from-service' && currentStep === 1) {
+                  return `Elige ciudad - Paso ${currentStep} / ${totalSteps}`;
+                } else if (flowType === 'from-city' && currentStep === 1) {
+                  return `Elige servicio - Paso ${currentStep} / ${totalSteps}`;
+                } else {
+                  return `Paso ${currentStep} / ${totalSteps}`;
+                }
+              })()}
             </span>
           </div>
           <div className="h-px bg-gray-200">
@@ -573,28 +582,58 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
         </div>
 
         <div className="bg-white border border-gray-200 p-8 md:p-12">
-          {/* Banner de información preseleccionada */}
-          {(formData.servicio || formData.ciudad_interes) && (
+          {/* Banner de información preseleccionada - ahora EDITABLE */}
+          {(formData.servicio || formData.ciudad_interes) && currentStep > 1 && (
             <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800 font-medium mb-2">Ya has seleccionado:</p>
+              <p className="text-sm text-blue-800 font-medium mb-3">Buscas:</p>
               <div className="flex flex-wrap gap-3">
                 {formData.servicio && (
-                  <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full text-sm">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // Ir al paso de selección de servicio
+                      if (flowType === 'from-city' || flowType === 'default') {
+                        setCurrentStep(1);
+                      } else if (flowType === 'from-service') {
+                        // Cambiar el flujo a default y volver al paso 1 (servicio)
+                        setFlowType('default');
+                        setCurrentStep(1);
+                      }
+                    }}
+                    className="flex items-center gap-2 bg-white px-3 py-2 rounded-full text-sm border border-blue-300 hover:border-blue-500 hover:bg-blue-50 transition-all group"
+                  >
                     <span className="text-blue-600">✓</span>
                     <span className="font-medium">
                       {SERVICIOS.find(s => s.id === formData.servicio)?.label}
                     </span>
-                  </div>
+                    <span className="text-xs text-gray-400 group-hover:text-blue-600 ml-1">✏️</span>
+                  </button>
                 )}
                 {formData.ciudad_interes && (
-                  <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full text-sm">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // Ir al paso de selección de ciudad
+                      if (flowType === 'from-service' || flowType === 'default') {
+                        const ciudadStep = flowType === 'from-service' ? 1 : 2;
+                        setCurrentStep(ciudadStep);
+                      } else if (flowType === 'from-city') {
+                        // Cambiar el flujo a default y volver al paso 2 (ciudad)
+                        setFlowType('default');
+                        setCurrentStep(2);
+                      }
+                    }}
+                    className="flex items-center gap-2 bg-white px-3 py-2 rounded-full text-sm border border-green-300 hover:border-green-500 hover:bg-green-50 transition-all group"
+                  >
                     <span className="text-green-600">📍</span>
                     <span className="font-medium">
                       {ciudades.find(c => c.id === formData.ciudad_interes)?.label}
                     </span>
-                  </div>
+                    <span className="text-xs text-gray-400 group-hover:text-green-600 ml-1">✏️</span>
+                  </button>
                 )}
               </div>
+              <p className="text-xs text-gray-500 mt-2">Haz clic para cambiar ✏️</p>
             </div>
           )}
           
