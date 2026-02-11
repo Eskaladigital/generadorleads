@@ -511,9 +511,15 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   <h2 className="mb-6">
                     {landing.solution_title}
                   </h2>
-                  <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
+                  <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line mb-6">
                     {landing.solution_text}
                   </p>
+                  <Link 
+                    href={`/es/contacto?slug=${landing.slug}`}
+                    className="btn-minimal inline-flex items-center gap-2"
+                  >
+                    Solicitar contacto →
+                  </Link>
                 </div>
               )}
 
@@ -536,6 +542,15 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                       </li>
                     ))}
                   </ul>
+                  <div className="text-center mt-12 pt-12 border-t border-gray-300">
+                    <p className="text-gray-600 mb-6">¿Necesitas ayuda con alguno de estos servicios?</p>
+                    <Link 
+                      href={`/es/contacto?slug=${landing.slug}`}
+                      className="btn-minimal-lg"
+                    >
+                      Solicitar información gratuita
+                    </Link>
+                  </div>
                 </div>
               )}
 
@@ -560,6 +575,14 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                       ))}
                     </div>
                   )}
+                  <div className="text-center mt-12">
+                    <Link 
+                      href={`/es/contacto?slug=${landing.slug}`}
+                      className="btn-minimal"
+                    >
+                      Conectar con profesionales →
+                    </Link>
+                  </div>
                 </div>
               )}
 
