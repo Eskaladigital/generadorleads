@@ -144,11 +144,11 @@ export default async function Footer() {
             <div className="md:col-span-2">
               <Link href="/es" className="inline-block mb-6">
                 <Image
-                  src="/images/logo-horizontal-white.png"
+                  src="/images/h4s horizontal_recortado.png"
                   alt="Health 4 Spain"
-                  height={60}
-                  width={90}
-                  className="h-12 md:h-[60px] w-auto"
+                  height={50}
+                  width={200}
+                  className="h-10 md:h-12 w-auto"
                 />
               </Link>
               <p className="text-gray-400 mb-8 text-lg leading-relaxed">

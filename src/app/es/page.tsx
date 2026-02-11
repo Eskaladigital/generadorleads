@@ -137,11 +137,11 @@ export default function HomePage() {
       >
         <div className="hero-content-box">
           <Image
-            src="/images/logo-vertical-color.png"
+            src="/images/h4s vertical color_recortado.png"
             alt="Health 4 Spain"
-            height={160}
-            width={240}
-            className="h-28 md:h-40 w-auto mb-8"
+            height={120}
+            width={180}
+            className="h-24 md:h-32 w-auto mb-6"
             priority
           />
           <h1 className="mb-8" style={{ lineHeight: '0.95' }}>

@@ -21,7 +21,7 @@ export default function Navigation() {
           {/* Logo Minimal */}
           <Link href="/es" className="logo-minimal">
             <Image
-              src="/images/logo-siglas.png"
+              src="/images/h4s siglas color_recortado.png"
               alt="H4S - Health4Spain"
               height={80}
               width={160}
