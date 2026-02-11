@@ -74,32 +74,32 @@ function Step1({ formData, updateFormData, errors, onAutoAdvance }: StepProps) {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="mb-4">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">¿Qué servicio necesitas?</h2>
-        <p className="text-base md:text-lg text-gray-600">Selecciona el tipo de profesional que buscas</p>
+    <div className="space-y-3">
+      <div className="mb-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-1">¿Qué servicio necesitas?</h2>
+        <p className="text-sm md:text-base text-gray-600">Selecciona el tipo de profesional que buscas</p>
       </div>
-      <div className="grid grid-cols-2 gap-3 md:gap-4">
+      <div className="grid grid-cols-2 gap-2 md:gap-3">
         {SERVICIOS.map((servicio) => (
           <button
             key={servicio.id}
             type="button"
             onClick={() => handleServicioClick(servicio.id)}
-            className={`p-4 md:p-6 border-2 rounded-lg text-left transition-all ${
+            className={`p-3 md:p-4 border-2 rounded-lg text-left transition-all ${
               formData.servicio === servicio.id
                 ? 'border-black bg-gray-50'
                 : 'border-gray-200 hover:border-gray-400'
             }`}
           >
-            <div className="text-3xl mb-2">{servicio.icon}</div>
-            <h3 className="text-base md:text-lg font-bold mb-1">{servicio.label}</h3>
+            <div className="text-2xl md:text-3xl mb-1.5">{servicio.icon}</div>
+            <h3 className="text-sm md:text-base font-bold mb-0.5">{servicio.label}</h3>
             {formData.servicio === servicio.id && (
-              <span className="text-accent text-xl">✓</span>
+              <span className="text-accent text-lg">✓</span>
             )}
           </button>
         ))}
       </div>
-      {errors.servicio && <p className="text-accent text-center mt-2">{errors.servicio}</p>}
+      {errors.servicio && <p className="text-accent text-center mt-1 text-sm">{errors.servicio}</p>}
     </div>
   );
 }
@@ -116,18 +116,18 @@ function Step2({ formData, updateFormData, errors, ciudades = [], onAutoAdvance 
   };
 
   return (
-    <div className="space-y-6">
-      <div className="mb-4">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">¿Dónde en España?</h2>
-        <p className="text-base md:text-lg text-gray-600">Selecciona la ciudad donde necesitas el servicio</p>
+    <div className="space-y-3">
+      <div className="mb-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-1">¿Dónde en España?</h2>
+        <p className="text-sm md:text-base text-gray-600">Selecciona la ciudad donde necesitas el servicio</p>
       </div>
-      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 max-h-[60vh] overflow-y-auto">
+      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1.5 md:gap-2 max-h-[50vh] overflow-y-auto pr-2">
         {ciudades.map((ciudad) => (
           <button
             key={ciudad.id}
             type="button"
             onClick={() => handleCiudadClick(ciudad.id)}
-            className={`p-2.5 md:p-3 border rounded text-left text-sm transition-all ${
+            className={`p-2 md:p-2.5 border rounded text-left text-xs md:text-sm transition-all ${
               formData.ciudad_interes === ciudad.id
                 ? 'border-black bg-gray-50 font-semibold'
                 : 'border-gray-200 hover:border-gray-400'
@@ -135,24 +135,24 @@ function Step2({ formData, updateFormData, errors, ciudades = [], onAutoAdvance 
           >
             <span className="block truncate">{ciudad.label}</span>
             {formData.ciudad_interes === ciudad.id && (
-              <span className="text-accent text-sm">✓</span>
+              <span className="text-accent text-xs">✓</span>
             )}
           </button>
         ))}
       </div>
-      {errors.ciudad_interes && <p className="text-accent text-center mt-2">{errors.ciudad_interes}</p>}
+      {errors.ciudad_interes && <p className="text-accent text-center mt-1 text-sm">{errors.ciudad_interes}</p>}
     </div>
   );
 }
 
 function Step3({ formData, updateFormData, errors }: StepProps) {
   return (
-    <div className="space-y-6">
-      <div className="mb-4">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">Cuéntanos sobre ti</h2>
-        <p className="text-base md:text-lg text-gray-600">Necesitamos algunos datos para conectarte con el profesional adecuado</p>
+    <div className="space-y-3">
+      <div className="mb-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-1">Cuéntanos sobre ti</h2>
+        <p className="text-sm md:text-base text-gray-600">Necesitamos algunos datos para conectarte con el profesional adecuado</p>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-3">
         <div>
           <label className="form-label-minimal">Nombre completo *</label>
           <input
@@ -164,7 +164,7 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
           />
           {errors.nombre && <p className="text-accent text-sm mt-1">{errors.nombre}</p>}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
             <label className="form-label-minimal">Email *</label>
             <input
@@ -188,7 +188,7 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
             {errors.telefono && <p className="text-accent text-sm mt-1">{errors.telefono}</p>}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
             <label className="form-label-minimal">País de origen *</label>
             <select
@@ -221,57 +221,57 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
 
 function Step4({ formData, updateFormData, errors }: StepProps) {
   return (
-    <div className="space-y-6">
-      <div className="mb-4">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">Últimos detalles</h2>
-        <p className="text-base md:text-lg text-gray-600">Esto nos ayudará a encontrar el profesional ideal para ti</p>
+    <div className="space-y-3">
+      <div className="mb-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-1">Últimos detalles</h2>
+        <p className="text-sm md:text-base text-gray-600">Esto nos ayudará a encontrar el profesional ideal para ti</p>
       </div>
-      <div className="space-y-5">
+      <div className="space-y-3">
         <div>
-          <label className="form-label-minimal mb-3">¿Cuál es tu presupuesto aproximado? *</label>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 mt-3">
+          <label className="form-label-minimal mb-2">¿Cuál es tu presupuesto aproximado? *</label>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5 md:gap-2 mt-2">
             {PRESUPUESTOS.map((option) => (
               <button
                 key={option.id}
                 type="button"
                 onClick={() => updateFormData('presupuesto', option.id)}
-                className={`p-3 border rounded text-left transition-all ${
+                className={`p-2 md:p-2.5 border rounded text-left transition-all ${
                   formData.presupuesto === option.id
                     ? 'border-black bg-gray-50 font-semibold'
                     : 'border-gray-200 hover:border-gray-400'
                 }`}
               >
-                <span className="text-sm block">{option.label}</span>
+                <span className="text-xs md:text-sm block">{option.label}</span>
                 {formData.presupuesto === option.id && (
-                  <span className="text-accent text-sm">✓</span>
+                  <span className="text-accent text-xs">✓</span>
                 )}
               </button>
             ))}
           </div>
-          {errors.presupuesto && <p className="text-accent text-sm mt-2">{errors.presupuesto}</p>}
+          {errors.presupuesto && <p className="text-accent text-xs mt-1">{errors.presupuesto}</p>}
         </div>
         <div>
-          <label className="form-label-minimal mb-3">¿Cuándo lo necesitas? *</label>
-          <div className="grid grid-cols-2 gap-2 md:gap-3 mt-3">
+          <label className="form-label-minimal mb-2">¿Cuándo lo necesitas? *</label>
+          <div className="grid grid-cols-2 gap-1.5 md:gap-2 mt-2">
             {URGENCIAS.map((option) => (
               <button
                 key={option.id}
                 type="button"
                 onClick={() => updateFormData('urgencia', option.id)}
-                className={`p-3 border rounded text-left transition-all ${
+                className={`p-2 md:p-2.5 border rounded text-left transition-all ${
                   formData.urgencia === option.id
                     ? 'border-black bg-gray-50 font-semibold'
                     : 'border-gray-200 hover:border-gray-400'
                 }`}
               >
-                <span className="text-sm block">{option.label}</span>
+                <span className="text-xs md:text-sm block">{option.label}</span>
                 {formData.urgencia === option.id && (
-                  <span className="text-accent text-sm">✓</span>
+                  <span className="text-accent text-xs">✓</span>
                 )}
               </button>
             ))}
           </div>
-          {errors.urgencia && <p className="text-accent text-sm mt-2">{errors.urgencia}</p>}
+          {errors.urgencia && <p className="text-accent text-xs mt-1">{errors.urgencia}</p>}
         </div>
         <div>
           <label className="form-label-minimal">
@@ -280,7 +280,7 @@ function Step4({ formData, updateFormData, errors }: StepProps) {
           <textarea
             value={formData.mensaje}
             onChange={(e) => updateFormData('mensaje', e.target.value)}
-            className="form-input-minimal min-h-[100px] mt-2"
+            className="form-input-minimal min-h-[80px] mt-1.5"
             placeholder="Cuéntanos más sobre tu situación..."
           />
         </div>
@@ -561,9 +561,9 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
   return (
     <div className="section">
       <div className="container-narrow">
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <span className="text-xs md:text-sm font-medium uppercase tracking-widest text-gray-600">
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-medium uppercase tracking-wider text-gray-600">
               {(() => {
                 // Mostrar mensaje más claro según el contexto
                 if (flowType === 'from-service' && currentStep === 1) {
@@ -584,10 +584,10 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
           </div>
         </div>
 
-        <div className="bg-white border border-gray-200 p-6 md:p-8 rounded-lg">
+        <div className="bg-white border border-gray-200 p-4 md:p-6 rounded-lg">
           {/* Banner de información preseleccionada - ahora EDITABLE */}
           {(formData.servicio || formData.ciudad_interes) && currentStep > 1 && (
-            <div className="mb-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="mb-4 p-2.5 bg-blue-50 border border-blue-200 rounded-lg">
               <p className="text-xs text-blue-800 font-medium mb-2">Buscas:</p>
               <div className="flex flex-wrap gap-2">
                 {formData.servicio && (
@@ -642,7 +642,7 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
           
           {renderStep()}
 
-          <div className="flex justify-between mt-6 pt-6 border-t border-gray-200">
+          <div className="flex justify-between mt-4 pt-4 border-t border-gray-200">
             <button
               type="button"
               onClick={prevStep}
@@ -668,8 +668,8 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
           </div>
         </div>
 
-        <div className="mt-6 text-center">
-          <p className="text-xs md:text-sm text-gray-600">🔒 Tus datos están seguros y protegidos</p>
+        <div className="mt-4 text-center">
+          <p className="text-xs text-gray-600">🔒 Tus datos están seguros y protegidos</p>
         </div>
       </div>
     </div>
