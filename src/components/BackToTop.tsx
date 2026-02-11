@@ -27,7 +27,15 @@ export default function BackToTop() {
       className={`back-to-top ${isVisible ? 'visible' : ''}`}
       aria-label="Volver arriba"
     >
-      ↑
+      <svg 
+        className="w-6 h-6" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+        strokeWidth={2.5}
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+      </svg>
     </button>
   );
 }
