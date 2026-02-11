@@ -146,9 +146,9 @@ export default async function Footer() {
                 <Image
                   src="/images/h4s horizontal_recortado.png"
                   alt="Health 4 Spain"
-                  height={50}
-                  width={200}
-                  className="h-10 md:h-12 w-auto"
+                  height={65}
+                  width={260}
+                  className="h-14 md:h-16 w-auto"
                 />
               </Link>
               <p className="text-gray-400 mb-8 text-lg leading-relaxed">
