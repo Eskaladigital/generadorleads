@@ -139,30 +139,30 @@ export default function HomePage() {
           <Image
             src="/images/h4s vertical color_recortado.png"
             alt="Health 4 Spain"
-            height={120}
-            width={180}
-            className="h-24 md:h-32 w-auto mb-6"
+            height={100}
+            width={150}
+            className="h-20 md:h-24 w-auto mb-5"
             priority
           />
-          <h1 className="mb-8" style={{ lineHeight: '0.95' }}>
+          <h1 className="mb-6" style={{ lineHeight: '0.95' }}>
             España.<br />Simplificado.
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl">
+          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
             Conexiones directas con profesionales verificados para extranjeros. 
             Seguros, abogados, inmobiliarias, gestorías. Sin complicaciones.
           </p>
           
-          <div className="flex gap-8 md:gap-12 mb-12 pt-8 border-t border-gray-300">
+          <div className="flex gap-6 md:gap-10 mb-8 pt-6 border-t border-gray-300">
             <div>
-              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">150+</div>
+              <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">150+</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Profesionales</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">19</div>
+              <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">19</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Ciudades</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">0€</div>
+              <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">0€</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Coste</div>
             </div>
           </div>

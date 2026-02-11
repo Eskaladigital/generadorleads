@@ -310,10 +310,10 @@ input:focus, textarea:focus, select:focus {
    ============================================= */
 .hero-with-image {
   position: relative;
-  min-height: 80vh;
+  min-height: 65vh;
   display: flex;
   align-items: center;
-  padding: 8rem 6%;
+  padding: 6rem 6%;
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -334,18 +334,18 @@ input:focus, textarea:focus, select:focus {
 .hero-content-box {
   position: relative;
   z-index: 2;
-  max-width: 900px;
+  max-width: 800px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  padding: 4rem;
-  clip-path: polygon(0 0, calc(100% - 3rem) 0, 100% 3rem, 100% 100%, 0 100%);
+  padding: 3rem;
+  clip-path: polygon(0 0, calc(100% - 2.5rem) 0, 100% 2.5rem, 100% 100%, 0 100%);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
 /* Hero compacto: mitad de altura para subpáginas (servicios, destinos) */
 .hero-with-image.hero-compact {
-  min-height: 40vh;
-  padding: 6rem 6%;
+  min-height: 32vh;
+  padding: 4rem 6%;
 }
 
 @media (max-width: 768px) {
