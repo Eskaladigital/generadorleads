@@ -76,9 +76,9 @@ export default function Header() {
             <Image
               src="/images/h4s siglas color_recortado.png"
               alt="H4S - Health4Spain"
-              height={60}
-              width={120}
-              className="h-[60px] w-auto"
+              height={45}
+              width={90}
+              className="h-[45px] w-auto"
               priority
             />
           </Link>
