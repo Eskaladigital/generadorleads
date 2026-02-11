@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
+import BackToTop from "@/components/BackToTop";
 
 export default function SpanishLayout({
   children,
@@ -15,6 +16,7 @@ export default function SpanishLayout({
       </main>
       <Footer />
       <StickyCTA />
+      <BackToTop />
     </>
   );
 }
