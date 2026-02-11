@@ -230,13 +230,15 @@ h4 { font-size: 1.5rem; }
 
 .service-card .service-arrow {
   align-self: flex-end;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #666666;
   transition: transform 0.2s ease;
 }
 
 .service-card:hover .service-arrow {
   transform: translateX(4px);
+  color: var(--color-accent);
 }
 
 @media (max-width: 768px) {
@@ -535,8 +537,8 @@ input:focus, textarea:focus, select:focus {
 }
 
 .destinos-lista a span {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 600;
   transition: transform 0.2s ease;
   flex-shrink: 0;
   margin-left: 0.5rem;
@@ -573,9 +575,9 @@ input:focus, textarea:focus, select:focus {
   }
   
   .destinos-lista a span {
-    font-size: 0.85rem;
+    font-size: 1rem;
     margin-left: 1rem;
-    font-weight: 500;
+    font-weight: 600;
   }
 }
 
