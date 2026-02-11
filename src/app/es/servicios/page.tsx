@@ -68,10 +68,6 @@ export default async function ServiciosPage() {
               <div className="text-4xl md:text-5xl font-bold text-accent mb-2">19</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Ciudades</div>
             </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold text-accent mb-2">0€</div>
-              <div className="text-xs uppercase tracking-widest text-gray-500">Para ti</div>
-            </div>
           </div>
           <Link href="/es/contacto" className="btn-minimal-lg">
             Solicitar Información

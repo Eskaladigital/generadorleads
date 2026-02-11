@@ -51,10 +51,6 @@ export default async function DestinosPage() {
               <div className="text-xs uppercase tracking-widest text-gray-500">Ciudades</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold text-accent mb-2">{regiones.length}</div>
-              <div className="text-xs uppercase tracking-widest text-gray-500">Regiones</div>
-            </div>
-            <div>
               <div className="text-4xl md:text-5xl font-bold text-accent mb-2">150+</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Profesionales</div>
             </div>
