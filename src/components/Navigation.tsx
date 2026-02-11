@@ -23,9 +23,9 @@ export default function Navigation() {
             <Image
               src="/images/logo-siglas.png"
               alt="H4S - Health4Spain"
-              height={36}
-              width={72}
-              className="h-9 w-auto"
+              height={80}
+              width={160}
+              className="h-20 w-auto"
             />
           </Link>
 
