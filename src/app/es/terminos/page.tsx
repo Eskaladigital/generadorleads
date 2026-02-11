@@ -1,3 +1,10 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Términos y Condiciones | Health4Spain',
+  description: 'Términos y condiciones de uso de Health4Spain. Conoce las reglas de nuestro servicio de conexión con profesionales. Última actualización enero 2026.',
+};
+
 export default function TerminosPage() {
   return (
     <div className="section">

@@ -4,9 +4,8 @@ import { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase';
 import { LandingPage } from '@/lib/types';
 
-// Evitar caché: siempre datos frescos de Supabase
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// Pre-renderizar en build para SEO. Revalidar cada 24h por si se actualizan landings.
+export const revalidate = 86400;
 
 // Función para obtener landing page desde la BD
 async function getLanding(slug: string): Promise<LandingPage | null> {
@@ -242,7 +241,20 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return Object.keys(SERVICIOS_DATA).map((slug) => ({ slug }));
+  const supabase = createServerSupabaseClient();
+  const staticServices = Object.keys(SERVICIOS_DATA).map((slug) => ({ slug }));
+
+  const { data: landings } = await supabase
+    .from('landing_pages')
+    .select('slug')
+    .eq('activo', true)
+    .eq('idioma', 'es');
+
+  const landingSlugs = (landings || [])
+    .map((l) => l.slug)
+    .filter((s): s is string => !!s && s.includes('-'));
+
+  return [...staticServices, ...landingSlugs.map((slug) => ({ slug }))];
 }
 
 export default async function ServicioPage({ 

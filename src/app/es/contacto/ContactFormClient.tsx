@@ -485,14 +485,18 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
 
   if (isSuccess) {
     return (
-      <div className="section">
-        <div className="container-narrow text-center">
-          <div className="mb-12">
-            <div className="text-6xl mb-8">✓</div>
+      <div className="section section-alt min-h-[60vh] flex items-center">
+        <div className="container-narrow text-center w-full">
+          <div className="max-w-xl mx-auto">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 text-green-600 text-4xl mb-8">✓</div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Solicitud Recibida</h1>
-            <p className="text-xl text-gray-600 mb-12 max-w-lg mx-auto">
+            <p className="text-xl text-gray-600 mb-10 max-w-lg mx-auto">
               Gracias por confiar en Health4Spain. Un profesional se pondrá en contacto contigo en menos de 24 horas.
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mb-10 text-sm text-gray-500">
+              <span>⚡ Respuesta en menos de 24h</span>
+              <span>🔒 Datos protegidos</span>
+            </div>
             <Link href="/es" className="btn-minimal-lg">
               Volver al Inicio
             </Link>

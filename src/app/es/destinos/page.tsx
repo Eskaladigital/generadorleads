@@ -4,8 +4,8 @@ import { getCiudades } from '@/lib/ciudades';
 import { HERO_IMAGE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Destinos en España para Extranjeros | Health4Spain',
-  description: 'Descubre los mejores destinos en España para extranjeros. 19 ciudades con profesionales verificados.',
+  title: 'Destinos - 19 Ciudades | Health4Spain',
+  description: 'Alicante, Murcia, Torrevieja, Cartagena y más. Profesionales verificados en cada ciudad: abogados, seguros, inmobiliarias y gestorías para extranjeros.',
 };
 
 export default async function DestinosPage() {

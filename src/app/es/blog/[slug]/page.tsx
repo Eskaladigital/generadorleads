@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
 
 // Mapeo de categorías
@@ -29,6 +30,21 @@ interface BlogPost {
   author_name: string;
   featured_image?: string;
   views: number;
+}
+
+async function getBlogPostMeta(slug: string): Promise<Pick<BlogPost, 'title' | 'excerpt' | 'category'> | null> {
+  try {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('title, excerpt, category')
+      .eq('slug', slug)
+      .eq('status', 'published')
+      .eq('lang', 'es')
+      .single();
+    return error || !data ? null : data;
+  } catch {
+    return null;
+  }
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
@@ -75,6 +91,30 @@ async function getRelatedPosts(category: string, currentSlug: string) {
     console.error('Error fetching related posts:', error);
     return [];
   }
+}
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getBlogPostMeta(slug);
+  
+  if (!post) {
+    return { title: 'Artículo no encontrado' };
+  }
+  
+  const categoryLabel = categoryLabels[post.category] || post.category;
+  
+  return {
+    title: `${post.title} | Health4Spain Blog`,
+    description: post.excerpt?.slice(0, 155) || `${post.title}. Guía práctica para extranjeros en España.`,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt?.slice(0, 155),
+    },
+  };
 }
 
 // Genera los paths estáticos para SEO (será llamado en build time)

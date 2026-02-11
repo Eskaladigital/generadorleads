@@ -1,6 +1,12 @@
 import { Suspense } from 'react';
+import { Metadata } from 'next';
 import { getCiudades } from '@/lib/ciudades';
 import ContactFormClient from './ContactFormClient';
+
+export const metadata: Metadata = {
+  title: 'Contacto - Solicitar Información | Health4Spain',
+  description: 'Contacta con Health4Spain. Te conectamos con abogados, agents de seguros e inmobiliarias verificados en menos de 24 horas. Sin compromiso.',
+};
 
 export default async function ContactPage() {
   const ciudades = await getCiudades();

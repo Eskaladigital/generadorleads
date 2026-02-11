@@ -1,6 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { HERO_IMAGE_URL } from '@/lib/constants';
+
+export const metadata: Metadata = {
+  title: 'Health4Spain - España Simplificado para Extranjeros',
+  description: 'Conectamos extranjeros con profesionales verificados: abogados, seguros, inmobiliarias y gestorías. 150+ profesionales en 19 ciudades. Sin coste para ti.',
+  openGraph: {
+    title: 'Health4Spain - España Simplificado para Extranjeros',
+    description: 'Conectamos extranjeros con profesionales verificados: abogados, seguros, inmobiliarias y gestorías.',
+  },
+};
 
 // Datos - 4 PERFILES CORRECTOS
 const AUDIENCIAS = [

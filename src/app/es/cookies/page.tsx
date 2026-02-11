@@ -1,3 +1,10 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Política de Cookies | Health4Spain',
+  description: 'Política de cookies de Health4Spain. Información sobre el uso de cookies en nuestro sitio web. Última actualización enero 2026.',
+};
+
 export default function CookiesPage() {
   return (
     <div className="section">

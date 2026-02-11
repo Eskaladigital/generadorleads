@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sobre Nosotros - Health4Spain',
+  description: 'Conectamos personas que sueñan con vivir en España con profesionales verificados: abogados, seguros, inmobiliarias y gestorías. Conoce nuestra misión.',
+};
 
 export default function SobreNosotrosPage() {
   return (

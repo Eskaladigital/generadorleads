@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
+
+export const metadata: Metadata = {
+  title: 'Blog - Guías para Vivir en España | Health4Spain',
+  description: 'Guías prácticas, consejos y recursos para extranjeros en España: visados, seguros, finanzas, trámites y guías de ciudades. Todo lo que necesitas saber.',
+};
 
 // Mapeo de categorías para mostrar nombres amigables
 const categoryLabels: Record<string, string> = {

@@ -1,3 +1,10 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Política de Privacidad | Health4Spain',
+  description: 'Política de privacidad de Health4Spain. Cómo protegemos y tratamos tus datos personales. Última actualización enero 2026.',
+};
+
 export default function PrivacidadPage() {
   return (
     <div className="section">

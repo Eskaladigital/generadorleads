@@ -4,6 +4,9 @@ import { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase';
 import { LandingPage } from '@/lib/types';
 
+// Pre-renderizar en build para SEO. Revalidar cada 24h.
+export const revalidate = 86400;
+
 // Función para obtener landing de la BD
 async function getLanding(slug: string): Promise<LandingPage | null> {
   try {
@@ -132,6 +135,26 @@ export async function generateMetadata({
   }
   
   return { title: 'Destino no encontrado' };
+}
+
+export async function generateStaticParams() {
+  const supabase = createServerSupabaseClient();
+
+  const { data: landings } = await supabase
+    .from('landing_pages')
+    .select('slug')
+    .eq('activo', true)
+    .eq('idioma', 'es');
+
+  const { data: ciudades } = await supabase
+    .from('ciudades_catalogo')
+    .select('slug');
+
+  const landingSlugs = (landings || []).map((l) => l.slug).filter((s): s is string => !!s);
+  const citySlugs = (ciudades || []).map((c) => c.slug).filter((s): s is string => !!s);
+
+  const allSlugs = [...new Set([...landingSlugs, ...citySlugs])];
+  return allSlugs.map((slug) => ({ slug }));
 }
 
 export default async function DestinoPage({ 

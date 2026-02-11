@@ -5,7 +5,7 @@ import { HERO_IMAGE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Servicios para Extranjeros en España | Health4Spain',
-  description: 'Seguros de salud, abogados, inmobiliarias y gestorías para extranjeros. Profesionales que hablan tu idioma.',
+  description: '4 servicios esenciales: seguros de salud, abogados, inmobiliarias y gestorías. Profesionales verificados en 19 ciudades. 150+ partners. Sin coste para ti.',
 };
 
 // 4 SERVICIOS PRINCIPALES con detalles

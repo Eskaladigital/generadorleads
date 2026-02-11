@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Hazte Partner - Profesionales Verificados | Health4Spain',
+  description: 'Únete a la red de Health4Spain. Abogados, corredores de seguros, inmobiliarias y gestorías: recibe leads cualificados de extranjeros. Pago por conversión.',
+};
 
 export default function ProfesionalesPage() {
   return (
