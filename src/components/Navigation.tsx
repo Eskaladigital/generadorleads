@@ -40,6 +40,20 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const pathnameWhenOpened = useRef<string | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(72);
+
+  // Medir altura del navbar para posicionar el menú debajo
+  useEffect(() => {
+    const updateHeight = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
+    };
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
 
   // Congelar pathname al abrir menú para evitar el "rebote" durante hidratación
   useEffect(() => {
@@ -79,7 +93,7 @@ export default function Navigation() {
   }, [isOpen]);
 
   return (
-    <header className="bg-white border-b border-gray-200 relative z-50">
+    <header ref={headerRef} className="bg-white border-b border-gray-200 relative z-50">
       <div className="container-base">
         <nav className="nav-minimal">
           {/* Logo Minimal */}
@@ -138,13 +152,14 @@ export default function Navigation() {
         </nav>
       </div>
 
-      {/* Mobile Menu - Full-width overlay superpuesto */}
+      {/* Mobile Menu - Full-width debajo del navbar (logo y hamburger visibles) */}
       <div
-        className={`md:hidden fixed inset-0 z-[100] transition-all duration-300 ease-out ${
+        className={`md:hidden fixed left-0 right-0 bottom-0 z-[100] transition-all duration-300 ease-out ${
           isOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
+        style={{ top: headerHeight }}
       >
-        {/* Backdrop - clic fuera cierra */}
+        {/* Backdrop - clic fuera cierra, no cubre el navbar */}
         <div
           onClick={() => setIsOpen(false)}
           className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${
@@ -153,13 +168,16 @@ export default function Navigation() {
           aria-hidden="true"
         />
 
-        {/* Panel del menú - full-width desde arriba */}
+        {/* Panel del menú - sale desde debajo del navbar */}
         <div
           className={`absolute top-0 left-0 right-0 bg-white shadow-xl transition-transform duration-300 ease-out ${
             isOpen ? 'translate-y-0' : '-translate-y-full'
           }`}
         >
-          <nav className="container-base py-6 pb-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <nav
+            className="container-base py-6 pb-8 overflow-y-auto"
+            style={{ maxHeight: `calc(100vh - ${headerHeight}px)` }}
+          >
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
