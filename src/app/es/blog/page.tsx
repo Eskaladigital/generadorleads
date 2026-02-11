@@ -81,8 +81,8 @@ export default async function BlogPage() {
   const posts = await getBlogPosts();
   const popularPosts = await getPopularPosts();
 
-  // Obtener categorías únicas para los filtros
   const categories = Array.from(new Set(posts.map(p => p.category)));
+  const [featuredPost, ...restPosts] = posts;
 
   return (
     <>
@@ -98,28 +98,6 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {/* FILTROS DE CATEGORÍAS */}
-      <section className="border-b border-gray-200 bg-white sticky top-16 z-20">
-        <div className="container-base py-4 overflow-x-auto">
-          <div className="flex items-center gap-3 min-w-max">
-            <Link 
-              href="/es/blog"
-              className="px-4 py-2 text-sm font-medium bg-[#293f92] text-white hover:opacity-90 transition-opacity"
-            >
-              Todos
-            </Link>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:opacity-70 transition-opacity whitespace-nowrap border-b-2 border-transparent hover:border-gray-300"
-              >
-                {categoryLabels[cat] || cat}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CONTENIDO PRINCIPAL CON SIDEBAR */}
       <section className="section-alt">
         <div className="container-base">
@@ -131,58 +109,87 @@ export default async function BlogPage() {
                   <p className="text-gray-500 text-lg">No hay artículos publicados.</p>
                 </div>
               ) : (
-                <div className="space-y-6">
-                  {posts.map((post) => {
-                    const imageUrl = post.featured_image || categoryImages[post.category] || categoryImages['vida-espana'];
-                    const categoryLabel = categoryLabels[post.category] || post.category;
+                <div className="space-y-8">
+                  {/* Artículo destacado */}
+                  {featuredPost && (
+                    <article className="group bg-white border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors">
+                      <div className="relative h-48 md:h-64 overflow-hidden">
+                        <Image
+                          src={featuredPost.featured_image || categoryImages[featuredPost.category] || categoryImages['vida-espana']}
+                          alt={featuredPost.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <span className={`absolute top-3 left-3 ${categoryColors[featuredPost.category] || 'bg-red-600'} text-white px-2 py-1 text-xs uppercase tracking-wider font-semibold`}>
+                          {categoryLabels[featuredPost.category] || featuredPost.category}
+                        </span>
+                      </div>
+                      <div className="p-6">
+                        <time className="text-xs text-gray-500 mb-2 block">
+                          {new Date(featuredPost.published_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+                        </time>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
+                          <Link href={`/es/blog/${featuredPost.slug}`}>{featuredPost.title}</Link>
+                        </h2>
+                        <p className="text-gray-600 mb-4 line-clamp-2">{featuredPost.excerpt}</p>
+                        <Link
+                          href={`/es/blog/${featuredPost.slug}`}
+                          className="inline-flex items-center gap-1 text-sm text-red-600 font-medium hover:gap-2 transition-all border-b-2 border-red-600"
+                        >
+                          Leer más
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+                    </article>
+                  )}
 
-                    return (
-                      <article 
-                        key={post.slug}
-                        className="group bg-white border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors"
-                      >
-                        <div className="grid md:grid-cols-3 gap-4">
-                          <div className="relative h-48 md:h-full overflow-hidden">
-                            <Image
-                              src={imageUrl}
-                              alt={post.title}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <span className={`absolute top-3 left-3 ${categoryColors[post.category] || 'bg-red-600'} text-white px-2 py-1 text-xs uppercase tracking-wider font-semibold`}>
-                              {categoryLabel}
-                            </span>
-                          </div>
-                          <div className="md:col-span-2 p-6">
-                            <time className="text-xs text-gray-500 mb-2 block">
-                              {new Date(post.published_at).toLocaleDateString('es-ES', { 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
-                              })}
-                            </time>
-                            <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors line-clamp-2">
-                              <Link href={`/es/blog/${post.slug}`}>
-                                {post.title}
+                  {/* Resto en 2 columnas */}
+                  {restPosts.length > 0 && (
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {restPosts.map((post) => {
+                        const imageUrl = post.featured_image || categoryImages[post.category] || categoryImages['vida-espana'];
+                        const categoryLabel = categoryLabels[post.category] || post.category;
+                        return (
+                          <article
+                            key={post.slug}
+                            className="group bg-white border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors"
+                          >
+                            <div className="relative h-40 overflow-hidden">
+                              <Image
+                                src={imageUrl}
+                                alt={post.title}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                              <span className={`absolute top-3 left-3 ${categoryColors[post.category] || 'bg-red-600'} text-white px-2 py-1 text-xs uppercase tracking-wider font-semibold`}>
+                                {categoryLabel}
+                              </span>
+                            </div>
+                            <div className="p-4">
+                              <time className="text-xs text-gray-500 mb-1 block">
+                                {new Date(post.published_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+                              </time>
+                              <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors line-clamp-2">
+                                <Link href={`/es/blog/${post.slug}`}>{post.title}</Link>
+                              </h2>
+                              <p className="text-gray-600 text-sm mb-2 line-clamp-2">{post.excerpt}</p>
+                              <Link
+                                href={`/es/blog/${post.slug}`}
+                                className="inline-flex items-center gap-1 text-sm text-red-600 font-medium hover:gap-2 transition-all border-b-2 border-red-600"
+                              >
+                                Leer más
+                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
                               </Link>
-                            </h2>
-                            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-                              {post.excerpt}
-                            </p>
-                            <Link 
-                              href={`/es/blog/${post.slug}`}
-                              className="inline-flex items-center gap-1 text-sm text-red-600 font-medium hover:gap-2 transition-all border-b-2 border-red-600"
-                            >
-                              Leer más
-                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
-                            </Link>
-                          </div>
-                        </div>
-                      </article>
-                    );
-                  })}
+                            </div>
+                          </article>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -231,7 +238,7 @@ export default async function BlogPage() {
                             {post.title}
                           </h4>
                           <div className="flex items-center gap-2 text-xs text-gray-500">
-                            <span className="uppercase">{categoryLabels[post.category]}</span>
+                            <span className="uppercase">{categoryLabels[post.category] || post.category}</span>
                             {post.views && post.views > 0 && (
                               <>
                                 <span>•</span>

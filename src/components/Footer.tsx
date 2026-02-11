@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getServicios } from '@/lib/services';
 
 const footerLinks = {
@@ -141,8 +142,14 @@ export default async function Footer() {
           {/* Logo & Description */}
           <div className="grid md:grid-cols-5 gap-12 md:gap-16 pb-16 border-b border-gray-800">
             <div className="md:col-span-2">
-              <Link href="/es" className="text-3xl md:text-4xl font-bold tracking-tight inline-block mb-6">
-                Health4Spain
+              <Link href="/es" className="inline-block mb-6">
+                <Image
+                  src="/images/logo-vertical-color.png"
+                  alt="Health 4 Spain"
+                  height={80}
+                  width={120}
+                  className="h-16 md:h-20 w-auto"
+                />
               </Link>
               <p className="text-gray-400 mb-8 text-lg leading-relaxed">
                 Tu puente hacia servicios legales profesionales en España. 

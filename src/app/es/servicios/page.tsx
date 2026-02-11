@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { getServicios } from '@/lib/services';
+import { HERO_IMAGE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Servicios para Extranjeros en España | Health4Spain',
@@ -40,34 +41,40 @@ export default async function ServiciosPage() {
   
   return (
     <>
-      {/* Header Minimal */}
-      <section className="section">
-        <div className="container-narrow">
-          <h1 className="mb-8">Servicios</h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl">
-            Cuatro servicios esenciales. Profesionales verificados. 
+      {/* Hero - mismo estilo que Home, mitad de altura */}
+      <section
+        className="hero-with-image hero-compact"
+        style={{ backgroundImage: `url(${HERO_IMAGE_URL})` }}
+      >
+        <div className="hero-content-box">
+          <h1 className="mb-6" style={{ lineHeight: '0.95' }}>
+            Servicios
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl">
+            Cuatro servicios esenciales. Profesionales verificados.
             Todo lo que necesitas para vivir legalmente en España.
           </p>
-          
-          {/* Stats rápidas */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-gray-300">
+          <div className="flex gap-8 md:gap-12 mb-8 pt-6 border-t border-gray-300">
             <div>
               <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">4</div>
-              <div className="text-sm uppercase tracking-widest text-gray-500">Servicios</div>
+              <div className="text-xs uppercase tracking-widest text-gray-500">Servicios</div>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">150+</div>
-              <div className="text-sm uppercase tracking-widest text-gray-500">Profesionales</div>
+              <div className="text-xs uppercase tracking-widest text-gray-500">Profesionales</div>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">19</div>
-              <div className="text-sm uppercase tracking-widest text-gray-500">Ciudades</div>
+              <div className="text-xs uppercase tracking-widest text-gray-500">Ciudades</div>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">0€</div>
-              <div className="text-sm uppercase tracking-widest text-gray-500">Para ti</div>
+              <div className="text-xs uppercase tracking-widest text-gray-500">Para ti</div>
             </div>
           </div>
+          <Link href="/es/contacto" className="btn-minimal-lg">
+            Solicitar Información
+          </Link>
         </div>
       </section>
 

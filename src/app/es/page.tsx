@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { HERO_IMAGE_URL } from '@/lib/constants';
 
 // Datos - 4 PERFILES CORRECTOS
@@ -135,6 +136,14 @@ export default function HomePage() {
         style={{ backgroundImage: `url(${HERO_IMAGE_URL})` }}
       >
         <div className="hero-content-box">
+          <Image
+            src="/images/logo-vertical-color.png"
+            alt="Health 4 Spain"
+            height={72}
+            width={108}
+            className="h-14 md:h-[72px] w-auto mb-6"
+            priority
+          />
           <h1 className="mb-8" style={{ lineHeight: '0.95' }}>
             España.<br />Simplificado.
           </h1>
