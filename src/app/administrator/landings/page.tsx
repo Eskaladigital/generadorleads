@@ -242,7 +242,7 @@ export default function LandingsPage() {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <Link
-                          href={`/es/destinos/${landing.slug}`}
+                          href={`/es/servicios/${landing.slug}`}
                           target="_blank"
                           className="text-accent hover:text-accent-600 text-sm font-medium"
                         >

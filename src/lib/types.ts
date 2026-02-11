@@ -178,12 +178,14 @@ export interface Partner {
   updated_at: string;
 }
 
-// Tipos para Landing Pages
+// Tipos para Landing Pages (columnas de landing_pages en Supabase)
 export interface LandingPage {
   id: string;
   slug: string;
   servicio_slug: string;
+  servicio_nombre: string;
   ciudad_slug: string;
+  ciudad_nombre: string;
   
   // SEO
   meta_title: string;

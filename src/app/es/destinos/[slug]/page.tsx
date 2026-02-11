@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase';
+import { getServicios, getServicioBySlug } from '@/lib/services';
 import { LandingPage } from '@/lib/types';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
@@ -18,6 +19,7 @@ async function getLanding(slug: string): Promise<LandingPage | null> {
       .select('*')
       .eq('slug', slug)
       .eq('activo', true)
+      .eq('idioma', 'es')
       .single();
     
     if (error || !data) {
@@ -76,23 +78,14 @@ async function getCiudadCatalogo(ciudadSlug: string) {
   }
 }
 
-const SERVICIOS_INFO: Record<string, { nombre: string }> = {
-  seguros: { nombre: 'Seguros de Salud' },
-  abogados: { nombre: 'Abogados' },
-  inmobiliarias: { nombre: 'Inmobiliarias' },
-  gestorias: { nombre: 'Gestorías' },
-};
-
 // Detectar si es landing de servicio-ciudad o solo ciudad
-function parseSlug(slug: string): { servicio?: string; ciudad: string } | null {
-  const servicios = Object.keys(SERVICIOS_INFO);
-  for (const servicio of servicios) {
+function parseSlug(slug: string, serviciosSlugs: string[]): { servicio?: string; ciudad: string } | null {
+  for (const servicio of serviciosSlugs) {
     if (slug.startsWith(`${servicio}-`)) {
       const ciudad = slug.replace(`${servicio}-`, '');
       return { servicio, ciudad };
     }
   }
-  
   return { ciudad: slug };
 }
 
@@ -115,16 +108,19 @@ export async function generateMetadata({
     };
   }
   
-  // Fallback a datos de BD ciudades
-  const parsed = parseSlug(slug);
+  // Fallback a datos de BD
+  const servicios = await getServicios();
+  const serviciosSlugs = servicios.map((s) => s.slug);
+  const parsed = parseSlug(slug, serviciosSlugs);
   if (parsed) {
     const ciudadData = await getCiudadCatalogo(parsed.ciudad);
     if (ciudadData) {
       if (parsed.servicio) {
-        const servicioInfo = SERVICIOS_INFO[parsed.servicio];
+        const servicioData = await getServicioBySlug(parsed.servicio);
+        const servicioNombre = servicioData?.nombre_plural || servicioData?.nombre || parsed.servicio;
         return {
-          title: `${servicioInfo.nombre} en ${ciudadData.nombre} - Health4Spain`,
-          description: `Encuentra los mejores ${servicioInfo.nombre.toLowerCase()} en ${ciudadData.nombre}. Profesionales verificados que hablan tu idioma.`,
+          title: `${servicioNombre} en ${ciudadData.nombre} - Health4Spain`,
+          description: `Encuentra los mejores ${servicioNombre.toLowerCase()} en ${ciudadData.nombre}. Profesionales verificados que hablan tu idioma.`,
         };
       }
       
@@ -173,7 +169,8 @@ export default async function DestinoPage({
   }
   
   // Fallback a vista estática con datos de BD
-  const parsed = parseSlug(slug);
+  const servicios = await getServicios();
+  const parsed = parseSlug(slug, servicios.map((s) => s.slug));
   if (!parsed) {
     notFound();
   }
@@ -183,11 +180,14 @@ export default async function DestinoPage({
     notFound();
   }
   
-  // Si es servicio-ciudad, mostrar vista de landing
+  // Si es servicio-ciudad, mostrar vista (sin landing en BD)
   if (parsed.servicio) {
+    const servicioData = await getServicioBySlug(parsed.servicio);
+    const servicioNombre = servicioData?.nombre_plural || servicioData?.nombre || parsed.servicio;
     return (
       <ServiceCityView 
         servicio={parsed.servicio} 
+        servicioNombre={servicioNombre}
         ciudad={parsed.ciudad} 
         ciudadData={ciudadData} 
       />
@@ -448,15 +448,15 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
 // Componente para vista servicio-ciudad (fallback)
 function ServiceCityView({ 
   servicio, 
+  servicioNombre,
   ciudad, 
   ciudadData 
 }: { 
   servicio: string; 
+  servicioNombre: string;
   ciudad: string; 
   ciudadData: any;
 }) {
-  const servicioInfo = SERVICIOS_INFO[servicio];
-  
   return (
     <>
       <section className="section">
@@ -464,11 +464,11 @@ function ServiceCityView({
           <Breadcrumbs items={[
             { label: 'Inicio', href: '/es' },
             { label: 'Servicios', href: '/es/servicios' },
-            { label: servicioInfo.nombre, href: `/es/servicios/${servicio}` },
+            { label: servicioNombre, href: `/es/servicios/${servicio}` },
             { label: ciudadData.nombre }
           ]} />
           <h1 className="mb-8">
-            {servicioInfo.nombre} en {ciudadData.nombre}
+            {servicioNombre} en {ciudadData.nombre}
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 max-w-2xl">
             Profesionales verificados que hablan tu idioma en {ciudadData.nombre}.
@@ -479,7 +479,7 @@ function ServiceCityView({
       <section className="section-alt text-center">
         <div className="container-narrow">
           <p className="text-gray-700 text-lg mb-12">
-            Te conectamos con los mejores profesionales de {servicioInfo.nombre.toLowerCase()} en {ciudadData.nombre}. 
+            Te conectamos con los mejores profesionales de {servicioNombre.toLowerCase()} en {ciudadData.nombre}. 
           </p>
           <Link 
             href={`/es/contacto?servicio=${servicio}&ciudad=${ciudad}`} 

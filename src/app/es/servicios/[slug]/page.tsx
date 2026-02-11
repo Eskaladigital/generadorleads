@@ -427,19 +427,6 @@ export default async function ServicioPage({
 
 // Componente para renderizar landing pages dinámicas (diseño minimalista)
 function LandingPageView({ landing }: { landing: LandingPage }) {
-  // Extraer servicio y ciudad del slug (ej: "abogados-murcia")
-  const slugParts = landing.slug.split('-');
-  const servicioSlug = slugParts[0]; // "abogados"
-  const ciudadSlug = slugParts.length > 1 ? slugParts.slice(1).join('-') : null; // "murcia"
-  
-  // Mapeo de slugs a nombres legibles
-  const servicioNombres: Record<string, string> = {
-    'seguros': 'Seguros',
-    'abogados': 'Abogados',
-    'inmobiliarias': 'Inmobiliarias',
-    'gestorias': 'Gestorías',
-  };
-  
   return (
     <>
       {/* Hero Section */}
@@ -448,7 +435,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
           <Breadcrumbs items={[
             { label: 'Inicio', href: '/es' },
             { label: 'Servicios', href: '/es/servicios' },
-            ...(servicioNombres[servicioSlug] ? [{ label: servicioNombres[servicioSlug], href: `/es/servicios/${servicioSlug}` }] : []),
+            ...(landing.servicio_nombre ? [{ label: landing.servicio_nombre, href: `/es/servicios/${landing.servicio_slug}` }] : []),
             { label: landing.hero_title }
           ]} />
           <h1 className="mb-8">
