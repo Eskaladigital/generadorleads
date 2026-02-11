@@ -75,10 +75,10 @@ export default function Header() {
           <Link href={`/${currentLang}`} className="flex items-center gap-2">
             <Image
               src="/images/logo-siglas-color.png"
-              alt="L4S - Health4Spain"
-              height={40}
-              width={100}
-              className="h-10 w-auto"
+              alt="H4S - Health4Spain"
+              height={36}
+              width={72}
+              className="h-9 w-auto"
               priority
             />
           </Link>

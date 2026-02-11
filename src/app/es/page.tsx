@@ -139,9 +139,9 @@ export default function HomePage() {
           <Image
             src="/images/logo-vertical-color.png"
             alt="Health 4 Spain"
-            height={72}
-            width={108}
-            className="h-14 md:h-[72px] w-auto mb-6"
+            height={80}
+            width={120}
+            className="h-16 md:h-20 w-auto mb-6"
             priority
           />
           <h1 className="mb-8" style={{ lineHeight: '0.95' }}>

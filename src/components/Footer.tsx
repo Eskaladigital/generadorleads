@@ -146,9 +146,9 @@ export default async function Footer() {
                 <Image
                   src="/images/logo-vertical-color.png"
                   alt="Health 4 Spain"
-                  height={80}
-                  width={120}
-                  className="h-16 md:h-20 w-auto"
+                  height={60}
+                  width={90}
+                  className="h-12 md:h-[60px] w-auto"
                 />
               </Link>
               <p className="text-gray-400 mb-8 text-lg leading-relaxed">
