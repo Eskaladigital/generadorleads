@@ -74,33 +74,32 @@ function Step1({ formData, updateFormData, errors, onAutoAdvance }: StepProps) {
   };
 
   return (
-    <div className="space-y-12">
-      <div className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">¿Qué servicio necesitas?</h2>
-        <p className="text-lg text-gray-600">Selecciona el tipo de profesional que buscas</p>
+    <div className="space-y-6">
+      <div className="mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">¿Qué servicio necesitas?</h2>
+        <p className="text-base md:text-lg text-gray-600">Selecciona el tipo de profesional que buscas</p>
       </div>
-      <ul className="service-list-minimal">
-        {SERVICIOS.map((servicio, index) => (
-          <li
+      <div className="grid grid-cols-2 gap-3 md:gap-4">
+        {SERVICIOS.map((servicio) => (
+          <button
             key={servicio.id}
+            type="button"
             onClick={() => handleServicioClick(servicio.id)}
-            className={`service-item-minimal cursor-pointer ${
-              formData.servicio === servicio.id ? 'opacity-100' : 'opacity-60 hover:opacity-100'
+            className={`p-4 md:p-6 border-2 rounded-lg text-left transition-all ${
+              formData.servicio === servicio.id
+                ? 'border-black bg-gray-50'
+                : 'border-gray-200 hover:border-gray-400'
             }`}
           >
-            <div className={`service-number ${formData.servicio === servicio.id ? 'text-accent' : 'text-gray-400'}`}>
-              {String(index + 1).padStart(2, '0')}
-            </div>
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold mb-1">{servicio.label}</h3>
-            </div>
-            <div className="service-arrow">
-              {formData.servicio === servicio.id ? '✓' : '→'}
-            </div>
-          </li>
+            <div className="text-3xl mb-2">{servicio.icon}</div>
+            <h3 className="text-base md:text-lg font-bold mb-1">{servicio.label}</h3>
+            {formData.servicio === servicio.id && (
+              <span className="text-accent text-xl">✓</span>
+            )}
+          </button>
         ))}
-      </ul>
-      {errors.servicio && <p className="text-accent text-center mt-4">{errors.servicio}</p>}
+      </div>
+      {errors.servicio && <p className="text-accent text-center mt-2">{errors.servicio}</p>}
     </div>
   );
 }
@@ -117,43 +116,43 @@ function Step2({ formData, updateFormData, errors, ciudades = [], onAutoAdvance 
   };
 
   return (
-    <div className="space-y-12">
-      <div className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">¿Dónde en España?</h2>
-        <p className="text-lg text-gray-600">Selecciona la ciudad donde necesitas el servicio</p>
+    <div className="space-y-6">
+      <div className="mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">¿Dónde en España?</h2>
+        <p className="text-base md:text-lg text-gray-600">Selecciona la ciudad donde necesitas el servicio</p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 max-h-[60vh] overflow-y-auto">
         {ciudades.map((ciudad) => (
           <button
             key={ciudad.id}
             type="button"
             onClick={() => handleCiudadClick(ciudad.id)}
-            className={`p-4 border border-gray-200 text-left transition-opacity ${
+            className={`p-2.5 md:p-3 border rounded text-left text-sm transition-all ${
               formData.ciudad_interes === ciudad.id
-                ? 'border-black opacity-100'
-                : 'opacity-50 hover:opacity-100'
+                ? 'border-black bg-gray-50 font-semibold'
+                : 'border-gray-200 hover:border-gray-400'
             }`}
           >
-            <span className="font-medium">{ciudad.label}</span>
+            <span className="block truncate">{ciudad.label}</span>
             {formData.ciudad_interes === ciudad.id && (
-              <span className="ml-2 text-accent">✓</span>
+              <span className="text-accent text-sm">✓</span>
             )}
           </button>
         ))}
       </div>
-      {errors.ciudad_interes && <p className="text-accent text-center mt-4">{errors.ciudad_interes}</p>}
+      {errors.ciudad_interes && <p className="text-accent text-center mt-2">{errors.ciudad_interes}</p>}
     </div>
   );
 }
 
 function Step3({ formData, updateFormData, errors }: StepProps) {
   return (
-    <div className="space-y-12">
-      <div className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Cuéntanos sobre ti</h2>
-        <p className="text-lg text-gray-600">Necesitamos algunos datos para conectarte con el profesional adecuado</p>
+    <div className="space-y-6">
+      <div className="mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">Cuéntanos sobre ti</h2>
+        <p className="text-base md:text-lg text-gray-600">Necesitamos algunos datos para conectarte con el profesional adecuado</p>
       </div>
-      <div className="space-y-8">
+      <div className="space-y-4">
         <div>
           <label className="form-label-minimal">Nombre completo *</label>
           <input
@@ -163,9 +162,9 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
             className={`form-input-minimal ${errors.nombre ? 'border-accent' : ''}`}
             placeholder="Tu nombre"
           />
-          {errors.nombre && <p className="text-accent text-sm mt-2">{errors.nombre}</p>}
+          {errors.nombre && <p className="text-accent text-sm mt-1">{errors.nombre}</p>}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="form-label-minimal">Email *</label>
             <input
@@ -175,7 +174,7 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
               className={`form-input-minimal ${errors.email ? 'border-accent' : ''}`}
               placeholder="tu@email.com"
             />
-            {errors.email && <p className="text-accent text-sm mt-2">{errors.email}</p>}
+            {errors.email && <p className="text-accent text-sm mt-1">{errors.email}</p>}
           </div>
           <div>
             <label className="form-label-minimal">Teléfono *</label>
@@ -186,10 +185,10 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
               className={`form-input-minimal ${errors.telefono ? 'border-accent' : ''}`}
               placeholder="+34 600 000 000"
             />
-            {errors.telefono && <p className="text-accent text-sm mt-2">{errors.telefono}</p>}
+            {errors.telefono && <p className="text-accent text-sm mt-1">{errors.telefono}</p>}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="form-label-minimal">País de origen *</label>
             <select
@@ -202,7 +201,7 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
                 <option key={pais} value={pais}>{pais}</option>
               ))}
             </select>
-            {errors.pais_origen && <p className="text-accent text-sm mt-2">{errors.pais_origen}</p>}
+            {errors.pais_origen && <p className="text-accent text-sm mt-1">{errors.pais_origen}</p>}
           </div>
           <div>
             <label className="form-label-minimal">Ciudad de origen</label>
@@ -222,57 +221,57 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
 
 function Step4({ formData, updateFormData, errors }: StepProps) {
   return (
-    <div className="space-y-12">
-      <div className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Últimos detalles</h2>
-        <p className="text-lg text-gray-600">Esto nos ayudará a encontrar el profesional ideal para ti</p>
+    <div className="space-y-6">
+      <div className="mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">Últimos detalles</h2>
+        <p className="text-base md:text-lg text-gray-600">Esto nos ayudará a encontrar el profesional ideal para ti</p>
       </div>
-      <div className="space-y-10">
+      <div className="space-y-5">
         <div>
-          <label className="form-label-minimal mb-6">¿Cuál es tu presupuesto aproximado? *</label>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+          <label className="form-label-minimal mb-3">¿Cuál es tu presupuesto aproximado? *</label>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 mt-3">
             {PRESUPUESTOS.map((option) => (
               <button
                 key={option.id}
                 type="button"
                 onClick={() => updateFormData('presupuesto', option.id)}
-                className={`p-4 border border-gray-200 text-left transition-opacity ${
+                className={`p-3 border rounded text-left transition-all ${
                   formData.presupuesto === option.id
-                    ? 'border-black opacity-100'
-                    : 'opacity-50 hover:opacity-100'
+                    ? 'border-black bg-gray-50 font-semibold'
+                    : 'border-gray-200 hover:border-gray-400'
                 }`}
               >
-                <span className="font-medium text-sm">{option.label}</span>
+                <span className="text-sm block">{option.label}</span>
                 {formData.presupuesto === option.id && (
-                  <span className="ml-2 text-accent">✓</span>
+                  <span className="text-accent text-sm">✓</span>
                 )}
               </button>
             ))}
           </div>
-          {errors.presupuesto && <p className="text-accent text-sm mt-4">{errors.presupuesto}</p>}
+          {errors.presupuesto && <p className="text-accent text-sm mt-2">{errors.presupuesto}</p>}
         </div>
         <div>
-          <label className="form-label-minimal mb-6">¿Cuándo lo necesitas? *</label>
-          <div className="grid grid-cols-2 gap-4 mt-6">
+          <label className="form-label-minimal mb-3">¿Cuándo lo necesitas? *</label>
+          <div className="grid grid-cols-2 gap-2 md:gap-3 mt-3">
             {URGENCIAS.map((option) => (
               <button
                 key={option.id}
                 type="button"
                 onClick={() => updateFormData('urgencia', option.id)}
-                className={`p-4 border border-gray-200 text-left transition-opacity ${
+                className={`p-3 border rounded text-left transition-all ${
                   formData.urgencia === option.id
-                    ? 'border-black opacity-100'
-                    : 'opacity-50 hover:opacity-100'
+                    ? 'border-black bg-gray-50 font-semibold'
+                    : 'border-gray-200 hover:border-gray-400'
                 }`}
               >
-                <span className="font-medium text-sm">{option.label}</span>
+                <span className="text-sm block">{option.label}</span>
                 {formData.urgencia === option.id && (
-                  <span className="ml-2 text-accent">✓</span>
+                  <span className="text-accent text-sm">✓</span>
                 )}
               </button>
             ))}
           </div>
-          {errors.urgencia && <p className="text-accent text-sm mt-4">{errors.urgencia}</p>}
+          {errors.urgencia && <p className="text-accent text-sm mt-2">{errors.urgencia}</p>}
         </div>
         <div>
           <label className="form-label-minimal">
@@ -281,7 +280,7 @@ function Step4({ formData, updateFormData, errors }: StepProps) {
           <textarea
             value={formData.mensaje}
             onChange={(e) => updateFormData('mensaje', e.target.value)}
-            className="form-input-minimal min-h-[120px] mt-4"
+            className="form-input-minimal min-h-[100px] mt-2"
             placeholder="Cuéntanos más sobre tu situación..."
           />
         </div>
@@ -562,9 +561,9 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
   return (
     <div className="section">
       <div className="container-narrow">
-        <div className="mb-16">
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-sm font-medium uppercase tracking-widest">
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-3">
+            <span className="text-xs md:text-sm font-medium uppercase tracking-widest text-gray-600">
               {(() => {
                 // Mostrar mensaje más claro según el contexto
                 if (flowType === 'from-service' && currentStep === 1) {
@@ -577,20 +576,20 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
               })()}
             </span>
           </div>
-          <div className="h-px bg-gray-200">
+          <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className="h-px bg-black transition-all duration-300"
+              className="h-full bg-black transition-all duration-300"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
             />
           </div>
         </div>
 
-        <div className="bg-white border border-gray-200 p-8 md:p-12">
+        <div className="bg-white border border-gray-200 p-6 md:p-8 rounded-lg">
           {/* Banner de información preseleccionada - ahora EDITABLE */}
           {(formData.servicio || formData.ciudad_interes) && currentStep > 1 && (
-            <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800 font-medium mb-3">Buscas:</p>
-              <div className="flex flex-wrap gap-3">
+            <div className="mb-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-xs text-blue-800 font-medium mb-2">Buscas:</p>
+              <div className="flex flex-wrap gap-2">
                 {formData.servicio && (
                   <button
                     type="button"
@@ -604,13 +603,13 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
                         setCurrentStep(1);
                       }
                     }}
-                    className="flex items-center gap-2 bg-white px-3 py-2 rounded-full text-sm border border-blue-300 hover:border-blue-500 hover:bg-blue-50 transition-all group"
+                    className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-full text-xs border border-blue-300 hover:border-blue-500 hover:bg-blue-50 transition-all group"
                   >
                     <span className="text-blue-600">✓</span>
                     <span className="font-medium">
                       {SERVICIOS.find(s => s.id === formData.servicio)?.label}
                     </span>
-                    <span className="text-xs text-gray-400 group-hover:text-blue-600 ml-1">✏️</span>
+                    <span className="text-xs text-gray-400 group-hover:text-blue-600">✏️</span>
                   </button>
                 )}
                 {formData.ciudad_interes && (
@@ -627,23 +626,23 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
                         setCurrentStep(2);
                       }
                     }}
-                    className="flex items-center gap-2 bg-white px-3 py-2 rounded-full text-sm border border-green-300 hover:border-green-500 hover:bg-green-50 transition-all group"
+                    className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-full text-xs border border-green-300 hover:border-green-500 hover:bg-green-50 transition-all group"
                   >
                     <span className="text-green-600">📍</span>
                     <span className="font-medium">
                       {ciudades.find(c => c.id === formData.ciudad_interes)?.label}
                     </span>
-                    <span className="text-xs text-gray-400 group-hover:text-green-600 ml-1">✏️</span>
+                    <span className="text-xs text-gray-400 group-hover:text-green-600">✏️</span>
                   </button>
                 )}
               </div>
-              <p className="text-xs text-gray-500 mt-2">Haz clic para cambiar ✏️</p>
+              <p className="text-xs text-gray-500 mt-1.5">Haz clic para cambiar ✏️</p>
             </div>
           )}
           
           {renderStep()}
 
-          <div className="flex justify-between mt-12 pt-8 border-t border-gray-200">
+          <div className="flex justify-between mt-6 pt-6 border-t border-gray-200">
             <button
               type="button"
               onClick={prevStep}
@@ -669,8 +668,8 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
           </div>
         </div>
 
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">🔒 Tus datos están seguros y protegidos</p>
+        <div className="mt-6 text-center">
+          <p className="text-xs md:text-sm text-gray-600">🔒 Tus datos están seguros y protegidos</p>
         </div>
       </div>
     </div>
