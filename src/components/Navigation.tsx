@@ -27,7 +27,6 @@ const socialLinks = [
   { name: 'Twitter', href: 'https://twitter.com/health4spain' },
 ];
 
-// Inicio (/es) solo activo con coincidencia exacta; el resto con startsWith
 function isLinkActive(pathname: string, href: string): boolean {
   const cleanPath = pathname.replace(/\/$/, '') || '/';
   if (href === '/es' || href === '/en' || href === '/de' || href === '/fr') {
@@ -40,28 +39,11 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const pathnameWhenOpened = useRef<string | null>(null);
-  const headerRef = useRef<HTMLElement>(null);
-  const [headerHeight, setHeaderHeight] = useState(72);
 
-  // Medir altura del navbar para posicionar el menú debajo
+  // Congelar pathname al abrir para evitar rebote
   useEffect(() => {
-    const updateHeight = () => {
-      if (headerRef.current) {
-        setHeaderHeight(headerRef.current.offsetHeight);
-      }
-    };
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
-  }, []);
-
-  // Congelar pathname al abrir menú para evitar el "rebote" durante hidratación
-  useEffect(() => {
-    if (isOpen) {
-      pathnameWhenOpened.current = pathname;
-    } else {
-      pathnameWhenOpened.current = null;
-    }
+    if (isOpen) pathnameWhenOpened.current = pathname;
+    else pathnameWhenOpened.current = null;
   }, [isOpen, pathname]);
 
   const activePathname = isOpen && pathnameWhenOpened.current !== null ? pathnameWhenOpened.current : pathname;
@@ -93,7 +75,7 @@ export default function Navigation() {
   }, [isOpen]);
 
   return (
-    <header ref={headerRef} className="bg-white border-b border-gray-200 relative z-50">
+    <header className="bg-white border-b border-gray-200 relative z-50">
       <div className="container-base">
         <nav className="nav-minimal">
           {/* Logo Minimal */}
@@ -152,14 +134,13 @@ export default function Navigation() {
         </nav>
       </div>
 
-      {/* Mobile Menu - Full-width debajo del navbar (logo y hamburger visibles) */}
+      {/* Mobile Menu - Full-width overlay superpuesto */}
       <div
-        className={`md:hidden fixed left-0 right-0 bottom-0 z-[100] transition-all duration-300 ease-out ${
+        className={`md:hidden fixed inset-0 z-[100] transition-all duration-300 ease-out ${
           isOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
-        style={{ top: headerHeight }}
       >
-        {/* Backdrop - clic fuera cierra, no cubre el navbar */}
+        {/* Backdrop - clic fuera cierra */}
         <div
           onClick={() => setIsOpen(false)}
           className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${
@@ -168,26 +149,21 @@ export default function Navigation() {
           aria-hidden="true"
         />
 
-        {/* Panel del menú - sale desde debajo del navbar */}
+        {/* Panel del menú - full-width desde arriba */}
         <div
           className={`absolute top-0 left-0 right-0 bg-white shadow-xl transition-transform duration-300 ease-out ${
             isOpen ? 'translate-y-0' : '-translate-y-full'
           }`}
         >
-          <nav
-            className="container-base py-6 pb-8 overflow-y-auto"
-            style={{ maxHeight: `calc(100vh - ${headerHeight}px)` }}
-          >
+          <nav className="container-base py-6 pb-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors ${
-                    isLinkActive(activePathname, link.href)
-                      ? 'bg-gray-100 text-[#293f92]'
-                      : 'text-gray-700 hover:bg-gray-50'
+                  className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors hover:text-[#3bbdda] ${
+                    isLinkActive(activePathname, link.href) ? 'text-[#293f92]' : 'text-gray-700'
                   }`}
                 >
                   {link.label}
@@ -216,7 +192,7 @@ export default function Navigation() {
                     className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                       currentLang === lang.code
                         ? 'bg-[#293f92] text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'text-gray-700 hover:text-[#3bbdda]'
                     }`}
                   >
                     <span>{lang.flag}</span>
