@@ -1,5 +1,22 @@
 # Historial de Desarrollo - Health4Spain
 
+## Versión 2.5.1 (11 Febrero 2026)
+
+### Banner de Cookies (GDPR / Normativa UE)
+
+- **Componente**: `CookieConsent.tsx` — Banner de consentimiento conforme a GDPR
+- **Categorías**: Esenciales (siempre activas), Análisis, Marketing — sin casillas pre-marcadas
+- **Opciones**: Aceptar todas, Rechazar opcionales, Personalizar (checkboxes por categoría)
+- **Modificar consentimiento**: Enlace "Modificar consentimiento de cookies" en footer (Legal)
+- **Lib**: `src/lib/cookie-consent.ts` — `getStoredConsent()`, `canUseAnalytics()`, `canUseMarketing()`
+- **Página**: `/es/cookies` — Actualizada con referencia al enlace de modificación
+
+### Corrección Menú Móvil
+
+- **Parpadeo**: Corrección del comportamiento del menú móvil en `Navigation.tsx`
+
+---
+
 ## Versión 2.5.0 (11 Febrero 2026)
 
 ### URL Canónica con www

@@ -169,7 +169,7 @@ export default function Navigation() {
                   className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors ${
                     isLinkActive(activePathname, link.href)
                       ? 'bg-gray-100 text-[#293f92]'
-                      : 'text-gray-700 hover:bg-gray-50 hover:text-[#3bbdda]'
+                      : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
                   {link.label}

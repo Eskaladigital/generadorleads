@@ -139,9 +139,10 @@ Respuesta: "Te contactaremos en menos de 24 horas"
 ```
 <Navigation />     ← ÚNICO navbar. NavLinks estáticos.
 <main>{children}</main>
-<Footer />         ← getServicios() + links estáticos
+<Footer />         ← getServicios() + links estáticos + enlace "Modificar consentimiento cookies"
 <StickyCTA />      ← Oculto en /contacto. Siempre /es/contacto
 <BackToTop />      ← Botón scroll arriba
+<CookieConsent />  ← Banner GDPR: Esenciales, Análisis, Marketing. Reabre desde footer.
 ```
 
 ### Componentes no usados
@@ -195,6 +196,7 @@ Respuesta: "Te contactaremos en menos de 24 horas"
 | Datos Supabase | ✅ Integrados correctamente |
 | CTAs → Contacto | ✅ Todos unificados |
 | Flujo de leads | ✅ Funcional, falta email |
+| Cookies GDPR | ✅ Banner con categorías, enlace footer |
 | Duplicación datos | ⚠️ Home + constants duplican BD |
 | Sitemap | ⚠️ Faltan ciudades/servicios |
 | Navbar | ✅ Solo Navigation.tsx |

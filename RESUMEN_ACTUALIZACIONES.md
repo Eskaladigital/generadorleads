@@ -2,23 +2,33 @@
 
 ## 🆕 Mejoras UX y Configuración - 11 Febrero 2026
 
-### 1. **URL Canónica con www**
+### 1. **Banner de Cookies (GDPR / Normativa UE)**
+- **Componente**: `CookieConsent.tsx` — Banner conforme a GDPR
+- **Categorías**: Esenciales (siempre activas), Análisis, Marketing — sin pre-marcadas
+- **Opciones**: Aceptar todas, Rechazar opcionales, Personalizar
+- **Footer**: Enlace "Modificar consentimiento de cookies" en sección Legal
+- **Lib**: `src/lib/cookie-consent.ts` — `canUseAnalytics()`, `canUseMarketing()`
+
+### 2. **Corrección Menú Móvil**
+- Parpadeo del menú móvil corregido en `Navigation.tsx`
+
+### 3. **URL Canónica con www**
 - **Dominio**: `https://www.health4spain.com` (siempre con www)
 - **Redirect 301**: `health4spain.com` → `www.health4spain.com` (next.config.js)
 - **Actualizado**: metadataBase, sitemap, constants, .env.example
 - **Archivos**: layout.tsx, sitemap.ts, constants.ts, sitemap-html, BlogPostForm, presupuesto
 
-### 2. **Tamaños "Solicitar →" unificados**
+### 4. **Tamaños "Solicitar →" unificados**
 - **Estándar**: text-base (1rem) móvil, text-lg (1.125rem) desktop, font-weight 600
 - **Aplicado en**: /destinos (lista ciudades), /servicios (lista servicios)
 - **Archivos**: destinos/page.tsx, globals.css (service-item-minimal .service-arrow)
 
-### 3. **Blog en navegación**
+### 5. **Blog en navegación**
 - **Componente**: `Navigation.tsx` — **único navbar del sitio** (no hay otro)
 - **Añadido**: Enlace Blog entre Servicios y Contacto
 - **Orden**: Inicio → Destinos → Servicios → **Blog** → Contacto
 
-### 4. **Documentación actualizada**
+### 6. **Documentación actualizada**
 - **docs/AUDITORIA.md** (NUEVO) — Auditoría completa: rutas, datos, CTAs, flujo leads
 - README.md — Flujo de datos, CTAs, referencia a auditoría
 - ESTADO_PROYECTO.md, CONFIGURACION_VERCEL.md, INDICE_DOCUMENTACION.md
@@ -118,12 +128,13 @@ Documento maestro del estado actual del proyecto con:
 ```
 ✅ ESTADO_PROYECTO.md                      (Documento maestro)
 ✅ README.md                               (ACTUALIZADO - 11 Feb)
-✅ docs/HISTORIAL.md                       (ACTUALIZADO - 11 Feb)
-✅ docs/SCRIPTS_LANDINGS.md                (ACTUALIZADO)
-✅ scripts/README.md                       (ACTUALIZADO)
-✅ RESUMEN_ACTUALIZACIONES.md              (Este archivo - 11 Feb)
-✅ CONFIGURACION_VERCEL.md                 (ACTUALIZADO - URL www)
+✅ docs/HISTORIAL.md                       (v2.5.1 cookies GDPR)
+✅ docs/AUDITORIA.md                       (Layout + CookieConsent)
 ✅ INDICE_DOCUMENTACION.md                 (ACTUALIZADO - 11 Feb)
+✅ RESUMEN_ACTUALIZACIONES.md              (Este archivo - 11 Feb)
+✅ docs/SCRIPTS_LANDINGS.md                (ACTUALIZADO)
+✅ scripts/README.md                      (ACTUALIZADO)
+✅ CONFIGURACION_VERCEL.md                 (ACTUALIZADO - URL www)
 ✅ docs/ESTRATEGIA_BLOG.md                 (URLs con www)
 ```
 
@@ -172,5 +183,5 @@ Documento maestro del estado actual del proyecto con:
 ---
 
 **Fecha de actualización:** 11 de Febrero 2026  
-**Últimas mejoras:** URL www, UX Solicitar unificado, Blog en navbar, docs actualizados  
+**Últimas mejoras:** Cookies GDPR, parpadeo menú móvil, URL www, UX Solicitar unificado, Blog en navbar, docs actualizados  
 **Estado:** ✅ COMPLETADO

@@ -256,12 +256,15 @@ health4spain/
 │   │   ├── Navigation.tsx          # ÚNICO navbar del sitio (usado en layout)
 │   │   ├── Header.tsx             # No usado (legacy)
 │   │   ├── Footer.tsx
+│   │   ├── CookieConsent.tsx       # Banner GDPR (categorías, personalizar, footer)
+│   │   ├── CookieConsentLink.tsx   # Enlace "Modificar consentimiento" en footer
 │   │   ├── StickyCTA.tsx           # Botón móvil fijo
 │   │   └── ...
 │   ├── hooks/
 │   │   └── useAuth.ts              # Hook de autenticación
 │   └── lib/
 │       ├── supabase.ts             # Cliente Supabase
+│       ├── cookie-consent.ts       # Gestión consentimiento cookies (GDPR)
 │       ├── ciudades.ts             # getCiudades() desde Supabase
 │       ├── services.ts             # getServicios() desde Supabase
 │       └── types.ts                # TypeScript types
@@ -503,6 +506,7 @@ Para más detalles sobre la estrategia del proyecto, consulta:
 - **Botón móvil fijo**: "Solicitar Información" en la parte inferior (oculto en página de contacto)
 - **"Solicitar →" unificado**: Tamaño homogéneo (text-base md:text-lg) en Home, /destinos, /servicios
 - **Fuente de datos**: Destinos y ciudades desde Supabase (`ciudades_catalogo`)
+- **Cookies GDPR**: Banner de consentimiento (Esenciales, Análisis, Marketing). Enlace "Modificar consentimiento" en footer.
 
 ## 🌐 URL Canónica
 

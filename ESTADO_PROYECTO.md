@@ -275,6 +275,7 @@ npx tsx scripts/verify-landings.ts
 - [x] URL canónica con www (redirect 301, metadataBase)
 - [x] Tamaños "Solicitar →" unificados en /destinos y /servicios
 - [x] Blog accesible desde navbar (Navigation.tsx)
+- [x] Banner de cookies GDPR (CookieConsent, categorías, enlace en footer)
 
 ### Corto Plazo
 - [ ] Generar contenido extendido para las 19 ciudades (`npm run generate-cities`)

@@ -1,7 +1,7 @@
 # 📚 Índice de Documentación - Health4Spain
 
 **Fecha:** 11 de Febrero 2026  
-**Estado del Proyecto:** ✅ 76 Landing Pages Completadas | URL www | Blog en navbar | UX unificada
+**Estado del Proyecto:** ✅ 76 Landing Pages | URL www | Blog en navbar | UX unificada | Cookies GDPR
 
 ---
 
@@ -150,10 +150,12 @@
 ## 🎯 Últimas Actualizaciones
 
 **11 de Febrero 2026:**
+- ✅ **Banner cookies GDPR** — CookieConsent (categorías, personalizar, enlace footer)
 - ✅ **docs/AUDITORIA.md** — Auditoría completa: rutas, datos, CTAs, flujo leads
 - ✅ URL canónica con www (redirect 301, metadataBase)
 - ✅ Tamaños "Solicitar →" unificados en /destinos y /servicios
 - ✅ Blog accesible desde navbar (Navigation.tsx)
+- ✅ Corrección parpadeo menú móvil
 - ✅ Documentación optimizada (README con flujo datos, INDICE, etc.)
 
 **7 de Febrero 2026:**
@@ -186,4 +188,4 @@
 
 **Última actualización:** 11 de Febrero 2026  
 **Mantenido por:** Sistema de documentación Health4Spain  
-**Estado:** ✅ COMPLETO Y ACTUALIZADO
+**Estado:** ✅ COMPLETO Y ACTUALIZADO (incl. cookies GDPR)
