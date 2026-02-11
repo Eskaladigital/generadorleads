@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '/es', label: 'Inicio' },
@@ -19,7 +20,13 @@ export default function Navigation() {
         <nav className="nav-minimal">
           {/* Logo Minimal */}
           <Link href="/es" className="logo-minimal">
-            Health4Spain
+            <Image
+              src="/images/logo-siglas.png"
+              alt="H4S - Health4Spain"
+              height={36}
+              width={72}
+              className="h-9 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
