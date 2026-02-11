@@ -39,7 +39,7 @@ export default async function DestinosPage() {
       >
         <div className="hero-content-box">
           <h1 className="mb-6" style={{ lineHeight: '0.95' }}>
-            Nuestros Destinos
+            Destinos
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl">
             {ciudades.length} ciudades españolas. Profesionales verificados en cada una.
