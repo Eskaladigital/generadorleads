@@ -221,7 +221,7 @@ Sistema sanitario       ✅    ✅    ✅    ✅   (todos)
 │ ┌─────────────────────────────────────────────────────┐    │
 │ │ 🎯 ¿PREPARANDO TU MUDANZA A ESPAÑA?                │    │
 │ │                                                     │    │
-│ │ Te conectamos con abogados y aseguradoras          │    │
+│ │ Te conectamos con seguros, abogados, inmobiliarias y gestorías          │    │
 │ │ especializados en tu zona.                         │    │
 │ │                                                     │    │
 │ │ ¿Dónde quieres vivir?                              │    │
@@ -258,7 +258,7 @@ Sistema sanitario       ✅    ✅    ✅    ✅   (todos)
 │                                                             │
 │ 💼 SERVICIOS                                               │
 │ → Seguros de salud                                         │
-│ → Abogados extranjería                                     │
+│ → Abogados                                     │
 │ → Inmobiliarias                                            │
 └─────────────────────────────────────────────────────────────┘
 ```

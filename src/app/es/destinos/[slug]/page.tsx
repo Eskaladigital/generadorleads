@@ -685,7 +685,7 @@ async function CityView({
                   <div className="mt-8 bg-white border-t-3 border-accent p-6">
                     <p className="text-gray-700 mb-4">
                       <strong>💡 Recomendación:</strong> Los trámites pueden ser complejos. 
-                      Te conectamos con abogados y gestores especializados que hablan tu idioma.
+                      Te conectamos con profesionales especializados (seguros, abogados, inmobiliarias, gestorías) que hablan tu idioma.
                     </p>
                     <Link 
                       href={`/es/contacto?servicio=gestorias&ciudad=${slug}`}
@@ -832,8 +832,8 @@ function CityViewBasic({
               ¿Quieres información personalizada sobre {ciudadData.nombre}?
             </h3>
             <p className="text-gray-600 mb-6">
-              Te conectamos con profesionales locales que te ayudarán con abogados, inmobiliarias, 
-              gestorías y todo lo necesario para tu mudanza.
+              Te conectamos con profesionales locales que te ayudarán con seguros, abogados, 
+              inmobiliarias, gestorías y todo lo necesario para tu mudanza.
             </p>
             <Link href={`/es/contacto?ciudad=${slug}`} className="btn-minimal-lg">
               Solicitar asesoramiento gratuito

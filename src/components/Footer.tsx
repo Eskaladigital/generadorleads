@@ -79,9 +79,9 @@ export default async function Footer() {
                 />
               </Link>
               <p className="text-gray-400 mb-8 text-lg leading-relaxed">
-                Tu puente hacia servicios legales profesionales en España. 
-                Conectamos personas con abogados especializados de forma rápida, 
-                transparente y sin coste inicial.
+                Tu puente hacia los servicios esenciales para tu vida en España. 
+                Conectamos personas con profesionales verificados: seguros, abogados, 
+                inmobiliarias y gestorías. Rápido, transparente y sin coste inicial.
               </p>
               
               {/* Contact Info */}

@@ -64,7 +64,7 @@ export default function PresupuestoPage() {
               <div className="bg-accent/10 border-l-4 border-accent p-6 mb-6">
                 <p className="text-gray-900 font-semibold mb-2">Dato clave:</p>
                 <p className="text-gray-700">
-                  <strong>90%</strong> de las personas que buscan seguros, abogados o inmobiliarias en España empiezan en Google. Si no apareces en la primera página, <strong>no existes.</strong>
+                  <strong>90%</strong> de las personas que buscan seguros, abogados, inmobiliarias o gestorías en España empiezan en Google. Si no apareces en la primera página, <strong>no existes.</strong>
                 </p>
               </div>
             </div>

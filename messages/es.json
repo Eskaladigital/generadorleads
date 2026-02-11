@@ -9,7 +9,7 @@
   "hero": {
     "label": "Edición Mediterránea",
     "title": "Tu Nuevo Capítulo en España",
-    "description": "Una conexión cuidada entre residentes internacionales y profesionales españoles de confianza. Seguros, servicios legales y vivienda—todo en un solo lugar.",
+    "description": "Una conexión cuidada entre residentes internacionales y profesionales españoles de confianza. Seguros, abogados, inmobiliarias y gestorías—todo en un solo lugar.",
     "stats": {
       "cities": "Ciudades",
       "partners": "Partners Verificados",
@@ -63,8 +63,8 @@
     },
     "lawyers": {
       "category": "Servicios Legales",
-      "title": "Abogados de Extranjería",
-      "description": "Especialistas en visados, NIE, arraigo, reagrupación familiar y todos los procedimientos migratorios.",
+      "title": "Abogados",
+      "description": "Especialistas en familia, civil, laboral, extranjería (visados, NIE, arraigo, reagrupación familiar) y todos los procedimientos legales.",
       "cta": "Encontrar Abogado"
     },
     "realestate": {
