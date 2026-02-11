@@ -678,7 +678,7 @@ input:focus, textarea:focus, select:focus {
   .back-to-top {
     width: 48px;
     height: 48px;
-    bottom: 7.5rem;
+    bottom: 8rem;
     left: 1.5rem;
     font-size: 1.25rem;
     z-index: 1000;
