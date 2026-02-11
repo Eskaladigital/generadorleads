@@ -521,8 +521,8 @@ input:focus, textarea:focus, select:focus {
   border-bottom: 1px solid var(--color-gray-border);
   text-decoration: none;
   color: var(--color-black);
-  font-weight: 500;
-  font-size: 1.05rem;
+  font-weight: 600;
+  font-size: 1.2rem;
   transition: all 0.2s ease;
   background: white;
   min-height: 56px;
@@ -535,8 +535,8 @@ input:focus, textarea:focus, select:focus {
 }
 
 .destinos-lista a span {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 500;
   transition: transform 0.2s ease;
   flex-shrink: 0;
   margin-left: 0.5rem;
@@ -563,9 +563,9 @@ input:focus, textarea:focus, select:focus {
   
   .destinos-lista a {
     padding: 1.25rem 1rem;
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     min-height: 64px;
-    font-weight: 600;
+    font-weight: 700;
   }
   
   .destinos-lista a:hover {
@@ -573,9 +573,9 @@ input:focus, textarea:focus, select:focus {
   }
   
   .destinos-lista a span {
-    font-size: 1rem;
+    font-size: 0.85rem;
     margin-left: 1rem;
-    font-weight: 600;
+    font-weight: 500;
   }
 }
 
