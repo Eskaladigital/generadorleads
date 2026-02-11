@@ -5,6 +5,13 @@
 // Imagen hero home. Para usar tu imagen: ponla en public/images/hero-spain.jpg y cambia a '/images/hero-spain.jpg'
 export const HERO_IMAGE_URL = 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=1920&q=80';
 
+// Logos en WebP para mejor LCP y carga rápida
+export const LOGO_PATHS = {
+  siglas: '/images/h4s siglas color_recortado.webp',
+  vertical: '/images/h4s vertical color_recortado.webp',
+  horizontal: '/images/h4s horizontal_recortado.webp',
+} as const;
+
 // Configuración del sitio
 export const SITE_CONFIG = {
   name: 'Health4Spain',

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getServicios } from '@/lib/services';
+import { LOGO_PATHS } from '@/lib/constants';
 import CookieConsentLink from './CookieConsentLink';
 
 const footerLinks = {
@@ -72,7 +73,7 @@ export default async function Footer() {
             <div className="md:col-span-2">
               <Link href="/es" className="inline-block mb-6">
                 <Image
-                  src="/images/h4s horizontal_recortado.png"
+                  src={LOGO_PATHS.horizontal}
                   alt="Health 4 Spain"
                   height={65}
                   width={260}

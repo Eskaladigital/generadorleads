@@ -23,7 +23,8 @@
     "regenerate-abogados-landings": "npx tsx scripts/regenerate-abogados-landings.ts",
     "regenerate-gestorias-landings": "npx tsx scripts/regenerate-gestorias-landings.ts",
     "regenerate-inmobiliarias-landings": "npx tsx scripts/regenerate-inmobiliarias-landings.ts",
-    "regenerate-seguros-landings": "npx tsx scripts/regenerate-seguros-landings.ts"
+    "regenerate-seguros-landings": "npx tsx scripts/regenerate-seguros-landings.ts",
+    "images:webp": "npx tsx scripts/convert-images-to-webp.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
@@ -44,6 +45,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.0",
     "ts-node": "^10.9.0",
     "typescript": "^5"

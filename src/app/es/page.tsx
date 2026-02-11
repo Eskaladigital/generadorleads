@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { HERO_IMAGE_URL } from '@/lib/constants';
+import { HERO_IMAGE_URL, LOGO_PATHS } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Health4Spain - España Simplificado para Extranjeros',
@@ -136,19 +136,28 @@ const TrustIcons = {
 export default function HomePage() {
   return (
     <>
-      {/* Hero: pon hero-spain.jpg en public/images/ para que se vea */}
-      <section 
-        className="hero-with-image" 
-        style={{ backgroundImage: `url(${HERO_IMAGE_URL})` }}
-      >
+      {/* Hero: Image optimizada para LCP (WebP vía Next.js) */}
+      <section className="hero-with-image">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={HERO_IMAGE_URL}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
         <div className="hero-content-box">
           <Image
-            src="/images/h4s vertical color_recortado.png"
+            src={LOGO_PATHS.vertical}
             alt="Health 4 Spain"
             height={100}
             width={150}
             className="h-20 md:h-24 w-auto mb-5"
             priority
+            fetchPriority="high"
           />
           <h1 className="mb-6" style={{ lineHeight: '0.95' }}>
             España.<br />Simplificado.

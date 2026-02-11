@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import { getServicios } from '@/lib/services';
 import { HERO_IMAGE_URL } from '@/lib/constants';
@@ -42,11 +43,19 @@ export default async function ServiciosPage() {
   
   return (
     <>
-      {/* Hero - mismo estilo que Home, mitad de altura */}
-      <section
-        className="hero-with-image hero-compact"
-        style={{ backgroundImage: `url(${HERO_IMAGE_URL})` }}
-      >
+      {/* Hero - Image optimizada para LCP y WebP */}
+      <section className="hero-with-image hero-compact">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={HERO_IMAGE_URL}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
         <div className="hero-content-box">
           <h1 className="mb-6" style={{ lineHeight: '0.95' }}>
             Servicios

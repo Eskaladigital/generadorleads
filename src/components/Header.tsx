@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { LOGO_PATHS } from '@/lib/constants';
 
 const LANGUAGES = [
   { code: 'es', label: 'ES', flag: '🇪🇸' },
@@ -74,12 +75,13 @@ export default function Header() {
           {/* LOGO */}
           <Link href={`/${currentLang}`} className="flex items-center gap-2">
             <Image
-              src="/images/h4s siglas color_recortado.png"
+              src={LOGO_PATHS.siglas}
               alt="H4S - Health4Spain"
               height={45}
               width={90}
               className="h-[45px] w-auto"
               priority
+              fetchPriority="high"
             />
           </Link>
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { LOGO_PATHS } from '@/lib/constants';
 
 const NAV_LINKS = [
   { href: '/es', label: 'Inicio', exact: true },
@@ -75,12 +76,13 @@ export default function Navigation() {
             {/* Logo */}
             <Link href="/es" className="flex items-center">
               <Image
-                src="/images/h4s siglas color_recortado.png"
+                src={LOGO_PATHS.siglas}
                 alt="H4S - Health4Spain"
                 height={50}
                 width={120}
                 className="h-[50px] w-auto"
                 priority
+                fetchPriority="high"
               />
             </Link>
 
@@ -146,7 +148,7 @@ export default function Navigation() {
             {/* Header del menú */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <Image
-                src="/images/h4s siglas color_recortado.png"
+                src={LOGO_PATHS.siglas}
                 alt="H4S"
                 height={40}
                 width={96}
