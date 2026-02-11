@@ -496,7 +496,7 @@ export default function MediaManager({ isOpen, onClose, onSelect, bucket = 'blog
                   </button>
                   <button
                     onClick={() => deleteFile(selectedFile.name)}
-                    className="w-full py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 text-sm"
+                    className="w-full py-2 border border-accent-200 text-accent rounded-lg hover:bg-accent-50 text-sm"
                   >
                     Eliminar
                   </button>

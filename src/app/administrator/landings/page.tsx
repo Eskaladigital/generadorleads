@@ -144,12 +144,12 @@ export default function LandingsPage() {
             placeholder="Buscar por slug o ciudad..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
           />
           <select
             value={filterServicio}
             onChange={(e) => setFilterServicio(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
           >
             <option value="">Todos los servicios</option>
             {servicios.map(s => (
@@ -159,7 +159,7 @@ export default function LandingsPage() {
           <select
             value={filterRevisado}
             onChange={(e) => setFilterRevisado(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
           >
             <option value="">Todas</option>
             <option value="true">Solo revisadas</option>
@@ -193,7 +193,7 @@ export default function LandingsPage() {
               {loading ? (
                 <tr>
                   <td colSpan={7} className="px-4 py-8 text-center">
-                    <div className="w-6 h-6 border-2 border-[red-600] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-6 h-6 border-2 border-[accent] border-t-transparent rounded-full animate-spin mx-auto"></div>
                   </td>
                 </tr>
               ) : filteredLandings.length === 0 ? (
@@ -244,7 +244,7 @@ export default function LandingsPage() {
                         <Link
                           href={`/es/destinos/${landing.slug}`}
                           target="_blank"
-                          className="text-[red-600] hover:text-[red-700] text-sm font-medium"
+                          className="text-accent hover:text-accent-600 text-sm font-medium"
                         >
                           Ver
                         </Link>

@@ -24,7 +24,7 @@ export default function SobreNosotrosPage() {
       {/* Mission intro */}
       <section className="section-alt">
         <div className="container-narrow">
-          <div className="bg-white border-t-3 border-red-600 p-8 mb-16">
+          <div className="bg-white border-t-3 border-accent p-8 mb-16">
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               Cada año, miles de personas deciden establecerse en España. El proceso puede ser complejo: 
               seguros de salud, visados, búsqueda de vivienda, trámites administrativos. Health4Spain existe 
@@ -69,7 +69,7 @@ export default function SobreNosotrosPage() {
                   'Sin Compromiso: No estás obligado a contratar con nadie',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <svg className="w-6 h-6 text-red-600 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-6 h-6 text-accent shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <span className="text-gray-700">{item}</span>
@@ -87,7 +87,7 @@ export default function SobreNosotrosPage() {
                   'Soporte: Te ayudamos a cerrar más clientes',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <svg className="w-6 h-6 text-red-600 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-6 h-6 text-accent shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <span className="text-gray-700">{item}</span>
@@ -113,7 +113,7 @@ export default function SobreNosotrosPage() {
               { value: '0€', label: 'Coste para Ti' },
             ].map((item, i) => (
               <div key={i} className="text-center">
-                <div className="text-5xl md:text-6xl font-bold text-red-600 mb-2">{item.value}</div>
+                <div className="text-5xl md:text-6xl font-bold text-accent mb-2">{item.value}</div>
                 <div className="text-sm uppercase tracking-widest text-gray-500">{item.label}</div>
               </div>
             ))}
@@ -133,7 +133,7 @@ export default function SobreNosotrosPage() {
             { title: 'Modelo Transparente', desc: 'Para ti es gratis. Los profesionales pagan una comisión solo cuando hay conversión real (contratas el servicio). Esto alinea nuestros intereses: solo ganamos si tú estás satisfecho.' },
             { title: 'Soporte Continuo', desc: 'No desaparecemos después de la conexión. Seguimos disponibles para resolver dudas, mediar si hay problemas y asegurarnos de que estás recibiendo un servicio excepcional.' },
           ].map((item, i) => (
-            <div key={i} className="bg-white border-t-3 border-red-600 p-8">
+            <div key={i} className="bg-white border-t-3 border-accent p-8">
               <h3 className="text-xl font-bold mb-4">{item.title}</h3>
               <p className="text-gray-600 leading-relaxed">{item.desc}</p>
             </div>

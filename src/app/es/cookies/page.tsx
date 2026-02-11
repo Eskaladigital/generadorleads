@@ -95,7 +95,7 @@ export default function CookiesPage() {
             <h2 className="mb-6 text-2xl font-bold">Contacto</h2>
             <p className="text-gray-700 leading-relaxed">
               Si tienes preguntas sobre nuestra política de cookies, contáctanos en: 
-              <a href="mailto:info@health4spain.com" className="text-red-600 hover:underline font-medium ml-1">info@health4spain.com</a>
+              <a href="mailto:info@health4spain.com" className="text-accent hover:underline font-medium ml-1">info@health4spain.com</a>
             </p>
           </section>
         </div>

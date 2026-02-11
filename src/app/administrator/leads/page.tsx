@@ -36,7 +36,7 @@ const statusColors: Record<string, string> = {
   asignado: 'bg-indigo-100 text-indigo-800',
   en_proceso: 'bg-cyan-100 text-cyan-800',
   convertido: 'bg-green-100 text-green-800',
-  perdido: 'bg-red-100 text-red-800',
+  perdido: 'bg-gray-100 text-gray-800',
   descartado: 'bg-gray-100 text-gray-800',
 };
 
@@ -138,12 +138,12 @@ export default function LeadsPage() {
             placeholder="Buscar por nombre, email o teléfono..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
           />
           <select
             value={filterStatus}
             onChange={(e) => { setFilterStatus(e.target.value); setPage(1); }}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
           >
             <option value="">Todos los estados</option>
             {Object.entries(statusLabels).map(([value, label]) => (
@@ -153,7 +153,7 @@ export default function LeadsPage() {
           <select
             value={filterServicio}
             onChange={(e) => { setFilterServicio(e.target.value); setPage(1); }}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
           >
             <option value="">Todos los servicios</option>
             <option value="seguros">Seguros</option>
@@ -164,7 +164,7 @@ export default function LeadsPage() {
           <select
             value={filterCiudad}
             onChange={(e) => { setFilterCiudad(e.target.value); setPage(1); }}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
           >
             <option value="">Todas las ciudades</option>
             <option value="torrevieja">Torrevieja</option>
@@ -203,7 +203,7 @@ export default function LeadsPage() {
               {loading ? (
                 <tr>
                   <td colSpan={9} className="px-4 py-8 text-center">
-                    <div className="w-6 h-6 border-2 border-[red-600] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-6 h-6 border-2 border-[accent] border-t-transparent rounded-full animate-spin mx-auto"></div>
                   </td>
                 </tr>
               ) : filteredLeads.length === 0 ? (
@@ -244,7 +244,7 @@ export default function LeadsPage() {
                     <td className="px-4 py-3">
                       <button
                         onClick={() => setSelectedLead(lead)}
-                        className="text-[red-600] hover:text-[red-700] text-sm font-medium"
+                        className="text-accent hover:text-accent-600 text-sm font-medium"
                       >
                         Ver
                       </button>

@@ -88,7 +88,7 @@ function Step1({ formData, updateFormData, errors, onAutoAdvance }: StepProps) {
               formData.servicio === servicio.id ? 'opacity-100' : 'opacity-60 hover:opacity-100'
             }`}
           >
-            <div className={`service-number ${formData.servicio === servicio.id ? 'text-red-600' : 'text-gray-400'}`}>
+            <div className={`service-number ${formData.servicio === servicio.id ? 'text-accent' : 'text-gray-400'}`}>
               {String(index + 1).padStart(2, '0')}
             </div>
             <div>
@@ -100,7 +100,7 @@ function Step1({ formData, updateFormData, errors, onAutoAdvance }: StepProps) {
           </li>
         ))}
       </ul>
-      {errors.servicio && <p className="text-red-600 text-center mt-4">{errors.servicio}</p>}
+      {errors.servicio && <p className="text-accent text-center mt-4">{errors.servicio}</p>}
     </div>
   );
 }
@@ -136,12 +136,12 @@ function Step2({ formData, updateFormData, errors, ciudades = [], onAutoAdvance 
           >
             <span className="font-medium">{ciudad.label}</span>
             {formData.ciudad_interes === ciudad.id && (
-              <span className="ml-2 text-red-600">✓</span>
+              <span className="ml-2 text-accent">✓</span>
             )}
           </button>
         ))}
       </div>
-      {errors.ciudad_interes && <p className="text-red-600 text-center mt-4">{errors.ciudad_interes}</p>}
+      {errors.ciudad_interes && <p className="text-accent text-center mt-4">{errors.ciudad_interes}</p>}
     </div>
   );
 }
@@ -160,10 +160,10 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
             type="text"
             value={formData.nombre}
             onChange={(e) => updateFormData('nombre', e.target.value)}
-            className={`form-input-minimal ${errors.nombre ? 'border-red-600' : ''}`}
+            className={`form-input-minimal ${errors.nombre ? 'border-accent' : ''}`}
             placeholder="Tu nombre"
           />
-          {errors.nombre && <p className="text-red-600 text-sm mt-2">{errors.nombre}</p>}
+          {errors.nombre && <p className="text-accent text-sm mt-2">{errors.nombre}</p>}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
@@ -172,10 +172,10 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData('email', e.target.value)}
-              className={`form-input-minimal ${errors.email ? 'border-red-600' : ''}`}
+              className={`form-input-minimal ${errors.email ? 'border-accent' : ''}`}
               placeholder="tu@email.com"
             />
-            {errors.email && <p className="text-red-600 text-sm mt-2">{errors.email}</p>}
+            {errors.email && <p className="text-accent text-sm mt-2">{errors.email}</p>}
           </div>
           <div>
             <label className="form-label-minimal">Teléfono *</label>
@@ -183,10 +183,10 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
               type="tel"
               value={formData.telefono}
               onChange={(e) => updateFormData('telefono', e.target.value)}
-              className={`form-input-minimal ${errors.telefono ? 'border-red-600' : ''}`}
+              className={`form-input-minimal ${errors.telefono ? 'border-accent' : ''}`}
               placeholder="+34 600 000 000"
             />
-            {errors.telefono && <p className="text-red-600 text-sm mt-2">{errors.telefono}</p>}
+            {errors.telefono && <p className="text-accent text-sm mt-2">{errors.telefono}</p>}
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -195,14 +195,14 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
             <select
               value={formData.pais_origen}
               onChange={(e) => updateFormData('pais_origen', e.target.value)}
-              className={`form-input-minimal ${errors.pais_origen ? 'border-red-600' : ''}`}
+              className={`form-input-minimal ${errors.pais_origen ? 'border-accent' : ''}`}
             >
               <option value="">Selecciona tu país</option>
               {PAISES.map((pais) => (
                 <option key={pais} value={pais}>{pais}</option>
               ))}
             </select>
-            {errors.pais_origen && <p className="text-red-600 text-sm mt-2">{errors.pais_origen}</p>}
+            {errors.pais_origen && <p className="text-accent text-sm mt-2">{errors.pais_origen}</p>}
           </div>
           <div>
             <label className="form-label-minimal">Ciudad de origen</label>
@@ -244,12 +244,12 @@ function Step4({ formData, updateFormData, errors }: StepProps) {
               >
                 <span className="font-medium text-sm">{option.label}</span>
                 {formData.presupuesto === option.id && (
-                  <span className="ml-2 text-red-600">✓</span>
+                  <span className="ml-2 text-accent">✓</span>
                 )}
               </button>
             ))}
           </div>
-          {errors.presupuesto && <p className="text-red-600 text-sm mt-4">{errors.presupuesto}</p>}
+          {errors.presupuesto && <p className="text-accent text-sm mt-4">{errors.presupuesto}</p>}
         </div>
         <div>
           <label className="form-label-minimal mb-6">¿Cuándo lo necesitas? *</label>
@@ -267,12 +267,12 @@ function Step4({ formData, updateFormData, errors }: StepProps) {
               >
                 <span className="font-medium text-sm">{option.label}</span>
                 {formData.urgencia === option.id && (
-                  <span className="ml-2 text-red-600">✓</span>
+                  <span className="ml-2 text-accent">✓</span>
                 )}
               </button>
             ))}
           </div>
-          {errors.urgencia && <p className="text-red-600 text-sm mt-4">{errors.urgencia}</p>}
+          {errors.urgencia && <p className="text-accent text-sm mt-4">{errors.urgencia}</p>}
         </div>
         <div>
           <label className="form-label-minimal">

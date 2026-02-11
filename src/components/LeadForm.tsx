@@ -442,7 +442,7 @@ export default function LeadForm({
         )}
 
         {submitStatus === 'error' && (
-          <div className="mt-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 text-xs sm:text-sm">
+          <div className="mt-4 p-3 sm:p-4 bg-accent-50 border border-accent-200 rounded-lg text-accent-700 text-xs sm:text-sm">
             <strong>Error al enviar.</strong> Inténtalo de nuevo.
           </div>
         )}

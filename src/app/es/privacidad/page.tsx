@@ -85,7 +85,7 @@ export default function PrivacidadPage() {
             <h2 className="mb-6 text-2xl font-bold">7. Contacto</h2>
             <p className="text-gray-700 leading-relaxed">
               Para ejercer tus derechos o hacer consultas sobre nuestra política de privacidad, 
-              contáctanos en: <a href="mailto:privacidad@health4spain.com" className="text-red-600 hover:underline font-medium">privacidad@health4spain.com</a>
+              contáctanos en: <a href="mailto:privacidad@health4spain.com" className="text-accent hover:underline font-medium">privacidad@health4spain.com</a>
             </p>
           </section>
         </div>

@@ -54,10 +54,21 @@ module.exports = {
           800: '#1f2937',
           900: '#111827',
         },
+        // Acento (reemplaza rojo): azul claro
+        accent: {
+          DEFAULT: '#3bbdda',
+          50: '#ecfbfe',
+          100: '#d5f5fa',
+          200: '#b0eaf4',
+          400: '#4dc9e3',
+          500: '#3bbdda',
+          600: '#2dacc7',
+          700: '#1e9cb8',
+        },
         // Semánticos
         success: '#10b981',
         warning: '#f59e0b',
-        error: '#ef4444',
+        error: '#3bbdda',
         info: '#3b82f6',
       },
       spacing: {

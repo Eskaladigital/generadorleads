@@ -35,10 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://health4spain.com",
     siteName: "Health4Spain",
-    title: "Health4Spain - Tu Nueva Vida en España",
-    description: "Conectamos residentes internacionales con profesionales españoles de confianza.",
     images: [
       {
         url: "/images/logo-horizontal.png",
@@ -50,8 +47,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Health4Spain - Tu Nueva Vida en España",
-    description: "Conectamos residentes internacionales con profesionales españoles de confianza.",
     images: ["/images/logo-horizontal.png"],
   },
   robots: {

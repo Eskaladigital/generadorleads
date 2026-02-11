@@ -46,19 +46,19 @@ export default async function DestinosPage() {
           </p>
           <div className="flex gap-8 md:gap-12 mb-8 pt-6 border-t border-gray-300">
             <div>
-              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">{ciudades.length}</div>
+              <div className="text-4xl md:text-5xl font-bold text-accent mb-2">{ciudades.length}</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Ciudades</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">{regiones.length}</div>
+              <div className="text-4xl md:text-5xl font-bold text-accent mb-2">{regiones.length}</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Regiones</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">150+</div>
+              <div className="text-4xl md:text-5xl font-bold text-accent mb-2">150+</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Profesionales</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">4</div>
+              <div className="text-4xl md:text-5xl font-bold text-accent mb-2">4</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Servicios</div>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default async function DestinosPage() {
         <div className="container-narrow space-y-20">
           {regiones.map(([zona, ciudadesZona], regionIndex) => (
             <div key={zona}>
-              <h2 className="mb-8 pb-4 border-b-3 border-red-600 inline-block">
+              <h2 className="mb-8 pb-4 border-b-3 border-accent inline-block">
                 {zona}
               </h2>
 
@@ -128,19 +128,19 @@ export default async function DestinosPage() {
           </Link>
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-600">
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Profesionales verificados
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Atención en tu idioma
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Sin compromiso

@@ -42,25 +42,25 @@ export default function NotFoundES() {
           <div className="flex flex-wrap justify-center gap-6">
             <Link 
               href="/es/destinos" 
-              className="text-red-600 hover:underline text-sm uppercase tracking-wider font-medium"
+              className="text-accent hover:underline text-sm uppercase tracking-wider font-medium"
             >
               Destinos
             </Link>
             <Link 
               href="/es/servicios" 
-              className="text-red-600 hover:underline text-sm uppercase tracking-wider font-medium"
+              className="text-accent hover:underline text-sm uppercase tracking-wider font-medium"
             >
               Servicios
             </Link>
             <Link 
               href="/es/blog" 
-              className="text-red-600 hover:underline text-sm uppercase tracking-wider font-medium"
+              className="text-accent hover:underline text-sm uppercase tracking-wider font-medium"
             >
               Blog
             </Link>
             <Link 
               href="/es/sobre-nosotros" 
-              className="text-red-600 hover:underline text-sm uppercase tracking-wider font-medium"
+              className="text-accent hover:underline text-sm uppercase tracking-wider font-medium"
             >
               Sobre Nosotros
             </Link>

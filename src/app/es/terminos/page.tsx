@@ -105,7 +105,7 @@ export default function TerminosPage() {
             <h2 className="mb-6 text-2xl font-bold">9. Contacto</h2>
             <p className="text-gray-700 leading-relaxed">
               Para preguntas sobre estos términos, contáctanos en: 
-              <a href="mailto:legal@health4spain.com" className="text-red-600 hover:underline font-medium ml-1">legal@health4spain.com</a>
+              <a href="mailto:legal@health4spain.com" className="text-accent hover:underline font-medium ml-1">legal@health4spain.com</a>
             </p>
           </section>
         </div>

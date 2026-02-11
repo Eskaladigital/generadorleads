@@ -159,7 +159,7 @@ export default function MediaPage() {
           <h1 className="text-2xl font-serif font-bold text-gray-900">Media</h1>
           <p className="text-gray-500 mt-1">Gestiona las imágenes del blog</p>
         </div>
-        <label className="inline-flex items-center gap-2 px-4 py-2 bg-[red-600] text-white rounded-lg hover:bg-[red-700] cursor-pointer transition">
+        <label className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-600 cursor-pointer transition">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
           </svg>
@@ -181,7 +181,7 @@ export default function MediaPage() {
         onDragLeave={handleDragLeave}
         className={`mb-6 border-2 border-dashed rounded-lg p-8 text-center transition ${
           dragOver
-            ? 'border-[red-600] bg-[red-600]/5'
+            ? 'border-[accent] bg-accent/5'
             : 'border-gray-300 hover:border-gray-400'
         }`}
       >
@@ -190,7 +190,7 @@ export default function MediaPage() {
         </svg>
         <p className="text-gray-600">
           Arrastra imágenes aquí o{' '}
-          <label className="text-[red-600] hover:underline cursor-pointer">
+          <label className="text-[accent] hover:underline cursor-pointer">
             selecciona archivos
             <input
               type="file"
@@ -244,7 +244,7 @@ export default function MediaPage() {
                   </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); deleteFile(file.name); }}
-                    className="p-2 bg-white rounded-full shadow hover:bg-red-50 text-red-500"
+                    className="p-2 bg-white rounded-full shadow hover:bg-accent-50 text-accent-500"
                     title="Eliminar"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -324,13 +324,13 @@ export default function MediaPage() {
                 <div className="mt-6 pt-6 border-t space-y-2">
                   <button
                     onClick={() => copyUrl(selectedFile.url)}
-                    className="w-full py-2 px-4 bg-[red-600] text-white rounded-lg hover:bg-[red-700] transition text-sm"
+                    className="w-full py-2 px-4 bg-accent text-white rounded-lg hover:bg-accent-600 transition text-sm"
                   >
                     Copiar URL
                   </button>
                   <button
                     onClick={() => deleteFile(selectedFile.name)}
-                    className="w-full py-2 px-4 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-sm"
+                    className="w-full py-2 px-4 border border-accent-200 text-accent rounded-lg hover:bg-accent-50 transition text-sm"
                   >
                     Eliminar Imagen
                   </button>

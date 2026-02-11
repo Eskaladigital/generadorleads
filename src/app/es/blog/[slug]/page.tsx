@@ -107,12 +107,14 @@ export async function generateMetadata({
   
   const categoryLabel = categoryLabels[post.category] || post.category;
   
+  const title = `${post.title} | Health4Spain Blog`;
+  const description = post.excerpt?.slice(0, 155) || `${post.title}. Guía práctica para extranjeros en España.`;
   return {
-    title: `${post.title} | Health4Spain Blog`,
-    description: post.excerpt?.slice(0, 155) || `${post.title}. Guía práctica para extranjeros en España.`,
+    title,
+    description,
     openGraph: {
-      title: post.title,
-      description: post.excerpt?.slice(0, 155),
+      title,
+      description,
     },
   };
 }
@@ -156,16 +158,16 @@ export default async function BlogPostPage({
         <div className="container-narrow">
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center gap-2 text-sm text-gray-500">
-            <Link href="/es" className="hover:text-red-600">Inicio</Link>
+            <Link href="/es" className="hover:text-accent">Inicio</Link>
             <span>/</span>
-            <Link href="/es/blog" className="hover:text-red-600">Blog</Link>
+            <Link href="/es/blog" className="hover:text-accent">Blog</Link>
             <span>/</span>
             <span className="text-gray-900">{categoryLabel}</span>
           </nav>
 
           {/* Category & Date */}
           <div className="flex items-center gap-4 mb-6">
-            <span className="uppercase text-[0.8rem] text-red-600 tracking-wider font-semibold">
+            <span className="uppercase text-[0.8rem] text-accent tracking-wider font-semibold">
               {categoryLabel}
             </span>
             <span className="text-gray-400">•</span>
@@ -186,7 +188,7 @@ export default async function BlogPostPage({
           </h1>
 
           {/* Excerpt */}
-          <p className="text-[1.3rem] text-gray-600 leading-relaxed mb-8 border-l-4 border-red-600 pl-6">
+          <p className="text-[1.3rem] text-gray-600 leading-relaxed mb-8 border-l-4 border-accent pl-6">
             {post.excerpt}
           </p>
 
@@ -220,7 +222,7 @@ export default async function BlogPostPage({
               prose-h2:text-3xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6
               prose-h3:text-2xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-4
               prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
-              prose-a:text-red-600 prose-a:no-underline prose-a:font-medium hover:prose-a:underline
+              prose-a:text-accent prose-a:no-underline prose-a:font-medium hover:prose-a:underline
               prose-strong:text-[#1a1a1a] prose-strong:font-semibold
               prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
               prose-ol:my-6 prose-ol:list-decimal prose-ol:pl-6
@@ -230,7 +232,7 @@ export default async function BlogPostPage({
           />
 
           {/* CTA Box */}
-          <div className="mt-16 p-10 bg-gray-50 border-l-4 border-red-600">
+          <div className="mt-16 p-10 bg-gray-50 border-l-4 border-accent">
             <h3 className="text-2xl font-bold mb-4">
               ¿Necesitas ayuda para establecerte en España?
             </h3>
@@ -264,8 +266,8 @@ export default async function BlogPostPage({
                           }}
                         />
                       </div>
-                      <div className="text-xs uppercase text-red-600 font-semibold mb-2">{relatedCategory}</div>
-                      <h4 className="text-lg font-semibold text-[#1a1a1a] group-hover:text-red-600 transition-colors">
+                      <div className="text-xs uppercase text-accent font-semibold mb-2">{relatedCategory}</div>
+                      <h4 className="text-lg font-semibold text-[#1a1a1a] group-hover:text-accent transition-colors">
                         {relatedPost.title}
                       </h4>
                     </Link>

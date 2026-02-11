@@ -100,7 +100,7 @@ function AdminSidebar() {
                   href={item.href}
                   className={`flex items-center gap-3 px-4 py-3 transition-opacity ${
                     active
-                      ? 'opacity-100 border-l-3 border-red-600 font-bold'
+                      ? 'opacity-100 border-l-3 border-accent font-bold'
                       : 'opacity-60 hover:opacity-100'
                   }`}
                 >

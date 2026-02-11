@@ -178,10 +178,10 @@ export default function BlogPostForm({ initialData, onSubmit, isLoading }: BlogP
                 onChange={handleChange}
                 placeholder="Título del artículo"
                 className={`w-full px-4 py-3 text-lg sm:text-xl border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none ${
-                  errors.title ? 'border-red-500' : 'border-gray-300'
+                  errors.title ? 'border-accent-500' : 'border-gray-300'
                 }`}
               />
-              {errors.title && <p className="mt-1 text-sm text-red-600">{errors.title}</p>}
+              {errors.title && <p className="mt-1 text-sm text-accent">{errors.title}</p>}
             </div>
 
             {/* Slug */}
@@ -198,11 +198,11 @@ export default function BlogPostForm({ initialData, onSubmit, isLoading }: BlogP
                   onChange={handleChange}
                   placeholder="url-del-articulo"
                   className={`flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none ${
-                    errors.slug ? 'border-red-500' : 'border-gray-300'
+                    errors.slug ? 'border-accent-500' : 'border-gray-300'
                   }`}
                 />
               </div>
-              {errors.slug && <p className="mt-1 text-sm text-red-600">{errors.slug}</p>}
+              {errors.slug && <p className="mt-1 text-sm text-accent">{errors.slug}</p>}
             </div>
 
             {/* Extracto */}
@@ -218,11 +218,11 @@ export default function BlogPostForm({ initialData, onSubmit, isLoading }: BlogP
                 maxLength={160}
                 placeholder="Breve descripción del artículo..."
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none ${
-                  errors.excerpt ? 'border-red-500' : 'border-gray-300'
+                  errors.excerpt ? 'border-accent-500' : 'border-gray-300'
                 }`}
               />
               <div className="flex justify-between mt-1">
-                {errors.excerpt && <p className="text-sm text-red-600">{errors.excerpt}</p>}
+                {errors.excerpt && <p className="text-sm text-accent">{errors.excerpt}</p>}
                 <span className="text-sm text-gray-500 ml-auto">
                   {formData.excerpt?.length || 0}/160
                 </span>
@@ -240,7 +240,7 @@ export default function BlogPostForm({ initialData, onSubmit, isLoading }: BlogP
                   onChange={handleContentChange}
                 />
               </div>
-              {errors.content && <p className="mt-2 text-sm text-red-600">{errors.content}</p>}
+              {errors.content && <p className="mt-2 text-sm text-accent">{errors.content}</p>}
             </div>
           </div>
 

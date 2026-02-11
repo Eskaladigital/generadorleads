@@ -137,7 +137,7 @@ export default function BlogEditor({
               border-radius: 4px;
               font-family: 'Fira Code', monospace;
               font-size: 0.9em;
-              color: #dc2626;
+              color: #3bbdda;
             }
             
             img { 

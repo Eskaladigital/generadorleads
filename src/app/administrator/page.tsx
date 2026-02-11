@@ -157,7 +157,7 @@ export default function DashboardPage() {
     cualificado: 'bg-purple-100 text-purple-800',
     asignado: 'bg-indigo-100 text-indigo-800',
     convertido: 'bg-green-100 text-green-800',
-    perdido: 'bg-red-100 text-red-800',
+    perdido: 'bg-gray-100 text-gray-800',
   };
 
   return (
@@ -170,21 +170,21 @@ export default function DashboardPage() {
 
       {/* Stats Cards - Minimal Style */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        <div className="border-t-3 border-red-600 pt-6">
+        <div className="border-t-3 border-accent pt-6">
           <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">Total Leads</p>
           <p className="text-4xl font-bold">{stats?.totalLeads}</p>
         </div>
-        <div className="border-t-3 border-red-600 pt-6">
+        <div className="border-t-3 border-accent pt-6">
           <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">Leads Este Mes</p>
           <p className="text-4xl font-bold">{stats?.leadsThisMonth}</p>
         </div>
-        <div className="border-t-3 border-red-600 pt-6">
+        <div className="border-t-3 border-accent pt-6">
           <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">Posts Publicados</p>
           <p className="text-4xl font-bold">
             {stats?.publishedPosts} <span className="text-xl text-gray-400">/ {stats?.totalPosts}</span>
           </p>
         </div>
-        <div className="border-t-3 border-red-600 pt-6">
+        <div className="border-t-3 border-accent pt-6">
           <p className="text-xs uppercase tracking-widest text-gray-600 mb-2">Landings Revisadas</p>
           <p className="text-4xl font-bold">
             {stats?.reviewedLandings} <span className="text-xl text-gray-400">/ {stats?.totalLandings}</span>

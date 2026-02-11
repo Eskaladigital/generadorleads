@@ -6,10 +6,6 @@ import { HERO_IMAGE_URL } from '@/lib/constants';
 export const metadata: Metadata = {
   title: 'Health4Spain - España Simplificado para Extranjeros',
   description: 'Conectamos extranjeros con profesionales verificados: abogados, seguros, inmobiliarias y gestorías. 150+ profesionales en 19 ciudades. Sin coste para ti.',
-  openGraph: {
-    title: 'Health4Spain - España Simplificado para Extranjeros',
-    description: 'Conectamos extranjeros con profesionales verificados: abogados, seguros, inmobiliarias y gestorías.',
-  },
 };
 
 // Datos - 4 PERFILES CORRECTOS
@@ -164,15 +160,15 @@ export default function HomePage() {
           
           <div className="flex gap-6 md:gap-10 mb-8 pt-6 border-t border-gray-300">
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">150+</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">150+</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Profesionales</div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">19</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">19</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Ciudades</div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">0€</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">0€</div>
               <div className="text-xs uppercase tracking-widest text-gray-500">Coste</div>
             </div>
           </div>
@@ -275,7 +271,7 @@ export default function HomePage() {
         <div className="text-center mt-12">
           <Link 
             href="/es/destinos" 
-            className="text-lg font-semibold text-black border-b-2 border-red-600 pb-1 hover:border-b-4 transition-all inline-block"
+            className="text-lg font-semibold text-black border-b-2 border-accent pb-1 hover:border-b-4 transition-all inline-block"
           >
             Ver todas las ciudades →
           </Link>

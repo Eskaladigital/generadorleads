@@ -24,7 +24,7 @@ export default function ProfesionalesPage() {
       {/* Intro */}
       <section className="section-alt">
         <div className="container-narrow">
-          <div className="bg-white border-t-3 border-red-600 p-8">
+          <div className="bg-white border-t-3 border-accent p-8">
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               Si eres abogado, corredor de seguros, agente inmobiliario o gestor administrativo, 
               Health4Spain puede ser tu mejor fuente de clientes cualificados. Solo pagas por resultados reales, 
@@ -111,7 +111,7 @@ export default function ProfesionalesPage() {
               { title: 'Seguro de Responsabilidad Civil', desc: 'Póliza de RC profesional activa y vigente.' },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-4 pb-6 border-b border-gray-300 last:border-0">
-                <svg className="w-6 h-6 text-red-600 mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-accent mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <div>
@@ -154,7 +154,7 @@ export default function ProfesionalesPage() {
       <section className="section">
         <div className="container-narrow">
           <h2 className="mb-12 text-center">Modelo de Comisiones</h2>
-          <div className="bg-white border-t-3 border-red-600 p-8 md:p-12">
+          <div className="bg-white border-t-3 border-accent p-8 md:p-12">
             <h3 className="text-2xl font-bold mb-6">Pago Por Conversión</h3>
             <p className="text-gray-600 mb-8">
               Solo pagas cuando hay conversión real. Las comisiones varían según el servicio:
@@ -168,7 +168,7 @@ export default function ProfesionalesPage() {
               ].map((item, i) => (
                 <li key={i} className="flex justify-between items-center py-4 border-b border-gray-200 last:border-0">
                   <span className="font-medium">{item.label}</span>
-                  <span className="font-bold text-red-600">{item.value}</span>
+                  <span className="font-bold text-accent">{item.value}</span>
                 </li>
               ))}
             </ul>

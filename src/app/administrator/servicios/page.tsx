@@ -177,7 +177,7 @@ export default function ServiciosPage() {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-[red-600] text-white rounded-lg hover:bg-[red-700] transition"
+          className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-600 transition"
         >
           {showForm ? 'Cancelar' : 'Nuevo Servicio'}
         </button>
@@ -201,7 +201,7 @@ export default function ServiciosPage() {
                   onChange={(e) => setFormData({ ...formData, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
                   disabled={!!editingServicio}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none disabled:bg-gray-100"
                   placeholder="abogados"
                 />
               </div>
@@ -214,7 +214,7 @@ export default function ServiciosPage() {
                   value={formData.nombre}
                   onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
                   placeholder="Abogado"
                 />
               </div>
@@ -227,7 +227,7 @@ export default function ServiciosPage() {
                   value={formData.nombre_plural}
                   onChange={(e) => setFormData({ ...formData, nombre_plural: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
                   placeholder="Abogados"
                 />
               </div>
@@ -239,7 +239,7 @@ export default function ServiciosPage() {
                   type="text"
                   value={formData.icon}
                   onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
                   placeholder="⚖️"
                 />
               </div>
@@ -253,7 +253,7 @@ export default function ServiciosPage() {
                 value={formData.descripcion_corta}
                 onChange={(e) => setFormData({ ...formData, descripcion_corta: e.target.value })}
                 rows={2}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
                 placeholder="Especialistas en visados, NIE, arraigo y nacionalidad"
               />
             </div>
@@ -268,7 +268,7 @@ export default function ServiciosPage() {
                   value={keywordInput}
                   onChange={(e) => setKeywordInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addKeyword())}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
                   placeholder="Añadir keyword"
                 />
                 <button
@@ -283,13 +283,13 @@ export default function ServiciosPage() {
                 {(formData.keywords || []).map((keyword, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-[red-600]/10 text-[red-600] rounded-full text-sm"
+                    className="inline-flex items-center gap-1 px-3 py-1 bg-accent/10 text-[accent] rounded-full text-sm"
                   >
                     {keyword}
                     <button
                       type="button"
                       onClick={() => removeKeyword(index)}
-                      className="hover:text-red-600"
+                      className="hover:text-accent"
                     >
                       ×
                     </button>
@@ -308,7 +308,7 @@ export default function ServiciosPage() {
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-[red-600] text-white rounded-lg hover:bg-[red-700] transition"
+                className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-600 transition"
               >
                 {editingServicio ? 'Actualizar' : 'Crear'} Servicio
               </button>
@@ -343,7 +343,7 @@ export default function ServiciosPage() {
               {loading ? (
                 <tr>
                   <td colSpan={6} className="px-4 py-8 text-center">
-                    <div className="w-6 h-6 border-2 border-[red-600] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-6 h-6 border-2 border-[accent] border-t-transparent rounded-full animate-spin mx-auto"></div>
                   </td>
                 </tr>
               ) : servicios.length === 0 ? (
@@ -385,13 +385,13 @@ export default function ServiciosPage() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleEdit(servicio)}
-                          className="text-[red-600] hover:text-[red-700] text-sm font-medium"
+                          className="text-[accent] hover:text-[accent-600] text-sm font-medium"
                         >
                           Editar
                         </button>
                         <button
                           onClick={() => handleDelete(servicio.slug)}
-                          className="text-red-600 hover:text-red-700 text-sm font-medium"
+                          className="text-accent hover:text-accent-600 text-sm font-medium"
                         >
                           Eliminar
                         </button>

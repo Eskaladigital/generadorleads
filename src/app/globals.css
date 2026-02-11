@@ -5,7 +5,7 @@
 /* =============================================
    HEALTH4SPAIN - Modern Minimalist Design
    Estilo: Ultra minimalista, 80% espacio blanco
-   Colores: Negro, Blanco, Rojo (#dc2626), Azul (#293f92)
+   Colores: Negro, Blanco, Azul claro acento (#3bbdda), Azul (#293f92)
    Tipografía: System fonts, protagonista del diseño
    ============================================= */
 
@@ -16,7 +16,7 @@
   /* Colores minimalistas */
   --color-black: #000000;
   --color-white: #ffffff;
-  --color-red: #dc2626;
+  --color-accent: #3bbdda;
   --color-blue: #293f92;
   --color-blue-light: #f0f2f9;
   --color-gray-light: #fafafa;
@@ -125,9 +125,9 @@ h4 { font-size: 1.5rem; }
    BUTTONS - MINIMALIST (solo bordes inferiores)
    ============================================= */
 @layer components {
-  /* Botón minimal con borde inferior rojo */
+  /* Botón minimal con borde inferior accent */
   .btn-minimal {
-    @apply inline-block py-2 px-0 text-black font-semibold border-b-3 border-red-600 hover:border-b-4 transition-all duration-200;
+    @apply inline-block py-2 px-0 text-black font-semibold border-b-3 border-accent hover:border-b-4 transition-all duration-200;
   }
   
   /* Botón minimal grande */
@@ -137,7 +137,7 @@ h4 { font-size: 1.5rem; }
   
   /* Botón para fondo negro/azul oscuro */
   .btn-minimal-white {
-    @apply inline-block py-2 px-0 text-white font-semibold border-b-3 border-red-600 hover:border-b-4 transition-all duration-200;
+    @apply inline-block py-2 px-0 text-white font-semibold border-b-3 border-accent hover:border-b-4 transition-all duration-200;
   }
   
   /* Botón ghost minimalista */
@@ -151,7 +151,7 @@ h4 { font-size: 1.5rem; }
    ============================================= */
 @layer components {
   .card-minimal {
-    @apply bg-white border-t-3 border-red-600 pt-6;
+    @apply bg-white border-t-3 border-accent pt-6;
   }
   
   .card-minimal-hover {
@@ -172,7 +172,7 @@ h4 { font-size: 1.5rem; }
   }
   
   .service-number {
-    @apply text-3xl md:text-4xl font-bold text-red-600;
+    @apply text-3xl md:text-4xl font-bold text-accent;
   }
   
   .service-arrow {
@@ -194,7 +194,7 @@ h4 { font-size: 1.5rem; }
 .service-card {
   background: white;
   padding: 2.5rem 2rem;
-  border-top: 3px solid var(--color-red);
+  border-top: 3px solid var(--color-accent);
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
@@ -212,7 +212,7 @@ h4 { font-size: 1.5rem; }
 .service-card .service-number {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-red);
+  color: var(--color-accent);
   margin-bottom: 0.25rem;
 }
 
@@ -452,7 +452,7 @@ input:focus, textarea:focus, select:focus {
 .profile-card {
   background: white;
   padding: 3rem 2.5rem;
-  border-top: 3px solid var(--color-red);
+  border-top: 3px solid var(--color-accent);
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
@@ -481,7 +481,7 @@ input:focus, textarea:focus, select:focus {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 3px solid var(--color-red);
+  border-bottom: 3px solid var(--color-accent);
   color: var(--color-blue);
   font-weight: 700;
 }
@@ -509,7 +509,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .destinos-lista a:hover {
-  color: var(--color-red);
+  color: var(--color-accent);
   padding-left: 1.25rem;
   background: var(--color-gray-light);
 }
@@ -574,7 +574,7 @@ input:focus, textarea:focus, select:focus {
 .timeline-number {
   font-size: 4rem;
   font-weight: 700;
-  color: var(--color-red);
+  color: var(--color-accent);
   margin-bottom: 1.5rem;
   line-height: 1;
 }
@@ -601,7 +601,7 @@ input:focus, textarea:focus, select:focus {
 
 .benefit-icon {
   font-size: 1.5rem;
-  color: var(--color-red);
+  color: var(--color-accent);
   flex-shrink: 0;
   background: white;
   width: 2rem;
@@ -645,9 +645,9 @@ input:focus, textarea:focus, select:focus {
 }
 
 .back-to-top:hover {
-  background: var(--color-red);
+  background: var(--color-accent);
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+  box-shadow: 0 6px 16px rgba(59, 189, 218, 0.4);
 }
 
 /* En móvil: más alto z-index y posición ajustada */

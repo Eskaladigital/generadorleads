@@ -204,14 +204,14 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
           <button
             onClick={() => handleSave(false)}
             disabled={saving}
-            className="px-4 py-2 border border-[red-600] text-[red-600] rounded-lg hover:bg-[red-600]/10 transition disabled:opacity-50"
+            className="px-4 py-2 border border-[accent] text-[accent] rounded-lg hover:bg-accent/10 transition disabled:opacity-50"
           >
             {saving ? 'Guardando...' : 'Guardar Borrador'}
           </button>
           <button
             onClick={() => handleSave(true)}
             disabled={saving}
-            className="px-4 py-2 bg-[red-600] text-white rounded-lg hover:bg-[red-700] transition disabled:opacity-50"
+            className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-600 transition disabled:opacity-50"
           >
             {saving ? 'Publicando...' : 'Publicar'}
           </button>
@@ -228,7 +228,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
               type="text"
               value={post.title}
               onChange={(e) => handleTitleChange(e.target.value)}
-              className="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+              className="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
               placeholder="Título del artículo..."
             />
             <div className="mt-2 flex items-center gap-2">
@@ -237,7 +237,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
                 type="text"
                 value={post.slug}
                 onChange={(e) => setPost(prev => ({ ...prev, slug: e.target.value }))}
-                className="flex-1 px-2 py-1 text-sm border border-gray-200 rounded focus:ring-1 focus:ring-[red-600] outline-none"
+                className="flex-1 px-2 py-1 text-sm border border-gray-200 rounded focus:ring-1 focus:ring-[accent] outline-none"
               />
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
               value={post.excerpt}
               onChange={(e) => setPost(prev => ({ ...prev, excerpt: e.target.value }))}
               rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none resize-none"
               placeholder="Breve descripción del artículo..."
             />
           </div>
@@ -260,7 +260,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
               <label className="block text-sm font-medium text-gray-700">Contenido</label>
               <button
                 onClick={() => openMediaManager('content')}
-                className="flex items-center gap-1 text-sm text-[red-600] hover:underline"
+                className="flex items-center gap-1 text-sm text-[accent] hover:underline"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -321,7 +321,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
             <select
               value={post.status}
               onChange={(e) => setPost(prev => ({ ...prev, status: e.target.value }))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
             >
               <option value="draft">Borrador</option>
               <option value="published">Publicado</option>
@@ -335,7 +335,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
             <select
               value={post.category}
               onChange={(e) => setPost(prev => ({ ...prev, category: e.target.value }))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
             >
               {categories.map(cat => (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -365,7 +365,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
                   </button>
                   <button
                     onClick={() => setPost(prev => ({ ...prev, featured_image: '' }))}
-                    className="p-1.5 bg-red-500 text-white rounded-full shadow hover:bg-red-600"
+                    className="p-1.5 bg-accent-500 text-white rounded-full shadow hover:bg-accent"
                     title="Quitar imagen"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -377,7 +377,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
             ) : (
               <button
                 onClick={() => openMediaManager('featured')}
-                className="w-full h-40 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400 hover:border-[red-600] hover:text-[red-600] transition"
+                className="w-full h-40 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400 hover:border-[accent] hover:text-[accent] transition"
               >
                 <svg className="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -394,7 +394,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
               type="text"
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
               placeholder="tag1, tag2, tag3..."
             />
             <p className="text-xs text-gray-400 mt-1">Separadas por comas</p>
@@ -410,7 +410,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
                   type="text"
                   value={post.meta_title}
                   onChange={(e) => setPost(prev => ({ ...prev, meta_title: e.target.value }))}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none"
                 />
                 <p className="text-xs text-gray-400 mt-1">{post.meta_title.length}/60 caracteres</p>
               </div>
@@ -420,7 +420,7 @@ export default function BlogEditorPage({ params }: { params: { slug: string } })
                   value={post.meta_description}
                   onChange={(e) => setPost(prev => ({ ...prev, meta_description: e.target.value }))}
                   rows={3}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[red-600] focus:border-transparent outline-none resize-none"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[accent] focus:border-transparent outline-none resize-none"
                 />
                 <p className="text-xs text-gray-400 mt-1">{post.meta_description.length}/160 caracteres</p>
               </div>

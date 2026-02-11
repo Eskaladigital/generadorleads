@@ -97,7 +97,7 @@ export const LEAD_STATUSES = [
   { value: 'asignado', label: 'Asignado', color: 'indigo' },
   { value: 'en_proceso', label: 'En proceso', color: 'cyan' },
   { value: 'convertido', label: 'Convertido', color: 'green' },
-  { value: 'perdido', label: 'Perdido', color: 'red' },
+  { value: 'perdido', label: 'Perdido', color: 'gray' },
   { value: 'descartado', label: 'Descartado', color: 'gray' },
 ] as const;
 

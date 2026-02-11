@@ -333,15 +333,15 @@ export default function DestinosPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-8 mb-12">
-        <div className="border-t-3 border-red-600 pt-4">
+        <div className="border-t-3 border-accent pt-4">
           <p className="text-sm uppercase tracking-widest text-gray-600 mb-1">Total Destinos</p>
           <p className="text-4xl font-bold">{destinos.length}</p>
         </div>
-        <div className="border-t-3 border-red-600 pt-4">
+        <div className="border-t-3 border-accent pt-4">
           <p className="text-sm uppercase tracking-widest text-gray-600 mb-1">Destacados</p>
           <p className="text-4xl font-bold">{destinos.filter(d => d.destacada).length}</p>
         </div>
-        <div className="border-t-3 border-red-600 pt-4">
+        <div className="border-t-3 border-accent pt-4">
           <p className="text-sm uppercase tracking-widest text-gray-600 mb-1">Población Total</p>
           <p className="text-4xl font-bold">
             {(destinos.reduce((acc, d) => acc + (d.poblacion || 0), 0) / 1000000).toFixed(1)}M
@@ -439,7 +439,7 @@ export default function DestinosPage() {
                         </button>
                         <button
                           onClick={() => handleDelete(destino.slug)}
-                          className="text-sm font-medium text-red-600 hover:opacity-50 transition-opacity"
+                          className="text-sm font-medium text-accent hover:opacity-50 transition-opacity"
                         >
                           Eliminar
                         </button>

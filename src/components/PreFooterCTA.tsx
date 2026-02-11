@@ -75,7 +75,7 @@ export default function PreFooterCTA() {
               </div>
               <button 
                 type="submit" 
-                className="w-full bg-red-600 text-white py-4 px-8 font-bold text-lg hover:bg-red-700 transition-colors"
+                className="w-full bg-accent text-white py-4 px-8 font-bold text-lg hover:bg-accent-600 transition-colors"
               >
                 Enviar Solicitud →
               </button>

@@ -358,7 +358,7 @@ export default async function ServicioPage({
             {/* Sidebar */}
             <div className="space-y-8">
               {/* CTA Card */}
-              <div className="bg-white border-t-3 border-red-600 p-6 sticky top-20">
+              <div className="bg-white border-t-3 border-accent p-6 sticky top-20">
                 <h3 className="text-xl font-bold mb-4">
                   Solicita información
                 </h3>
@@ -389,10 +389,10 @@ export default async function ServicioPage({
                         href={`/es/contacto?servicio=${slug}&ciudad=${ciudadSlug}`}
                         className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0 hover:pl-2 transition-all group"
                       >
-                        <span className="text-gray-700 font-medium group-hover:text-red-600">
+                        <span className="text-gray-700 font-medium group-hover:text-accent">
                           {CIUDADES_NOMBRES[ciudadSlug]}
                         </span>
-                        <svg className="w-4 h-4 text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-gray-400 group-hover:text-accent group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </Link>
@@ -443,7 +443,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             <div className="flex flex-wrap gap-8 mb-12 pt-8 border-t border-gray-300">
               {landing.hero_bullets.slice(0, 3).map((bullet, idx) => (
                 <div key={idx} className="flex items-center gap-3">
-                  <svg className="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span className="text-gray-700 font-medium">{bullet}</span>
@@ -477,7 +477,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   <div className="space-y-4">
                     {landing.problems.map((problem, idx) => (
                       <div key={idx} className="flex items-start gap-4 pb-4 border-b border-gray-200 last:border-0">
-                        <svg className="w-6 h-6 text-red-600 mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-6 h-6 text-accent mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                         </svg>
                         <p className="text-gray-700 text-lg">{problem}</p>
@@ -489,7 +489,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
 
               {/* Solución */}
               {landing.solution_title && landing.solution_text && (
-                <div className="bg-white border-t-3 border-red-600 p-8">
+                <div className="bg-white border-t-3 border-accent p-8">
                   <h2 className="mb-6">
                     {landing.solution_title}
                   </h2>
@@ -534,7 +534,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                       {landing.why_city_stats.map((stat, idx) => (
                         <div key={idx} className="text-center">
-                          <div className="text-5xl md:text-6xl font-bold text-red-600 mb-2">
+                          <div className="text-5xl md:text-6xl font-bold text-accent mb-2">
                             {stat.value}
                           </div>
                           <div className="text-sm uppercase tracking-widest text-gray-500">{stat.label}</div>
@@ -570,7 +570,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
 
             {/* Sidebar */}
             <div className="space-y-8">
-              <div className="bg-white border-t-3 border-red-600 p-6 sticky top-20">
+              <div className="bg-white border-t-3 border-accent p-6 sticky top-20">
                 <h3 className="text-xl font-bold mb-4">
                   Solicita información
                 </h3>
@@ -585,19 +585,19 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                 </Link>
                 <div className="space-y-2 text-xs text-gray-500">
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     Sin compromiso
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     100% gratuito
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     Profesionales verificados
@@ -627,19 +627,19 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
           </Link>
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-600">
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Respuesta en 24h
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Atención en tu idioma
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Sin compromiso
