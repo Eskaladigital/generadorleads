@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { getCiudades } from '@/lib/ciudades';
-import ContactFormClient from '../contacto/ContactFormClient';
+import ContactFormClient from './ContactFormClient';
 
 export const metadata: Metadata = {
   title: 'Solicitar Información | Health4Spain',

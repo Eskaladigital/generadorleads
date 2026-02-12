@@ -481,7 +481,7 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
 
   if (isSuccess) {
     return (
-      <div className="py-6 md:py-10 bg-gray-50 min-h-[60vh] flex items-center">
+      <div className="py-4 md:py-10 bg-gray-50">
         <div className="container-narrow text-center w-full">
           <div className="max-w-xl mx-auto">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 text-green-600 text-4xl mb-8">✓</div>
@@ -556,7 +556,7 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
   };
 
   return (
-    <div className="py-6 md:py-10">
+    <div className="py-4 md:py-10">
       <div className="container-narrow">
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
