@@ -272,7 +272,7 @@ export default function ContactoPage() {
       </section>
 
       {/* Garantías */}
-      <section className="section-blue-light">
+      <section className="section">
         <div className="container-narrow">
           <div className="text-center mb-12">
             <h2 className="mb-4">Nuestras Garantías</h2>
@@ -321,8 +321,8 @@ export default function ContactoPage() {
       </section>
 
       {/* CTA Final - Dual para clientes y partners */}
-      <section className="section-blue-dark">
-        <div className="container-narrow">
+      <section className="section-blue-dark pb-0">
+        <div className="container-narrow pb-8 md:pb-16">
           {/* Para Clientes */}
           <div className="text-center mb-12 pb-12 border-b border-white/20">
             <h2 className="mb-6" style={{ color: 'white' }}>¿Necesitas Ayuda Para Vivir en España?</h2>
