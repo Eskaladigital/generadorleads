@@ -2,8 +2,17 @@
 // HEALTH4SPAIN - Constantes de la aplicación
 // =============================================
 
-// Imagen hero home. Para usar tu imagen: ponla en public/images/hero-spain.jpg y cambia a '/images/hero-spain.jpg'
-export const HERO_IMAGE_URL = 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=1920&q=80';
+// Imágenes hero por página (Adobe Stock, WebP para mejor LCP)
+export const HERO_IMAGES = {
+  home: '/images/hero-home.webp',
+  servicios: '/images/hero-servicios.webp',
+  destinos: '/images/hero-destinos.webp',
+  contacto: '/images/hero-contacto.webp',
+  sobreNosotros: '/images/hero-nosotros.webp',
+} as const;
+
+/** @deprecated Use HERO_IMAGES.home instead */
+export const HERO_IMAGE_URL = HERO_IMAGES.home;
 
 // Logos en WebP para mejor LCP y carga rápida
 export const LOGO_PATHS = {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { HERO_IMAGE_URL } from '@/lib/constants';
+import { HERO_IMAGES } from '@/lib/constants';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ContactoPageMarker from './ContactoPageMarker';
 
@@ -28,7 +28,7 @@ export default function ContactoPage() {
       <section className="hero-with-image hero-compact">
         <div className="absolute inset-0 z-0">
           <Image
-            src={HERO_IMAGE_URL}
+            src={HERO_IMAGES.contacto}
             alt=""
             fill
             priority

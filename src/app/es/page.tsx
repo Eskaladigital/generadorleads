@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { HERO_IMAGE_URL, LOGO_PATHS } from '@/lib/constants';
+import { HERO_IMAGES, LOGO_PATHS } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Health4Spain - España Simplificado para Extranjeros',
@@ -140,7 +140,7 @@ export default function HomePage() {
       <section className="hero-with-image">
         <div className="absolute inset-0 z-0">
           <Image
-            src={HERO_IMAGE_URL}
+            src={HERO_IMAGES.home}
             alt=""
             fill
             priority

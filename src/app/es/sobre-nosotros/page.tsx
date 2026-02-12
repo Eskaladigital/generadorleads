@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { HERO_IMAGE_URL } from '@/lib/constants';
+import { HERO_IMAGES } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Sobre Nosotros - Health4Spain',
@@ -15,7 +15,7 @@ export default function SobreNosotrosPage() {
       <section className="hero-with-image hero-compact">
         <div className="absolute inset-0 z-0">
           <Image
-            src={HERO_IMAGE_URL}
+            src={HERO_IMAGES.sobreNosotros}
             alt=""
             fill
             priority
