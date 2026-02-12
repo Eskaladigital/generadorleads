@@ -102,6 +102,24 @@ export default function Navigation() {
                 </Link>
               ))}
               
+              {/* Language Switcher Desktop */}
+              <div className="flex items-center gap-1 border-l border-gray-300 pl-6">
+                {LANGUAGES.map((lang) => (
+                  <Link
+                    key={lang.code}
+                    href={switchLanguage(lang.code)}
+                    className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                      currentLang === lang.code
+                        ? 'bg-[#293f92] text-white'
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                    title={lang.label}
+                  >
+                    {lang.flag}
+                  </Link>
+                ))}
+              </div>
+              
               {/* CTA Desktop */}
               <Link
                 href="/es/contacto"
