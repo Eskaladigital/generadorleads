@@ -45,6 +45,9 @@ export default function SobreNosotrosPage() {
               <div className="text-xs uppercase tracking-widest text-gray-500">Coste</div>
             </div>
           </div>
+          <Link href="/es/contacto" className="btn-minimal-lg">
+            Solicitar Información
+          </Link>
         </div>
       </section>
 
