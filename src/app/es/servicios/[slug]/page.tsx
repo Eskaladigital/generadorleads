@@ -365,7 +365,7 @@ export default async function ServicioPage({
                   Te conectamos con profesionales verificados en menos de 24 horas.
                 </p>
                 <Link 
-                  href={`/es/contacto?servicio=${slug}`}
+                  href={`/es/solicitar?servicio=${slug}`}
                   className="btn-minimal-lg w-full text-center block mb-4"
                 >
                   Comenzar ahora
@@ -385,7 +385,7 @@ export default async function ServicioPage({
                     {servicio.ciudadesPopulares.map((ciudadSlug) => (
                       <Link
                         key={ciudadSlug}
-                        href={`/es/contacto?servicio=${slug}&ciudad=${ciudadSlug}`}
+                        href={`/es/solicitar?servicio=${slug}&ciudad=${ciudadSlug}`}
                         className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0 hover:pl-2 transition-all group"
                       >
                         <span className="text-gray-700 font-medium group-hover:text-accent">
@@ -457,7 +457,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             </div>
           )}
           <Link 
-            href={`/es/contacto?slug=${landing.slug}`}
+            href={`/es/solicitar?servicio=${landing.slug}`}
             className="btn-minimal-lg"
           >
             Solicitar información gratuita
@@ -502,7 +502,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                     {landing.solution_text}
                   </p>
                   <Link 
-                    href={`/es/contacto?slug=${landing.slug}`}
+                    href={`/es/solicitar?servicio=${landing.slug}`}
                     className="btn-minimal inline-flex items-center gap-2"
                   >
                     Solicitar contacto →
@@ -532,7 +532,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   <div className="text-center mt-12 pt-12 border-t border-gray-300">
                     <p className="text-gray-600 mb-6">¿Necesitas ayuda con alguno de estos servicios?</p>
                     <Link 
-                      href={`/es/contacto?slug=${landing.slug}`}
+                      href={`/es/solicitar?servicio=${landing.slug}`}
                       className="btn-minimal-lg"
                     >
                       Solicitar información gratuita
@@ -564,7 +564,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   )}
                   <div className="text-center mt-12">
                     <Link 
-                      href={`/es/contacto?slug=${landing.slug}`}
+                      href={`/es/solicitar?servicio=${landing.slug}`}
                       className="btn-minimal"
                     >
                       Conectar con profesionales →
@@ -606,7 +606,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   Te conectamos con profesionales verificados en menos de 24 horas.
                 </p>
                 <Link 
-                  href={`/es/contacto?slug=${landing.slug}`}
+                  href={`/es/solicitar?servicio=${landing.slug}`}
                   className="btn-minimal-lg w-full text-center block mb-4"
                 >
                   Comenzar ahora
@@ -648,7 +648,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             {landing.cta_subtitle || 'Te conectamos con profesionales que hablan tu idioma'}
           </p>
           <Link 
-            href={`/es/contacto?slug=${landing.slug}`}
+            href={`/es/solicitar?servicio=${landing.slug}`}
             className="btn-minimal-lg"
           >
             Solicitar información gratuita

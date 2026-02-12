@@ -78,7 +78,7 @@ export default async function ServiciosPage() {
               <div className="text-xs uppercase tracking-widest text-gray-500">Ciudades</div>
             </div>
           </div>
-          <Link href="/es/contacto" className="btn-minimal-lg">
+          <Link href="/es/solicitar" className="btn-minimal-lg">
             Solicitar Información
           </Link>
         </div>
@@ -99,7 +99,7 @@ export default async function ServiciosPage() {
               return (
                 <li key={servicio.slug}>
                   <Link
-                    href={`/es/contacto?servicio=${servicio.slug}`}
+                    href={`/es/solicitar?servicio=${servicio.slug}`}
                     className="service-item-minimal block w-full hover:bg-white hover:pl-4 transition-all group"
                   >
                     <div className="service-number">{numero}</div>
@@ -143,7 +143,7 @@ export default async function ServiciosPage() {
             Cuéntanos tu situación y te orientamos sin compromiso. 
             Todos los servicios en un solo punto de contacto.
           </p>
-          <Link href="/es/contacto" className="btn-minimal-lg">
+          <Link href="/es/solicitar" className="btn-minimal-lg">
             Solicitar Información Ahora
           </Link>
           <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-600">

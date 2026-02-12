@@ -232,7 +232,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             </div>
           )}
           <Link 
-            href={`/es/contacto?slug=${landing.slug}`}
+            href={`/es/solicitar?ciudad=${landing.slug}`}
             className="btn-minimal-lg"
           >
             {landing.cta_subtitle || 'Solicitar información'}
@@ -274,7 +274,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                     {landing.solution_text}
                   </p>
                   <Link 
-                    href={`/es/contacto?slug=${landing.slug}`}
+                    href={`/es/solicitar?ciudad=${landing.slug}`}
                     className="btn-minimal inline-flex items-center gap-2"
                   >
                     Solicitar contacto →
@@ -304,7 +304,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   <div className="text-center mt-12 pt-12 border-t border-gray-300">
                     <p className="text-gray-600 mb-6">¿Necesitas ayuda con alguno de estos servicios?</p>
                     <Link 
-                      href={`/es/contacto?slug=${landing.slug}`}
+                      href={`/es/solicitar?ciudad=${landing.slug}`}
                       className="btn-minimal-lg"
                     >
                       Solicitar información gratuita
@@ -334,7 +334,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   )}
                   <div className="text-center mt-12">
                     <Link 
-                      href={`/es/contacto?slug=${landing.slug}`}
+                      href={`/es/solicitar?ciudad=${landing.slug}`}
                       className="btn-minimal"
                     >
                       Conectar con profesionales →
@@ -373,7 +373,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   Te conectamos con profesionales verificados en menos de 24 horas.
                 </p>
                 <Link 
-                  href={`/es/contacto?slug=${landing.slug}`}
+                  href={`/es/solicitar?ciudad=${landing.slug}`}
                   className="btn-minimal-lg w-full text-center block"
                 >
                   Comenzar ahora
@@ -414,7 +414,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             {landing.cta_subtitle || 'Te conectamos con profesionales que hablan tu idioma'}
           </p>
           <Link 
-            href={`/es/contacto?slug=${landing.slug}`}
+            href={`/es/solicitar?ciudad=${landing.slug}`}
             className="btn-minimal-lg"
           >
             Solicitar información gratuita
@@ -482,7 +482,7 @@ function ServiceCityView({
             Te conectamos con los mejores profesionales de {servicioNombre.toLowerCase()} en {ciudadData.nombre}. 
           </p>
           <Link 
-            href={`/es/contacto?servicio=${servicio}&ciudad=${ciudad}`} 
+            href={`/es/solicitar?servicio=${servicio}&ciudad=${ciudad}`} 
             className="btn-minimal-lg"
           >
             Solicitar información gratuita
@@ -688,7 +688,7 @@ async function CityView({
                       Te conectamos con profesionales especializados (seguros, abogados, inmobiliarias, gestorías) que hablan tu idioma.
                     </p>
                     <Link 
-                      href={`/es/contacto?servicio=gestorias&ciudad=${slug}`}
+                      href={`/es/solicitar?servicio=gestorias&ciudad=${slug}`}
                       className="btn-minimal"
                     >
                       Solicitar contacto →
@@ -725,7 +725,7 @@ async function CityView({
                 <p className="text-gray-600 mb-6">
                   Te conectamos con profesionales verificados que te ayudarán en cada paso.
                 </p>
-                <Link href={`/es/contacto?ciudad=${slug}`} className="btn-minimal-lg w-full text-center block mb-4">
+                <Link href={`/es/solicitar?ciudad=${slug}`} className="btn-minimal-lg w-full text-center block mb-4">
                   Solicitar información gratuita
                 </Link>
                 <p className="text-xs text-gray-500 text-center">
@@ -747,7 +747,7 @@ async function CityView({
             No tienes que hacerlo solo. Te conectamos con profesionales de confianza que hablan tu idioma.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <Link href={`/es/contacto?ciudad=${slug}`} className="btn-minimal-lg">
+            <Link href={`/es/solicitar?ciudad=${slug}`} className="btn-minimal-lg">
               Solicitar asesoramiento gratuito
             </Link>
             <Link href="/es/servicios" className="text-gray-700 hover:text-black font-medium">
@@ -835,7 +835,7 @@ function CityViewBasic({
               Te conectamos con profesionales locales que te ayudarán con seguros, abogados, 
               inmobiliarias, gestorías y todo lo necesario para tu mudanza.
             </p>
-            <Link href={`/es/contacto?ciudad=${slug}`} className="btn-minimal-lg">
+            <Link href={`/es/solicitar?ciudad=${slug}`} className="btn-minimal-lg">
               Solicitar asesoramiento gratuito
             </Link>
           </div>
