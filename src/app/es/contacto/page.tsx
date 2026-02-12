@@ -70,9 +70,19 @@ export default function ContactoPage() {
 
           <div className="bg-white border-t-3 border-accent p-8 mb-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">¿Cómo Prefieres Contactarnos?</h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed mb-4">
               Elige el método que mejor se adapte a tus necesidades. Te responderemos en menos de 24 horas.
             </p>
+            <div className="flex flex-wrap gap-4 text-sm text-gray-600 mt-6 pt-4 border-t border-gray-200">
+              <div className="flex items-center gap-2">
+                <span className="text-accent font-bold">👥</span>
+                <span><strong>Clientes:</strong> Dudas sobre servicios, trámites, profesionales</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-accent font-bold">💼</span>
+                <span><strong>Partners:</strong> Únete a nuestro directorio de profesionales</span>
+              </div>
+            </div>
           </div>
 
           {/* Grid de contacto - 2 columnas en desktop */}
@@ -162,49 +172,101 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      {/* Qué esperar */}
+      {/* Qué esperar - Dividido por tipo de usuario */}
       <section className="section">
         <div className="container-narrow">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="mb-4">¿Qué Ocurre Después de Contactar?</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Proceso simple y transparente
+              Proceso adaptado según tus necesidades
             </p>
           </div>
 
-          <div className="space-y-8">
-            {[
-              {
-                num: '01',
-                title: 'Recibimos Tu Consulta',
-                desc: 'En menos de 24 horas revisamos tu solicitud y analizamos qué profesionales se ajustan mejor a tu caso, ubicación y necesidades.'
-              },
-              {
-                num: '02',
-                title: 'Te Presentamos Opciones',
-                desc: 'Te conectamos con 2-3 profesionales verificados. Recibes sus perfiles, especialidades y propuestas iniciales sin compromiso.'
-              },
-              {
-                num: '03',
-                title: 'Tú Decides',
-                desc: 'Compara, pregunta lo que necesites y elige libremente. Si ninguno te convence, buscamos más opciones. Todo gratis para ti.'
-              },
-              {
-                num: '04',
-                title: 'Seguimiento',
-                desc: 'Una vez conectado, hacemos seguimiento para asegurarnos de que estás recibiendo un servicio excepcional. Estamos contigo.'
-              }
-            ].map((step) => (
-              <div key={step.num} className="flex items-start gap-6">
-                <div className="text-5xl font-bold text-accent shrink-0" style={{ lineHeight: '1' }}>
-                  {step.num}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.desc}</p>
-                </div>
+          {/* Grid 2 columnas: Clientes y Partners */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Para Clientes */}
+            <div>
+              <div className="flex items-center gap-3 mb-8">
+                <span className="text-4xl">👥</span>
+                <h3 className="text-2xl font-bold">Si Eres Cliente</h3>
               </div>
-            ))}
+              <div className="space-y-6">
+                {[
+                  {
+                    num: '01',
+                    title: 'Recibimos Tu Consulta',
+                    desc: 'En menos de 24 horas revisamos tu solicitud y analizamos qué profesionales se ajustan mejor a tu caso.'
+                  },
+                  {
+                    num: '02',
+                    title: 'Te Presentamos Opciones',
+                    desc: 'Te conectamos con 2-3 profesionales verificados que pueden ayudarte específicamente.'
+                  },
+                  {
+                    num: '03',
+                    title: 'Tú Decides',
+                    desc: 'Compara propuestas y elige libremente. Si ninguno te convence, buscamos más opciones. Gratis.'
+                  },
+                  {
+                    num: '04',
+                    title: 'Seguimiento',
+                    desc: 'Hacemos seguimiento para asegurarnos de que estás recibiendo un servicio excepcional.'
+                  }
+                ].map((step) => (
+                  <div key={step.num} className="flex items-start gap-4">
+                    <div className="text-3xl font-bold text-accent shrink-0" style={{ lineHeight: '1' }}>
+                      {step.num}
+                    </div>
+                    <div>
+                      <h4 className="font-bold mb-1">{step.title}</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Para Partners */}
+            <div>
+              <div className="flex items-center gap-3 mb-8">
+                <span className="text-4xl">💼</span>
+                <h3 className="text-2xl font-bold">Si Eres Profesional</h3>
+              </div>
+              <div className="space-y-6">
+                {[
+                  {
+                    num: '01',
+                    title: 'Revisamos Tu Perfil',
+                    desc: 'Analizamos tu especialidad, experiencia con clientes internacionales y servicios que ofreces.'
+                  },
+                  {
+                    num: '02',
+                    title: 'Proceso de Verificación',
+                    desc: 'Verificamos licencias profesionales, referencias y capacidad de trabajar con extranjeros.'
+                  },
+                  {
+                    num: '03',
+                    title: 'Alta en el Directorio',
+                    desc: 'Una vez aprobado, te damos de alta y empezamos a enviarte leads cualificados de tu zona.'
+                  },
+                  {
+                    num: '04',
+                    title: 'Pago por Éxito',
+                    desc: 'Solo pagas cuando hay conversión real. Sin cuotas mensuales, sin permanencia.'
+                  }
+                ].map((step) => (
+                  <div key={step.num} className="flex items-start gap-4">
+                    <div className="text-3xl font-bold text-accent shrink-0" style={{ lineHeight: '1' }}>
+                      {step.num}
+                    </div>
+                    <div>
+                      <h4 className="font-bold mb-1">{step.title}</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -258,22 +320,39 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      {/* CTA Final */}
+      {/* CTA Final - Dual para clientes y partners */}
       <section className="section-blue-dark">
-        <div className="container-narrow text-center">
-          <h2 className="mb-6" style={{ color: 'white' }}>¿Listo Para Empezar?</h2>
-          <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Da el primer paso hacia tu nueva vida en España. Sin compromiso, sin coste.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/es/presupuesto" className="btn-minimal-white">
-              Solicitar Información
-            </Link>
+        <div className="container-narrow">
+          {/* Para Clientes */}
+          <div className="text-center mb-12 pb-12 border-b border-white/20">
+            <h2 className="mb-6" style={{ color: 'white' }}>¿Necesitas Ayuda Para Vivir en España?</h2>
+            <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+              Da el primer paso. Te conectamos con profesionales verificados. Sin compromiso, sin coste.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/es/presupuesto" className="btn-minimal-white">
+                Solicitar Información
+              </Link>
+              <a 
+                href={`mailto:${CONTACT_INFO.email}`}
+                className="inline-flex items-center justify-center px-8 py-3 text-white border border-white/30 hover:bg-white/10 transition-all text-sm uppercase tracking-widest"
+              >
+                Enviar Email
+              </a>
+            </div>
+          </div>
+
+          {/* Para Profesionales */}
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-4" style={{ color: 'white' }}>¿Eres Profesional?</h3>
+            <p className="text-lg text-gray-200 mb-6 max-w-2xl mx-auto">
+              Únete a nuestro directorio verificado. Recibe leads cualificados de tu especialidad y zona.
+            </p>
             <a 
-              href={`mailto:${CONTACT_INFO.email}`}
-              className="inline-flex items-center justify-center px-8 py-3 text-white border border-white/30 hover:bg-white/10 transition-all text-sm uppercase tracking-widest"
+              href={`mailto:${CONTACT_INFO.email}?subject=Quiero ser Partner - Health4Spain`}
+              className="inline-flex items-center justify-center px-8 py-3 text-white border-2 border-white hover:bg-white hover:text-[#293f92] transition-all text-sm uppercase tracking-widest font-semibold"
             >
-              Enviar Email
+              Solicitar Información Partners
             </a>
           </div>
         </div>

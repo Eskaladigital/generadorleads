@@ -125,7 +125,7 @@ export default function Navigation() {
                 href="/es/contacto"
                 className="bg-[#293f92] text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-[#3bbdda] transition-all shadow-md hover:shadow-lg"
               >
-                Solicitar contacto
+                Contacto
               </Link>
             </nav>
 
@@ -205,7 +205,7 @@ export default function Navigation() {
                 href="/es/contacto"
                 className="block w-full bg-[#293f92] text-white text-center px-6 py-4 rounded-lg font-semibold text-base hover:bg-[#3bbdda] transition-colors shadow-md"
               >
-                Solicitar contacto
+                Contacto
               </Link>
             </div>
 
