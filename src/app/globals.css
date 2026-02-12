@@ -54,7 +54,7 @@ body.form-active .sticky-cta-mobile {
 
 /* Formulario activo: main se adapta al contenido, sin espacio blanco extra */
 body.form-active main {
-  min-height: auto;
+  min-height: auto !important;
 }
 
 /* Padding inferior en móvil para el botón flotante */
@@ -66,6 +66,12 @@ body.form-active main {
   /* No padding cuando el formulario está activo (botón oculto) */
   body.form-active main {
     padding-bottom: 0;
+  }
+
+  /* Página contacto: sin padding extra, sin espacio blanco antes del footer */
+  body.contacto-page main {
+    padding-bottom: 0;
+    min-height: auto !important;
   }
 }
 

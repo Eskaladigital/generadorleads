@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { HERO_IMAGE_URL } from '@/lib/constants';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import ContactoPageMarker from './ContactoPageMarker';
 
 export const metadata: Metadata = {
   title: 'Contacto | Health4Spain',
@@ -22,6 +23,7 @@ const CONTACT_INFO = {
 export default function ContactoPage() {
   return (
     <>
+      <ContactoPageMarker />
       {/* Hero - Estilo minimalista como las demás páginas */}
       <section className="hero-with-image hero-compact">
         <div className="absolute inset-0 z-0">
@@ -320,11 +322,10 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      {/* CTA Final - Dual para clientes y partners */}
+      {/* CTA Clientes - Azul oscuro */}
       <section className="section-blue-dark pb-0">
-        <div className="container-narrow pb-8 md:pb-16">
-          {/* Para Clientes */}
-          <div className="text-center mb-12 pb-12 border-b border-white/20">
+        <div className="container-narrow pb-8 md:pb-12">
+          <div className="text-center">
             <h2 className="mb-6" style={{ color: 'white' }}>¿Necesitas Ayuda Para Vivir en España?</h2>
             <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
               Da el primer paso. Te conectamos con profesionales verificados. Sin compromiso, sin coste.
@@ -344,16 +345,20 @@ export default function ContactoPage() {
               </a>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Para Profesionales */}
+      {/* CTA Profesionales - Fondo gris para contraste */}
+      <section className="section-alt pt-0">
+        <div className="container-narrow py-8 md:py-12">
           <div className="text-center">
-            <h3 className="text-2xl font-bold mb-4" style={{ color: 'white' }}>¿Eres Profesional?</h3>
-            <p className="text-lg text-gray-200 mb-6 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold mb-4">¿Eres Profesional?</h3>
+            <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
               Únete a nuestro directorio verificado. Recibe leads cualificados de tu especialidad y zona.
             </p>
             <a 
               href={`mailto:${CONTACT_INFO.email}?subject=Quiero ser Partner - Health4Spain`}
-              className="inline-flex items-center justify-center px-8 py-3 text-white border-2 border-white hover:bg-white hover:text-[#293f92] transition-all text-sm uppercase tracking-widest font-semibold"
+              className="inline-flex items-center justify-center px-8 py-3 bg-[#293f92] text-white border-2 border-[#293f92] hover:bg-[#1e2d6b] hover:border-[#1e2d6b] transition-all text-sm uppercase tracking-widest font-semibold"
             >
               Solicitar Información Partners
             </a>
