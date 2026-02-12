@@ -88,7 +88,6 @@ export default async function BlogPage() {
   const popularPosts = await getPopularPosts();
 
   const categories = Array.from(new Set(posts.map(p => p.category)));
-  const [featuredPost, ...restPosts] = posts;
 
   return (
     <>
@@ -113,43 +112,8 @@ export default async function BlogPage() {
             </div>
           ) : (
             <div className="space-y-12">
-              {/* Artículo destacado */}
-              {featuredPost && (
-                <article className="group bg-white border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors max-w-4xl mx-auto">
-                  <div className="relative h-64 md:h-96 overflow-hidden">
-                    <Image
-                      src={featuredPost.featured_image || categoryImages[featuredPost.category] || categoryImages['vida-espana']}
-                      alt={featuredPost.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <span className={`absolute top-4 left-4 ${categoryColors[featuredPost.category] || 'bg-accent'} text-white px-3 py-1.5 text-sm uppercase tracking-wider font-semibold`}>
-                      {categoryLabels[featuredPost.category] || featuredPost.category}
-                    </span>
-                  </div>
-                  <div className="p-8">
-                    <time className="text-sm text-gray-500 mb-3 block">
-                      {new Date(featuredPost.published_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
-                    </time>
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 group-hover:text-accent transition-colors">
-                      <Link href={`/es/blog/${featuredPost.slug}`}>{featuredPost.title}</Link>
-                    </h2>
-                    <p className="text-gray-600 text-lg mb-6 line-clamp-3">{featuredPost.excerpt}</p>
-                    <Link
-                      href={`/es/blog/${featuredPost.slug}`}
-                      className="inline-flex items-center gap-2 text-base text-accent font-semibold hover:gap-3 transition-all border-b-2 border-accent"
-                    >
-                      Leer más
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </article>
-              )}
-
-              {/* Filtros: Más Leídos y Categorías */}
-              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {/* Filtros: Más Leídos y Categorías - MISMO ANCHO QUE GRID */}
+              <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
                 {/* Posts Populares */}
                 {popularPosts.length > 0 && (
                   <div className="bg-white border border-gray-200 p-6">
@@ -213,54 +177,52 @@ export default async function BlogPage() {
                 </div>
               </div>
 
-              {/* Resto de posts en grid */}
-              {restPosts.length > 0 && (
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6 max-w-4xl mx-auto">Más artículos</h2>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                    {restPosts.map((post) => {
-                      const imageUrl = post.featured_image || categoryImages[post.category] || categoryImages['vida-espana'];
-                      const categoryLabel = categoryLabels[post.category] || post.category;
-                      return (
-                        <article
-                          key={post.slug}
-                          className="group bg-white border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors"
-                        >
-                          <div className="relative h-40 overflow-hidden">
-                            <Image
-                              src={imageUrl}
-                              alt={post.title}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <span className={`absolute top-3 left-3 ${categoryColors[post.category] || 'bg-accent'} text-white px-2 py-1 text-xs uppercase tracking-wider font-semibold`}>
-                              {categoryLabel}
-                            </span>
-                          </div>
-                          <div className="p-4">
-                            <time className="text-xs text-gray-500 mb-1 block">
-                              {new Date(post.published_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
-                            </time>
-                            <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-accent transition-colors line-clamp-2">
-                              <Link href={`/es/blog/${post.slug}`}>{post.title}</Link>
-                            </h2>
-                            <p className="text-gray-600 text-sm mb-2 line-clamp-2">{post.excerpt}</p>
-                            <Link
-                              href={`/es/blog/${post.slug}`}
-                              className="inline-flex items-center gap-1 text-sm text-accent font-medium hover:gap-2 transition-all border-b-2 border-accent"
-                            >
-                              Leer más
-                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
-                            </Link>
-                          </div>
-                        </article>
-                      );
-                    })}
-                  </div>
+              {/* Todos los posts en grid 3 columnas */}
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 max-w-6xl mx-auto">Todos los artículos</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                  {posts.map((post) => {
+                    const imageUrl = post.featured_image || categoryImages[post.category] || categoryImages['vida-espana'];
+                    const categoryLabel = categoryLabels[post.category] || post.category;
+                    return (
+                      <article
+                        key={post.slug}
+                        className="group bg-white border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors"
+                      >
+                        <div className="relative h-40 overflow-hidden">
+                          <Image
+                            src={imageUrl}
+                            alt={post.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <span className={`absolute top-3 left-3 ${categoryColors[post.category] || 'bg-accent'} text-white px-2 py-1 text-xs uppercase tracking-wider font-semibold`}>
+                            {categoryLabel}
+                          </span>
+                        </div>
+                        <div className="p-4">
+                          <time className="text-xs text-gray-500 mb-1 block">
+                            {new Date(post.published_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+                          </time>
+                          <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-accent transition-colors line-clamp-2">
+                            <Link href={`/es/blog/${post.slug}`}>{post.title}</Link>
+                          </h2>
+                          <p className="text-gray-600 text-sm mb-2 line-clamp-2">{post.excerpt}</p>
+                          <Link
+                            href={`/es/blog/${post.slug}`}
+                            className="inline-flex items-center gap-1 text-sm text-accent font-medium hover:gap-2 transition-all border-b-2 border-accent"
+                          >
+                            Leer más
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
-              )}
+              </div>
             </div>
           )}
         </div>

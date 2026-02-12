@@ -157,7 +157,7 @@ export const SOCIAL_LINKS = {
 export const COMMON_TEXTS = {
   es: {
     cta: {
-      primary: 'Solicitar ayuda gratis',
+      primary: 'Solicitar contacto',
       secondary: 'Ver servicios',
       contact: 'Contactar ahora',
     },

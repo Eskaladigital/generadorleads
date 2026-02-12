@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
+import { HERO_IMAGE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Sobre Nosotros - Health4Spain',
@@ -9,13 +11,23 @@ export const metadata: Metadata = {
 export default function SobreNosotrosPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="section">
-        <div className="container-narrow text-center">
-          <h1 className="mb-8">
+      {/* Hero compacto con imagen de fondo */}
+      <section className="hero-with-image hero-compact relative">
+        <Image
+          src={HERO_IMAGE_URL}
+          alt="Sobre Health4Spain"
+          fill
+          className="object-cover"
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative container-narrow text-center">
+          <h1 className="text-white mb-4">
             Sobre Nosotros
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-white/95 max-w-2xl mx-auto">
             Conectamos a personas que sueñan con vivir en España con profesionales que hacen ese sueño realidad.
           </p>
         </div>

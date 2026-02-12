@@ -31,12 +31,10 @@ interface StepProps {
 }
 
 const PAISES = [
-  'Reino Unido', 'Alemania', 'Francia', 'Países Bajos', 'Bélgica',
-  'Suecia', 'Noruega', 'Dinamarca', 'Finlandia', 'Irlanda',
-  'Estados Unidos', 'Canadá', 'Rusia', 'Ucrania',
-  'Italia', 'Portugal', 'Suiza',
-  'Argelia', 'Marruecos',
-  'Colombia', 'Ecuador', 'Bolivia', 'Argentina', 'Venezuela', 'Uruguay', 'Chile',
+  'Alemania', 'Argelia', 'Argentina', 'Bélgica', 'Bolivia', 'Canadá', 'Chile',
+  'Colombia', 'Dinamarca', 'Ecuador', 'Estados Unidos', 'Finlandia', 'Francia',
+  'Irlanda', 'Italia', 'Marruecos', 'Noruega', 'Países Bajos', 'Portugal',
+  'Reino Unido', 'Rusia', 'Suecia', 'Suiza', 'Ucrania', 'Uruguay', 'Venezuela',
   'Otro'
 ];
 
@@ -577,7 +575,7 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
           </div>
           <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className="h-full bg-black transition-all duration-300"
+              className="h-full bg-[#3bbdda] transition-all duration-300"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
             />
           </div>
