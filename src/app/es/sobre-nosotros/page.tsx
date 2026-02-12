@@ -11,25 +11,40 @@ export const metadata: Metadata = {
 export default function SobreNosotrosPage() {
   return (
     <>
-      {/* Hero compacto con imagen de fondo */}
-      <section className="hero-with-image hero-compact relative">
-        <Image
-          src={HERO_IMAGE_URL}
-          alt="Sobre Health4Spain"
-          fill
-          className="object-cover"
-          priority
-          fetchPriority="high"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative container-narrow text-center">
-          <h1 className="text-white mb-4">
-            Sobre Nosotros
+      {/* Hero - IGUAL que Servicios y Destinos */}
+      <section className="hero-with-image hero-compact">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={HERO_IMAGE_URL}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
+        <div className="hero-content-box">
+          <h1 className="mb-4" style={{ lineHeight: '0.95' }}>
+            Nosotros
           </h1>
-          <p className="text-lg md:text-xl text-white/95 max-w-2xl mx-auto">
-            Conectamos a personas que sueñan con vivir en España con profesionales que hacen ese sueño realidad.
+          <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
+            Conectamos a personas que sueñan con vivir en España con profesionales verificados que hacen ese sueño realidad.
           </p>
+          <div className="flex gap-6 md:gap-8 mb-6 pt-4 border-t border-gray-300">
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">150+</div>
+              <div className="text-xs uppercase tracking-widest text-gray-500">Profesionales</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">19</div>
+              <div className="text-xs uppercase tracking-widest text-gray-500">Ciudades</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">0€</div>
+              <div className="text-xs uppercase tracking-widest text-gray-500">Coste</div>
+            </div>
+          </div>
         </div>
       </section>
 
