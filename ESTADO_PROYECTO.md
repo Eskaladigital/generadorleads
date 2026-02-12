@@ -13,6 +13,7 @@ El proyecto Health4Spain ha completado exitosamente:
 - ✅ **Optimización LCP y WebP**: Logos convertidos a WebP, hero con Image de Next.js
 - ✅ **UX condensada**: Espaciado reducido, formulario ultra-compacto, todo visible sin scroll
 - ✅ **Formulario optimizado**: Lista vertical de servicios, grid denso de ciudades
+- ✅ **Mejoras UX finales**: CTAs claros, blog directo, coherencia visual
 
 ---
 
@@ -40,6 +41,13 @@ El proyecto Health4Spain ha completado exitosamente:
 ---
 
 ## 🚀 Últimas Optimizaciones (11 Feb 2026)
+
+### Mejoras UX Finales (12 Feb 2026)
+- ✅ **CTAs más claros**: "Solicitar ayuda" → "Solicitar contacto"
+- ✅ **Barra progreso azul**: Color corporativo `#3bbdda` en formulario
+- ✅ **Países alfabéticos**: 26 países ordenados A-Z en formulario
+- ✅ **Hero Nosotros**: Hero compacto con imagen (coherencia con otras páginas)
+- ✅ **Blog optimizado**: Sin destacado, 3 columnas directas desde el inicio
 
 ### Performance y LCP
 - ✅ Script de conversión PNG → WebP (`npm run images:webp`)

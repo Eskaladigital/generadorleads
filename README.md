@@ -24,7 +24,7 @@ Health4Spain es una plataforma-marketplace digital que conecta a personas extran
 
 **4 servicios × 19 ciudades = 76 páginas optimizadas**
 
-**✅ ESTADO**: Proyecto optimizado y production-ready (11 Feb 2026)
+**✅ ESTADO**: Proyecto optimizado y production-ready (12 Feb 2026)
 
 ---
 
@@ -108,17 +108,21 @@ health4spain/
 - **Mobile-first**: Grid denso, botones pequeños, texto optimizado
 
 ### Navegación
-- **Desktop**: Navbar fijo con logo WebP, links, CTA
+- **Desktop**: Navbar fijo con logo WebP, links, CTA "Solicitar contacto"
 - **Mobile**: Off-canvas lateral con selector idioma y social
 - **Botón flotante**: "Solicitar Información" en móvil (oculto en contacto)
+- **CTAs unificados**: "Solicitar contacto" en toda la web
 
 ### Formulario Contacto (Ultra-Compacto)
 **Paso 1**: 4 servicios en lista vertical (sin iconos)
 **Paso 2**: Grid 3-5 columnas de ~20 ciudades
-**Paso 3**: Datos personales condensados
+**Paso 3**: Datos personales condensados, 26 países alfabéticos
 **Paso 4**: Presupuesto + urgencia + textarea corto
 
-**Todo visible sin scroll en cada paso**
+**Características**:
+- Barra progreso en azul corporativo (`#3bbdda`)
+- Países ordenados alfabéticamente (A-Z)
+- Todo visible sin scroll en cada paso
 
 ---
 
@@ -336,6 +340,21 @@ NEXT_PUBLIC_SITE_URL=https://www.health4spain.com
 - **Dominio**: `https://www.health4spain.com` (siempre con www)
 - **Redirect 301**: `health4spain.com` → `www.health4spain.com`
 - Configurar `NEXT_PUBLIC_SITE_URL` en Vercel con www
+
+---
+
+## 🎯 Coherencia Visual
+
+### Páginas con Hero Compacto
+- ✅ `/es/servicios` - Hero con imagen
+- ✅ `/es/destinos` - Hero con imagen
+- ✅ `/es/sobre-nosotros` - Hero con imagen (actualizado 12 Feb)
+
+### Blog Optimizado
+- Sin artículo destacado grande
+- Filtros (Más Leídos + Categorías) al inicio
+- Grid 3 columnas desde el primer artículo
+- Coherencia visual con resto del sitio
 
 ---
 
