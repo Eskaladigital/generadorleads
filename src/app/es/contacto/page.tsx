@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { HERO_IMAGE_URL } from '@/lib/constants';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { getCiudades } from '@/lib/ciudades';
+import ContactFormClient from './ContactFormClient';
 
 export const metadata: Metadata = {
   title: 'Contacto | Health4Spain',
@@ -19,7 +22,12 @@ const CONTACT_INFO = {
   schedule: 'Lunes a Viernes, 09:00-18:00',
 };
 
-export default function ContactoPage() {
+export default async function ContactoPage() {
+  const ciudades = await getCiudades();
+  const ciudadesOpciones = [
+    ...ciudades.map((c) => ({ id: c.slug, label: c.nombre })),
+    { id: 'otra', label: 'Otra ciudad' },
+  ];
   return (
     <>
       {/* Hero - Estilo minimalista como las demás páginas */}
@@ -150,8 +158,8 @@ export default function ContactoPage() {
             </a>
 
             {/* Formulario */}
-            <Link
-              href="/es/presupuesto"
+            <a
+              href="#formulario"
               className="profile-card group hover:border-accent transition-all"
             >
               <div className="mb-4">
@@ -167,8 +175,30 @@ export default function ContactoPage() {
               <div className="mt-4 text-sm text-accent group-hover:translate-x-2 transition-transform inline-flex items-center gap-1">
                 Ir al formulario →
               </div>
-            </Link>
+            </a>
           </div>
+        </div>
+      </section>
+
+      {/* Formulario Integrado */}
+      <section id="formulario" className="section-alt scroll-mt-20">
+        <div className="container-narrow">
+          <div className="text-center mb-12">
+            <h2 className="mb-4">Formulario de Contacto</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Completa el formulario y te conectamos con los profesionales adecuados
+            </p>
+          </div>
+          <Suspense fallback={
+            <div className="flex items-center justify-center py-12">
+              <div className="text-center">
+                <div className="inline-block w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
+                <p className="text-gray-600">Cargando formulario...</p>
+              </div>
+            </div>
+          }>
+            <ContactFormClient ciudades={ciudadesOpciones} />
+          </Suspense>
         </div>
       </section>
 
@@ -330,9 +360,12 @@ export default function ContactoPage() {
               Da el primer paso. Te conectamos con profesionales verificados. Sin compromiso, sin coste.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/es/presupuesto" className="btn-minimal-white">
-                Solicitar Información
-              </Link>
+              <a 
+                href="#formulario"
+                className="btn-minimal-white"
+              >
+                Completar Formulario
+              </a>
               <a 
                 href={`mailto:${CONTACT_INFO.email}`}
                 className="inline-flex items-center justify-center px-8 py-3 text-white border border-white/30 hover:bg-white/10 transition-all text-sm uppercase tracking-widest"
