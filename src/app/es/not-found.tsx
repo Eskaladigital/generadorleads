@@ -27,7 +27,7 @@ export default function NotFoundES() {
             Volver al Inicio
           </Link>
           <Link
-            href="/es/contacto"
+            href="/es/solicitar"
             className="inline-block border-2 border-[#293f92] text-[#293f92] py-3 px-8 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-[#293f92] hover:text-white"
           >
             Contactar

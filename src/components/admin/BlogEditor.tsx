@@ -253,7 +253,7 @@ export default function BlogEditor({
                 <div class="cta-box">
                   <h3>¿Necesitas ayuda con esto?</h3>
                   <p>Te conectamos con profesionales verificados en menos de 24 horas.</p>
-                  <p><a href="/es/contacto" style="display:inline-block;background:#3b82f6;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;">Solicitar contacto →</a></p>
+                  <p><a href="/es/solicitar" style="display:inline-block;background:#3b82f6;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;">Solicitar contacto →</a></p>
                 </div>
               `
             },

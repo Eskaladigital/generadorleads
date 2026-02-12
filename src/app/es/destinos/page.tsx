@@ -68,7 +68,7 @@ export default async function DestinosPage() {
               <div className="text-xs uppercase tracking-widest text-gray-500">Servicios</div>
             </div>
           </div>
-          <Link href="/es/contacto" className="btn-minimal-lg">
+          <Link href="/es/solicitar" className="btn-minimal-lg">
             Solicitar Información
           </Link>
         </div>
@@ -115,7 +115,7 @@ export default async function DestinosPage() {
               {regionIndex === 0 && regiones.length > 1 && (
                 <div className="text-center mt-10 pt-10 border-t border-gray-300">
                   <p className="text-gray-600 mb-4 text-sm">¿No encuentras tu ciudad?</p>
-                  <Link href="/es/contacto" className="btn-minimal">
+                  <Link href="/es/solicitar" className="btn-minimal">
                     Solicitar Información →
                   </Link>
                 </div>
@@ -133,7 +133,7 @@ export default async function DestinosPage() {
             No tienes que hacerlo solo. Te conectamos con profesionales verificados 
             que hablan tu idioma en tu ciudad de destino.
           </p>
-          <Link href="/es/contacto" className="btn-minimal-lg">
+          <Link href="/es/solicitar" className="btn-minimal-lg">
             Solicitar Asesoramiento Gratuito
           </Link>
           <div className="mt-8 flex flex-wrap justify-center gap-6 text-xs md:text-sm text-gray-600">

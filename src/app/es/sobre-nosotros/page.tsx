@@ -45,7 +45,7 @@ export default function SobreNosotrosPage() {
               <div className="text-xs uppercase tracking-widest text-gray-500">Coste</div>
             </div>
           </div>
-          <Link href="/es/contacto" className="btn-minimal-lg">
+          <Link href="/es/solicitar" className="btn-minimal-lg">
             Solicitar Información
           </Link>
         </div>
@@ -178,7 +178,7 @@ export default function SobreNosotrosPage() {
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
             Únete a cientos de personas que ya han simplificado su proceso con Health4Spain.
           </p>
-          <Link href="/es/contacto" className="btn-minimal-white">
+          <Link href="/es/solicitar" className="btn-minimal-white">
             Empezar Ahora
           </Link>
         </div>

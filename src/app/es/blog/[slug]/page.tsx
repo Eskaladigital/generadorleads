@@ -240,7 +240,7 @@ export default async function BlogPostPage({
               Te conectamos con profesionales verificados que hablan tu idioma y conocen tus necesidades específicas.
             </p>
             <Link
-              href="/es/contacto"
+              href="/es/solicitar"
               className="btn-minimal-lg"
             >
               Hablar con un Experto

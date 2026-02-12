@@ -49,7 +49,7 @@ export default function EnglishComingSoon() {
             Visit Spanish Site
           </Link>
           <Link
-            href="/es/contacto"
+            href="/es/solicitar"
             className="inline-block border-2 border-[#1a1a1a] text-[#1a1a1a] py-5 px-10 no-underline font-medium uppercase tracking-wider text-[0.85rem] transition-all hover:bg-[#1a1a1a] hover:text-white"
           >
             Get Notified

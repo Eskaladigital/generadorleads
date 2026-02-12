@@ -19,6 +19,7 @@ export default function PreFooterCTA() {
   // Solo mostrar en landings específicas como /servicios/abogados-murcia, /destinos/murcia
   const hiddenPages = [
     '/es/contacto',
+    '/es/solicitar',
     '/es',
     '/es/servicios',
     '/es/destinos',
@@ -51,7 +52,7 @@ export default function PreFooterCTA() {
           </div>
           <div className="bg-white p-8 md:p-10">
             <h3 className="text-2xl font-bold mb-6 text-black">Solicitar Información</h3>
-            <form className="space-y-5" action="/es/contacto" method="GET">
+            <form className="space-y-5" action="/es/solicitar" method="GET">
               <div>
                 <input 
                   type="text" 

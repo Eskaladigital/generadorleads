@@ -182,7 +182,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Link href="/es/contacto" className="btn-minimal-lg">
+          <Link href="/es/solicitar" className="btn-minimal-lg">
             Solicitar Información
           </Link>
         </div>
@@ -201,7 +201,7 @@ export default function HomePage() {
             {SERVICIOS.map((servicio) => (
               <Link
                 key={servicio.id}
-                href={`/es/contacto?servicio=${servicio.id}`}
+                href={`/es/solicitar?servicio=${servicio.id}`}
                 className="service-card"
               >
                 <div className="service-number">{servicio.number}</div>
@@ -339,7 +339,7 @@ export default function HomePage() {
                 Somos el único marketplace neutral que conecta extranjeros con profesionales 
                 verificados sin coste adicional.
               </p>
-              <Link href="/es/contacto" className="btn-minimal-white">
+              <Link href="/es/solicitar" className="btn-minimal-white">
                 Solicitar Contacto Ahora
               </Link>
             </div>
@@ -450,7 +450,7 @@ export default function HomePage() {
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
             Sin coste. Sin compromiso. Respuesta en 24 horas.
           </p>
-          <Link href="/es/contacto" className="btn-minimal-lg">
+          <Link href="/es/solicitar" className="btn-minimal-lg">
             Solicitar Información Ahora
           </Link>
         </div>
