@@ -6,6 +6,7 @@ import { getServicios, getServicioBySlug } from '@/lib/services';
 import { LandingPage } from '@/lib/types';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ServiceIcon from '@/components/ServiceIcon';
+import LandingFormEmbed from '@/components/LandingFormEmbed';
 
 // Pre-renderizar en build para SEO. Revalidar cada 24h.
 export const revalidate = 86400;
@@ -214,7 +215,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             { label: 'Destinos', href: '/es/destinos' },
             { label: landing.hero_title }
           ]} />
-          <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] leading-snug max-w-4xl">
+          <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] leading-normal max-w-4xl">
             {landing.hero_title}
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 md:mb-8 max-w-2xl leading-relaxed">
@@ -232,12 +233,25 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
               ))}
             </div>
           )}
-          <Link 
-            href={`/es/solicitar?${landing.servicio_slug ? `servicio=${landing.servicio_slug}&` : ''}ciudad=${landing.ciudad_slug || landing.slug}`}
-            className="btn-minimal-lg"
-          >
-            {landing.cta_subtitle || 'Solicitar información'}
-          </Link>
+          
+          {/* Formulario embebido si hay servicio y ciudad */}
+          {landing.servicio_slug && landing.ciudad_slug ? (
+            <div className="max-w-2xl">
+              <LandingFormEmbed 
+                servicioSlug={landing.servicio_slug}
+                ciudadSlug={landing.ciudad_slug}
+                servicioNombre={landing.servicio_nombre || landing.servicio_slug}
+                ciudadNombre={landing.ciudad_nombre || landing.ciudad_slug}
+              />
+            </div>
+          ) : (
+            <Link 
+              href={`/es/solicitar?${landing.servicio_slug ? `servicio=${landing.servicio_slug}&` : ''}ciudad=${landing.ciudad_slug || landing.slug}`}
+              className="btn-minimal-lg"
+            >
+              {landing.cta_subtitle || 'Solicitar información'}
+            </Link>
+          )}
         </div>
       </section>
 
