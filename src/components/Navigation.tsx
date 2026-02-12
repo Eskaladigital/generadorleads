@@ -10,8 +10,8 @@ const NAV_LINKS = [
   { href: '/es', label: 'Inicio', exact: true },
   { href: '/es/destinos', label: 'Destinos' },
   { href: '/es/servicios', label: 'Servicios' },
-  { href: '/es/blog', label: 'Blog' },
   { href: '/es/sobre-nosotros', label: 'Nosotros' },
+  { href: '/es/blog', label: 'Blog' },
 ];
 
 const LANGUAGES = [
