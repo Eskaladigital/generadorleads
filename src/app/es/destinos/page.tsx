@@ -91,7 +91,7 @@ export default async function DestinosPage() {
                 {ciudadesZona.map((ciudad) => (
                   <Link
                     key={ciudad.slug}
-                    href={`/es/contacto?ciudad=${ciudad.slug}`}
+                    href={`/es/solicitar?ciudad=${ciudad.slug}`}
                     className="group flex justify-between items-center py-4 border-b border-gray-300 hover:bg-white hover:pl-3 transition-all"
                   >
                     <div>

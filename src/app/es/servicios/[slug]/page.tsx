@@ -414,7 +414,7 @@ export default async function ServicioPage({
             Te conectamos con profesionales verificados que hablan tu idioma. Sin compromiso.
           </p>
           <Link 
-            href={`/es/contacto?servicio=${slug}`} 
+            href={`/es/solicitar?servicio=${slug}`} 
             className="btn-minimal-lg"
           >
             Solicitar información gratuita
