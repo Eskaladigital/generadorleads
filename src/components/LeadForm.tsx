@@ -144,7 +144,7 @@ export default function LeadForm({
   const displaySubtitle = subtitle || defaultSubtitle;
 
   const containerClasses = {
-    card: 'bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl border-2 border-blue-500 p-4 sm:p-6 lg:p-8',
+    card: 'bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl border-2 border-accent p-4 sm:p-6 lg:p-8',
     inline: 'bg-gray-50 p-4 sm:p-6 rounded-lg',
     modal: 'bg-white p-4 sm:p-6 lg:p-8',
   };
@@ -154,8 +154,8 @@ export default function LeadForm({
     return (
       <div className={containerClasses[variant]}>
         <div className="text-center py-6 sm:py-8">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#293f92]/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-            <svg className="w-8 h-8 sm:w-10 sm:h-10 text-[#293f92]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+            <svg className="w-8 h-8 sm:w-10 sm:h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
@@ -163,13 +163,13 @@ export default function LeadForm({
           <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
             Te contactaremos en las próximas horas.
           </p>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 text-xs sm:text-sm text-blue-800 text-left">
+          <div className="bg-accent/10 border border-accent/30 rounded-lg p-3 sm:p-4 text-xs sm:text-sm text-gray-800 text-left">
             <strong>¿Qué pasa ahora?</strong><br />
             Un experto revisará tu caso y te llamará para confirmar tus necesidades.
           </div>
           <button
             onClick={() => setSubmitStatus('idle')}
-            className="mt-4 sm:mt-6 text-blue-600 hover:text-blue-800 font-medium text-sm sm:text-base"
+            className="mt-4 sm:mt-6 text-accent hover:text-accent/80 font-medium text-sm sm:text-base"
           >
             Enviar otra consulta
           </button>
@@ -191,13 +191,13 @@ export default function LeadForm({
         {[1, 2].map((step) => (
           <div key={step} className="flex items-center">
             <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-colors ${
-              currentStep >= step ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-500'
+              currentStep >= step ? 'bg-accent text-white' : 'bg-gray-200 text-gray-500'
             }`}>
               {step}
             </div>
             {step < 2 && (
               <div className={`w-8 sm:w-12 h-1 mx-1 transition-colors ${
-                currentStep > step ? 'bg-blue-600' : 'bg-gray-200'
+                currentStep > step ? 'bg-accent' : 'bg-gray-200'
               }`} />
             )}
           </div>
@@ -219,7 +219,7 @@ export default function LeadForm({
                   value={formData.servicio}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none"
                 >
                   <option value="">Selecciona un servicio</option>
                   {SERVICIOS.map(s => (
@@ -230,9 +230,9 @@ export default function LeadForm({
             )}
 
             {servicioSlug && (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 text-sm">
-                <span className="text-blue-600">✓</span>
-                <span className="text-blue-800 font-medium">Servicio: {servicio}</span>
+              <div className="bg-accent/10 border border-accent/30 rounded-lg p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 text-sm">
+                <svg className="w-5 h-5 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                <span className="font-medium text-gray-800">Servicio: {servicio}</span>
               </div>
             )}
 
@@ -247,7 +247,7 @@ export default function LeadForm({
                   value={formData.ciudad}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none"
                 >
                   <option value="">Selecciona una ciudad</option>
                   {ciudades.map((c) => (
@@ -258,9 +258,9 @@ export default function LeadForm({
             )}
 
             {ciudadSlug && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 text-sm">
-                <span className="text-green-600">📍</span>
-                <span className="text-green-800 font-medium">Ciudad: {ciudad}</span>
+              <div className="bg-accent/10 border border-accent/30 rounded-lg p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 text-sm">
+                <svg className="w-5 h-5 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <span className="font-medium text-gray-800">Ciudad: {ciudad}</span>
               </div>
             )}
 
@@ -275,7 +275,7 @@ export default function LeadForm({
                     key={u.value}
                     className={`flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 border-2 rounded-lg cursor-pointer transition-all text-sm sm:text-base ${
                       formData.urgencia === u.value 
-                        ? 'border-blue-500 bg-blue-50' 
+                        ? 'border-accent bg-accent/10' 
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
@@ -285,7 +285,7 @@ export default function LeadForm({
                       value={u.value}
                       checked={formData.urgencia === u.value}
                       onChange={handleChange}
-                      className="w-4 h-4 text-blue-600"
+                      className="w-4 h-4 text-accent"
                       required
                     />
                     <span className="text-gray-700">{u.label}</span>
@@ -303,7 +303,7 @@ export default function LeadForm({
               type="button"
               onClick={() => setCurrentStep(2)}
               disabled={!formData.urgencia || (!servicioSlug && !formData.servicio) || (!ciudadSlug && !formData.ciudad)}
-              className="w-full bg-blue-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold text-base sm:text-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
+              className="w-full bg-accent text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold text-base sm:text-lg hover:bg-accent/90 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
             >
               Continuar →
             </button>
@@ -324,7 +324,7 @@ export default function LeadForm({
                 onChange={handleChange}
                 required
                 placeholder="¿Cómo te llamas?"
-                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none"
               />
             </div>
 
@@ -339,7 +339,7 @@ export default function LeadForm({
                 onChange={handleChange}
                 required
                 placeholder="+34 600 000 000"
-                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none"
               />
             </div>
 
@@ -354,7 +354,7 @@ export default function LeadForm({
                 onChange={handleChange}
                 required
                 placeholder="tu@email.com"
-                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none"
               />
             </div>
 
@@ -366,7 +366,7 @@ export default function LeadForm({
                 name="idioma_preferido"
                 value={formData.idioma_preferido}
                 onChange={handleChange}
-                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none"
               >
                 {IDIOMAS.map(i => (
                   <option key={i.value} value={i.value}>{i.label}</option>
@@ -384,7 +384,7 @@ export default function LeadForm({
                 onChange={handleChange}
                 rows={2}
                 placeholder="Cuéntanos más..."
-                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none resize-none"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/30 outline-none resize-none"
               />
             </div>
 
@@ -395,11 +395,11 @@ export default function LeadForm({
                 checked={formData.acepta_privacidad}
                 onChange={handleChange}
                 required
-                className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 text-blue-600 rounded"
+                className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 text-accent rounded"
               />
               <span className="text-xs sm:text-sm text-gray-600">
                 Acepto la{' '}
-                <a href="/es/privacidad" className="text-blue-600 hover:underline" target="_blank">
+                <a href="/es/privacidad" className="text-accent hover:underline" target="_blank">
                   política de privacidad
                 </a>
               </span>
@@ -416,7 +416,7 @@ export default function LeadForm({
               <button
                 type="submit"
                 disabled={isSubmitting || !formData.acepta_privacidad}
-                className="flex-1 bg-green-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold text-base sm:text-lg hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+                className="flex-1 bg-accent text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold text-base sm:text-lg hover:bg-accent/90 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -434,9 +434,9 @@ export default function LeadForm({
 
             {/* Trust badges - responsive */}
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pt-3 sm:pt-4 border-t border-gray-100 text-xs sm:text-sm text-gray-500">
-              <span>🔒 Seguro</span>
-              <span>⚡ 24h</span>
-              <span>💰 Gratis</span>
+              <span className="inline-flex items-center gap-1"><svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4a12 12 0 0018 0 12 12 0 000-18 12 12 0 00-18 0 12 12 0 000 18zm10-10a12 12 0 01-18 0 12 12 0 010-18 12 12 0 0118 0 12 12 0 010 18z" /></svg> Seguro</span>
+              <span className="inline-flex items-center gap-1"><svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> 24h</span>
+              <span className="inline-flex items-center gap-1"><svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Gratis</span>
             </div>
           </div>
         )}

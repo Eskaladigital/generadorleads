@@ -91,7 +91,7 @@ function Step1({ formData, updateFormData, errors, onAutoAdvance }: StepProps) {
           >
             <span className="text-sm md:text-base font-semibold">{servicio.label}</span>
             {formData.servicio === servicio.id && (
-              <span className="text-accent text-xl">✓</span>
+              <svg className="w-6 h-6 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
             )}
           </button>
         ))}
@@ -132,7 +132,7 @@ function Step2({ formData, updateFormData, errors, ciudades = [], onAutoAdvance 
           >
             <span className="block truncate">{ciudad.label}</span>
             {formData.ciudad_interes === ciudad.id && (
-              <span className="text-accent text-xs">✓</span>
+              <svg className="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
             )}
           </button>
         ))}
@@ -240,7 +240,7 @@ function Step4({ formData, updateFormData, errors }: StepProps) {
               >
                 <span className="text-xs md:text-sm block">{option.label}</span>
                 {formData.presupuesto === option.id && (
-                  <span className="text-accent text-xs">✓</span>
+                  <svg className="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                 )}
               </button>
             ))}
@@ -263,7 +263,7 @@ function Step4({ formData, updateFormData, errors }: StepProps) {
               >
                 <span className="text-xs md:text-sm block">{option.label}</span>
                 {formData.urgencia === option.id && (
-                  <span className="text-accent text-xs">✓</span>
+                  <svg className="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                 )}
               </button>
             ))}
@@ -318,11 +318,22 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
   });
 
   useEffect(() => {
-    const servicio = searchParams.get('servicio') || '';
-    const ciudad = searchParams.get('ciudad') || '';
+    let servicio = searchParams.get('servicio') || '';
+    let ciudad = searchParams.get('ciudad') || '';
     const utm_source = searchParams.get('utm_source') || '';
     const utm_medium = searchParams.get('utm_medium') || '';
     const utm_campaign = searchParams.get('utm_campaign') || '';
+
+    // Si servicio viene como "abogados-elche" (slug combinado), extraer servicio y ciudad
+    const SERVICIOS_IDS = ['seguros', 'abogados', 'inmobiliarias', 'gestorias'];
+    if (servicio && servicio.includes('-') && !ciudad) {
+      const parts = servicio.split('-');
+      const posibleServicio = parts[0];
+      if (SERVICIOS_IDS.includes(posibleServicio)) {
+        servicio = posibleServicio;
+        ciudad = parts.slice(1).join('-'); // "elche" o "las-palmas" etc
+      }
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -484,14 +495,16 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
       <div className="py-4 md:py-10 bg-gray-50">
         <div className="container-narrow text-center w-full">
           <div className="max-w-xl mx-auto">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#293f92]/10 text-[#293f92] text-4xl mb-8">✓</div>
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-accent/10 text-accent mb-8">
+              <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Solicitud Recibida</h1>
             <p className="text-xl text-gray-600 mb-10 max-w-lg mx-auto">
               Gracias por confiar en Health4Spain. Un profesional se pondrá en contacto contigo en menos de 24 horas.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-10 text-sm text-gray-500">
-              <span>⚡ Respuesta en menos de 24h</span>
-              <span>🔒 Datos protegidos</span>
+              <span className="inline-flex items-center gap-1"><svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Respuesta en menos de 24h</span>
+              <span className="inline-flex items-center gap-1"><svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4a12 12 0 0018 0 12 12 0 000-18 12 12 0 00-18 0 12 12 0 000 18zm10-10a12 12 0 01-18 0 12 12 0 010-18 12 12 0 0118 0 12 12 0 010 18z" /></svg> Datos protegidos</span>
             </div>
             <Link href="/es" className="btn-minimal-lg">
               Volver al Inicio
@@ -623,17 +636,17 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
                         setCurrentStep(2);
                       }
                     }}
-                    className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-full text-xs border border-[#293f92]/30 hover:border-[#293f92] hover:bg-blue-50 transition-all group"
+                    className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-full text-xs border border-[#293f92]/30 hover:border-[#293f92] hover:bg-accent/5 transition-all group"
                   >
-                    <span className="text-[#293f92]">📍</span>
+                    <svg className="w-4 h-4 text-[#293f92] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                     <span className="font-medium">
                       {ciudades.find(c => c.id === formData.ciudad_interes)?.label}
                     </span>
-                    <span className="text-xs text-gray-400 group-hover:text-[#293f92]">✏️</span>
+                    <svg className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#293f92] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
                   </button>
                 )}
               </div>
-              <p className="text-xs text-gray-500 mt-1.5">Haz clic para cambiar ✏️</p>
+              <p className="text-xs text-gray-500 mt-1.5 flex items-center gap-1">Haz clic para cambiar <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg></p>
             </div>
           )}
           
@@ -666,7 +679,7 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
         </div>
 
         <div className="mt-4 text-center">
-          <p className="text-xs text-gray-600">🔒 Tus datos están seguros y protegidos</p>
+          <p className="text-xs text-gray-600 flex items-center justify-center gap-1"><svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4a12 12 0 0018 0 12 12 0 000-18 12 12 0 00-18 0 12 12 0 000 18zm10-10a12 12 0 01-18 0 12 12 0 010-18 12 12 0 0118 0 12 12 0 010 18z" /></svg> Tus datos están seguros y protegidos</p>
         </div>
       </div>
     </div>

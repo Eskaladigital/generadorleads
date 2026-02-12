@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase';
 import { LandingPage } from '@/lib/types';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import ServiceIcon from '@/components/ServiceIcon';
 
 // Pre-renderizar en build para SEO. Revalidar cada 24h por si se actualizan landings.
 export const revalidate = 86400;
@@ -366,7 +367,7 @@ export default async function ServicioPage({
                 </p>
                 <Link 
                   href={`/es/solicitar?servicio=${slug}`}
-                  className="btn-minimal-lg w-full text-center block mb-4"
+                  className="block w-full text-center py-4 px-6 bg-[#293f92] text-white font-bold text-base hover:bg-[#1e2d6b] transition-colors rounded-sm mb-4"
                 >
                   Comenzar ahora
                 </Link>
@@ -438,18 +439,18 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             ...(landing.servicio_nombre ? [{ label: landing.servicio_nombre, href: `/es/servicios/${landing.servicio_slug}` }] : []),
             { label: landing.hero_title }
           ]} />
-          <h1 className="mb-8">
+          <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] leading-tight">
             {landing.hero_title}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 md:mb-8 max-w-2xl leading-relaxed">
             {landing.hero_subtitle}
           </p>
           {landing.hero_bullets && landing.hero_bullets.length > 0 && (
             <div className="flex flex-wrap gap-8 mb-12 pt-8 border-t border-gray-300">
               {landing.hero_bullets.slice(0, 3).map((bullet, idx) => (
                 <div key={idx} className="flex items-center gap-3">
-                  <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span className="text-gray-700 font-medium">{bullet}</span>
                 </div>
@@ -457,7 +458,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             </div>
           )}
           <Link 
-            href={`/es/solicitar?servicio=${landing.slug}`}
+            href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
             className="btn-minimal-lg"
           >
             Solicitar información gratuita
@@ -476,14 +477,14 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
               {/* Problema */}
               {landing.problem_title && landing.problems && landing.problems.length > 0 && (
                 <div>
-                  <h2 className="mb-8">
+                  <h2 className="mb-6 md:mb-8 text-xl sm:text-2xl md:text-3xl">
                     {landing.problem_title}
                   </h2>
                   <div className="space-y-4">
                     {landing.problems.map((problem, idx) => (
                       <div key={idx} className="flex items-start gap-4 pb-4 border-b border-gray-200 last:border-0">
-                        <svg className="w-6 h-6 text-accent mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+<svg className="w-6 h-6 text-accent mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m3-7a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <p className="text-gray-700 text-lg">{problem}</p>
                       </div>
@@ -502,7 +503,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                     {landing.solution_text}
                   </p>
                   <Link 
-                    href={`/es/solicitar?servicio=${landing.slug}`}
+                    href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
                     className="btn-minimal inline-flex items-center gap-2"
                   >
                     Solicitar contacto →
@@ -513,18 +514,20 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
               {/* Servicios Específicos */}
               {landing.services_title && landing.services && landing.services.length > 0 && (
                 <div>
-                  <h2 className="mb-8">
+                  <h2 className="mb-6 md:mb-8 text-xl sm:text-2xl md:text-3xl">
                     {landing.services_title}
                   </h2>
                   <ul className="service-list-minimal">
                     {landing.services.map((service, idx) => (
                       <li key={idx} className="service-item-minimal">
-                        <div className="text-3xl">{service.icon || `0${idx + 1}`}</div>
+                        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                          <ServiceIcon title={service.title} />
+                        </div>
                         <div>
-                          <h3 className="text-2xl md:text-3xl font-bold mb-2">
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">
                             {service.title}
                           </h3>
-                          <p className="text-base md:text-lg text-gray-600">{service.description}</p>
+                          <p className="text-sm sm:text-base md:text-lg text-gray-600">{service.description}</p>
                         </div>
                       </li>
                     ))}
@@ -532,7 +535,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   <div className="text-center mt-12 pt-12 border-t border-gray-300">
                     <p className="text-gray-600 mb-6">¿Necesitas ayuda con alguno de estos servicios?</p>
                     <Link 
-                      href={`/es/solicitar?servicio=${landing.slug}`}
+                      href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
                       className="btn-minimal-lg"
                     >
                       Solicitar información gratuita
@@ -544,7 +547,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
               {/* Por qué esta ciudad */}
               {landing.why_city_title && landing.why_city_text && (
                 <div>
-                  <h2 className="mb-8">
+                  <h2 className="mb-6 md:mb-8 text-xl sm:text-2xl md:text-3xl">
                     {landing.why_city_title}
                   </h2>
                   <p className="text-gray-700 text-lg leading-relaxed mb-8 whitespace-pre-line">
@@ -554,7 +557,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                       {landing.why_city_stats.map((stat, idx) => (
                         <div key={idx} className="text-center">
-                          <div className="text-5xl md:text-6xl font-bold text-accent mb-2">
+                          <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-accent mb-2">
                             {stat.value}
                           </div>
                           <div className="text-sm uppercase tracking-widest text-gray-500">{stat.label}</div>
@@ -564,7 +567,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   )}
                   <div className="text-center mt-12">
                     <Link 
-                      href={`/es/solicitar?servicio=${landing.slug}`}
+                      href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
                       className="btn-minimal"
                     >
                       Conectar con profesionales →
@@ -576,7 +579,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
               {/* FAQs */}
               {landing.faqs && landing.faqs.length > 0 && (
                 <div>
-                  <h2 className="mb-8">
+                  <h2 className="mb-6 md:mb-8 text-xl sm:text-2xl md:text-3xl">
                     Preguntas frecuentes
                   </h2>
                   <div className="space-y-6">
@@ -606,27 +609,27 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   Te conectamos con profesionales verificados en menos de 24 horas.
                 </p>
                 <Link 
-                  href={`/es/solicitar?servicio=${landing.slug}`}
-                  className="btn-minimal-lg w-full text-center block mb-4"
+                  href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
+                  className="block w-full text-center py-4 px-6 bg-[#293f92] text-white font-bold text-base hover:bg-[#1e2d6b] transition-colors rounded-sm mb-4"
                 >
                   Comenzar ahora
                 </Link>
                 <div className="space-y-2 text-xs text-gray-500">
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     Sin compromiso
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     100% gratuito
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     Profesionales verificados
                   </div>
@@ -648,27 +651,27 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             {landing.cta_subtitle || 'Te conectamos con profesionales que hablan tu idioma'}
           </p>
           <Link 
-            href={`/es/solicitar?servicio=${landing.slug}`}
+            href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
             className="btn-minimal-lg"
           >
             Solicitar información gratuita
           </Link>
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-600">
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               Respuesta en 24h
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               Atención en tu idioma
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               Sin compromiso
             </div>

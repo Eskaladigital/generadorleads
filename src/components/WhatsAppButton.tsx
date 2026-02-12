@@ -16,11 +16,11 @@ const CONTENT = {
     online: 'Online ahora',
     responseTime: 'Respondemos en minutos',
     quickMessages: [
-      { icon: '🏥', text: 'Necesito información sobre seguros de salud' },
-      { icon: '⚖️', text: 'Quiero consultar con un abogado' },
-      { icon: '🏠', text: 'Busco ayuda para encontrar vivienda' },
-      { icon: '📋', text: 'Necesito ayuda con trámites y papeleos' },
-      { icon: '❓', text: 'Tengo otra consulta' },
+      { iconType: 'shield', text: 'Necesito información sobre seguros de salud' },
+      { iconType: 'scale', text: 'Quiero consultar con un abogado' },
+      { iconType: 'home', text: 'Busco ayuda para encontrar vivienda' },
+      { iconType: 'clipboard', text: 'Necesito ayuda con trámites y papeleos' },
+      { iconType: 'chat', text: 'Tengo otra consulta' },
     ],
   },
   en: {
@@ -31,11 +31,11 @@ const CONTENT = {
     online: 'Online now',
     responseTime: 'We reply in minutes',
     quickMessages: [
-      { icon: '🏥', text: 'I need information about health insurance' },
-      { icon: '⚖️', text: 'I want to consult with an immigration lawyer' },
-      { icon: '🏠', text: "I'm looking for help finding accommodation" },
-      { icon: '📋', text: 'I need help with paperwork and procedures' },
-      { icon: '❓', text: 'I have another question' },
+      { iconType: 'shield', text: 'I need information about health insurance' },
+      { iconType: 'scale', text: 'I want to consult with an immigration lawyer' },
+      { iconType: 'home', text: "I'm looking for help finding accommodation" },
+      { iconType: 'clipboard', text: 'I need help with paperwork and procedures' },
+      { iconType: 'chat', text: 'I have another question' },
     ],
   },
   de: {
@@ -46,11 +46,11 @@ const CONTENT = {
     online: 'Jetzt online',
     responseTime: 'Wir antworten in Minuten',
     quickMessages: [
-      { icon: '🏥', text: 'Ich brauche Informationen über Krankenversicherung' },
-      { icon: '⚖️', text: 'Ich möchte einen Einwanderungsanwalt konsultieren' },
-      { icon: '🏠', text: 'Ich suche Hilfe bei der Wohnungssuche' },
-      { icon: '📋', text: 'Ich brauche Hilfe mit Papierkram' },
-      { icon: '❓', text: 'Ich habe eine andere Frage' },
+      { iconType: 'shield', text: 'Ich brauche Informationen über Krankenversicherung' },
+      { iconType: 'scale', text: 'Ich möchte einen Einwanderungsanwalt konsultieren' },
+      { iconType: 'home', text: 'Ich suche Hilfe bei der Wohnungssuche' },
+      { iconType: 'clipboard', text: 'Ich brauche Hilfe mit Papierkram' },
+      { iconType: 'chat', text: 'Ich habe eine andere Frage' },
     ],
   },
   fr: {
@@ -61,11 +61,11 @@ const CONTENT = {
     online: 'En ligne maintenant',
     responseTime: 'Nous répondons en quelques minutes',
     quickMessages: [
-      { icon: '🏥', text: "J'ai besoin d'informations sur l'assurance santé" },
-      { icon: '⚖️', text: "Je veux consulter un avocat en immigration" },
-      { icon: '🏠', text: "Je cherche de l'aide pour trouver un logement" },
-      { icon: '📋', text: "J'ai besoin d'aide avec les démarches administratives" },
-      { icon: '❓', text: "J'ai une autre question" },
+      { iconType: 'shield', text: "J'ai besoin d'informations sur l'assurance santé" },
+      { iconType: 'scale', text: "Je veux consulter un avocat en immigration" },
+      { iconType: 'home', text: "Je cherche de l'aide pour trouver un logement" },
+      { iconType: 'clipboard', text: "J'ai besoin d'aide avec les démarches administratives" },
+      { iconType: 'chat', text: "J'ai une autre question" },
     ],
   },
 };
@@ -155,11 +155,17 @@ export default function WhatsAppButton({
                   onClick={() => handleSelectQuickMessage(msg.text)}
                   className={`w-full text-left px-3 py-2.5 rounded-lg border-2 transition-all text-sm ${
                     selectedMessage === msg.text
-                      ? 'border-[#293f92] bg-blue-50 text-[#293f92]'
-                      : 'border-gray-200 bg-white hover:border-[#293f92]/50 hover:bg-blue-50'
+                      ? 'border-[#293f92] bg-accent/10 text-[#293f92]'
+                      : 'border-gray-200 bg-white hover:border-[#293f92]/50 hover:bg-accent/5'
                   }`}
                 >
-                  <span className="mr-2">{msg.icon}</span>
+                  <span className="mr-2 w-5 h-5 inline-flex shrink-0 text-[#293f92]">
+                    {msg.iconType === 'shield' && <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>}
+                    {msg.iconType === 'scale' && <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>}
+                    {msg.iconType === 'home' && <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>}
+                    {msg.iconType === 'clipboard' && <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>}
+                    {msg.iconType === 'chat' && <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg>}
+                  </span>
                   {msg.text}
                 </button>
               ))}
@@ -192,8 +198,8 @@ export default function WhatsAppButton({
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9z" />
               </svg>
               {content.button}
             </button>
