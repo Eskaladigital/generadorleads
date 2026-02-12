@@ -440,7 +440,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             ...(landing.servicio_nombre ? [{ label: landing.servicio_nombre, href: `/es/servicios/${landing.servicio_slug}` }] : []),
             { label: landing.hero_title }
           ]} />
-          <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] leading-normal max-w-4xl">
+          <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] !leading-[1.5] max-w-4xl">
             {landing.hero_title}
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 md:mb-8 max-w-2xl leading-relaxed">
@@ -461,7 +461,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
           
           {/* Formulario embebido si hay servicio y ciudad */}
           {landing.servicio_slug && landing.ciudad_slug ? (
-            <div className="max-w-2xl">
+            <div className="max-w-2xl mx-auto">
               <LandingFormEmbed 
                 servicioSlug={landing.servicio_slug}
                 ciudadSlug={landing.ciudad_slug}
@@ -498,7 +498,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                     {landing.problems.map((problem, idx) => (
                       <div key={idx} className="flex items-start gap-4 pb-4 border-b border-gray-200 last:border-0">
 <svg className="w-6 h-6 text-accent mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m3-7a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         <p className="text-gray-700 text-lg">{problem}</p>
                       </div>
