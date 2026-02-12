@@ -214,7 +214,7 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             { label: 'Destinos', href: '/es/destinos' },
             { label: landing.hero_title }
           ]} />
-          <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] leading-tight">
+          <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] leading-snug max-w-4xl">
             {landing.hero_title}
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 md:mb-8 max-w-2xl leading-relaxed">
