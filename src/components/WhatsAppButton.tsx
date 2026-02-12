@@ -114,7 +114,7 @@ export default function WhatsAppButton({
       >
         <div className="bg-white rounded-2xl shadow-2xl w-[calc(100vw-16px)] sm:w-[340px] max-w-[340px] overflow-hidden border border-gray-200">
           {/* Header */}
-          <div className="bg-green-500 text-white p-4">
+          <div className="bg-[#293f92] text-white p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
@@ -122,15 +122,15 @@ export default function WhatsAppButton({
                 </div>
                 <div>
                   <h4 className="font-bold text-sm sm:text-base">Health4Spain</h4>
-                  <p className="text-xs sm:text-sm text-green-100 flex items-center gap-1">
-                    <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+                  <p className="text-xs sm:text-sm text-white/90 flex items-center gap-1">
+                    <span className="w-2 h-2 bg-white/80 rounded-full animate-pulse"></span>
                     {content.online}
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-green-600 rounded-full transition-colors"
+                className="p-1 hover:bg-[#1e2d6b] rounded-full transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -155,8 +155,8 @@ export default function WhatsAppButton({
                   onClick={() => handleSelectQuickMessage(msg.text)}
                   className={`w-full text-left px-3 py-2.5 rounded-lg border-2 transition-all text-sm ${
                     selectedMessage === msg.text
-                      ? 'border-green-500 bg-green-50 text-green-800'
-                      : 'border-gray-200 bg-white hover:border-green-300 hover:bg-green-50'
+                      ? 'border-[#293f92] bg-blue-50 text-[#293f92]'
+                      : 'border-gray-200 bg-white hover:border-[#293f92]/50 hover:bg-blue-50'
                   }`}
                 >
                   <span className="mr-2">{msg.icon}</span>
@@ -175,7 +175,7 @@ export default function WhatsAppButton({
                   setSelectedMessage(null); // Limpiar selección si escribe
                 }}
                 placeholder={content.placeholder}
-                className="w-full px-4 py-3 pr-12 rounded-full border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none text-sm"
+                className="w-full px-4 py-3 pr-12 rounded-full border border-gray-200 focus:border-[#293f92] focus:ring-2 focus:ring-[#293f92]/20 outline-none text-sm"
                 onKeyPress={(e) => e.key === 'Enter' && canSend && handleSend()}
               />
             </div>
@@ -188,7 +188,7 @@ export default function WhatsAppButton({
               disabled={!canSend}
               className={`w-full py-3 px-4 rounded-full font-semibold text-sm sm:text-base flex items-center justify-center gap-2 transition-all ${
                 canSend
-                  ? 'bg-green-500 text-white hover:bg-green-600 shadow-md hover:shadow-lg'
+                  ? 'bg-[#293f92] text-white hover:bg-[#1e2d6b] shadow-md hover:shadow-lg'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
@@ -205,7 +205,7 @@ export default function WhatsAppButton({
       {/* Main Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed right-2 sm:right-4 bottom-2 sm:bottom-4 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition-all hover:scale-110 ${
+        className={`fixed right-2 sm:right-4 bottom-2 sm:bottom-4 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-[#293f92] text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#1e2d6b] transition-all hover:scale-110 ${
           isOpen ? 'rotate-0' : ''
         }`}
         aria-label="WhatsApp Chat"
@@ -223,7 +223,7 @@ export default function WhatsAppButton({
 
       {/* Pulse animation */}
       {!isOpen && (
-        <span className="fixed right-2 sm:right-4 bottom-2 sm:bottom-4 z-40 w-12 h-12 sm:w-14 sm:h-14 bg-green-500 rounded-full animate-ping opacity-20 pointer-events-none"></span>
+        <span className="fixed right-2 sm:right-4 bottom-2 sm:bottom-4 z-40 w-12 h-12 sm:w-14 sm:h-14 bg-[#293f92] rounded-full animate-ping opacity-20 pointer-events-none"></span>
       )}
     </>
   );

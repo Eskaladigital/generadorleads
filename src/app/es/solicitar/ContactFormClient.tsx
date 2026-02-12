@@ -484,7 +484,7 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
       <div className="py-4 md:py-10 bg-gray-50">
         <div className="container-narrow text-center w-full">
           <div className="max-w-xl mx-auto">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 text-green-600 text-4xl mb-8">✓</div>
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#293f92]/10 text-[#293f92] text-4xl mb-8">✓</div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Solicitud Recibida</h1>
             <p className="text-xl text-gray-600 mb-10 max-w-lg mx-auto">
               Gracias por confiar en Health4Spain. Un profesional se pondrá en contacto contigo en menos de 24 horas.
@@ -623,13 +623,13 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
                         setCurrentStep(2);
                       }
                     }}
-                    className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-full text-xs border border-green-300 hover:border-green-500 hover:bg-green-50 transition-all group"
+                    className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-full text-xs border border-[#293f92]/30 hover:border-[#293f92] hover:bg-blue-50 transition-all group"
                   >
-                    <span className="text-green-600">📍</span>
+                    <span className="text-[#293f92]">📍</span>
                     <span className="font-medium">
                       {ciudades.find(c => c.id === formData.ciudad_interes)?.label}
                     </span>
-                    <span className="text-xs text-gray-400 group-hover:text-green-600">✏️</span>
+                    <span className="text-xs text-gray-400 group-hover:text-[#293f92]">✏️</span>
                   </button>
                 )}
               </div>
