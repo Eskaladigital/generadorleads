@@ -691,7 +691,7 @@ async function CityView({
                       href={`/es/contacto?servicio=gestorias&ciudad=${slug}`}
                       className="btn-minimal"
                     >
-                      Solicitar ayuda con trámites →
+                      Solicitar contacto →
                     </Link>
                   </div>
                 </div>

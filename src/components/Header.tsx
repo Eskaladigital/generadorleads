@@ -147,7 +147,7 @@ export default function Header() {
               href={`/${currentLang}/contacto`}
               className="hidden sm:inline-flex items-center gap-2 bg-[#293f92] text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-[#3bbdda] transition-all shadow-md hover:shadow-lg"
             >
-              {currentLang === 'es' ? 'Solicitar ayuda' : 'Get help'}
+              {currentLang === 'es' ? 'Solicitar contacto' : 'Get help'}
               <span>→</span>
             </Link>
 
@@ -195,7 +195,7 @@ export default function Header() {
             href={`/${currentLang}/contacto`}
             className="block mt-4 bg-[#293f92] text-white text-center px-4 py-3 rounded-lg font-semibold hover:bg-[#3bbdda] transition-colors"
           >
-            {currentLang === 'es' ? 'Solicitar ayuda gratis' : 'Get free help'}
+            {currentLang === 'es' ? 'Solicitar contacto' : 'Get free help'}
           </Link>
         </nav>
       </div>
