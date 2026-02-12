@@ -227,7 +227,7 @@ export default function HomePage() {
             {AUDIENCIAS.map((audiencia) => (
               <Link
                 key={audiencia.id}
-                href={`/es/contacto?perfil=${audiencia.id}`}
+                href={`/es/solicitar?perfil=${audiencia.id}`}
                 className="profile-card"
               >
                 <h3 className="text-2xl md:text-3xl font-bold mb-4">
@@ -257,7 +257,7 @@ export default function HomePage() {
             <h3>Región de Murcia</h3>
             <div className="destinos-lista">
               {CIUDADES_MURCIA.map((ciudad) => (
-                <Link key={ciudad.slug} href={`/es/contacto?ciudad=${ciudad.slug}`}>
+                <Link key={ciudad.slug} href={`/es/solicitar?ciudad=${ciudad.slug}`}>
                   {ciudad.nombre} <span>Solicitar →</span>
                 </Link>
               ))}
@@ -269,7 +269,7 @@ export default function HomePage() {
             <h3>Provincia de Alicante</h3>
             <div className="destinos-lista">
               {CIUDADES_ALICANTE.map((ciudad) => (
-                <Link key={ciudad.slug} href={`/es/contacto?ciudad=${ciudad.slug}`}>
+                <Link key={ciudad.slug} href={`/es/solicitar?ciudad=${ciudad.slug}`}>
                   {ciudad.nombre} <span>Solicitar →</span>
                 </Link>
               ))}
