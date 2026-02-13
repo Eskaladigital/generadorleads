@@ -1,6 +1,6 @@
 # 🔍 Auditoría Completa - Health4Spain
 
-**Fecha:** 11 Febrero 2026  
+**Fecha:** 12 Febrero 2026  
 **Alcance:** Funcionamiento, flujo de datos, CTAs, servicios, documentación
 
 ---
@@ -19,7 +19,8 @@
 | `/es/servicios/[slug]` | servicios/[slug]/page.tsx | **Supabase** landing_pages, servicios_catalogo | Landing servicio×ciudad O página servicio general |
 | `/es/blog` | blog/page.tsx | **Supabase** blog_posts | Lista posts published |
 | `/es/blog/[slug]` | blog/[slug]/page.tsx | **Supabase** blog_posts | Post individual |
-| `/es/contacto` | contacto/page.tsx | **Supabase** getCiudades() | Formulario multi-paso. Ciudades para dropdown |
+| `/es/contacto` | contacto/page.tsx | **Supabase** getCiudades() | Página contacto con mapa |
+| `/es/solicitar` | solicitar/page.tsx | **Supabase** getCiudades() | Formulario multi-paso (4 pasos). LandingFormEmbed en landings |
 | `/es/sobre-nosotros` | sobre-nosotros/page.tsx | Estático | |
 | `/es/profesionales` | profesionales/page.tsx | Estático | |
 | `/es/presupuesto` | presupuesto/page.tsx | Estático | |

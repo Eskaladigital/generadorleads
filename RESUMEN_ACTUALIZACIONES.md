@@ -1,5 +1,24 @@
 # 📋 Resumen de Actualizaciones - Health4Spain
 
+## 🆕 Formulario Embebido y Landings - 12 Febrero 2026
+
+### 1. **LandingFormEmbed**
+- Formulario de conversión directa en hero de landings con servicio+ciudad
+- 2 pasos: datos personales + presupuesto/urgencia (pasos 3 y 4 del flujo completo)
+- Estética idéntica a /solicitar
+- Centrado en PC con `mx-auto`
+
+### 2. **Landings UX**
+- H1 con `!leading-[1.5]` para evitar solapamiento
+- Icono checkmark en sección problemas (antes: círculo-X)
+- Enlaces con `servicio=X&ciudad=Y` → /solicitar abre en paso 3
+
+### 3. **Iconos**
+- Datos protegidos: Shield/Lock (antes: globo)
+- Problemas landings: Checkmark (antes: círculo-X)
+
+---
+
 ## 🆕 Mejoras UX y Configuración - 11 Febrero 2026
 
 ### 1. **Banner de Cookies (GDPR / Normativa UE)**

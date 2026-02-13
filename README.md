@@ -24,7 +24,8 @@ Health4Spain es una plataforma-marketplace digital que conecta a personas extran
 
 **4 servicios × 19 ciudades = 76 páginas optimizadas**
 
-**✅ ESTADO**: Proyecto optimizado y production-ready (12 Feb 2026)
+**✅ ESTADO**: Proyecto optimizado y production-ready (12 Feb 2026)  
+- **Formulario embebido** en landings con servicio+ciudad (conversión directa)
 
 ---
 
@@ -77,6 +78,8 @@ health4spain/
 │   │   ├── Navigation.tsx          # Navbar único
 │   │   ├── Footer.tsx
 │   │   ├── CookieConsent.tsx       # GDPR
+│   │   ├── LandingFormEmbed.tsx    # Formulario en landings (paso 3+4)
+│   │   ├── ServiceIcon.tsx        # Iconos por tipo de servicio
 │   │   └── OptimizedImage.tsx      # Componente Image
 │   ├── lib/
 │   │   ├── supabase.ts
@@ -123,6 +126,7 @@ health4spain/
 - Barra progreso en azul corporativo (`#3bbdda`)
 - Países ordenados alfabéticamente (A-Z)
 - Todo visible sin scroll en cada paso
+- **Landings**: Formulario embebido en hero (paso 3+4) cuando servicio+ciudad ya definidos
 
 ---
 

@@ -1,6 +1,6 @@
 # 📊 Estado del Proyecto Health4Spain
 
-**Fecha de última actualización:** 11 de Febrero 2026
+**Fecha de última actualización:** 12 de Febrero 2026
 
 ---
 
@@ -40,9 +40,22 @@ El proyecto Health4Spain ha completado exitosamente:
 
 ---
 
-## 🚀 Últimas Optimizaciones (11 Feb 2026)
+## 🚀 Últimas Optimizaciones (12 Feb 2026)
 
-### Mejoras UX Finales (12 Feb 2026)
+### Formulario Embebido en Landings (12 Feb 2026)
+- ✅ **LandingFormEmbed**: Formulario directo en hero de landings con servicio+ciudad
+- ✅ **2 pasos**: Datos personales (3) + Presupuesto/urgencia (4) — servicio y ciudad fijos
+- ✅ **Estética idéntica** a `/solicitar`: labels, grids, botones negro/gris
+- ✅ **Centrado en PC** con `mx-auto`
+- ✅ **Fallback**: Si no hay servicio+ciudad, se muestra enlace tradicional
+
+### Landings y Diseño (12 Feb 2026)
+- ✅ **H1 interlineado**: `!leading-[1.5]` para evitar solapamiento en títulos largos
+- ✅ **Iconos unificados**: Checkmark en sección problemas (antes: círculo-X)
+- ✅ **Iconos seguridad**: Shield/Lock para "Datos protegidos" (antes: globo)
+- ✅ **Enlaces landings**: `servicio=X&ciudad=Y` → formulario /solicitar abre en paso 3
+
+### Mejoras UX Finales (11 Feb 2026)
 - ✅ **CTAs más claros**: "Solicitar ayuda" → "Solicitar contacto"
 - ✅ **Barra progreso azul**: Color corporativo `#3bbdda` en formulario
 - ✅ **Países alfabéticos**: 26 países ordenados A-Z en formulario
@@ -184,9 +197,13 @@ npm run check-landings         # Estado landing pages
 
 **Estado**: ✅ OPTIMIZADO Y PRODUCTION-READY
 
-**Última optimización**: 11 de Febrero 2026
+**Última optimización**: 12 de Febrero 2026
 
 **Commits clave**:
+- `4c97c1b` - Formulario embebido en landings + estética /solicitar
+- `cf9047e` - H1 !leading-[1.5], form centrado, icono checkmark
+- `1152abf` - Formulario: lista vertical sin iconos
+- `3f59c19` - Formulario ultra-condensado
 - `1152abf` - Formulario: lista vertical sin iconos
 - `3f59c19` - Formulario ultra-condensado  
 - `1ce1245` - Condensación global UX (50% menos padding)

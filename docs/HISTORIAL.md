@@ -1,5 +1,30 @@
 # Historial de Desarrollo - Health4Spain
 
+## Versión 2.6.0 (12 Febrero 2026)
+
+### Formulario Embebido en Landings
+
+- **Componente**: `LandingFormEmbed.tsx` — Formulario de conversión directa en hero de landings
+- **Condición**: Solo cuando `servicio_slug` y `ciudad_slug` existen (ej. gestorias-jumilla)
+- **Flujo**: 2 pasos (datos personales + presupuesto/urgencia), servicio y ciudad fijos
+- **Estética**: Idéntica a ContactFormClient (/solicitar) — labels, grids, botones
+- **Ubicación**: Debajo de bullets del hero, centrado en PC (`mx-auto`)
+- **Rutas**: `servicios/[slug]` y `destinos/[slug]`
+
+### Landings: Mejoras UX
+
+- **H1 interlineado**: `!leading-[1.5]` para evitar solapamiento en títulos largos
+- **Formulario centrado**: `max-w-2xl mx-auto` en desktop
+- **Iconos**: Círculo-X → Checkmark en sección problemas
+- **Enlaces**: `servicio=X&ciudad=Y` en URL → /solicitar abre directamente en paso 3
+
+### Iconos Unificados
+
+- **Seguridad**: Globo → Shield/Lock para "Datos protegidos" (ContactFormClient, LeadForm, PreFooterCTA)
+- **Problemas landings**: Círculo-X → Checkmark (servicios/[slug], destinos/[slug])
+
+---
+
 ## Versión 2.5.1 (11 Febrero 2026)
 
 ### Banner de Cookies (GDPR / Normativa UE)

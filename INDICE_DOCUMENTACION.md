@@ -1,7 +1,7 @@
 # 📚 Índice de Documentación - Health4Spain
 
-**Fecha:** 11 de Febrero 2026  
-**Estado:** ✅ Optimizado y Production-Ready | WebP | UX Condensada | Formulario Compacto
+**Fecha:** 12 de Febrero 2026  
+**Estado:** ✅ Optimizado y Production-Ready | WebP | UX Condensada | Formulario Embebido Landings
 
 ---
 
@@ -117,7 +117,8 @@
 - [ESTADO_PROYECTO.md](./ESTADO_PROYECTO.md) - Sección "UX y Espaciado"
 - [MINIMALIST_ACTUALIZADO.md](./MINIMALIST_ACTUALIZADO.md) - Diseño minimalist
 - `src/app/globals.css` - Estilos condensados
-- `src/app/es/contacto/ContactFormClient.tsx` - Formulario optimizado
+- `src/app/es/solicitar/ContactFormClient.tsx` - Formulario principal
+- `src/components/LandingFormEmbed.tsx` - Formulario embebido en landings
 
 ### Landing Pages
 - [docs/AUDITORIA.md](./docs/AUDITORIA.md) - Auditoría rutas y datos
@@ -145,9 +146,15 @@
 
 ---
 
-## 🎯 Últimas Actualizaciones (11 Feb 2026)
+## 🎯 Últimas Actualizaciones (12 Feb 2026)
 
-### Optimización Performance
+### Formulario Embebido en Landings
+- ✅ `LandingFormEmbed.tsx` — Conversión directa en hero cuando servicio+ciudad definidos
+- ✅ Estética idéntica a /solicitar
+- ✅ H1 interlineado `!leading-[1.5]`, form centrado en PC
+- ✅ Iconos: checkmark en problemas, shield/lock para datos protegidos
+
+### Optimización Performance (11 Feb)
 - ✅ Logos PNG → WebP (script `convert-images-to-webp.ts`)
 - ✅ Hero con Next.js Image (priority + fetchPriority)
 - ✅ LOGO_PATHS centralizadas en constants.ts
@@ -192,6 +199,6 @@
 
 ---
 
-**Última actualización:** 11 de Febrero 2026  
+**Última actualización:** 12 de Febrero 2026  
 **Estado:** ✅ OPTIMIZADO Y DOCUMENTADO  
 **Versión:** 2.6.0
