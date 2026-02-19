@@ -6,6 +6,7 @@ import { HERO_IMAGES } from '@/lib/constants';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { getDictionary } from '@/lib/dictionaries';
 import { ROUTES, type Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const LOCALE: Locale = 'es';
 const t = getDictionary(LOCALE);
@@ -14,6 +15,7 @@ const r = ROUTES[LOCALE];
 export const metadata: Metadata = {
   title: t.destinations.metaTitle,
   description: t.destinations.metaDesc,
+  alternates: buildAlternates(LOCALE, '/destinos'),
 };
 
 export default async function DestinosPage() {
@@ -44,7 +46,7 @@ export default async function DestinosPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={HERO_IMAGES.destinos}
-            alt=""
+            alt="Destinos en España para extranjeros"
             fill
             priority
             fetchPriority="high"

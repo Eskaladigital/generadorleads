@@ -4,11 +4,16 @@ import { Metadata } from 'next';
 import { HERO_IMAGES } from '@/lib/constants';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ContactoPageMarker from './ContactoPageMarker';
+import { buildAlternates } from '@/lib/seo';
+import type { Locale } from '@/lib/routes';
+
+const LOCALE: Locale = 'es';
 
 export const metadata: Metadata = {
   title: 'Contacto | Health4Spain',
   description: 'Contacta con Health4Spain. Te ayudamos a conectar con abogados, seguros, inmobiliarias y gestorías verificados. Respuesta en 24h. Sin coste para ti.',
   keywords: 'contacto health4spain, servicios extranjeros españa, abogados españa, seguros salud españa, inmobiliarias españa',
+  alternates: buildAlternates(LOCALE, '/contacto'),
 };
 
 // 📧 DATOS DE CONTACTO - TEMPORALES (cambiar después)
@@ -29,7 +34,7 @@ export default function ContactoPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={HERO_IMAGES.contacto}
-            alt=""
+            alt="Contacto Health4Spain"
             fill
             priority
             fetchPriority="high"

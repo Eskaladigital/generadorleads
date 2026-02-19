@@ -9,6 +9,7 @@ import { getLandingBySlug, getActiveLandingSlugs } from '@/lib/data';
 import { getDictionary } from '@/lib/dictionaries';
 import { ROUTES } from '@/lib/routes';
 import type { Locale } from '@/lib/routes';
+import { buildDynamicAlternates, buildOpenGraph, buildTwitter, serviceJsonLd, faqPageJsonLd, JsonLd } from '@/lib/seo';
 
 const LOCALE: Locale = 'de';
 const t = getDictionary(LOCALE);
@@ -202,6 +203,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   
+  const alternates = buildDynamicAlternates(LOCALE, 'services', slug);
+  const url = alternates.canonical;
+  
   if (slug.includes('-')) {
     const landing = await getLanding(slug);
     if (landing) {
@@ -211,6 +215,16 @@ export async function generateMetadata({
         keywords: Array.isArray(landing.meta_keywords) 
           ? landing.meta_keywords.join(', ') 
           : landing.meta_keywords || undefined,
+        alternates,
+        openGraph: buildOpenGraph(LOCALE, {
+          title: landing.meta_title,
+          description: landing.meta_description,
+          url,
+        }),
+        twitter: buildTwitter({
+          title: landing.meta_title,
+          description: landing.meta_description,
+        }),
       };
     }
   }
@@ -218,12 +232,21 @@ export async function generateMetadata({
   const servicio = SERVICIOS_DATA[slug];
   
   if (!servicio) {
-    return { title: t.landingUI.serviceNotFound };
+    return { 
+      title: t.landingUI.serviceNotFound,
+      alternates,
+    };
   }
   
+  const title = `${servicio.titulo} ${t.landingUI.forExpatsIn} | Health4Spain`;
+  const description = servicio.descripcion.slice(0, 155) + '...';
+  
   return {
-    title: `${servicio.titulo} ${t.landingUI.forExpatsIn} | Health4Spain`,
-    description: servicio.descripcion.slice(0, 155) + '...',
+    title,
+    description,
+    alternates,
+    openGraph: buildOpenGraph(LOCALE, { title, description, url }),
+    twitter: buildTwitter({ title, description }),
   };
 }
 
@@ -254,8 +277,23 @@ export default async function ServicioPage({
     notFound();
   }
 
+  const breadcrumbs = [
+    { name: t.common.breadcrumbHome, url: `/${LOCALE}` },
+    { name: t.nav.services, url: `/${LOCALE}/${r.services}` },
+    { name: servicio.titulo, url: `/${LOCALE}/${r.services}/${slug}` },
+  ];
+
   return (
     <>
+      <JsonLd data={serviceJsonLd({
+        name: servicio.titulo,
+        description: servicio.descripcion,
+        url: `/${LOCALE}/${r.services}/${slug}`,
+        locale: LOCALE,
+      })} />
+      {servicio.faqs && servicio.faqs.length > 0 && (
+        <JsonLd data={faqPageJsonLd(servicio.faqs.map(f => ({ question: f.pregunta, answer: f.respuesta })))} />
+      )}
       <section className="section">
         <div className="container-narrow">
           <Breadcrumbs items={[
@@ -390,8 +428,18 @@ export default async function ServicioPage({
 }
 
 function LandingPageView({ landing }: { landing: LandingPage }) {
+  const breadcrumbs = [
+    { name: t.common.breadcrumbHome, url: `/${LOCALE}` },
+    { name: t.nav.services, url: `/${LOCALE}/${r.services}` },
+    ...(landing.servicio_nombre ? [{ name: landing.servicio_nombre, url: `/${LOCALE}/${r.services}/${landing.servicio_slug}` }] : []),
+    { name: landing.hero_title, url: `/${LOCALE}/${r.services}/${landing.slug}` },
+  ];
+  
   return (
     <>
+      {landing.faqs && landing.faqs.length > 0 && (
+        <JsonLd data={faqPageJsonLd(landing.faqs.map(f => ({ question: f.question, answer: f.answer })))} />
+      )}
       <section className="section">
         <div className="container-base">
           <Breadcrumbs items={[

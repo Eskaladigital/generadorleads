@@ -4,11 +4,18 @@ import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildDynamicAlternates, buildOpenGraph, buildTwitter, blogPostingJsonLd, JsonLd } from '@/lib/seo';
 
 const locale: Locale = 'pt';
 const t = getDictionary(locale);
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const { getBlogSlugs } = await import('@/lib/data');
+  const slugs = await getBlogSlugs(locale);
+  return slugs.map((slug) => ({ slug }));
+}
 
 async function getBlogPost(slug: string) {
   const { data, error } = await supabase.from('blog_posts').select('*').eq('slug', slug).eq('status', 'published').eq('lang', 'pt').single();
@@ -24,9 +31,30 @@ async function getRelatedPosts(category: string, currentSlug: string) {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const { data } = await supabase.from('blog_posts').select('title, excerpt').eq('slug', slug).eq('status', 'published').eq('lang', 'pt').single();
+  const { data } = await supabase.from('blog_posts').select('title, excerpt, published_at, featured_image').eq('slug', slug).eq('status', 'published').eq('lang', 'pt').single();
   if (!data) return { title: t.blog.articleNotFound };
-  return { title: `${data.title} | Health4Spain Blog`, description: data.excerpt?.slice(0, 155) };
+  
+  const BASE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com';
+  const description = data.excerpt?.slice(0, 155) || '';
+  
+  return {
+    title: `${data.title} | Health4Spain Blog`,
+    description,
+    alternates: buildDynamicAlternates(locale, 'blog', slug),
+    openGraph: buildOpenGraph(locale, {
+      title: data.title,
+      description,
+      url: `${BASE}/${locale}/blog/${slug}`,
+      type: 'article',
+      publishedTime: data.published_at,
+      image: data.featured_image,
+    }),
+    twitter: buildTwitter({
+      title: data.title,
+      description,
+      image: data.featured_image,
+    }),
+  };
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -37,8 +65,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const relatedPosts = await getRelatedPosts(post.category, post.slug);
   const categoryLabel = t.blog.categoryLabels[post.category] || post.category;
 
+  const blogJsonLd = blogPostingJsonLd({
+    title: post.title,
+    description: post.excerpt,
+    url: `/${locale}/blog/${post.slug}`,
+    image: post.featured_image,
+    publishedAt: post.published_at,
+    author: post.author_name || 'Health4Spain',
+    locale: locale,
+  });
+
   return (
-    <article className="section">
+    <>
+      <JsonLd data={blogJsonLd} />
+      <article className="section">
       <div className="container-narrow">
         <nav className="mb-8 flex items-center gap-2 text-sm text-gray-500">
           <Link href="/pt" className="hover:text-accent">{t.common.home}</Link><span>/</span>
@@ -79,5 +119,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
       </div>
     </article>
+    </>
   );
 }

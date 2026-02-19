@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
 import { ROUTES } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 import { getBlogPosts, getLandingPagesForSitemap } from '@/lib/data';
 import { getServicios } from '@/lib/services';
 import { getCiudades } from '@/lib/ciudades';
@@ -14,6 +15,7 @@ const routes = ROUTES[locale];
 export const metadata: Metadata = {
   title: t.sitemap.metaTitle,
   description: t.sitemap.metaDesc,
+  alternates: buildAlternates(locale, '/seitenplan'),
   robots: { index: true, follow: true },
 };
 

@@ -4,15 +4,17 @@ import { Metadata } from 'next';
 import { getBlogPosts as fetchBlogPosts, getPopularBlogPosts } from '@/lib/data';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const LOCALE: Locale = 'es';
 const t = getDictionary(LOCALE);
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: t.blog.metaTitle,
   description: t.blog.metaDesc,
+  alternates: buildAlternates(LOCALE, '/blog'),
 };
 
 // Colores por categoría

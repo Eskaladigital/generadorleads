@@ -4,12 +4,17 @@ import { Metadata } from 'next';
 import { getBlogPosts as fetchBlogPosts, getPopularBlogPosts } from '@/lib/data';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const LOCALE: Locale = 'fr';
 const t = getDictionary(LOCALE);
 
-export const dynamic = 'force-dynamic';
-export const metadata: Metadata = { title: t.blog.metaTitle, description: t.blog.metaDesc };
+export const revalidate = 3600;
+export const metadata: Metadata = {
+  title: t.blog.metaTitle,
+  description: t.blog.metaDesc,
+  alternates: buildAlternates(LOCALE, '/blog'),
+};
 
 const categoryImages: Record<string, string> = {
   'guias-ciudad': 'https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=1200&q=80',

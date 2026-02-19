@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { getDictionary } from '@/lib/dictionaries';
 import { ROUTES, type Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 import { getBlogPosts, getLandingPagesForSitemap } from '@/lib/data';
 import { getServicios } from '@/lib/services';
 import { getCiudades } from '@/lib/ciudades';
@@ -13,6 +14,7 @@ const routes = ROUTES[LOCALE];
 export const metadata: Metadata = {
   title: t.sitemap.metaTitle,
   description: t.sitemap.metaDesc,
+  alternates: buildAlternates(LOCALE, '/sitemap-html'),
   robots: {
     index: true,
     follow: true,

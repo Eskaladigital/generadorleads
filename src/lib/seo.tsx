@@ -1,0 +1,216 @@
+import type { Locale } from './routes';
+import { LOCALES, ROUTES } from './routes';
+
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com';
+
+const OG_LOCALE_MAP: Record<Locale, string> = {
+  es: 'es_ES',
+  en: 'en_US',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  pt: 'pt_PT',
+};
+
+// ── Alternates & Canonical ──────────────────────────────────────────────
+
+export function buildAlternates(locale: Locale, path: string) {
+  const languages: Record<string, string> = {};
+  for (const l of LOCALES) {
+    languages[l] = `${BASE_URL}/${l}${path}`;
+  }
+  languages['x-default'] = `${BASE_URL}/es${path}`;
+  return {
+    canonical: `${BASE_URL}/${locale}${path}`,
+    languages,
+  };
+}
+
+export function buildDynamicAlternates(
+  locale: Locale,
+  routeKey: string,
+  slug: string
+) {
+  const languages: Record<string, string> = {};
+  for (const l of LOCALES) {
+    const segment = ROUTES[l][routeKey] || routeKey;
+    languages[l] = `${BASE_URL}/${l}/${segment}/${slug}`;
+  }
+  languages['x-default'] = `${BASE_URL}/es/${ROUTES.es[routeKey] || routeKey}/${slug}`;
+  return {
+    canonical: `${BASE_URL}/${locale}/${ROUTES[locale][routeKey] || routeKey}/${slug}`,
+    languages,
+  };
+}
+
+// ── Open Graph helpers ──────────────────────────────────────────────────
+
+export function buildOpenGraph(locale: Locale, opts: {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  authors?: string[];
+}) {
+  return {
+    title: opts.title,
+    description: opts.description,
+    url: opts.url,
+    siteName: 'Health4Spain',
+    locale: OG_LOCALE_MAP[locale],
+    alternateLocale: LOCALES.filter(l => l !== locale).map(l => OG_LOCALE_MAP[l]),
+    type: opts.type || 'website',
+    images: opts.image
+      ? [{ url: opts.image, width: 1200, height: 630, alt: opts.title }]
+      : [{ url: `${BASE_URL}/images/logo-horizontal.png`, width: 1200, height: 630, alt: 'Health4Spain' }],
+    ...(opts.publishedTime && { publishedTime: opts.publishedTime }),
+    ...(opts.authors && { authors: opts.authors }),
+  };
+}
+
+export function buildTwitter(opts: { title: string; description: string; image?: string }) {
+  return {
+    card: 'summary_large_image' as const,
+    title: opts.title,
+    description: opts.description,
+    images: opts.image ? [opts.image] : [`${BASE_URL}/images/logo-horizontal.png`],
+  };
+}
+
+// ── JSON-LD Structured Data ─────────────────────────────────────────────
+
+export function organizationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Health4Spain',
+    url: BASE_URL,
+    logo: `${BASE_URL}/images/logo-horizontal.png`,
+    description: 'Conectamos extranjeros con profesionales verificados en España: abogados, seguros, inmobiliarias y gestorías.',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'info@health4spain.com',
+      contactType: 'customer service',
+      availableLanguage: ['Spanish', 'English', 'French', 'German', 'Portuguese'],
+    },
+    sameAs: [
+      'https://www.facebook.com/health4spain',
+      'https://www.instagram.com/health4spain',
+      'https://www.linkedin.com/company/health4spain',
+    ],
+  };
+}
+
+export function websiteJsonLd(locale: Locale) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Health4Spain',
+    url: `${BASE_URL}/${locale}`,
+    inLanguage: locale,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${BASE_URL}/${locale}/${ROUTES[locale].request}?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
+export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: item.url.startsWith('http') ? item.url : `${BASE_URL}${item.url}`,
+    })),
+  };
+}
+
+export function blogPostingJsonLd(opts: {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  publishedAt: string;
+  author: string;
+  locale: Locale;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: opts.title,
+    description: opts.description,
+    url: opts.url.startsWith('http') ? opts.url : `${BASE_URL}${opts.url}`,
+    image: opts.image || `${BASE_URL}/images/logo-horizontal.png`,
+    datePublished: opts.publishedAt,
+    dateModified: opts.publishedAt,
+    author: {
+      '@type': 'Organization',
+      name: opts.author || 'Health4Spain',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Health4Spain',
+      logo: { '@type': 'ImageObject', url: `${BASE_URL}/images/logo-horizontal.png` },
+    },
+    inLanguage: opts.locale,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': opts.url.startsWith('http') ? opts.url : `${BASE_URL}${opts.url}` },
+  };
+}
+
+export function faqPageJsonLd(faqs: { question: string; answer: string }[]) {
+  if (!faqs || faqs.length === 0) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+export function serviceJsonLd(opts: {
+  name: string;
+  description: string;
+  url: string;
+  locale: Locale;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: opts.name,
+    description: opts.description,
+    url: opts.url.startsWith('http') ? opts.url : `${BASE_URL}${opts.url}`,
+    provider: {
+      '@type': 'Organization',
+      name: 'Health4Spain',
+      url: BASE_URL,
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Spain',
+    },
+    availableLanguage: ['Spanish', 'English', 'French', 'German', 'Portuguese'],
+  };
+}
+
+// ── Helper to render JSON-LD as script tag ──────────────────────────────
+
+export function JsonLd({ data }: { data: Record<string, unknown> | null }) {
+  if (!data) return null;
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}

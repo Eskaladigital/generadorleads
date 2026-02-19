@@ -14,6 +14,7 @@ import { getLandingBySlug, getCiudadContenido as getCiudadContenidoData, getCiud
 import type { Locale } from '@/lib/routes';
 import { getDictionary } from '@/lib/dictionaries';
 import { ROUTES } from '@/lib/routes';
+import { buildDynamicAlternates, buildOpenGraph, buildTwitter, breadcrumbJsonLd, faqPageJsonLd, JsonLd } from '@/lib/seo';
 
 const LOCALE: Locale = 'fr';
 const t = getDictionary(LOCALE);
@@ -48,14 +49,27 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   
+  const alternates = buildDynamicAlternates(LOCALE, 'destinations', slug);
+  
   const landing = await getLanding(slug);
   if (landing) {
+    const url = alternates.canonical;
     return {
       title: landing.meta_title,
       description: landing.meta_description,
       keywords: Array.isArray(landing.meta_keywords) 
         ? landing.meta_keywords.join(', ') 
         : landing.meta_keywords || undefined,
+      alternates,
+      openGraph: buildOpenGraph(LOCALE, {
+        title: landing.meta_title,
+        description: landing.meta_description,
+        url,
+      }),
+      twitter: buildTwitter({
+        title: landing.meta_title,
+        description: landing.meta_description,
+      }),
     };
   }
   
@@ -65,23 +79,37 @@ export async function generateMetadata({
   if (parsed) {
     const ciudadData = await getCiudadCatalogo(parsed.ciudad);
     if (ciudadData) {
+      const url = alternates.canonical;
       if (parsed.servicio) {
         const servicioData = await getServicioBySlug(parsed.servicio, LOCALE);
         const servicioNombre = servicioData?.nombre_plural || servicioData?.nombre || parsed.servicio;
+        const title = `${servicioNombre} ${t.landingUI.in} ${ciudadData.nombre} - Health4Spain`;
+        const description = `${t.landingUI.connectBestProf} ${servicioNombre.toLowerCase()} ${t.landingUI.in} ${ciudadData.nombre}. ${t.landingUI.verifiedProf}.`;
         return {
-          title: `${servicioNombre} ${t.landingUI.in} ${ciudadData.nombre} - Health4Spain`,
-          description: `${t.landingUI.connectBestProf} ${servicioNombre.toLowerCase()} ${t.landingUI.in} ${ciudadData.nombre}. ${t.landingUI.verifiedProf}.`,
+          title,
+          description,
+          alternates,
+          openGraph: buildOpenGraph(LOCALE, { title, description, url }),
+          twitter: buildTwitter({ title, description }),
         };
       }
       
+      const title = `${t.landingUI.livIn} ${ciudadData.nombre} - Health4Spain`;
+      const description = `${t.landingUI.allYouNeed} ${ciudadData.nombre} ${t.landingUI.asExpat}.`;
       return {
-        title: `${t.landingUI.livIn} ${ciudadData.nombre} - Health4Spain`,
-        description: `${t.landingUI.allYouNeed} ${ciudadData.nombre} ${t.landingUI.asExpat}.`,
+        title,
+        description,
+        alternates,
+        openGraph: buildOpenGraph(LOCALE, { title, description, url }),
+        twitter: buildTwitter({ title, description }),
       };
     }
   }
   
-  return { title: t.landingUI.destinationNotFound };
+  return { 
+    title: t.landingUI.destinationNotFound,
+    alternates,
+  };
 }
 
 export async function generateStaticParams() {
@@ -141,8 +169,18 @@ export default async function DestinationPage({
 function LandingPageView({ landing }: { landing: LandingPage }) {
   const requestUrl = `/${LOCALE}/${r.request}?${landing.servicio_slug ? `servicio=${landing.servicio_slug}&` : ''}ciudad=${landing.ciudad_slug || landing.slug}`;
   
+  const breadcrumbs = [
+    { name: t.common.breadcrumbHome, url: `/${LOCALE}` },
+    { name: t.destinations.title, url: `/${LOCALE}/${r.destinations}` },
+    { name: landing.hero_title, url: `/${LOCALE}/${r.destinations}/${landing.slug}` },
+  ];
+  
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd(breadcrumbs)} />
+      {landing.faqs && landing.faqs.length > 0 && (
+        <JsonLd data={faqPageJsonLd(landing.faqs.map(f => ({ question: f.question, answer: f.answer })))} />
+      )}
       <section className="section">
         <div className="container-base">
           <Breadcrumbs items={[
@@ -448,8 +486,18 @@ async function CityView({
     return <CityViewBasic slug={slug} ciudadData={ciudadData} />;
   }
   
+  const breadcrumbs = [
+    { name: t.common.breadcrumbHome, url: `/${LOCALE}` },
+    { name: t.destinations.title, url: `/${LOCALE}/${r.destinations}` },
+    { name: ciudadData.nombre, url: `/${LOCALE}/${r.destinations}/${slug}` },
+  ];
+  
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd(breadcrumbs)} />
+      {contenidoDB.faqs && contenidoDB.faqs.length > 0 && (
+        <JsonLd data={faqPageJsonLd(contenidoDB.faqs.map((f: any) => ({ question: f.pregunta, answer: f.respuesta })))} />
+      )}
       <section className="section">
         <div className="container-narrow">
           <Breadcrumbs items={[

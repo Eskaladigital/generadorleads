@@ -4,6 +4,7 @@ import { getCiudades } from '@/lib/ciudades';
 import ContactFormClient from '@/app/es/solicitar/ContactFormClient';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const locale: Locale = 'en';
 const t = getDictionary(locale);
@@ -11,6 +12,7 @@ const t = getDictionary(locale);
 export const metadata: Metadata = {
   title: t.request.metaTitle,
   description: t.request.metaDesc,
+  alternates: buildAlternates(locale, '/request'),
 };
 
 export default async function RequestPage() {

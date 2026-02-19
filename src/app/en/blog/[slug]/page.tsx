@@ -4,17 +4,45 @@ import { Metadata } from 'next';
 import { getBlogPost as fetchBlogPost, getBlogPostMeta as fetchBlogPostMeta, getRelatedBlogPosts } from '@/lib/data';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildDynamicAlternates, buildOpenGraph, buildTwitter, blogPostingJsonLd, JsonLd } from '@/lib/seo';
 
 const LOCALE: Locale = 'en';
 const t = getDictionary(LOCALE);
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const { getBlogSlugs } = await import('@/lib/data');
+  const slugs = await getBlogSlugs(LOCALE);
+  return slugs.map((slug) => ({ slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = await fetchBlogPostMeta(slug, LOCALE);
   if (!post) return { title: t.blog.articleNotFound };
-  return { title: `${post.title} | Health4Spain Blog`, description: post.excerpt?.slice(0, 155) };
+  
+  const BASE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com';
+  const description = post.excerpt?.slice(0, 155) || '';
+  
+  return {
+    title: `${post.title} | Health4Spain Blog`,
+    description,
+    alternates: buildDynamicAlternates(LOCALE, 'blog', slug),
+    openGraph: buildOpenGraph(LOCALE, {
+      title: post.title,
+      description,
+      url: `${BASE}/${LOCALE}/blog/${slug}`,
+      type: 'article',
+      publishedTime: post.published_at,
+      image: post.featured_image,
+    }),
+    twitter: buildTwitter({
+      title: post.title,
+      description,
+      image: post.featured_image,
+    }),
+  };
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,8 +53,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const relatedPosts = await getRelatedBlogPosts(post.category, post.slug, LOCALE);
   const categoryLabel = t.blog.categoryLabels[post.category] || post.category;
 
+  const blogJsonLd = blogPostingJsonLd({
+    title: post.title,
+    description: post.excerpt,
+    url: `/${LOCALE}/blog/${post.slug}`,
+    image: post.featured_image,
+    publishedAt: post.published_at,
+    author: post.author_name || 'Health4Spain',
+    locale: LOCALE,
+  });
+
   return (
-    <article className="section">
+    <>
+      <JsonLd data={blogJsonLd} />
+      <article className="section">
       <div className="container-narrow">
         <nav className="mb-8 flex items-center gap-2 text-sm text-gray-500">
           <Link href="/en" className="hover:text-accent">{t.common.home}</Link><span>/</span>
@@ -67,5 +107,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
       </div>
     </article>
+    </>
   );
 }

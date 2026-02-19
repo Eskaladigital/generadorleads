@@ -6,6 +6,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import ContactoPageMarker from '@/app/es/contacto/ContactoPageMarker';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const locale: Locale = 'en';
 const t = getDictionary(locale);
@@ -28,7 +29,7 @@ export default function ContactPage() {
       <ContactoPageMarker />
       <section className="hero-with-image hero-compact">
         <div className="absolute inset-0 z-0">
-          <Image src={HERO_IMAGES.contacto} alt="" fill priority fetchPriority="high" sizes="100vw" className="object-cover object-center" />
+          <Image src={HERO_IMAGES.contacto} alt="Contact Health4Spain" fill priority fetchPriority="high" sizes="100vw" className="object-cover object-center" />
         </div>
         <div className="hero-content-box">
           <h1 className="mb-4" style={{ lineHeight: '0.95' }}>{t.contact.title}</h1>

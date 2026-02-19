@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import { HERO_IMAGES, LOGO_PATHS } from '@/lib/constants';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { organizationJsonLd, websiteJsonLd, JsonLd, buildAlternates } from '@/lib/seo';
 
 const locale: Locale = 'fr';
 const t = getDictionary(locale);
@@ -11,6 +12,7 @@ const t = getDictionary(locale);
 export const metadata: Metadata = {
   title: t.home.metaTitle,
   description: t.home.metaDesc,
+  alternates: buildAlternates(locale, ''),
 };
 
 const SERVICIOS = [
@@ -55,9 +57,11 @@ const CIUDADES_ALICANTE = [
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={websiteJsonLd(locale)} />
       <section className="hero-with-image">
         <div className="absolute inset-0 z-0">
-          <Image src={HERO_IMAGES.home} alt="" fill priority fetchPriority="high" sizes="100vw" className="object-cover object-center" />
+          <Image src={HERO_IMAGES.home} alt="Health4Spain - L'Espagne simplifiée pour les étrangers" fill priority fetchPriority="high" sizes="100vw" className="object-cover object-center" />
         </div>
         <div className="hero-content-box">
           <Image src={LOGO_PATHS.vertical} alt="Health 4 Spain" height={100} width={150} className="h-20 md:h-24 w-auto mb-5" priority fetchPriority="high" />

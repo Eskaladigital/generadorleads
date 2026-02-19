@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { getBlogPost as fetchBlogPost, getBlogPostMeta as fetchBlogPostMeta, getRelatedBlogPosts } from '@/lib/data';
 import type { Locale } from '@/lib/routes';
+import { buildDynamicAlternates, buildOpenGraph, buildTwitter, blogPostingJsonLd, JsonLd } from '@/lib/seo';
 
 const LOCALE: Locale = 'es';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 // Mapeo de categorías
 const categoryLabels: Record<string, string> = {
@@ -61,17 +62,29 @@ export async function generateMetadata({
     return { title: 'Artículo no encontrado' };
   }
   
+  const BASE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com';
   const categoryLabel = categoryLabels[post.category] || post.category;
   
   const title = `${post.title} | Health4Spain Blog`;
   const description = post.excerpt?.slice(0, 155) || `${post.title}. Guía práctica para extranjeros en España.`;
+  
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-    },
+    alternates: buildDynamicAlternates(LOCALE, 'blog', slug),
+    openGraph: buildOpenGraph(LOCALE, {
+      title: post.title,
+      description: description,
+      url: `${BASE}/${LOCALE}/blog/${slug}`,
+      type: 'article',
+      publishedTime: post.published_at,
+      image: post.featured_image,
+    }),
+    twitter: buildTwitter({
+      title: post.title,
+      description: description,
+      image: post.featured_image,
+    }),
   };
 }
 
@@ -97,8 +110,19 @@ export default async function BlogPostPage({
   const categoryLabel = categoryLabels[post.category] || post.category;
   const imageUrl = post.featured_image || categoryImages[post.category] || categoryImages['vida-espana'];
 
+  const blogJsonLd = blogPostingJsonLd({
+    title: post.title,
+    description: post.excerpt,
+    url: `/${LOCALE}/blog/${post.slug}`,
+    image: post.featured_image,
+    publishedAt: post.published_at,
+    author: post.author_name || 'Health4Spain',
+    locale: LOCALE,
+  });
+
   return (
     <>
+      <JsonLd data={blogJsonLd} />
       {/* ARTICLE HEADER */}
       <article className="section">
         <div className="container-narrow">

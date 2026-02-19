@@ -4,17 +4,18 @@ import { Metadata } from 'next';
 import { HERO_IMAGES } from '@/lib/constants';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const locale: Locale = 'en';
 const t = getDictionary(locale);
 
-export const metadata: Metadata = { title: t.about.metaTitle, description: t.about.metaDesc };
+export const metadata: Metadata = { title: t.about.metaTitle, description: t.about.metaDesc, alternates: buildAlternates(locale, '/about-us') };
 
 export default function AboutPage() {
   return (
     <>
       <section className="hero-with-image hero-compact">
-        <div className="absolute inset-0 z-0"><Image src={HERO_IMAGES.sobreNosotros} alt="" fill priority fetchPriority="high" sizes="100vw" className="object-cover object-center" /></div>
+        <div className="absolute inset-0 z-0"><Image src={HERO_IMAGES.sobreNosotros} alt="About us Health4Spain" fill priority fetchPriority="high" sizes="100vw" className="object-cover object-center" /></div>
         <div className="hero-content-box">
           <h1 className="mb-4" style={{ lineHeight: '0.95' }}>{t.about.title}</h1>
           <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">{t.about.subtitle}</p>

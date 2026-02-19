@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const LOCALE: Locale = 'es';
 const t = getDictionary(LOCALE);
@@ -8,6 +9,7 @@ const t = getDictionary(LOCALE);
 export const metadata: Metadata = {
   title: t.privacy.metaTitle,
   description: t.privacy.metaDesc,
+  alternates: buildAlternates(LOCALE, '/privacidad'),
 };
 
 export default function PrivacidadPage() {

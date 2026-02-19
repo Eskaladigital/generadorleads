@@ -2,10 +2,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { HERO_IMAGES, LOGO_PATHS } from '@/lib/constants';
+import { organizationJsonLd, websiteJsonLd, JsonLd, buildAlternates } from '@/lib/seo';
+
+const LOCALE = 'es' as const;
 
 export const metadata: Metadata = {
   title: 'Health4Spain - España Simplificado para Extranjeros',
   description: 'Conectamos extranjeros con profesionales verificados: abogados, seguros, inmobiliarias y gestorías. 150+ profesionales en 19 ciudades. Sin coste para ti.',
+  alternates: buildAlternates(LOCALE, ''),
 };
 
 // Datos - 4 PERFILES CORRECTOS
@@ -136,12 +140,13 @@ const TrustIcons = {
 export default function HomePage() {
   return (
     <>
-      {/* Hero: Image optimizada para LCP (WebP vía Next.js) */}
+      <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={websiteJsonLd(LOCALE)} />
       <section className="hero-with-image">
         <div className="absolute inset-0 z-0">
           <Image
             src={HERO_IMAGES.home}
-            alt=""
+            alt="Health4Spain - España simplificado para extranjeros"
             fill
             priority
             fetchPriority="high"

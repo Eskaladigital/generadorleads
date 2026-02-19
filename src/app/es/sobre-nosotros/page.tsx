@@ -2,10 +2,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { HERO_IMAGES } from '@/lib/constants';
+import { buildAlternates } from '@/lib/seo';
+import type { Locale } from '@/lib/routes';
+
+const LOCALE: Locale = 'es';
 
 export const metadata: Metadata = {
   title: 'Sobre Nosotros - Health4Spain',
   description: 'Conectamos personas que sueñan con vivir en España con profesionales verificados: abogados, seguros, inmobiliarias y gestorías. Conoce nuestra misión.',
+  alternates: buildAlternates(LOCALE, '/sobre-nosotros'),
 };
 
 export default function SobreNosotrosPage() {
@@ -16,7 +21,7 @@ export default function SobreNosotrosPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={HERO_IMAGES.sobreNosotros}
-            alt=""
+            alt="Sobre nosotros Health4Spain"
             fill
             priority
             fetchPriority="high"

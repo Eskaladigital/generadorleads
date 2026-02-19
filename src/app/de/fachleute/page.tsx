@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
 import { localePath } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const locale: Locale = 'de';
 const t = getDictionary(locale);
@@ -10,6 +11,7 @@ const t = getDictionary(locale);
 export const metadata: Metadata = {
   title: t.professionals.metaTitle,
   description: t.professionals.metaDesc,
+  alternates: buildAlternates(locale, '/fachleute'),
 };
 
 export default function FachleutePage() {

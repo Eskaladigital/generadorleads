@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getDictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/routes';
+import { buildAlternates } from '@/lib/seo';
 
 const locale: Locale = 'en';
 const t = getDictionary(locale);
@@ -8,6 +9,7 @@ const t = getDictionary(locale);
 export const metadata: Metadata = {
   title: t.quote.metaTitle,
   description: t.quote.metaDesc,
+  alternates: buildAlternates(locale, '/quote'),
 };
 
 export default function QuotePage() {

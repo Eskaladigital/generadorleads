@@ -133,7 +133,7 @@ export async function getBlogPostMeta(slug: string, locale: Locale) {
   try {
     const { data, error } = await supabase
       .from('blog_posts')
-      .select('title, excerpt, category')
+      .select('title, excerpt, category, published_at, featured_image')
       .eq('slug', slug)
       .eq('status', 'published')
       .eq('lang', locale)
