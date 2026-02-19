@@ -7,6 +7,7 @@ const LABELS: Record<string, string> = {
   en: 'Modify cookie consent',
   de: 'Cookie-Einwilligung ändern',
   fr: 'Modifier le consentement aux cookies',
+  pt: 'Modificar consentimento de cookies',
 };
 
 interface CookieConsentLinkProps {

@@ -1,20 +1,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { supabase } from '@/lib/supabase';
+import { getBlogPosts as fetchBlogPosts, getPopularBlogPosts } from '@/lib/data';
+import { getDictionary } from '@/lib/dictionaries';
+import type { Locale } from '@/lib/routes';
+
+const LOCALE: Locale = 'es';
+const t = getDictionary(LOCALE);
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Blog - Guías para Vivir en España | Health4Spain',
-  description: 'Guías prácticas, consejos y recursos para extranjeros en España: visados, seguros, finanzas, trámites y guías de ciudades. Todo lo que necesitas saber.',
-};
-
-// Mapeo de categorías para mostrar nombres amigables
-const categoryLabels: Record<string, string> = {
-  'guias-ciudad': 'Guías de Ciudad',
-  'procedimientos': 'Trámites y Visados',
-  'salud': 'Salud y Bienestar',
-  'finanzas': 'Finanzas',
-  'vida-espana': 'Vivir en España',
+  title: t.blog.metaTitle,
+  description: t.blog.metaDesc,
 };
 
 // Colores por categoría
@@ -45,47 +43,9 @@ interface BlogPost {
   views?: number;
 }
 
-async function getBlogPosts(): Promise<BlogPost[]> {
-  try {
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('slug, title, excerpt, category, published_at, featured_image, views')
-      .eq('status', 'published')
-      .eq('lang', 'es')
-      .order('published_at', { ascending: false });
-
-    if (error) {
-      console.error('Error fetching blog posts:', error);
-      return [];
-    }
-
-    return data || [];
-  } catch (error) {
-    console.error('Error in getBlogPosts:', error);
-    return [];
-  }
-}
-
-async function getPopularPosts(): Promise<BlogPost[]> {
-  try {
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('slug, title, excerpt, category, published_at, views, featured_image')
-      .eq('status', 'published')
-      .eq('lang', 'es')
-      .order('views', { ascending: false })
-      .limit(5);
-
-    if (error) return [];
-    return data || [];
-  } catch (error) {
-    return [];
-  }
-}
-
 export default async function BlogPage() {
-  const posts = await getBlogPosts();
-  const popularPosts = await getPopularPosts();
+  const posts = await fetchBlogPosts(LOCALE) as BlogPost[];
+  const popularPosts = await getPopularBlogPosts(LOCALE) as BlogPost[];
 
   const categories = Array.from(new Set(posts.map(p => p.category)));
 
@@ -138,7 +98,7 @@ export default async function BlogPage() {
                               {post.title}
                             </h4>
                             <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                              <span className="uppercase">{categoryLabels[post.category] || post.category}</span>
+                              <span className="uppercase">{t.blog.categoryLabels[post.category] || post.category}</span>
                               {post.views && post.views > 0 && (
                                 <>
                                   <span>•</span>
@@ -165,7 +125,7 @@ export default async function BlogPage() {
                           className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors text-left group"
                         >
                           <span className="text-sm font-medium text-gray-700 group-hover:text-accent transition-colors">
-                            {categoryLabels[cat] || cat}
+                            {t.blog.categoryLabels[cat] || cat}
                           </span>
                           <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                             {count}
@@ -183,7 +143,7 @@ export default async function BlogPage() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                   {posts.map((post) => {
                     const imageUrl = post.featured_image || categoryImages[post.category] || categoryImages['vida-espana'];
-                    const categoryLabel = categoryLabels[post.category] || post.category;
+                    const categoryLabel = t.blog.categoryLabels[post.category] || post.category;
                     return (
                       <article
                         key={post.slug}

@@ -8,9 +8,11 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    // Validación básica
-    const requiredFields = ['nombre', 'email', 'telefono', 'servicio', 'ciudad'];
+    // Validación básica (ciudad puede venir como ciudad_interes en LandingFormEmbed)
+    const ciudad = body.ciudad || body.ciudad_interes;
+    const requiredFields = ['nombre', 'email', 'telefono', 'servicio'];
     const missingFields = requiredFields.filter(field => !body[field]);
+    if (!ciudad) missingFields.push('ciudad');
     
     if (missingFields.length > 0) {
       return NextResponse.json(
@@ -50,13 +52,20 @@ export async function POST(request: NextRequest) {
     // Usar score del frontend o calcular
     const score = body.score || calculateLeadScore(body);
     
+    // Teléfono: si hay codigo_pais, guardar solo el número; si no, formato legacy (completo)
+    const telefonoValor = body.codigo_pais
+      ? (body.telefono || '').replace(/\D/g, '').trim()
+      : (body.telefono || '').trim();
+
     // Crear lead
     const newLead: Partial<Lead> = {
       nombre: body.nombre.trim(),
       email: body.email.toLowerCase().trim(),
-      telefono: body.telefono.trim(),
+      codigo_pais: body.codigo_pais || undefined,
+      telefono: telefonoValor,
+      fecha_nacimiento: body.fecha_nacimiento || undefined,
       servicio: body.servicio,
-      ciudad: body.ciudad,
+      ciudad: ciudad,
       pais_origen: body.pais_origen || undefined,
       ciudad_origen: body.ciudad_origen || undefined,
       presupuesto: body.presupuesto || undefined,

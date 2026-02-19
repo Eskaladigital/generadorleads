@@ -97,7 +97,9 @@ export interface Lead {
   // Datos de contacto
   nombre: string;
   email: string;
+  codigo_pais?: string;
   telefono: string;
+  fecha_nacimiento?: string;
   
   // Origen del lead
   pais_origen?: string;

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { PAISES_CON_CODIGO, CODIGOS_PARA_OTRO, PAISES } from '@/lib/constants';
 
 interface LandingFormEmbedProps {
   servicioSlug: string;
@@ -13,20 +14,14 @@ interface LandingFormEmbedProps {
 interface FormData {
   nombre: string;
   email: string;
+  codigo_pais: string;
   telefono: string;
   pais_origen: string;
+  fecha_nacimiento: string;
   presupuesto: string;
   urgencia: string;
   mensaje: string;
 }
-
-const PAISES = [
-  'Alemania', 'Argelia', 'Argentina', 'Bélgica', 'Bolivia', 'Canadá', 'Chile',
-  'Colombia', 'Dinamarca', 'Ecuador', 'Estados Unidos', 'Finlandia', 'Francia',
-  'Irlanda', 'Italia', 'Marruecos', 'Noruega', 'Países Bajos', 'Portugal',
-  'Reino Unido', 'Rusia', 'Suecia', 'Suiza', 'Ucrania', 'Uruguay', 'Venezuela',
-  'Otro'
-];
 
 const PRESUPUESTOS = [
   { id: 'menos-5000', label: 'Menos de 5.000€' },
@@ -57,8 +52,10 @@ export default function LandingFormEmbed({
   const [formData, setFormData] = useState<FormData>({
     nombre: '',
     email: '',
+    codigo_pais: '',
     telefono: '',
     pais_origen: '',
+    fecha_nacimiento: '',
     presupuesto: '',
     urgencia: '',
     mensaje: '',
@@ -83,6 +80,8 @@ export default function LandingFormEmbed({
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
         newErrors.email = 'Email no válido';
       }
+      if (!formData.fecha_nacimiento) newErrors.fecha_nacimiento = 'La fecha de nacimiento es obligatoria';
+      if (!formData.codigo_pais) newErrors.codigo_pais = 'El código de país es obligatorio';
       if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
       if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país de origen';
     }
@@ -108,7 +107,7 @@ export default function LandingFormEmbed({
     try {
       const payload = {
         servicio: servicioSlug,
-        ciudad_interes: ciudadSlug,
+        ciudad: ciudadSlug,
         ...formData,
         landing_page: typeof window !== 'undefined' ? window.location.href : '',
         utm_source: '',
@@ -205,15 +204,14 @@ export default function LandingFormEmbed({
                 {errors.email && <p className="text-accent text-sm mt-1">{errors.email}</p>}
               </div>
               <div>
-                <label className="form-label-minimal">Teléfono *</label>
+                <label className="form-label-minimal">Fecha de nacimiento *</label>
                 <input
-                  type="tel"
-                  value={formData.telefono}
-                  onChange={(e) => updateFormData('telefono', e.target.value)}
-                  placeholder="+34 600 000 000"
-                  className={`form-input-minimal ${errors.telefono ? 'border-accent' : ''}`}
+                  type="date"
+                  value={formData.fecha_nacimiento}
+                  onChange={(e) => updateFormData('fecha_nacimiento', e.target.value)}
+                  className={`form-input-minimal ${errors.fecha_nacimiento ? 'border-accent' : ''}`}
                 />
-                {errors.telefono && <p className="text-accent text-sm mt-1">{errors.telefono}</p>}
+                {errors.fecha_nacimiento && <p className="text-accent text-sm mt-1">{errors.fecha_nacimiento}</p>}
               </div>
             </div>
 
@@ -221,7 +219,16 @@ export default function LandingFormEmbed({
               <label className="form-label-minimal">País de origen *</label>
               <select
                 value={formData.pais_origen}
-                onChange={(e) => updateFormData('pais_origen', e.target.value)}
+                onChange={(e) => {
+                  const pais = e.target.value;
+                  updateFormData('pais_origen', pais);
+                  if (pais && pais !== 'Otro') {
+                    const found = PAISES_CON_CODIGO.find(p => p.pais === pais);
+                    if (found) updateFormData('codigo_pais', found.codigo);
+                  } else if (pais === 'Otro') {
+                    updateFormData('codigo_pais', '');
+                  }
+                }}
                 className={`form-input-minimal ${errors.pais_origen ? 'border-accent' : ''}`}
               >
                 <option value="">Selecciona tu país</option>
@@ -232,6 +239,40 @@ export default function LandingFormEmbed({
                 ))}
               </select>
               {errors.pais_origen && <p className="text-accent text-sm mt-1">{errors.pais_origen}</p>}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-3">
+              <div className="min-w-[120px]">
+                <label className="form-label-minimal">Código país *</label>
+                {formData.pais_origen && formData.pais_origen !== 'Otro' ? (
+                  <div className="form-input-minimal bg-gray-50 text-gray-700">
+                    {PAISES_CON_CODIGO.find(p => p.pais === formData.pais_origen)?.codigo || formData.codigo_pais}
+                  </div>
+                ) : (
+                  <select
+                    value={formData.codigo_pais}
+                    onChange={(e) => updateFormData('codigo_pais', e.target.value)}
+                    className={`form-input-minimal ${errors.codigo_pais ? 'border-accent' : ''}`}
+                  >
+                    <option value="">Selecciona código</option>
+                    {CODIGOS_PARA_OTRO.map(({ codigo, pais }) => (
+                      <option key={codigo} value={codigo}>{codigo} {pais}</option>
+                    ))}
+                  </select>
+                )}
+                {errors.codigo_pais && <p className="text-accent text-sm mt-1">{errors.codigo_pais}</p>}
+              </div>
+              <div>
+                <label className="form-label-minimal">Teléfono *</label>
+                <input
+                  type="tel"
+                  value={formData.telefono}
+                  onChange={(e) => updateFormData('telefono', e.target.value.replace(/\D/g, ''))}
+                  placeholder="600 123 456"
+                  className={`form-input-minimal ${errors.telefono ? 'border-accent' : ''}`}
+                />
+                {errors.telefono && <p className="text-accent text-sm mt-1">{errors.telefono}</p>}
+              </div>
             </div>
 
             <button

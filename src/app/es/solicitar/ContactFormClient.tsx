@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { PAISES_CON_CODIGO, CODIGOS_PARA_OTRO, PAISES } from '@/lib/constants';
 
 // Tipos
 interface FormData {
@@ -10,9 +11,11 @@ interface FormData {
   ciudad_interes: string;
   nombre: string;
   email: string;
+  codigo_pais: string;
   telefono: string;
   pais_origen: string;
   ciudad_origen: string;
+  fecha_nacimiento: string;
   presupuesto: string;
   urgencia: string;
   mensaje: string;
@@ -29,14 +32,6 @@ interface StepProps {
   ciudades?: { id: string; label: string }[];
   onAutoAdvance?: () => void;
 }
-
-const PAISES = [
-  'Alemania', 'Argelia', 'Argentina', 'Bélgica', 'Bolivia', 'Canadá', 'Chile',
-  'Colombia', 'Dinamarca', 'Ecuador', 'Estados Unidos', 'Finlandia', 'Francia',
-  'Irlanda', 'Italia', 'Marruecos', 'Noruega', 'Países Bajos', 'Portugal',
-  'Reino Unido', 'Rusia', 'Suecia', 'Suiza', 'Ucrania', 'Uruguay', 'Venezuela',
-  'Otro'
-];
 
 const SERVICIOS = [
   { id: 'seguros', label: 'Seguros de Salud', icon: '🏥' },
@@ -143,6 +138,16 @@ function Step2({ formData, updateFormData, errors, ciudades = [], onAutoAdvance 
 }
 
 function Step3({ formData, updateFormData, errors }: StepProps) {
+  const handlePaisChange = (pais: string) => {
+    updateFormData('pais_origen', pais);
+    if (pais && pais !== 'Otro') {
+      const found = PAISES_CON_CODIGO.find(p => p.pais === pais);
+      if (found) updateFormData('codigo_pais', found.codigo);
+    } else if (pais === 'Otro') {
+      updateFormData('codigo_pais', '');
+    }
+  };
+
   return (
     <div className="space-y-3">
       <div className="mb-2">
@@ -174,15 +179,14 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
             {errors.email && <p className="text-accent text-sm mt-1">{errors.email}</p>}
           </div>
           <div>
-            <label className="form-label-minimal">Teléfono *</label>
+            <label className="form-label-minimal">Fecha de nacimiento *</label>
             <input
-              type="tel"
-              value={formData.telefono}
-              onChange={(e) => updateFormData('telefono', e.target.value)}
-              className={`form-input-minimal ${errors.telefono ? 'border-accent' : ''}`}
-              placeholder="+34 600 000 000"
+              type="date"
+              value={formData.fecha_nacimiento}
+              onChange={(e) => updateFormData('fecha_nacimiento', e.target.value)}
+              className={`form-input-minimal ${errors.fecha_nacimiento ? 'border-accent' : ''}`}
             />
-            {errors.telefono && <p className="text-accent text-sm mt-1">{errors.telefono}</p>}
+            {errors.fecha_nacimiento && <p className="text-accent text-sm mt-1">{errors.fecha_nacimiento}</p>}
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -190,7 +194,7 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
             <label className="form-label-minimal">País de origen *</label>
             <select
               value={formData.pais_origen}
-              onChange={(e) => updateFormData('pais_origen', e.target.value)}
+              onChange={(e) => handlePaisChange(e.target.value)}
               className={`form-input-minimal ${errors.pais_origen ? 'border-accent' : ''}`}
             >
               <option value="">Selecciona tu país</option>
@@ -209,6 +213,39 @@ function Step3({ formData, updateFormData, errors }: StepProps) {
               className="form-input-minimal"
               placeholder="Tu ciudad actual"
             />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-3">
+          <div className="min-w-[120px]">
+            <label className="form-label-minimal">Código país *</label>
+            {formData.pais_origen && formData.pais_origen !== 'Otro' ? (
+              <div className="form-input-minimal bg-gray-50 text-gray-700">
+                {PAISES_CON_CODIGO.find(p => p.pais === formData.pais_origen)?.codigo || formData.codigo_pais}
+              </div>
+            ) : (
+              <select
+                value={formData.codigo_pais}
+                onChange={(e) => updateFormData('codigo_pais', e.target.value)}
+                className={`form-input-minimal ${errors.codigo_pais ? 'border-accent' : ''}`}
+              >
+                <option value="">Selecciona código</option>
+                {CODIGOS_PARA_OTRO.map(({ codigo, pais }) => (
+                  <option key={codigo} value={codigo}>{codigo} {pais}</option>
+                ))}
+              </select>
+            )}
+            {errors.codigo_pais && <p className="text-accent text-sm mt-1">{errors.codigo_pais}</p>}
+          </div>
+          <div>
+            <label className="form-label-minimal">Teléfono *</label>
+            <input
+              type="tel"
+              value={formData.telefono}
+              onChange={(e) => updateFormData('telefono', e.target.value.replace(/\D/g, ''))}
+              className={`form-input-minimal ${errors.telefono ? 'border-accent' : ''}`}
+              placeholder="600 123 456"
+            />
+            {errors.telefono && <p className="text-accent text-sm mt-1">{errors.telefono}</p>}
           </div>
         </div>
       </div>
@@ -303,9 +340,11 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
   const [formData, setFormData] = useState<FormData>({
     nombre: '',
     email: '',
+    codigo_pais: '',
     telefono: '',
     pais_origen: '',
     ciudad_origen: '',
+    fecha_nacimiento: '',
     servicio: '',
     ciudad_interes: '',
     presupuesto: '',
@@ -388,6 +427,8 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
         if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
         if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email no válido';
+        if (!formData.fecha_nacimiento) newErrors.fecha_nacimiento = 'La fecha de nacimiento es obligatoria';
+        if (!formData.codigo_pais) newErrors.codigo_pais = 'El código de país es obligatorio';
         if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
         if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
       }
@@ -402,6 +443,8 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
         if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
         if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email no válido';
+        if (!formData.fecha_nacimiento) newErrors.fecha_nacimiento = 'La fecha de nacimiento es obligatoria';
+        if (!formData.codigo_pais) newErrors.codigo_pais = 'El código de país es obligatorio';
         if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
         if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
       }
@@ -417,6 +460,8 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
         if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
         if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email no válido';
+        if (!formData.fecha_nacimiento) newErrors.fecha_nacimiento = 'La fecha de nacimiento es obligatoria';
+        if (!formData.codigo_pais) newErrors.codigo_pais = 'El código de país es obligatorio';
         if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
         if (!formData.pais_origen) newErrors.pais_origen = 'Selecciona tu país';
       }
@@ -461,9 +506,11 @@ export default function ContactFormClient({ ciudades }: ContactFormClientProps) 
         body: JSON.stringify({
           nombre: formData.nombre,
           email: formData.email,
+          codigo_pais: formData.codigo_pais,
           telefono: formData.telefono,
           pais_origen: formData.pais_origen,
           ciudad_origen: formData.ciudad_origen,
+          fecha_nacimiento: formData.fecha_nacimiento || undefined,
           servicio: formData.servicio,
           ciudad: formData.ciudad_interes,
           presupuesto: formData.presupuesto,

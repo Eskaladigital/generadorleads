@@ -80,6 +80,23 @@ const CONTENT = {
     marketing: 'Marketing',
     marketingDesc: 'Pour afficher des annonces pertinentes et mesurer les campagnes.',
   },
+  pt: {
+    title: 'Configurações de cookies',
+    description:
+      'Utilizamos cookies para melhorar a sua experiência, analisar o tráfego e personalizar o conteúdo. Pode aceitar todos, rejeitar os opcionais ou personalizar a sua escolha.',
+    policyLink: 'Política de cookies',
+    acceptAll: 'Aceitar todos',
+    rejectAll: 'Rejeitar opcionais',
+    customize: 'Personalizar',
+    save: 'Guardar preferências',
+    back: 'Voltar',
+    essential: 'Essenciais',
+    essentialDesc: 'Necessários para o funcionamento do site. Não podem ser desativados.',
+    analytics: 'Análise',
+    analyticsDesc: 'Ajudam-nos a compreender como utiliza o site (ex. Google Analytics).',
+    marketing: 'Marketing',
+    marketingDesc: 'Para mostrar anúncios relevantes e medir campanhas.',
+  },
 };
 
 type Locale = keyof typeof CONTENT;

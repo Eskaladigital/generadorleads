@@ -7,7 +7,10 @@ interface Lead {
   id: string;
   nombre: string;
   email: string;
+  codigo_pais?: string;
   telefono: string;
+  fecha_nacimiento?: string;
+  pais_origen?: string;
   servicio: string;
   ciudad: string;
   urgencia: string;
@@ -112,13 +115,21 @@ export default function LeadsPage() {
     }
   };
 
+  const formatTelefono = (lead: Lead) => {
+    if (lead.codigo_pais) {
+      return `${lead.codigo_pais} ${lead.telefono}`;
+    }
+    return lead.telefono;
+  };
+
   const filteredLeads = leads.filter(lead => {
     if (!searchTerm) return true;
     const term = searchTerm.toLowerCase();
+    const telefonoCompleto = formatTelefono(lead);
     return (
       lead.nombre.toLowerCase().includes(term) ||
       lead.email.toLowerCase().includes(term) ||
-      lead.telefono.includes(term)
+      telefonoCompleto.includes(term)
     );
   });
 
@@ -218,7 +229,7 @@ export default function LeadsPage() {
                     <td className="px-4 py-3 text-sm font-medium text-gray-900">{lead.nombre}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">
                       <div>{lead.email}</div>
-                      <div className="text-xs text-gray-400">{lead.telefono}</div>
+                      <div className="text-xs text-gray-400">{formatTelefono(lead)}</div>
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600 capitalize">{lead.servicio}</td>
                     <td className="px-4 py-3 text-sm text-gray-600 capitalize">{lead.ciudad}</td>
@@ -310,8 +321,20 @@ export default function LeadsPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase mb-1">Teléfono</p>
-                  <p className="text-gray-900">{selectedLead.telefono}</p>
+                  <p className="text-gray-900">{formatTelefono(selectedLead)}</p>
                 </div>
+                {selectedLead.fecha_nacimiento && (
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase mb-1">Fecha nacimiento</p>
+                    <p className="text-gray-900">{new Date(selectedLead.fecha_nacimiento).toLocaleDateString('es-ES')}</p>
+                  </div>
+                )}
+                {selectedLead.pais_origen && (
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase mb-1">País origen</p>
+                    <p className="text-gray-900">{selectedLead.pais_origen}</p>
+                  </div>
+                )}
                 <div>
                   <p className="text-xs text-gray-500 uppercase mb-1">Servicio</p>
                   <p className="text-gray-900 capitalize">{selectedLead.servicio}</p>

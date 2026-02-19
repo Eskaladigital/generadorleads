@@ -1,18 +1,23 @@
 import { Metadata } from 'next';
+import { getDictionary } from '@/lib/dictionaries';
+import type { Locale } from '@/lib/routes';
+
+const LOCALE: Locale = 'es';
+const t = getDictionary(LOCALE);
 
 export const metadata: Metadata = {
-  title: 'Política de Cookies | Health4Spain',
-  description: 'Política de cookies de Health4Spain. Información sobre el uso de cookies en nuestro sitio web. Última actualización enero 2026.',
+  title: t.cookies.metaTitle,
+  description: t.cookies.metaDesc,
 };
 
 export default function CookiesPage() {
   return (
     <div className="section">
       <div className="container-narrow">
-        <h1 className="mb-12">Política de Cookies</h1>
+        <h1 className="mb-12">{t.cookies.title}</h1>
         
         <p className="text-gray-600 mb-12">
-          <strong>Última actualización:</strong> Enero 2026
+          <strong>{t.cookies.lastUpdate}:</strong> Enero 2026
         </p>
 
         <div className="space-y-12">

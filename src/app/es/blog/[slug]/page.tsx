@@ -1,7 +1,12 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { supabase } from '@/lib/supabase';
+import { getBlogPost as fetchBlogPost, getBlogPostMeta as fetchBlogPostMeta, getRelatedBlogPosts } from '@/lib/data';
+import type { Locale } from '@/lib/routes';
+
+const LOCALE: Locale = 'es';
+
+export const dynamic = 'force-dynamic';
 
 // Mapeo de categorías
 const categoryLabels: Record<string, string> = {
@@ -32,65 +37,16 @@ interface BlogPost {
   views: number;
 }
 
-async function getBlogPostMeta(slug: string): Promise<Pick<BlogPost, 'title' | 'excerpt' | 'category'> | null> {
-  try {
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('title, excerpt, category')
-      .eq('slug', slug)
-      .eq('status', 'published')
-      .eq('lang', 'es')
-      .single();
-    return error || !data ? null : data;
-  } catch {
-    return null;
-  }
+async function getBlogPostMeta(slug: string) {
+  return fetchBlogPostMeta(slug, LOCALE);
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  try {
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('*')
-      .eq('slug', slug)
-      .eq('status', 'published')
-      .eq('lang', 'es')
-      .single();
-
-    if (error || !data) {
-      return null;
-    }
-
-    // Incrementar vistas
-    await supabase
-      .from('blog_posts')
-      .update({ views: (data.views || 0) + 1 })
-      .eq('slug', slug);
-
-    return data;
-  } catch (error) {
-    console.error('Error fetching blog post:', error);
-    return null;
-  }
+  return fetchBlogPost(slug, LOCALE) as Promise<BlogPost | null>;
 }
 
 async function getRelatedPosts(category: string, currentSlug: string) {
-  try {
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('slug, title, category, featured_image')
-      .eq('status', 'published')
-      .eq('lang', 'es')
-      .eq('category', category)
-      .neq('slug', currentSlug)
-      .limit(2);
-
-    if (error) return [];
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching related posts:', error);
-    return [];
-  }
+  return getRelatedBlogPosts(category, currentSlug, LOCALE);
 }
 
 export async function generateMetadata({ 
@@ -119,20 +75,10 @@ export async function generateMetadata({
   };
 }
 
-// Genera los paths estáticos para SEO (será llamado en build time)
 export async function generateStaticParams() {
-  try {
-    const { data } = await supabase
-      .from('blog_posts')
-      .select('slug')
-      .eq('status', 'published')
-      .eq('lang', 'es');
-
-    return data?.map((post) => ({ slug: post.slug })) || [];
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
+  const { getBlogSlugs } = await import('@/lib/data');
+  const slugs = await getBlogSlugs(LOCALE);
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function BlogPostPage({ 

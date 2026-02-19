@@ -1,39 +1,25 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { createServerSupabaseClient } from '@/lib/supabase';
 import { LandingPage } from '@/lib/types';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ServiceIcon from '@/components/ServiceIcon';
 import LandingFormEmbed from '@/components/LandingFormEmbed';
+import { getLandingBySlug, getActiveLandingSlugs } from '@/lib/data';
+import { getDictionary } from '@/lib/dictionaries';
+import { ROUTES } from '@/lib/routes';
+import type { Locale } from '@/lib/routes';
 
-// Pre-renderizar en build para SEO. Revalidar cada 24h por si se actualizan landings.
+const LOCALE: Locale = 'es';
+const t = getDictionary(LOCALE);
+const r = ROUTES[LOCALE];
+
 export const revalidate = 86400;
 
-// Función para obtener landing page desde la BD
 async function getLanding(slug: string): Promise<LandingPage | null> {
-  try {
-    const supabase = createServerSupabaseClient();
-    
-    const { data, error } = await supabase
-      .from('landing_pages')
-      .select('*')
-      .eq('slug', slug)
-      .eq('activo', true)
-      .eq('idioma', 'es')
-      .single();
-    
-    if (error || !data) {
-      return null;
-    }
-    return data as LandingPage;
-  } catch (error) {
-    console.error('Error fetching landing page:', error);
-    return null;
-  }
+  return getLandingBySlug(slug, LOCALE);
 }
 
-// Datos de servicios
 const SERVICIOS_DATA: Record<string, {
   titulo: string;
   subtitulo: string;
@@ -216,7 +202,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   
-  // Primero verificar si es una landing page (servicio-ciudad)
   if (slug.includes('-')) {
     const landing = await getLanding(slug);
     if (landing) {
@@ -230,34 +215,23 @@ export async function generateMetadata({
     }
   }
   
-  // Si no es landing, es página de servicio estático
   const servicio = SERVICIOS_DATA[slug];
   
   if (!servicio) {
-    return { title: 'Servicio no encontrado' };
+    return { title: t.landingUI.serviceNotFound };
   }
   
   return {
-    title: `${servicio.titulo} para Extranjeros en España | Health4Spain`,
+    title: `${servicio.titulo} ${t.landingUI.forExpatsIn} | Health4Spain`,
     description: servicio.descripcion.slice(0, 155) + '...',
   };
 }
 
 export async function generateStaticParams() {
-  const supabase = createServerSupabaseClient();
   const staticServices = Object.keys(SERVICIOS_DATA).map((slug) => ({ slug }));
-
-  const { data: landings } = await supabase
-    .from('landing_pages')
-    .select('slug')
-    .eq('activo', true)
-    .eq('idioma', 'es');
-
-  const landingSlugs = (landings || [])
-    .map((l) => l.slug)
-    .filter((s): s is string => !!s && s.includes('-'));
-
-  return [...staticServices, ...landingSlugs.map((slug) => ({ slug }))];
+  const landingSlugs = await getActiveLandingSlugs(LOCALE);
+  const dynamicSlugs = landingSlugs.filter(s => s.includes('-'));
+  return [...staticServices, ...dynamicSlugs.map((slug) => ({ slug }))];
 }
 
 export default async function ServicioPage({ 
@@ -267,7 +241,6 @@ export default async function ServicioPage({
 }) {
   const { slug } = await params;
   
-  // Primero verificar si es una landing page (servicio-ciudad)
   if (slug.includes('-')) {
     const landing = await getLanding(slug);
     if (landing) {
@@ -275,7 +248,6 @@ export default async function ServicioPage({
     }
   }
   
-  // Si no es landing, mostrar página de servicio estático
   const servicio = SERVICIOS_DATA[slug];
   
   if (!servicio) {
@@ -284,12 +256,11 @@ export default async function ServicioPage({
 
   return (
     <>
-      {/* Header - Diseño minimalista */}
       <section className="section">
         <div className="container-narrow">
           <Breadcrumbs items={[
-            { label: 'Inicio', href: '/es' },
-            { label: 'Servicios', href: '/es/servicios' },
+            { label: t.common.breadcrumbHome, href: `/${LOCALE}` },
+            { label: t.nav.services, href: `/${LOCALE}/${r.services}` },
             { label: servicio.titulo }
           ]} />
           <h1 className="mb-8">
@@ -301,20 +272,16 @@ export default async function ServicioPage({
         </div>
       </section>
 
-      {/* Contenido principal */}
       <section className="section-alt">
         <div className="container-narrow">
           <div className="grid lg:grid-cols-3 gap-16">
-            {/* Columna principal */}
             <div className="lg:col-span-2 space-y-16">
-              {/* Descripción */}
               <div>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   {servicio.descripcion}
                 </p>
               </div>
 
-              {/* Beneficios */}
               <div>
                 <h2 className="mb-8">
                   ¿Por qué elegirnos?
@@ -336,10 +303,9 @@ export default async function ServicioPage({
                 </ul>
               </div>
 
-              {/* FAQs */}
               <div>
                 <h2 className="mb-8">
-                  Preguntas frecuentes
+                  {t.landingUI.faqs}
                 </h2>
                 <div className="space-y-6">
                   {servicio.faqs.map((faq, index) => (
@@ -356,28 +322,25 @@ export default async function ServicioPage({
               </div>
             </div>
 
-            {/* Sidebar */}
             <div className="space-y-8">
-              {/* CTA Card */}
               <div className="bg-white border-t-3 border-accent p-6 sticky top-20">
                 <h3 className="text-xl font-bold mb-4">
-                  Solicita información
+                  {t.landingUI.sidebarTitle}
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Te conectamos con profesionales verificados en menos de 24 horas.
+                  {t.landingUI.sidebarDesc}
                 </p>
                 <Link 
-                  href={`/es/solicitar?servicio=${slug}`}
+                  href={`/${LOCALE}/${r.request}?servicio=${slug}`}
                   className="block w-full text-center py-4 px-6 bg-[#293f92] text-white font-bold text-base hover:bg-[#1e2d6b] transition-colors rounded-sm mb-4"
                 >
-                  Comenzar ahora
+                  {t.landingUI.startNow}
                 </Link>
                 <p className="text-xs text-gray-500 text-center">
-                  Sin compromiso · 100% gratuito
+                  {t.landingUI.noCommitment} · {t.landingUI.free100}
                 </p>
               </div>
 
-              {/* Ciudades populares */}
               {servicio.ciudadesPopulares.length > 0 && (
                 <div className="bg-white border-t-3 border-gray-300 p-6">
                   <h3 className="text-xl font-bold mb-4">
@@ -387,7 +350,7 @@ export default async function ServicioPage({
                     {servicio.ciudadesPopulares.map((ciudadSlug) => (
                       <Link
                         key={ciudadSlug}
-                        href={`/es/solicitar?servicio=${slug}&ciudad=${ciudadSlug}`}
+                        href={`/${LOCALE}/${r.request}?servicio=${slug}&ciudad=${ciudadSlug}`}
                         className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0 hover:pl-2 transition-all group"
                       >
                         <span className="text-gray-700 font-medium group-hover:text-accent">
@@ -406,20 +369,19 @@ export default async function ServicioPage({
         </div>
       </section>
 
-      {/* CTA Final */}
       <section className="section text-center">
         <div className="container-narrow">
           <h2 className="mb-8">
-            ¿Listo para encontrar tu {servicio.titulo.toLowerCase().replace('abogados', 'abogado').replace('seguros de ', 'seguro de ')}?
+            {t.landingUI.readyToStart}
           </h2>
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            Te conectamos con profesionales verificados que hablan tu idioma. Sin compromiso.
+            {t.landingUI.connectMsg}
           </p>
           <Link 
-            href={`/es/solicitar?servicio=${slug}`} 
+            href={`/${LOCALE}/${r.request}?servicio=${slug}`} 
             className="btn-minimal-lg"
           >
-            Solicitar información gratuita
+            {t.landingUI.requestFreeInfo}
           </Link>
         </div>
       </section>
@@ -427,17 +389,15 @@ export default async function ServicioPage({
   );
 }
 
-// Componente para renderizar landing pages dinámicas (diseño minimalista)
 function LandingPageView({ landing }: { landing: LandingPage }) {
   return (
     <>
-      {/* Hero Section */}
       <section className="section">
         <div className="container-base">
           <Breadcrumbs items={[
-            { label: 'Inicio', href: '/es' },
-            { label: 'Servicios', href: '/es/servicios' },
-            ...(landing.servicio_nombre ? [{ label: landing.servicio_nombre, href: `/es/servicios/${landing.servicio_slug}` }] : []),
+            { label: t.common.breadcrumbHome, href: `/${LOCALE}` },
+            { label: t.nav.services, href: `/${LOCALE}/${r.services}` },
+            ...(landing.servicio_nombre ? [{ label: landing.servicio_nombre, href: `/${LOCALE}/${r.services}/${landing.servicio_slug}` }] : []),
             { label: landing.hero_title }
           ]} />
           <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] !leading-[1.5] max-w-4xl">
@@ -459,7 +419,6 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             </div>
           )}
           
-          {/* Formulario embebido si hay servicio y ciudad */}
           {landing.servicio_slug && landing.ciudad_slug ? (
             <div className="max-w-2xl mx-auto">
               <LandingFormEmbed 
@@ -471,24 +430,21 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
             </div>
           ) : (
             <Link 
-              href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
+              href={`/${LOCALE}/${r.request}?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
               className="btn-minimal-lg"
             >
-              Solicitar información gratuita
+              {t.landingUI.requestFreeInfo}
             </Link>
           )}
         </div>
       </section>
 
-      {/* Contenido Principal */}
       <section className="section-alt">
         <div className="container-base">
           <div className="grid lg:grid-cols-3 gap-16">
             
-            {/* Columna Principal */}
             <div className="lg:col-span-2 space-y-16">
               
-              {/* Problema */}
               {landing.problem_title && landing.problems && landing.problems.length > 0 && (
                 <div>
                   <h2 className="mb-6 md:mb-8 text-xl sm:text-2xl md:text-3xl">
@@ -507,7 +463,6 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                 </div>
               )}
 
-              {/* Solución */}
               {landing.solution_title && landing.solution_text && (
                 <div className="bg-white border-t-3 border-accent p-8">
                   <h2 className="mb-6">
@@ -517,15 +472,14 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                     {landing.solution_text}
                   </p>
                   <Link 
-                    href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
+                    href={`/${LOCALE}/${r.request}?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
                     className="btn-minimal inline-flex items-center gap-2"
                   >
-                    Solicitar contacto →
+                    {t.landingUI.requestContact} →
                   </Link>
                 </div>
               )}
 
-              {/* Servicios Específicos */}
               {landing.services_title && landing.services && landing.services.length > 0 && (
                 <div>
                   <h2 className="mb-6 md:mb-8 text-xl sm:text-2xl md:text-3xl">
@@ -547,18 +501,17 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                     ))}
                   </ul>
                   <div className="text-center mt-12 pt-12 border-t border-gray-300">
-                    <p className="text-gray-600 mb-6">¿Necesitas ayuda con alguno de estos servicios?</p>
+                    <p className="text-gray-600 mb-6">{t.landingUI.needHelp}</p>
                     <Link 
-                      href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
+                      href={`/${LOCALE}/${r.request}?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
                       className="btn-minimal-lg"
                     >
-                      Solicitar información gratuita
+                      {t.landingUI.requestFreeInfo}
                     </Link>
                   </div>
                 </div>
               )}
 
-              {/* Por qué esta ciudad */}
               {landing.why_city_title && landing.why_city_text && (
                 <div>
                   <h2 className="mb-6 md:mb-8 text-xl sm:text-2xl md:text-3xl">
@@ -581,20 +534,19 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
                   )}
                   <div className="text-center mt-12">
                     <Link 
-                      href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
+                      href={`/${LOCALE}/${r.request}?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
                       className="btn-minimal"
                     >
-                      Conectar con profesionales →
+                      {t.landingUI.connectProf} →
                     </Link>
                   </div>
                 </div>
               )}
 
-              {/* FAQs */}
               {landing.faqs && landing.faqs.length > 0 && (
                 <div>
                   <h2 className="mb-6 md:mb-8 text-xl sm:text-2xl md:text-3xl">
-                    Preguntas frecuentes
+                    {t.landingUI.faqs}
                   </h2>
                   <div className="space-y-6">
                     {landing.faqs.map((faq, idx) => (
@@ -613,39 +565,38 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
 
             </div>
 
-            {/* Sidebar */}
             <div className="space-y-8">
               <div className="bg-white border-t-3 border-accent p-6 sticky top-20">
                 <h3 className="text-xl font-bold mb-4">
-                  Solicita información
+                  {t.landingUI.sidebarTitle}
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Te conectamos con profesionales verificados en menos de 24 horas.
+                  {t.landingUI.sidebarDesc}
                 </p>
                 <Link 
-                  href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
+                  href={`/${LOCALE}/${r.request}?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
                   className="block w-full text-center py-4 px-6 bg-[#293f92] text-white font-bold text-base hover:bg-[#1e2d6b] transition-colors rounded-sm mb-4"
                 >
-                  Comenzar ahora
+                  {t.landingUI.startNow}
                 </Link>
                 <div className="space-y-2 text-xs text-gray-500">
                   <div className="flex items-center gap-2">
                     <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Sin compromiso
+                    {t.landingUI.noCommitment}
                   </div>
                   <div className="flex items-center gap-2">
                     <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    100% gratuito
+                    {t.landingUI.free100}
                   </div>
                   <div className="flex items-center gap-2">
                     <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Profesionales verificados
+                    {t.landingUI.verifiedProf}
                   </div>
                 </div>
               </div>
@@ -655,39 +606,38 @@ function LandingPageView({ landing }: { landing: LandingPage }) {
         </div>
       </section>
 
-      {/* CTA Final */}
       <section className="section text-center">
         <div className="container-base">
           <h2 className="mb-8">
-            {landing.cta_title || '¿Listo para empezar?'}
+            {landing.cta_title || t.landingUI.readyToStart}
           </h2>
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            {landing.cta_subtitle || 'Te conectamos con profesionales que hablan tu idioma'}
+            {landing.cta_subtitle || t.landingUI.connectMsg}
           </p>
           <Link 
-            href={`/es/solicitar?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
+            href={`/${LOCALE}/${r.request}?servicio=${landing.servicio_slug || landing.slug}${landing.ciudad_slug ? `&ciudad=${landing.ciudad_slug}` : ''}`}
             className="btn-minimal-lg"
           >
-            Solicitar información gratuita
+            {t.landingUI.requestFreeInfo}
           </Link>
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Respuesta en 24h
+              {t.landingUI.response24h}
             </div>
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Atención en tu idioma
+              {t.landingUI.inYourLang}
             </div>
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Sin compromiso
+              {t.landingUI.noCommitment}
             </div>
           </div>
         </div>

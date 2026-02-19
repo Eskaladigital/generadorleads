@@ -1,104 +1,72 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { supabase } from '@/lib/supabase';
+import { getDictionary } from '@/lib/dictionaries';
+import { ROUTES, type Locale } from '@/lib/routes';
+import { getBlogPosts, getLandingPagesForSitemap } from '@/lib/data';
 import { getServicios } from '@/lib/services';
 import { getCiudades } from '@/lib/ciudades';
 
+const LOCALE: Locale = 'es';
+const t = getDictionary(LOCALE);
+const routes = ROUTES[LOCALE];
+
 export const metadata: Metadata = {
-  title: 'Mapa del Sitio - Health4Spain',
-  description: 'Mapa completo del sitio web de Health4Spain. Encuentra todas las páginas, destinos, servicios y artículos del blog.',
+  title: t.sitemap.metaTitle,
+  description: t.sitemap.metaDesc,
   robots: {
     index: true,
     follow: true,
   },
 };
 
-// Rutas estáticas principales
-const RUTAS_ESTATICAS = [
-  { url: '/es', titulo: 'Inicio', descripcion: 'Página principal' },
-  { url: '/es/destinos', titulo: 'Destinos', descripcion: 'Guía de destinos en España' },
-  { url: '/es/servicios', titulo: 'Servicios', descripcion: 'Servicios para extranjeros' },
-  { url: '/es/blog', titulo: 'Blog', descripcion: 'Artículos y guías' },
-  { url: '/es/profesionales', titulo: 'Profesionales', descripcion: 'Directorio de profesionales' },
-  { url: '/es/sobre-nosotros', titulo: 'Sobre Nosotros', descripcion: 'Quiénes somos' },
-  { url: '/es/contacto', titulo: 'Contacto', descripcion: 'Formulario de contacto' },
-  { url: '/es/presupuesto', titulo: 'Presupuesto', descripcion: 'Solicitar presupuesto' },
-  { url: '/es/privacidad', titulo: 'Política de Privacidad', descripcion: 'Protección de datos' },
-  { url: '/es/terminos', titulo: 'Términos y Condiciones', descripcion: 'Términos de uso' },
-  { url: '/es/cookies', titulo: 'Política de Cookies', descripcion: 'Uso de cookies' },
+const staticRoutes = [
+  { key: 'home', desc: 'Página principal' },
+  { key: 'destinations', desc: 'Guía de destinos en España' },
+  { key: 'services', desc: 'Servicios para extranjeros' },
+  { key: 'blog', desc: 'Artículos y guías' },
+  { key: 'professionals', desc: 'Directorio de profesionales' },
+  { key: 'about', desc: 'Quiénes somos' },
+  { key: 'contact', desc: 'Formulario de contacto' },
+  { key: 'quote', desc: 'Solicitar presupuesto' },
+  { key: 'privacy', desc: 'Protección de datos' },
+  { key: 'terms', desc: 'Términos de uso' },
+  { key: 'cookies', desc: 'Uso de cookies' },
 ];
-
-// Función para obtener posts del blog directamente desde Supabase
-async function getBlogPosts() {
-  try {
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('slug, title, excerpt, published_at')
-      .eq('status', 'published')
-      .order('published_at', { ascending: false })
-      .limit(100);
-    
-    if (error) {
-      console.error('Error fetching blog posts:', error);
-      return [];
-    }
-    
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching blog posts:', error);
-    return [];
-  }
-}
-
-// Función para obtener landing pages activas desde Supabase
-async function getLandingPages() {
-  try {
-    const { data, error } = await supabase
-      .from('landing_pages')
-      .select('slug, servicio_nombre, ciudad_nombre, meta_title')
-      .eq('activo', true)
-      .eq('idioma', 'es')
-      .order('servicio_slug')
-      .order('ciudad_slug');
-    
-    if (error) {
-      console.error('Error fetching landing pages:', error);
-      return [];
-    }
-    
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching landing pages:', error);
-    return [];
-  }
-}
 
 export default async function SitemapHtmlPage() {
   const [blogPosts, servicios, ciudades, landingPages] = await Promise.all([
-    getBlogPosts(),
-    getServicios(),
+    getBlogPosts(LOCALE),
+    getServicios(LOCALE),
     getCiudades(),
-    getLandingPages(),
+    getLandingPagesForSitemap(LOCALE),
   ]);
-  
+
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.health4spain.com';
+  const localePrefix = `/${LOCALE}`;
+
+  const rutasEstaticas = staticRoutes.map((r) => {
+    const segment = routes[r.key as keyof typeof routes] ?? r.key;
+    const url = segment ? `${localePrefix}/${segment}` : localePrefix;
+    const titulo = r.key === 'home' ? 'Inicio' : r.key === 'destinations' ? 'Destinos' : r.key === 'services' ? 'Servicios' : r.key === 'blog' ? 'Blog' : r.key === 'professionals' ? 'Profesionales' : r.key === 'about' ? 'Sobre Nosotros' : r.key === 'contact' ? 'Contacto' : r.key === 'quote' ? 'Presupuesto' : r.key === 'privacy' ? 'Política de Privacidad' : r.key === 'terms' ? 'Términos y Condiciones' : r.key === 'cookies' ? 'Política de Cookies' : r.key;
+    return { url, titulo, descripcion: r.desc };
+  });
 
   // Obtener todos los destinos desde BD
-  const allDestinos = ciudades.map(ciudad => ({
-    url: `/es/destinos/${ciudad.slug}`,
+  const allDestinos = ciudades.map((ciudad) => ({
+    url: `${localePrefix}/${routes.destinations}/${ciudad.slug}`,
     titulo: ciudad.nombre,
     provincia: ciudad.provincia,
   }));
 
   // Obtener todos los servicios desde BD
-  const allServicios = servicios.map(servicio => ({
-    url: `/es/servicios/${servicio.slug}`,
+  const allServicios = servicios.map((servicio) => ({
+    url: `${localePrefix}/${routes.services}/${servicio.slug}`,
     titulo: servicio.nombre_plural || servicio.nombre,
   }));
-  
+
   // Obtener landing pages (servicio×ciudad)
-  const allLandingPages = landingPages.map((landing: any) => ({
-    url: `/es/servicios/${landing.slug}`,
+  const allLandingPages = landingPages.map((landing: { slug: string; servicio_nombre: string; ciudad_nombre: string }) => ({
+    url: `${localePrefix}/${routes.services}/${landing.slug}`,
     titulo: `${landing.servicio_nombre} en ${landing.ciudad_nombre}`,
     servicio: landing.servicio_nombre,
     ciudad: landing.ciudad_nombre,
@@ -111,10 +79,10 @@ export default async function SitemapHtmlPage() {
         <div className="container-base">
           <div className="max-w-3xl">
             <h1 className="font-heading text-3xl md:text-4xl font-bold mb-3">
-              Mapa del Sitio
+              {t.sitemap.title}
             </h1>
             <p className="text-lg text-white/90">
-              Navega por todas las páginas disponibles en Health4Spain. 
+              Navega por todas las páginas disponibles en Health4Spain.
               Encuentra destinos, servicios, artículos del blog y más.
             </p>
           </div>
@@ -125,18 +93,18 @@ export default async function SitemapHtmlPage() {
       <section className="py-10 md:py-14">
         <div className="container-base">
           <div className="max-w-4xl mx-auto space-y-12">
-            
+
             {/* Páginas Principales */}
             <div>
               <h2 className="font-heading text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
                 Páginas Principales
               </h2>
               <ul className="space-y-2">
-                {RUTAS_ESTATICAS.map((ruta) => (
+                {rutasEstaticas.map((ruta) => (
                   <li key={ruta.url} className="flex items-start gap-3">
                     <span className="text-primary mt-1">•</span>
                     <div className="flex-1">
-                      <Link 
+                      <Link
                         href={ruta.url}
                         className="text-primary hover:text-primary-dark font-medium hover:underline"
                       >
@@ -158,7 +126,7 @@ export default async function SitemapHtmlPage() {
               <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                 {allDestinos.map((destino) => (
                   <li key={destino.url}>
-                    <Link 
+                    <Link
                       href={destino.url}
                       className="text-primary hover:text-primary-dark hover:underline text-sm"
                     >
@@ -178,7 +146,7 @@ export default async function SitemapHtmlPage() {
                 {allServicios.map((servicio) => (
                   <li key={servicio.url} className="flex items-start gap-3">
                     <span className="text-primary mt-1">•</span>
-                    <Link 
+                    <Link
                       href={servicio.url}
                       className="text-primary hover:text-primary-dark hover:underline"
                     >
@@ -199,10 +167,10 @@ export default async function SitemapHtmlPage() {
                   Páginas especializadas por servicio y ubicación
                 </p>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {allLandingPages.map((landing: any) => (
+                  {allLandingPages.map((landing: { url: string; titulo: string }) => (
                     <li key={landing.url} className="flex items-start gap-2">
                       <span className="text-primary mt-1 text-xs">•</span>
-                      <Link 
+                      <Link
                         href={landing.url}
                         className="text-primary hover:text-primary-dark hover:underline text-sm"
                       >
@@ -221,12 +189,12 @@ export default async function SitemapHtmlPage() {
               </h2>
               {blogPosts.length > 0 ? (
                 <ul className="space-y-3">
-                  {blogPosts.map((post: any) => (
+                  {blogPosts.map((post: { slug: string; title: string; excerpt?: string; published_at?: string }) => (
                     <li key={post.slug} className="flex items-start gap-3">
                       <span className="text-primary mt-1">•</span>
                       <div className="flex-1">
-                        <Link 
-                          href={`/es/blog/${post.slug}`}
+                        <Link
+                          href={`/${LOCALE}/blog/${post.slug}`}
                           className="text-primary hover:text-primary-dark font-medium hover:underline block"
                         >
                           {post.title}
@@ -262,10 +230,10 @@ export default async function SitemapHtmlPage() {
                 Información del Sitemap
               </h3>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Total de páginas: {RUTAS_ESTATICAS.length + allDestinos.length + allServicios.length + allLandingPages.length + blogPosts.length}</li>
-                <li>• Última actualización: {new Date().toLocaleDateString('es-ES', { 
-                  year: 'numeric', 
-                  month: 'long', 
+                <li>• Total de páginas: {rutasEstaticas.length + allDestinos.length + allServicios.length + allLandingPages.length + blogPosts.length}</li>
+                <li>• Última actualización: {new Date().toLocaleDateString('es-ES', {
+                  year: 'numeric',
+                  month: 'long',
                   day: 'numeric',
                   hour: '2-digit',
                   minute: '2-digit'

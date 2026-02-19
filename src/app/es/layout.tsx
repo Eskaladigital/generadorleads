@@ -15,7 +15,7 @@ export default function SpanishLayout({
       <main className="min-h-screen">
         {children}
       </main>
-      <Footer />
+      <Footer locale="es" />
       <StickyCTA />
       <BackToTop />
       <CookieConsent lang="es" />

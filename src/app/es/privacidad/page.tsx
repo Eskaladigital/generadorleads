@@ -1,18 +1,23 @@
 import { Metadata } from 'next';
+import { getDictionary } from '@/lib/dictionaries';
+import type { Locale } from '@/lib/routes';
+
+const LOCALE: Locale = 'es';
+const t = getDictionary(LOCALE);
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidad | Health4Spain',
-  description: 'Política de privacidad de Health4Spain. Cómo protegemos y tratamos tus datos personales. Última actualización enero 2026.',
+  title: t.privacy.metaTitle,
+  description: t.privacy.metaDesc,
 };
 
 export default function PrivacidadPage() {
   return (
     <div className="section">
       <div className="container-narrow">
-        <h1 className="mb-12">Política de Privacidad</h1>
+        <h1 className="mb-12">{t.privacy.title}</h1>
         
         <p className="text-gray-600 mb-12">
-          <strong>Última actualización:</strong> Enero 2026
+          <strong>{t.privacy.lastUpdate}:</strong> Enero 2026
         </p>
 
         <div className="space-y-12">

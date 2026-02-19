@@ -1,18 +1,23 @@
 import { Metadata } from 'next';
+import { getDictionary } from '@/lib/dictionaries';
+import type { Locale } from '@/lib/routes';
+
+const LOCALE: Locale = 'es';
+const t = getDictionary(LOCALE);
 
 export const metadata: Metadata = {
-  title: 'Términos y Condiciones | Health4Spain',
-  description: 'Términos y condiciones de uso de Health4Spain. Conoce las reglas de nuestro servicio de conexión con profesionales. Última actualización enero 2026.',
+  title: t.terms.metaTitle,
+  description: t.terms.metaDesc,
 };
 
 export default function TerminosPage() {
   return (
     <div className="section">
       <div className="container-narrow">
-        <h1 className="mb-12">Términos y Condiciones</h1>
+        <h1 className="mb-12">{t.terms.title}</h1>
         
         <p className="text-gray-600 mb-12">
-            <strong>Última actualización:</strong> Enero 2026
+            <strong>{t.terms.lastUpdate}:</strong> Enero 2026
         </p>
 
         <div className="space-y-12">

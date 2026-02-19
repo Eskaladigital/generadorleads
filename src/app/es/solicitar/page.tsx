@@ -1,11 +1,16 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
+import { getDictionary } from '@/lib/dictionaries';
+import type { Locale } from '@/lib/routes';
 import { getCiudades } from '@/lib/ciudades';
 import ContactFormClient from './ContactFormClient';
 
+const LOCALE: Locale = 'es';
+const t = getDictionary(LOCALE);
+
 export const metadata: Metadata = {
-  title: 'Solicitar Información | Health4Spain',
-  description: 'Contacta con Health4Spain. Te conectamos con seguros, abogados, inmobiliarias y gestorías verificados en menos de 24 horas. Sin compromiso.',
+  title: t.request.metaTitle,
+  description: t.request.metaDesc,
 };
 
 export default async function SolicitarPage() {
@@ -13,11 +18,11 @@ export default async function SolicitarPage() {
 
   const ciudadesOpciones = [
     ...ciudades.map((c) => ({ id: c.slug, label: c.nombre })),
-    { id: 'otra', label: 'Otra ciudad' },
+    { id: 'otra', label: t.request.otherCity },
   ];
 
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Cargando...</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">{t.request.loading}</div>}>
       <ContactFormClient ciudades={ciudadesOpciones} />
     </Suspense>
   );

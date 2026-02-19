@@ -98,6 +98,52 @@ export const CITIES = [
 
 export type CitySlug = typeof CITIES[number]['slug'];
 
+// Países seleccionables en formularios + códigos telefónicos (coinciden 1:1)
+export const PAISES_CON_CODIGO = [
+  { pais: 'Alemania', codigo: '+49' },
+  { pais: 'Argelia', codigo: '+213' },
+  { pais: 'Argentina', codigo: '+54' },
+  { pais: 'Bélgica', codigo: '+32' },
+  { pais: 'Bolivia', codigo: '+591' },
+  { pais: 'Canadá', codigo: '+1' },
+  { pais: 'Chile', codigo: '+56' },
+  { pais: 'Colombia', codigo: '+57' },
+  { pais: 'Dinamarca', codigo: '+45' },
+  { pais: 'Ecuador', codigo: '+593' },
+  { pais: 'Estados Unidos', codigo: '+1' },
+  { pais: 'Finlandia', codigo: '+358' },
+  { pais: 'Francia', codigo: '+33' },
+  { pais: 'Irlanda', codigo: '+353' },
+  { pais: 'Italia', codigo: '+39' },
+  { pais: 'Marruecos', codigo: '+212' },
+  { pais: 'Noruega', codigo: '+47' },
+  { pais: 'Países Bajos', codigo: '+31' },
+  { pais: 'Portugal', codigo: '+351' },
+  { pais: 'Reino Unido', codigo: '+44' },
+  { pais: 'Rusia', codigo: '+7' },
+  { pais: 'Suecia', codigo: '+46' },
+  { pais: 'Suiza', codigo: '+41' },
+  { pais: 'Ucrania', codigo: '+380' },
+  { pais: 'Uruguay', codigo: '+598' },
+  { pais: 'Venezuela', codigo: '+58' },
+] as const;
+
+// Códigos para "Otro" (países no listados - España destino del servicio, etc.)
+export const CODIGOS_PARA_OTRO = [
+  { codigo: '+34', pais: 'España' },
+  { codigo: '+52', pais: 'México' },
+  { codigo: '+51', pais: 'Perú' },
+  { codigo: '+55', pais: 'Brasil' },
+  { codigo: '+86', pais: 'China' },
+  { codigo: '+91', pais: 'India' },
+  { codigo: '+81', pais: 'Japón' },
+  { codigo: '+82', pais: 'Corea del Sur' },
+  { codigo: '+61', pais: 'Australia' },
+  { codigo: '+27', pais: 'Sudáfrica' },
+] as const;
+
+export const PAISES = [...PAISES_CON_CODIGO.map(p => p.pais), 'Otro'] as const;
+
 // Niveles de urgencia
 export const URGENCY_LEVELS = [
   { value: 'esta_semana', label: { es: 'Esta semana', en: 'This week' }, priority: 'hot' },
